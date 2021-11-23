@@ -1,0 +1,33 @@
+{
+    "name": "CharacterController",
+    "maps": [
+        {
+            "name": "Mouse",
+            "id": "4cca6537-0800-43b9-88b0-e591bb9889da",
+            "actions": [
+                {
+                    "name": "Pick",
+                    "type": "Button",
+                    "id": "94de72ba-f381-4fda-a555-8d9475bb4c97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "42a0cf33-3407-4cfa-a07d-1487d62e48fa",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
