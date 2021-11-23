@@ -6,7 +6,7 @@ using Unity.MLAgents.Sensors;
 
 public class MLAgent : Agent
 {
-    private Rigidbody rigidbody;
+    private Rigidbody mlAgentBody;
     [SerializeField]
     public float runspeed = 1.5f;
 
@@ -69,7 +69,7 @@ public class MLAgent : Agent
 
     private void Strafe(ActionSegment<int> discreteActions)
     {
-        Vector3 direction = transform.rotation.eulerAngles;
+        Vector3 direction = Vector3.zero;
         int action = discreteActions[1];
         switch (action)
         {
@@ -83,12 +83,12 @@ public class MLAgent : Agent
                 break;
 
         }
-        rigidbody.AddForce(direction * runspeed, ForceMode.VelocityChange);
+        mlAgentBody.AddForce(direction * runspeed, ForceMode.VelocityChange);
     }
 
     private void MoveForward(ActionSegment<int> discreteActions)
     {
-        Vector3 direction = transform.rotation.eulerAngles;
+        Vector3 direction = Vector3.zero;
 
         int action = discreteActions[0];
         switch (action)
@@ -105,7 +105,7 @@ public class MLAgent : Agent
         }
 
 
-        rigidbody.AddForce(direction * runspeed, ForceMode.VelocityChange);
+        mlAgentBody.AddForce(direction * runspeed, ForceMode.VelocityChange);
 
 
     }
@@ -164,7 +164,7 @@ public class MLAgent : Agent
 
     public override void Initialize()
     {
-        rigidbody = FindObjectOfType<Rigidbody>();
+        mlAgentBody = FindObjectOfType<Rigidbody>();
     }
 
 
