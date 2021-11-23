@@ -7,8 +7,14 @@ using Unity.MLAgents.Sensors;
 public class MLAgent : Agent
 {
     private Rigidbody mlAgentBody;
+    
     [SerializeField]
-    public float runspeed = 1.5f;
+    private float runspeed = 1.5f;
+
+    public override void Initialize()
+    {
+        mlAgentBody = FindObjectOfType<Rigidbody>();
+    }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -17,10 +23,6 @@ public class MLAgent : Agent
         LookY(actions.DiscreteActions);
         LookX(actions.DiscreteActions);
         Jump(actions.DiscreteActions);
-
-
-
-
     }
 
     private void Jump(ActionSegment<int> discreteActions)
@@ -40,10 +42,10 @@ public class MLAgent : Agent
         switch (action)
         {
             case 1:
-                rotateDir = transform.up * 1f;
+                rotateDir = Vector3.up * 1f;
                 break;
             case 2:
-                rotateDir = transform.up * -1f;
+                rotateDir = Vector3.up * -1f;
                 break;
         }
         transform.Rotate(rotateDir, Time.deltaTime * 150f);
@@ -57,10 +59,10 @@ public class MLAgent : Agent
         switch (action)
         {
             case 1:
-                rotateDir = transform.right * 1f;
+                rotateDir = Vector3.right * 1f;
                 break;
             case 2:
-                rotateDir = transform.right * -1f;
+                rotateDir = Vector3.right * -1f;
                 break;
         }
         transform.Rotate(rotateDir, Time.deltaTime * 150f);
@@ -116,66 +118,26 @@ public class MLAgent : Agent
     public override void Heuristic(in ActionBuffers actionsOut)
     {
        var a = actionsOut.DiscreteActions;
-        if (Input.GetKey(KeyCode.W)){
+        if (Input.GetKey(KeyCode.W))
             a[0] = 1;
-            print("w");
-        }
         if (Input.GetKey(KeyCode.S))
-        {
             a[0] = 2;
-            print("s");
-        }
         if (Input.GetKey(KeyCode.A))
-        {
             a[1] = 2;
-            print("a");
-        }
         if (Input.GetKey(KeyCode.D))
-        {
             a[1] = 1;
-            print("d");
-        }
         if (Input.GetKey(KeyCode.LeftArrow))
-        {
             a[2] = 1;
-            print("L");
-        }
         if (Input.GetKey(KeyCode.RightArrow))
-        {
             a[2] = 2;
-            print("R");
-        }
         if (Input.GetKey(KeyCode.UpArrow))
-        {
             a[3] = 2;
-            print("U");
-        }
         if (Input.GetKey(KeyCode.DownArrow))
-        {
             a[3] = 1;
-            print("D");
-        }
     }
 
     public override void OnEpisodeBegin()
     {
 
     }
-
-    public override void Initialize()
-    {
-        mlAgentBody = FindObjectOfType<Rigidbody>();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 }
