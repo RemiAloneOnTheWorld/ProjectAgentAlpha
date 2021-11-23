@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 0
     NumStackedVectorObservations: 3
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -80,16 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: RayPerceptionSensor
-  m_DetectableTags:
-  - wall
-  - Symbol_O
-  - Symbol_X
-  - Symbol_*
-  - Symbol_T
-  - Symbol_O_Goal
-  - Symbol_X_Goal
-  - Symbol_*_Goal
-  - Symbol_T_Goal
+  m_DetectableTags: []
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.5
@@ -147,6 +138,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
+  maxSpeed: 200
   runspeed: 1.5
 --- !u!114 &4681152311083814708
 MonoBehaviour:

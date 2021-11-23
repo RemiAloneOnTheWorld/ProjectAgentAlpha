@@ -7,7 +7,8 @@ using Unity.MLAgents.Sensors;
 public class MLAgent : Agent
 {
     private Rigidbody mlAgentBody;
-    
+    [SerializeField]
+    public float maxSpeed = 200f;
     [SerializeField]
     private float runspeed = 1.5f;
 
@@ -15,6 +16,17 @@ public class MLAgent : Agent
     {
         mlAgentBody = FindObjectOfType<Rigidbody>();
     }
+
+   
+
+   void Update()
+   {
+         if(mlAgentBody.velocity.magnitude > maxSpeed)
+         {
+                mlAgentBody.velocity = mlAgentBody.velocity.normalized * maxSpeed;
+         }
+   }
+
 
     public override void OnActionReceived(ActionBuffers actions)
     {
