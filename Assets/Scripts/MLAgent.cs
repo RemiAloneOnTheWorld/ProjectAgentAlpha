@@ -4,7 +4,8 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 
 public class MLAgent : Agent
-{
+{   
+    [SerializeField]
     private Rigidbody mlAgentBody;
     [SerializeField]
     public float maxSpeed = 200f;
@@ -16,10 +17,11 @@ public class MLAgent : Agent
     private Vector3 beginPosition;
     [SerializeField]
     private Vector3 beginrotation;
+ 
 
     public override void Initialize()
     {
-        mlAgentBody = FindObjectOfType<Rigidbody>();
+       
     }
 
     public override void OnEpisodeBegin()
@@ -32,11 +34,11 @@ public class MLAgent : Agent
 
    void Update()
    {
-         if(mlAgentBody.velocity.magnitude > maxSpeed)
-         {
-                mlAgentBody.velocity = mlAgentBody.velocity.normalized * maxSpeed;
-         }
-   }
+        if (mlAgentBody.velocity.magnitude > maxSpeed)
+        {
+            mlAgentBody.velocity = mlAgentBody.velocity.normalized * maxSpeed;
+        }
+    }
 
     public override void CollectObservations(VectorSensor sensor)
     {

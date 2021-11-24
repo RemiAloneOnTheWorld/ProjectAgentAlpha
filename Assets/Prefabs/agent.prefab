@@ -53,6 +53,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
+  mlAgentBody: {fileID: 0}
   maxSpeed: 50
   runspeed: 1.5
   goal: {fileID: 0}
@@ -82,7 +83,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: 328d315d3c62808449053ca5518a844d, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: AgentAlpha
   TeamId: 0
   m_UseChildSensors: 1
