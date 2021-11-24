@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,15 +7,18 @@ public class BoxPlacement : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float pickupDistance;
     [SerializeField] private bool useWorldAxis;
+    [SerializeField] private bool useLerp;
+    [SerializeField] [Range(0, 1)] private float lerp;
 
+    private Transform _playerCameraTransform;
     private bool _pickedUp;
     private GameObject _pickedBox;
-    private Vector3 distToObject;
-    
+
     private void Start()
     {
         playerInput.actions.FindAction("Pick").performed += PickupBox;
         playerInput.actions.FindAction("Pick").canceled += DropBox;
+        _playerCameraTransform = playerCamera.transform;
     }
 
     private void Update()
@@ -26,18 +27,13 @@ public class BoxPlacement : MonoBehaviour
             MoveBox();
     }
 
-    /// <summary>
-    /// Sets bool for now; will surely contain more logic later.
-    /// </summary>
-    /// <param name="pContext"></param>
+
+    // Sets bool for now; will surely contain more logic later.
     private void PickupBox(InputAction.CallbackContext pContext)
     {
-        if (Physics.Raycast(playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var raycastHit, pickupDistance))
-        {
-            _pickedUp = true;
-            _pickedBox = raycastHit.collider.gameObject;
-            distToObject = _pickedBox.transform.position - playerCamera.transform.position;
-        }
+        if (!Physics.Raycast(playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var raycastHit, pickupDistance)) return;
+        _pickedUp = true;
+        _pickedBox = raycastHit.collider.gameObject;
     }
 
     private void DropBox(InputAction.CallbackContext pContext)
@@ -47,19 +43,24 @@ public class BoxPlacement : MonoBehaviour
 
     private void MoveBox()
     {
+        Vector3 newPosition;
+        
         //Method 1
         if (useWorldAxis)
         {
-            Vector2 scaledMouseDelta = Mouse.current.delta.ReadValue() * 0.05f;
-            _pickedBox.transform.position += new Vector3(scaledMouseDelta.x,
-                scaledMouseDelta.y, transform.position.z);
+            Vector2 scaledMouseDelta = Mouse.current.delta.ReadValue() * 0.1f;
+            newPosition = _pickedBox.transform.position + new Vector3(scaledMouseDelta.x, scaledMouseDelta.y, transform.position.z);
         }
+        //Method 2 
         else
         {
-            //Method 2 
-            var mousePositionMagnitude = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 3);
-            _pickedBox.transform.position = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
+            var cameraForwardProjection = Vector3.Dot(_playerCameraTransform.forward, 
+                (_pickedBox.transform.position - _playerCameraTransform.position));
+            var mousePositionMagnitude = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, cameraForwardProjection);
+            newPosition = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
         }
+
+        _pickedBox.transform.position = useLerp ? Vector3.Lerp(_pickedBox.transform.position, newPosition, lerp) : newPosition;
     }
     
 }
