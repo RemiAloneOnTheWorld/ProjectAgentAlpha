@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -11,13 +10,25 @@ public class MLAgent : Agent
     public float maxSpeed = 200f;
     [SerializeField]
     private float runspeed = 1.5f;
+    [SerializeField]
+    private GameObject goal;
+    [SerializeField]
+    private Vector3 beginPosition;
+    [SerializeField]
+    private Vector3 beginrotation;
 
     public override void Initialize()
     {
         mlAgentBody = FindObjectOfType<Rigidbody>();
     }
 
-   
+    public override void OnEpisodeBegin()
+    {
+        transform.localPosition = beginPosition;
+        transform.rotation = Quaternion.Euler(beginrotation.x, beginrotation.y, beginrotation.z);
+        mlAgentBody.velocity *= 0f;
+        mlAgentBody.angularVelocity *= 0f;
+    }
 
    void Update()
    {
@@ -27,6 +38,12 @@ public class MLAgent : Agent
          }
    }
 
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(goal.transform.position);
+
+        sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
+    }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -35,6 +52,18 @@ public class MLAgent : Agent
         LookY(actions.DiscreteActions);
         LookX(actions.DiscreteActions);
         Jump(actions.DiscreteActions);
+        AddReward(-1f / MaxStep == 0 ? 5000 : MaxStep);
+    }
+
+    private void OnCollisionEnter(Collision col) {
+        if(col.gameObject.CompareTag("Goal")) {
+            SetReward(1f);
+            print("hit the goal");
+            EndEpisode();
+        }
+        if(col.gameObject.CompareTag("Wall")) {
+            AddReward(-0.1f);
+        }
     }
 
     private void Jump(ActionSegment<int> discreteActions)
@@ -124,9 +153,6 @@ public class MLAgent : Agent
 
     }
 
-
-
-
     public override void Heuristic(in ActionBuffers actionsOut)
     {
        var a = actionsOut.DiscreteActions;
@@ -146,10 +172,5 @@ public class MLAgent : Agent
             a[3] = 2;
         if (Input.GetKey(KeyCode.DownArrow))
             a[3] = 1;
-    }
-
-    public override void OnEpisodeBegin()
-    {
-
     }
 }
