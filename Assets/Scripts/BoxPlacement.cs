@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BoxPlacement : MonoBehaviour
-{
+public class BoxPlacement : MonoBehaviour {
     [SerializeField] private Camera playerCamera;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float pickupDistance;
@@ -14,53 +13,52 @@ public class BoxPlacement : MonoBehaviour
     private bool _pickedUp;
     private GameObject _pickedBox;
 
-    private void Start()
-    {
+    private void Start() {
         playerInput.actions.FindAction("Pick").performed += PickupBox;
         playerInput.actions.FindAction("Pick").canceled += DropBox;
         playerInput.actions.FindAction("Scroll").performed += MoveWithScroll;
         _playerCameraTransform = playerCamera.transform;
     }
 
-    private void Update()
-    {
-        if (_pickedUp)
+    private void Update() {
+        if (_pickedUp) {
             MoveBox();
+        }
     }
 
 
     // Sets bool for now; will surely contain more logic later.
-    private void PickupBox(InputAction.CallbackContext pContext)
-    {
+    private void PickupBox(InputAction.CallbackContext pContext) {
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var raycastHit,
-            pickupDistance)) return;
+            pickupDistance)) {
+            return;
+        }
+
         _pickedUp = true;
         _pickedBox = raycastHit.collider.gameObject;
     }
 
-    private void DropBox(InputAction.CallbackContext pContext)
-    {
+    private void DropBox(InputAction.CallbackContext pContext) {
         _pickedUp = false;
     }
 
-    private void MoveBox()
-    {
+    private void MoveBox() {
         Vector3 newPosition;
 
         //Method 1
-        if (useWorldAxis)
-        {
+        if (useWorldAxis) {
             Vector2 scaledMouseDelta = Mouse.current.delta.ReadValue() * 0.1f;
             newPosition = _pickedBox.transform.position +
                           new Vector3(scaledMouseDelta.x, scaledMouseDelta.y, transform.position.z);
         }
         //Method 2 
-        else
-        {
-            var cameraForwardProjection = Vector3.Dot(_playerCameraTransform.forward,
+        else {
+            float cameraForwardProjection = Vector3.Dot(_playerCameraTransform.forward,
                 (_pickedBox.transform.position - _playerCameraTransform.position));
-            var mousePositionMagnitude = new Vector3(Mouse.current.position.ReadValue().x,
+
+            Vector3 mousePositionMagnitude = new Vector3(Mouse.current.position.ReadValue().x,
                 Mouse.current.position.ReadValue().y, cameraForwardProjection);
+
             newPosition = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
         }
 
@@ -68,10 +66,11 @@ public class BoxPlacement : MonoBehaviour
             useLerp ? Vector3.Lerp(_pickedBox.transform.position, newPosition, lerp) : newPosition;
     }
 
-    private void MoveWithScroll(InputAction.CallbackContext pContext)
-    {
-        if (!_pickedUp) return;
+    private void MoveWithScroll(InputAction.CallbackContext pContext) {
+        if (!_pickedUp) {
+            return;
+        }
+
         _pickedBox.transform.position += _playerCameraTransform.forward * pContext.ReadValue<Vector2>().y * Time.deltaTime;
     }
-
 }
