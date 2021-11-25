@@ -66,24 +66,31 @@ public class MLAgent : Agent
     private void OnCollisionEnter(Collision col) {
         if(col.gameObject.CompareTag("Goal")) {
             SetReward(1f);
-            StartCoroutine(GoalScored(0.5f, correct));
+            StartCoroutine(GoalScored(0.5f));
             EndEpisode();
         }
         if (col.gameObject.CompareTag("Wall"))
         {
-            AddReward(-0.1f);
-            StartCoroutine(GoalScored(0.3f, wrong));
+            AddReward(0.05f);
+            StartCoroutine(WallPenalty(0.5f));
             EndEpisode();
         }
     }
 
-    IEnumerator GoalScored(float time, Material material) {
-        backWall.GetComponent<Renderer>().material = material;
+    IEnumerator GoalScored(float time) {
+        backWall.GetComponent<Renderer>().material = correct;
         yield return new WaitForSeconds(time);
         backWall.GetComponent<Renderer>().material = glass;
     }
 
-   
+    IEnumerator WallPenalty(float time)
+    {
+        backWall.GetComponent<Renderer>().material = wrong;
+        yield return new WaitForSeconds(time);
+        
+        backWall.GetComponent<Renderer>().material = glass;
+    }
+
     private void Look(ActionSegment<int> discreteActions)
     {
         var rotateDir = Vector3.zero;

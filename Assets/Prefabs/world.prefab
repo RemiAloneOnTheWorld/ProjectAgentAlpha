@@ -854,6 +854,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4538849632925654973}
     - target: {fileID: 2234856272287931159, guid: 5e7f12431ff3f5b4c9adcc208ea3af6c, type: 3}
+      propertyPath: wrong
+      value: 
+      objectReference: {fileID: 2100000, guid: c7725a2cf9ba42348914b718e0e4b704, type: 2}
+    - target: {fileID: 2234856272287931159, guid: 5e7f12431ff3f5b4c9adcc208ea3af6c, type: 3}
       propertyPath: backWall
       value: 
       objectReference: {fileID: 4538849632354836974}
