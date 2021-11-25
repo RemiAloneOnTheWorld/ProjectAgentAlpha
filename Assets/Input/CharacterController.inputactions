@@ -1,0 +1,52 @@
+{
+    "name": "CharacterController",
+    "maps": [
+        {
+            "name": "Mouse",
+            "id": "4cca6537-0800-43b9-88b0-e591bb9889da",
+            "actions": [
+                {
+                    "name": "Pick",
+                    "type": "Button",
+                    "id": "94de72ba-f381-4fda-a555-8d9475bb4c97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "4757960d-484b-4862-8c3d-b9beb632ddc0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "42a0cf33-3407-4cfa-a07d-1487d62e48fa",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "301b5425-34a3-45b1-9b60-f3ad4ac8665f",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
