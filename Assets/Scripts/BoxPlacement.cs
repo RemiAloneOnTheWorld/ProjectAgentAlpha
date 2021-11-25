@@ -58,23 +58,22 @@ public class BoxPlacement : MonoBehaviour {
         else {
             float cameraForwardProjection = Vector3.Dot(_playerCameraTransform.forward,
                 (_pickedBox.transform.position - _playerCameraTransform.position));
-            
-            if (Vector3.Dot(_playerCameraTransform.forward, _pickedBox.position - playerCamera.transform.position) 
+
+            if (Vector3.Dot(_playerCameraTransform.forward, _pickedBox.position - playerCamera.transform.position)
                 < minimumZoomDistance && _scrollValue < 0) {
                 _scrollValue = 0;
             }
-            
+
             Vector3 mousePositionMagnitude = new Vector3(Mouse.current.position.ReadValue().x,
                 Mouse.current.position.ReadValue().y, cameraForwardProjection + _scrollValue);
 
             newPosition = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
         }
 
-
         //Not really correct use of lerp, but it will be fine for now.
         _pickedBox.transform.position =
             useLerp ? Vector3.Lerp(_pickedBox.transform.position, newPosition, lerp) : newPosition;
-        
+
         _scrollValue += Vector3.Dot(playerCamera.transform.forward, (_previousPosition - _pickedBox.position));
         _previousPosition = _pickedBox.position;
     }
