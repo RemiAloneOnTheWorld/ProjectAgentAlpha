@@ -51,9 +51,15 @@ public class MLAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(goal.transform.position);
+        sensor.AddObservation(goal.transform.localPosition);
 
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
+
+        sensor.AddObservation(transform.InverseTransformDirection(mlAgentBody.velocity));
+
+        sensor.AddObservation(transform.localPosition);
+
+        
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -65,7 +71,7 @@ public class MLAgent : Agent
 
     private void OnCollisionEnter(Collision col) {
         if(col.gameObject.CompareTag("Goal")) {
-            SetReward(1f);
+            SetReward(2f);
             StartCoroutine(GoalScored(0.5f, correct));
             EndEpisode();
         }
