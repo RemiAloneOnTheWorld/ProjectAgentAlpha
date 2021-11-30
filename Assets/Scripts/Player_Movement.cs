@@ -18,12 +18,18 @@ public class Player_Movement : MonoBehaviour
     private float maxSpeed;
     [SerializeField]
     private float rotationSpeed;
-    private Camera _playerCamera;
+    [SerializeField]
+    private float smoothTime;
+
     private Rigidbody _rigidbody;
     private InputAction _move;
     private InputAction _look;
     private InputAction _pause;
     private InputAction _click;
+
+    private Vector3 _input;
+    private Vector3 _smoothInputVelocity;
+
 
     private float pitch;
     private float yaw;
@@ -48,8 +54,7 @@ public class Player_Movement : MonoBehaviour
             _pause.performed += PauseGame;
             _click.performed += Click;
         }
-        _move.canceled += CancelMovement;
-     
+
     }
 
     private void PauseGame(InputAction.CallbackContext obj)
@@ -62,11 +67,6 @@ public class Player_Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-
-    private void CancelMovement(InputAction.CallbackContext obj)
-    {
-        _rigidbody.velocity = Vector3.zero;
-    }
 
   
 
@@ -111,7 +111,8 @@ public class Player_Movement : MonoBehaviour
         var _moveInput2D = _move.ReadValue<Vector2>();
         Vector3 _moveInput = _moveInput2D.x * transform.right;
         _moveInput += _moveInput2D.y * transform.forward;
-        _rigidbody.AddForce(_moveInput * speed, ForceMode.Force);
+        _input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
+        transform.position = transform.position + _input;
         if (_rigidbody.velocity.magnitude > maxSpeed)
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
