@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 //This acts as the base class for all event data.
+
 public class EventData {
     public readonly EventType eventType;
 
