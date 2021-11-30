@@ -202,7 +202,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1ec4a793-88c7-4c92-a3dc-67d1db1cc7e8"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -213,7 +213,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7a496f99-11c7-48ec-95e3-217112cac060"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

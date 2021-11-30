@@ -182,8 +182,9 @@ MonoBehaviour:
   playerPrefab: {fileID: 0}
   playerInput: {fileID: 180191736314912212}
   speed: 5
-  maxSpeed: 80
+  maxSpeed: 0.1
   rotationSpeed: 0.1
+  smoothTime: 0.05
 --- !u!54 &180191736314912214
 Rigidbody:
   m_ObjectHideFlags: 0
