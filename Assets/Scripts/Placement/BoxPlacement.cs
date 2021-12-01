@@ -1,3 +1,5 @@
+using Unity.Barracuda;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,13 +34,14 @@ public class BoxPlacement : MonoBehaviour {
     // Sets bool for now; will surely contain more logic later.
     private void PickupBox(InputAction.CallbackContext pContext) {
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var raycastHit,
-            pickupDistance)) {
+            pickupDistance) || !raycastHit.collider.CompareTag("Box")) {
             return;
         }
-
+        
         _pickedUp = true;
         _pickedBox = raycastHit.collider.gameObject.transform;
         _previousPosition = _pickedBox.transform.position;
+
     }
 
     private void DropBox(InputAction.CallbackContext pContext) {
