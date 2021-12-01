@@ -24,6 +24,16 @@ public abstract class Module : MonoBehaviour {
         return _baseModule;
     }
 
+    public void RemoveConnection(Connection connection) {
+        try {
+            Connections.Remove(connection);
+            Destroy(connection.gameObject);
+        }
+        catch (Exception e) {
+            Debug.LogError("A non-existing connection was tried to be removed: " + e);
+        }
+    }
+
     //This method may seems redundant, since modules can be removed from the connections directly, yet
     //modules will probably be removed based on the module they're bound to, opposing the docking, where
     //the clicked connection is of importance.
@@ -61,10 +71,16 @@ public abstract class Module : MonoBehaviour {
         Health = health;
         Connections = new List<Connection>();
 
+
+        RemoveOverlapConnections();
+    }
+
+
+    private void RemoveOverlapConnections() {
         //This only grabs the sub-gameobjects with 'Connection' script.
         Component[] components = transform.GetComponentsInChildren(typeof(Connection));
 
-        //Add it to list so 'Contains' can be called in 
+        //Add it to list so 'contains' can be called in the overlap test.
         List<GameObject> connectors = new List<GameObject>();
 
         foreach (var component in components) {
@@ -81,22 +97,23 @@ public abstract class Module : MonoBehaviour {
 
             displacementVector *= transform.lossyScale.x / 2;
 
-            //GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            //go.transform.position = connection.transform.position + displacementVector;
-            //go.transform.localScale = transform.lossyScale / 2;
-            
-            foreach (var currentCollider in Physics.OverlapBox(connection.transform.position + displacementVector, 
-                transform.lossyScale/2)) {
+
+            foreach (var currentCollider in Physics.OverlapBox(connection.transform.position + displacementVector,
+                transform.lossyScale / 2)) {
                 //Check if collision occured with own connections and module.
                 if (currentCollider.gameObject == gameObject || connectors.Contains(currentCollider.gameObject)) {
                     continue;
                 }
 
                 Destroy(connection.gameObject);
-                
+
+                //Tries to get the 'Connection' component to ensure that it is indeed a connection
+                //and not another module.
                 if (currentCollider.TryGetComponent<Connection>(out var component)) {
-                    Debug.LogWarning("Destroyed " + currentCollider.gameObject.name);
-                    Destroy(currentCollider.gameObject);
+                    //Debug.LogWarning("Destroyed " + currentCollider.gameObject.name);
+
+                    //'RemoveConnection' also deletes the connections' game object.
+                    component.GetParentModule().RemoveConnection(component);
                 }
             }
 
