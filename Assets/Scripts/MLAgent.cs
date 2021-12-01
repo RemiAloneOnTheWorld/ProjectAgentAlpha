@@ -64,7 +64,6 @@ public class MLAgent : Agent
         Move(actions.DiscreteActions);
         Strafe(actions.DiscreteActions);
         LookY(actions.DiscreteActions);
-        LookX(actions.DiscreteActions);
         AddReward(-1f/MaxStep);
     }
 
@@ -75,7 +74,11 @@ public class MLAgent : Agent
             EndEpisode();
         }
         if(col.gameObject.CompareTag("Block")) {
-            SetReward(-0.1f);
+            AddReward(-0.5f);
+            StartCoroutine(GoalScored(wrong, 0.5f));
+        }
+        if (col.gameObject.CompareTag("Wall")) {
+            AddReward(-0.1f);
         }
     }
 
@@ -101,24 +104,6 @@ public class MLAgent : Agent
                 break;
         }
         transform.Rotate(rotateDir, Time.deltaTime * 150f);
-    }
-
-    private void LookX(ActionSegment<int> discreteActions)
-    {
-        var rotateDir = Vector3.zero;
-        var action = discreteActions[3];
-
-        switch (action)
-        {            
-            case 1:
-                rotateDir = Vector3.right * -1f;
-                break;
-
-            case 2:
-                rotateDir = Vector3.right * 1f;
-                break;
-        }
-        transform.Rotate(rotateDir, Time.deltaTime * 150f);               
     }
 
     private void Strafe(ActionSegment<int> discreteActions) 
@@ -172,9 +157,5 @@ public class MLAgent : Agent
             a[2] = 1;
         if (Input.GetKey(KeyCode.LeftArrow))
             a[2] = 2;
-        if (Input.GetKey(KeyCode.UpArrow))
-            a[3] = 1;
-        if (Input.GetKey(KeyCode.DownArrow))
-            a[3] = 2;
     }
 }
