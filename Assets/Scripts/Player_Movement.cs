@@ -28,6 +28,7 @@ public class Player_Movement : MonoBehaviour
     private InputAction _click;
 
     private Vector3 _input;
+    private Vector3 _moveInput;
     private Vector3 _smoothInputVelocity;
 
 
@@ -42,6 +43,7 @@ public class Player_Movement : MonoBehaviour
         {
             _move = playerInput.actions.FindAction("Move_Controller");
             _look = playerInput.actions.FindAction("Look_Controller");
+            
           
         }
         else
@@ -54,6 +56,7 @@ public class Player_Movement : MonoBehaviour
             _pause.performed += PauseGame;
             _click.performed += Click;
         }
+        _move.canceled += CancelMovement;
 
     }
 
@@ -66,9 +69,12 @@ public class Player_Movement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
+    private void CancelMovement(InputAction.CallbackContext obj)
+    {
+        _moveInput = Vector3.zero;
+    }
 
 
-  
 
 
 
@@ -109,7 +115,7 @@ public class Player_Movement : MonoBehaviour
     private void updateMovement()
     {
         var _moveInput2D = _move.ReadValue<Vector2>();
-        Vector3 _moveInput = _moveInput2D.x * transform.right;
+        _moveInput = _moveInput2D.x * transform.right;
         _moveInput += _moveInput2D.y * transform.forward;
         _input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
         transform.position = transform.position + _input;
