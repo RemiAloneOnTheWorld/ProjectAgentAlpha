@@ -58,10 +58,10 @@ public abstract class Module : MonoBehaviour {
     protected virtual void Start() {
         Health = health;
         Connections = new List<Connection>();
-        foreach (var sub in transform.GetComponentsInChildren(typeof(Connection))) {
+        foreach (var connection in transform.GetComponentsInChildren(typeof(Connection))) {
             Debug.Log("Found connection");
-            Connections.Add((Connection) sub);
-            ((Connection) sub).SetParentModule(this);
+            Connections.Add((Connection) connection);
+            ((Connection) connection).SetParentModule(this);
         }
     }
 }
