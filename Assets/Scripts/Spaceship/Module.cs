@@ -58,10 +58,13 @@ public abstract class Module : MonoBehaviour {
     }
 
     protected virtual void Start() {
-        Debug.Log("Start called");
         Health = health;
         Connections = new List<Connection>();
+
+        //This only grabs the sub-gameobjects with 'Connection' script.
         Component[] components = transform.GetComponentsInChildren(typeof(Connection));
+
+        //Add it to list so 'Contains' can be called in 
         List<GameObject> connectors = new List<GameObject>();
 
         foreach (var component in components) {
@@ -69,9 +72,7 @@ public abstract class Module : MonoBehaviour {
         }
 
         foreach (var connection in components) {
-            Debug.Log("Found connection");
-
-            //Todo: Do space check here
+            //Todo: Use same displacement vector in connectors and here.
             Vector3 moduleDisplacement = connection.transform.position - transform.position;
             Vector3 displacementVector = connection.transform.right;
             if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) < 0) {
@@ -79,16 +80,26 @@ public abstract class Module : MonoBehaviour {
             }
 
             displacementVector *= transform.lossyScale.x / 2;
+
+            //GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //go.transform.position = connection.transform.position + displacementVector;
+            //go.transform.localScale = transform.lossyScale / 2;
             
-            foreach (var currentCollider in Physics.OverlapBox(connection.transform.position + displacementVector,
-                transform.lossyScale / 2)) {
+            foreach (var currentCollider in Physics.OverlapBox(connection.transform.position + displacementVector, 
+                transform.lossyScale/2)) {
+                //Check if collision occured with own connections and module.
                 if (currentCollider.gameObject == gameObject || connectors.Contains(currentCollider.gameObject)) {
                     continue;
                 }
-                
+
                 Destroy(connection.gameObject);
+                
+                if (currentCollider.TryGetComponent<Connection>(out var component)) {
+                    Debug.LogWarning("Destroyed " + currentCollider.gameObject.name);
+                    Destroy(currentCollider.gameObject);
+                }
             }
-            
+
             Connections.Add((Connection) connection);
             ((Connection) connection).SetParentModule(this);
         }
