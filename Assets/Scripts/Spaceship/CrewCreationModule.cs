@@ -9,7 +9,8 @@ public class CrewCreationModule : Module
 
     protected override void Start()
     {
-        base.Start();    
+        base.Start();
+        UpdateSpawner();
     }
 
     void Update()
@@ -22,8 +23,14 @@ public class CrewCreationModule : Module
         _timePassed = +Time.deltaTime;
         if (_timePassed >= crewRespawnTime)
         {
-            //TODO: Spawn agent
+            //TODO: Call Spawner
             _timePassed = 0;
         }
+    }
+
+    private void UpdateSpawner()
+    {
+       GameObject crewSpawner = GameObject.Find("CrewSpawner");
+       crewSpawner.GetComponent<Spawner>().crewCreationModules++;
     }
 }
