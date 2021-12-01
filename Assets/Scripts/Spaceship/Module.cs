@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -40,6 +41,7 @@ public abstract class Module : MonoBehaviour {
         foreach (var module in Connections) {
             RemoveDockedModule(module.GetBoundModule());
         }
+
         Destroy(gameObject);
     }
 
@@ -56,10 +58,37 @@ public abstract class Module : MonoBehaviour {
     }
 
     protected virtual void Start() {
+        Debug.Log("Start called");
         Health = health;
         Connections = new List<Connection>();
-        foreach (var connection in transform.GetComponentsInChildren(typeof(Connection))) {
+        Component[] components = transform.GetComponentsInChildren(typeof(Connection));
+        List<GameObject> connectors = new List<GameObject>();
+
+        foreach (var component in components) {
+            connectors.Add(component.gameObject);
+        }
+
+        foreach (var connection in components) {
             Debug.Log("Found connection");
+
+            //Todo: Do space check here
+            Vector3 moduleDisplacement = connection.transform.position - transform.position;
+            Vector3 displacementVector = connection.transform.right;
+            if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) < 0) {
+                displacementVector = -displacementVector;
+            }
+
+            displacementVector *= transform.lossyScale.x / 2;
+            
+            foreach (var currentCollider in Physics.OverlapBox(connection.transform.position + displacementVector,
+                transform.lossyScale / 2)) {
+                if (currentCollider.gameObject == gameObject || connectors.Contains(currentCollider.gameObject)) {
+                    continue;
+                }
+                
+                Destroy(connection.gameObject);
+            }
+            
             Connections.Add((Connection) connection);
             ((Connection) connection).SetParentModule(this);
         }
