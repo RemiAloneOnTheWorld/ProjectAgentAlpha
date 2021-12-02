@@ -21,4 +21,10 @@ public class SpaceshipManager : Module {
         Money += amount;
         currencyText.text = $"Currency: {Money}";
     }
+
+    public void AddCrew(int amount)
+    {
+        Spaceships += amount;
+        factoryText.text = $"Spaceships: {Spaceships}";
+    }
 }

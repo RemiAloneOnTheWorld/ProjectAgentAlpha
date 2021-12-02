@@ -27,45 +27,24 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        setSpawnerBasedOnModules();
         cubeList = new List<GameObject>();
-        SpawnCubes();
     }
-    
-    private void setSpawnerBasedOnModules()
-    {
-        if (crewCreationModules > 1)
-        {
-            minSpawnCount = crewCreationModules - 1;
-            maxSpawnCount = crewCreationModules;
 
-        } else
-        {
-            minSpawnCount = 1;
-            maxSpawnCount = 1;
-        }
-        
+
+    public void SpawnCube()
+    {
+        float randX = Random.Range(size.x / 2 * -1 + transform.position.x, size.x / 2 + transform.position.x);
+        float randY = Random.Range(size.y / 2 * -1 + transform.position.y, size.y / 2 + transform.position.y);
+        float randZ = Random.Range(size.z / 2 * -1 + transform.position.z, size.z / 2 + transform.position.z);
+        GameObject cube = Instantiate<GameObject>(prefab);
+        cube.transform.localPosition = new Vector3(randX, randY, randZ);
+
+        cubeList.Add(cube);
     }
 
     public void resetArea()
     {
         RemoveCubes();
-        SpawnCubes();
-    }
-
-    private void SpawnCubes()
-    {
-        totalCubes = Random.Range(minSpawnCount, maxSpawnCount);
-        for (int i = 0; i < totalCubes; i++)
-        {
-            float randX = Random.Range(size.x / 2 * -1 + transform.position.x, size.x / 2 + transform.position.x);
-            float randY = Random.Range(size.y / 2 * -1 + transform.position.y, size.y / 2 + transform.position.y);
-            float randZ = Random.Range(size.z / 2 * -1 + transform.position.z, size.z / 2 + transform.position.z);
-            GameObject cube = Instantiate<GameObject>(prefab);
-            cube.transform.localPosition = new Vector3(randX, randY, randZ);
-
-            cubeList.Add(cube);
-        }
     }
 
     private void RemoveCubes()
