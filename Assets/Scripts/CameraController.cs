@@ -67,14 +67,14 @@ public class CameraController : MonoBehaviour
     private void PrePhase2(Player player, float yCam)
     {
         
-        player.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //player.gameObject.GetComponent<MeshRenderer>().enabled = false;
         player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(0,yCam,1,0.5f);
         
     }
 
     private void EndPhase2(Player player,float xCam)
     {
-        player.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        //player.gameObject.GetComponent<MeshRenderer>().enabled = true;
         player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(xCam, 0, 0.5f, 1);
     }
 
