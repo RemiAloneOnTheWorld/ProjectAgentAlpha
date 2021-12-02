@@ -6,13 +6,6 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private int ready = 0;
-    [SerializeField]
-    private GameObject spectatePosPlayer1;
-    [SerializeField]
-    private GameObject spectatePosPlayer2;
-    [SerializeField]
-    private float duration;
-
 
     public class Player
     {
@@ -26,11 +19,13 @@ public class CameraController : MonoBehaviour
 
     private Player player1 = new Player();
     private Player player2 = new Player();
+    private Animator animationStates;
 
     // Start is called before the first frame update
     void Start()
     {
         Player_Movement[] players = FindObjectsOfType<Player_Movement>();
+        animationStates = GetComponent<Animator>();
         player1.gameObject = players[0].gameObject;
         player2.gameObject = players[1].gameObject;
     }
@@ -38,37 +33,49 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ready == 2)
+        if(ready == 1)
         {
-            player1.gameObject.transform.position = Vector3.Lerp(player1.startPos, spectatePosPlayer1.transform.position, (Time.time - player1.startTime - Time.deltaTime) / duration);
-            player2.gameObject.transform.position = Vector3.Lerp(player2.startPos, spectatePosPlayer2.transform.position, (Time.time - player2.startTime - Time.deltaTime) / duration);
+            //these should be called by a game controller instead, (thats why they are public)
+            Ready();
         }
+        if(ready == 3)
+        {
+            //these should be called by a game controller instead, (thats why they are public)
+            UnReady();
+        }
+        //only for testing it is being called here.
     }
     public void Ready()
     {
         ready++;
         if (ready == 2)
         {
-            PrePhase2(player1, spectatePosPlayer1);
-            PrePhase2(player2, spectatePosPlayer2);
-            
+            PrePhase2(player1,0);
+            PrePhase2(player2,0.5f);
+            animationStates.SetFloat("Ready", ready);
         }
     }
 
-    public void PrePhase2(Player player, GameObject spectatePos)
-    {
-        Vector3 posP1 = player.gameObject.transform.position;  
-        player.startTime = Time.time;
-        player.journeyLength = Vector3.Distance(posP1, spectatePos.transform.position);
-        player.startPos = new Vector3(posP1.x, posP1.y, posP1.z);
-        player.gameObject.GetComponent<MeshRenderer>().enabled = false;
-    }
-
-    public void EndPhase2()
+    public void UnReady()
     {
         ready = 0;
-        player1.gameObject.GetComponent<MeshRenderer>().enabled = true;
-        player2.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        EndPhase2(player1, 0.5f);
+        EndPhase2(player2, 0);
+        animationStates.SetFloat("Ready", ready);
+    }
+
+    private void PrePhase2(Player player, float yCam)
+    {
+        
+        player.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(0,yCam,1,0.5f);
+        
+    }
+
+    private void EndPhase2(Player player,float xCam)
+    {
+        player.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(xCam, 0, 0.5f, 1);
     }
 
     
