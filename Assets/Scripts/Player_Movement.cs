@@ -30,6 +30,9 @@ public class Player_Movement : MonoBehaviour
     private Vector3 _input;
     private Vector3 _moveInput;
     private Vector3 _smoothInputVelocity;
+    
+    private Vector3 _velocity;
+    [Range(0f, 1f)] public float deceleration;
 
 
     private float pitch;
@@ -73,20 +76,12 @@ public class Player_Movement : MonoBehaviour
     {
         _moveInput = Vector3.zero;
     }
-
-
-
-
-
-
+    
     // Update is called once per frame
     void Update() 
     {
         updateMovement();
         updateDirection();
-
-
-        
     }
     
     private void updateDirection()
@@ -117,8 +112,20 @@ public class Player_Movement : MonoBehaviour
         var _moveInput2D = _move.ReadValue<Vector2>();
         _moveInput = _moveInput2D.x * transform.right;
         _moveInput += _moveInput2D.y * transform.forward;
-        _input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
-        transform.position = transform.position + _input;
+
+        
+        //Semi-explicit Euler Integration
+        _velocity += _moveInput * speed;
+        if (_velocity.magnitude > maxSpeed) {
+            _velocity = _velocity.normalized * maxSpeed;
+        }
+
+        if (_moveInput2D.magnitude <= 0) {
+            _velocity *= deceleration;
+        }
+        
+        //_input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
+        transform.position += _velocity * Time.deltaTime;
        
     }
 }
