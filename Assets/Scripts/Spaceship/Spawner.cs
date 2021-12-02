@@ -12,9 +12,9 @@ public class Spawner : MonoBehaviour
     private Vector3 size;
 
     [SerializeField]
-    private int minSpawnCount = 10;
+    private int minSpawnCount = 0;
     [SerializeField]
-    private int maxSpawnCount = 15;
+    private int maxSpawnCount = 0;
     [SerializeField]
     private Color colour;
     public GizmoType showSpawnRegion;
@@ -34,7 +34,17 @@ public class Spawner : MonoBehaviour
     
     private void setSpawnerBasedOnModules()
     {
-        maxSpawnCount = crewCreationModules;
+        if (crewCreationModules > 1)
+        {
+            minSpawnCount = crewCreationModules - 1;
+            maxSpawnCount = crewCreationModules;
+
+        } else
+        {
+            minSpawnCount = 1;
+            maxSpawnCount = 1;
+        }
+        
     }
 
     public void resetArea()
