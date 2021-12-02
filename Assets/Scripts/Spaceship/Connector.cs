@@ -7,10 +7,13 @@ public class Connector : MonoBehaviour {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float pickupDistance;
 
-    public GameObject testModule;
+    public GameObject currencyModule;
+    public GameObject factoryModule;
+    private GameObject testModule;
     public Module baseModule;
 
     private void Start() {
+        testModule = currencyModule;
         playerInput.actions.FindAction("Pick").performed += AddModule;
     }
 
@@ -33,5 +36,15 @@ public class Connector : MonoBehaviour {
             connection.GetParentModule().transform.rotation);
 
         connection.SetBoundModule(module.GetComponent<Module>(), baseModule);
+    }
+
+    public void SetCurrencyModulePrefab()
+    {
+        testModule = currencyModule;
+    }
+
+    public void SetFactoryModulePrefab()
+    {
+        testModule = factoryModule;
     }
 }
