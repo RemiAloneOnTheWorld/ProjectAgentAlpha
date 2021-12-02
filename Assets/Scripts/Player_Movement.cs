@@ -119,9 +119,6 @@ public class Player_Movement : MonoBehaviour
         _moveInput += _moveInput2D.y * transform.forward;
         _input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
         transform.position = transform.position + _input;
-        if (_rigidbody.velocity.magnitude > maxSpeed)
-        {
-            _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
-        }
+       
     }
 }
