@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7253366387946838000, guid: 0bec2aaf5d5d44947be668775065518b, type: 3}
   size: {x: 50, y: 5, z: 70}
-  minSpawnCount: 10
-  maxSpawnCount: 15
+  minSpawnCount: 0
+  maxSpawnCount: 0
   colour: {r: 0, g: 0, b: 0, a: 0}
   showSpawnRegion: 1
 --- !u!1 &4188030917398012975
@@ -646,7 +646,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6011326169233320079}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

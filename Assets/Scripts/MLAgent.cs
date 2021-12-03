@@ -32,7 +32,7 @@ public class MLAgent : Agent
 
     public override void Initialize()
     {
-       print(spawner);
+        
     }
 
     public override void OnEpisodeBegin()
@@ -57,6 +57,8 @@ public class MLAgent : Agent
         sensor.AddObservation(goal.transform.position);
 
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
+
+        sensor.AddObservation(transform.position);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
