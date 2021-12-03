@@ -13,7 +13,6 @@ public class Connector : MonoBehaviour {
     private GameObject testModule;
     public Module baseModule;
     
-
     [SerializeField] private RectTransform crosshair;
 
     private void Start() {
