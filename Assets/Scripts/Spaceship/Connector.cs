@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Connector : MonoBehaviour {
     [SerializeField] private Camera playerCamera;
@@ -11,6 +12,9 @@ public class Connector : MonoBehaviour {
     public GameObject factoryModule;
     private GameObject testModule;
     public Module baseModule;
+    
+
+    [SerializeField] private RectTransform crosshair;
 
     private void Start() {
         testModule = currencyModule;
@@ -18,7 +22,7 @@ public class Connector : MonoBehaviour {
     }
 
     private void AddModule(InputAction.CallbackContext pContext) {
-        if (!Physics.Raycast(playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var raycastHit,
+        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
             pickupDistance) || !raycastHit.collider.CompareTag("Connection")) {
             return;
         }
