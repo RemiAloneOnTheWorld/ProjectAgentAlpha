@@ -20,11 +20,14 @@ public class CameraController : MonoBehaviour
     private Player player1 = new Player();
     private Player player2 = new Player();
     private Animator animationStates;
+    private ScreenFader fader;
+    public GameObject panel;
 
     // Start is called before the first frame update
     void Start()
     {
         Player_Movement[] players = FindObjectsOfType<Player_Movement>();
+        fader = FindObjectOfType<ScreenFader>();
         animationStates = GetComponent<Animator>();
         player1.gameObject = players[0].gameObject;
         player2.gameObject = players[1].gameObject;
@@ -33,12 +36,12 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ready == 1)
+        if (ready == 1)
         {
             //these should be called by a game controller instead, (thats why they are public)
             Ready();
         }
-        if(ready == 3)
+        if (ready == 3)
         {
             //these should be called by a game controller instead, (thats why they are public)
             UnReady();
@@ -50,35 +53,54 @@ public class CameraController : MonoBehaviour
         ready++;
         if (ready == 2)
         {
-            //PrePhase2(player1,0);
-            //PrePhase2(player2,0.5f);
+            StartCoroutine(StartPhase());
+
             animationStates.SetFloat("Ready", ready);
+
         }
     }
 
     public void UnReady()
     {
         ready = 0;
-        //EndPhase2(player1, 0.5f);
-        //EndPhase2(player2, 0);
-        animationStates.SetFloat("Ready", ready);
+        StartCoroutine(EndPhase());
     }
+
+    IEnumerator StartPhase()
+    {
+        StartCoroutine(fader.fadeOut());
+        yield return new WaitForSeconds(2);
+        PrePhase2(player1, 0);
+        PrePhase2(player2, 0.5f);
+        animationStates.SetFloat("Ready", ready);
+
+    }
+    IEnumerator EndPhase()
+    {
+        StartCoroutine(fader.fadeOut());
+        yield return new WaitForSeconds(2);
+        EndPhase2(player1, 0.5f);
+        EndPhase2(player2, 0f);
+        animationStates.SetFloat("Ready", ready);
+
+    }
+
 
     private void PrePhase2(Player player, float yCam)
     {
-        
+
         //player.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(0,yCam,1,0.5f);
-        
+        player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(0, yCam, 1, 0.5f);
+
     }
 
-    private void EndPhase2(Player player,float xCam)
+    private void EndPhase2(Player player, float xCam)
     {
         //player.gameObject.GetComponent<MeshRenderer>().enabled = true;
         player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(xCam, 0, 0.5f, 1);
     }
 
-    
+
 
 
 }
