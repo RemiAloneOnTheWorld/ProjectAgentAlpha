@@ -53,8 +53,10 @@ public class CameraController : MonoBehaviour
         ready++;
         if (ready == 2)
         {
-            StartCoroutine(startPhase());
+           StartCoroutine(startPhase());
          
+           animationStates.SetFloat("Ready", ready);
+
         }
     }
 

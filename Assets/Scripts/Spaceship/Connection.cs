@@ -8,7 +8,7 @@ public class Connection : MonoBehaviour {
         _boundModule = module;
         module.SetBaseModule(baseModule);
         module.SetParentModule(_parentModule);
-        
+
         //Simple rotation application. Depends on how we want to mount the new module later on. 
         module.transform.rotation = transform.rotation;
     }

@@ -330,4 +330,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  price: 50
   moneyPerSecond: 2
