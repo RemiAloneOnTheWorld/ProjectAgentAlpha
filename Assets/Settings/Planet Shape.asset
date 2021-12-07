@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetRadius: 2
   noiseLayers:
-  - enabled: 0
+  - enabled: 1
     useFirstLayerAsMask: 0
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 1
-        roughness: 2
-        persistence: 0.5
-        baseRoughness: 1
-        minValue: 0
-        numLayers: 1
+        strength: 0.05
+        roughness: 1.44
+        persistence: 0.9
+        baseRoughness: 1.25
+        minValue: 2.22
+        numLayers: 5
         centre: {x: 0, y: 0, z: 0}
       rigidNoiseSettings:
         strength: 1
@@ -57,7 +57,7 @@ MonoBehaviour:
         centre: {x: 0, y: 0, z: 0}
         weightMultiplier: 0.8
   - enabled: 1
-    useFirstLayerAsMask: 0
+    useFirstLayerAsMask: 1
     noiseSettings:
       filterType: 1
       simpleNoiseSettings:
@@ -70,10 +70,10 @@ MonoBehaviour:
         centre: {x: 0, y: 0, z: 0}
       rigidNoiseSettings:
         strength: 0.2
-        roughness: 1.19
-        persistence: 0.29
-        baseRoughness: 2.15
+        roughness: 1.5
+        persistence: 1.25
+        baseRoughness: 2.5
         minValue: 0
-        numLayers: 1
+        numLayers: 5
         centre: {x: 0, y: 0, z: 0}
-        weightMultiplier: 0.8
+        weightMultiplier: 4
