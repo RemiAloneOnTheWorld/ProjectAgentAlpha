@@ -1,6 +1,4 @@
 using TMPro;
-using Unity.Barracuda;
-using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,16 +8,14 @@ public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
     private Connector _connector;
 
-    [SerializeField] private EventSystem eventSystem;
-    
     //Stats
     [SerializeField] private TMP_Text currencyText;
     [SerializeField] private TMP_Text spaceshipText;
-    
+
     //Buy menu
     [SerializeField] private GameObject buyMenu;
     private bool _menuShown;
-    
+
     //Buttons
     [SerializeField] private Button currencyButton;
     [SerializeField] private Button factoryButton;
@@ -47,7 +43,7 @@ public class UIHandler : MonoBehaviour {
 
     private void Update() {
         if (_modulePreviewShown) {
-            _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed);
+            _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed * Time.deltaTime);
         }
     }
 
@@ -58,7 +54,7 @@ public class UIHandler : MonoBehaviour {
     public void SetSpaceshipTextValue(int value) {
         spaceshipText.text = $"Spaceships: {value}";
     }
-    
+
     private void ShowCursor(bool showCursor) {
         Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = showCursor;
@@ -79,7 +75,7 @@ public class UIHandler : MonoBehaviour {
         for (int i = 0; i < _modulePreview.transform.childCount; i++) {
             _modulePreview.transform.GetChild(i).gameObject.layer = previewLayer;
         }
-        
+
         Destroy(_modulePreview.GetComponent<Module>());
         previewCamera.transform.position = new Vector3(20, 0, 17);
         _modulePreviewShown = true;
@@ -90,7 +86,7 @@ public class UIHandler : MonoBehaviour {
         Destroy(_modulePreview);
         _modulePreviewShown = false;
     }
-    
+
     public void SetFactoryModule() {
         if (_menuShown) {
             _connector.SetFactoryModulePrefab();
@@ -105,14 +101,14 @@ public class UIHandler : MonoBehaviour {
         _menuShown = !_menuShown;
         ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
-        
+
         if (_playerInput.currentActionMap.name.Equals("Controller")) {
             SetCurrencyModule();
             EventSystem.current.SetSelectedGameObject(currencyButton.gameObject);
             currencyButton.GetComponent<EventTrigger>().OnSelect(null);
         }
-        
-        
+
+
         if (!_menuShown) {
             Debug.Log("Module preview closed");
             CloseModulePreview();
