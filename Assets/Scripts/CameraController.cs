@@ -50,8 +50,8 @@ public class CameraController : MonoBehaviour
         ready++;
         if (ready == 2)
         {
-            PrePhase2(player1,0);
-            PrePhase2(player2,0.5f);
+            //PrePhase2(player1,0);
+            //PrePhase2(player2,0.5f);
             animationStates.SetFloat("Ready", ready);
         }
     }
@@ -59,8 +59,8 @@ public class CameraController : MonoBehaviour
     public void UnReady()
     {
         ready = 0;
-        EndPhase2(player1, 0.5f);
-        EndPhase2(player2, 0);
+        //EndPhase2(player1, 0.5f);
+        //EndPhase2(player2, 0);
         animationStates.SetFloat("Ready", ready);
     }
 

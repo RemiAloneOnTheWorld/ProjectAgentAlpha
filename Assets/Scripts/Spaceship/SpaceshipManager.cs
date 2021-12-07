@@ -1,30 +1,33 @@
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
 public class SpaceshipManager : Module {
     [SerializeField] private int spaceships;
     public int Spaceships { get; private set; }
-    public float Money { get; private set; }
-    
-    //UI
-    [SerializeField] private TMP_Text currencyText;
-    [SerializeField] private TMP_Text factoryText;
+    [SerializeField] private int startMoney;
 
+    [SerializeField] private UIHandler uiHandler;
+
+    public float Money { get; set; }
+    
     protected override void Start() {
         base.Start();
         Spaceships = spaceships;
-        currencyText.text = $"Currency: {Money.ToString()}";
-        factoryText.text = $"Spaceships: {Spaceships.ToString()}";
+        Money = startMoney;
+
+        //Set UI to values
+        uiHandler.SetCurrencyTextValue(Money);
+        uiHandler.SetSpaceshipTextValue(Spaceships);
     }
 
     public void AddMoney(float amount) {
         Money += amount;
-        currencyText.text = $"Currency: {Money}";
+        uiHandler.SetCurrencyTextValue(Money);
     }
 
-    public void AddCrew(int amount)
-    {
+    public void AddCrew(int amount) {
         Spaceships += amount;
-        factoryText.text = $"Spaceships: {Spaceships}";
+        uiHandler.SetSpaceshipTextValue(Spaceships);
     }
 }

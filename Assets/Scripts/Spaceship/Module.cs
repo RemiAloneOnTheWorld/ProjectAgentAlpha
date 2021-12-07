@@ -7,6 +7,13 @@ public abstract class Module : MonoBehaviour {
     [SerializeField] protected int health;
     public int Health { get; protected set; }
 
+    [SerializeField] private int price;
+
+    public int Price {
+        get => price;
+        private set => price = value;
+    }
+
     private Module _parentModule;
     private Module _baseModule;
 
@@ -57,7 +64,6 @@ public abstract class Module : MonoBehaviour {
 
     public virtual void ResetModule() {
         Health = health;
-        //Connections.Clear();
     }
 
     public virtual void ApplyDamage(in int amount) {
@@ -69,9 +75,8 @@ public abstract class Module : MonoBehaviour {
 
     protected virtual void Start() {
         Health = health;
+        Price = price;
         Connections = new List<Connection>();
-
-
         RemoveOverlapConnections();
     }
 
@@ -89,17 +94,19 @@ public abstract class Module : MonoBehaviour {
 
         foreach (var connection in components) {
             //Todo: Use same displacement vector in connectors and here.
-            Vector3 moduleDisplacement = connection.transform.position - transform.position;
-            Vector3 displacementVector = connection.transform.right;
-            if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) < 0) {
+            var connectionTransform = connection.transform;
+            var moduleDisplacement = transform.position - connectionTransform.position;
+            var displacementVector = connectionTransform.right;
+            if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) > 0) {
                 displacementVector = -displacementVector;
             }
 
+            //TODO: Make this dependent on the actual size of the module.
             displacementVector *= transform.lossyScale.x / 2;
 
-
+            //TODO: Make the half-extents dependent on the actual size of the module.
             foreach (var currentCollider in Physics.OverlapBox(connection.transform.position + displacementVector,
-                transform.lossyScale / 2)) {
+                transform.lossyScale * 0.3f)) {
                 //Check if collision occured with own connections and module.
                 if (currentCollider.gameObject == gameObject || connectors.Contains(currentCollider.gameObject)) {
                     continue;
@@ -110,10 +117,10 @@ public abstract class Module : MonoBehaviour {
                 //Tries to get the 'Connection' component to ensure that it is indeed a connection
                 //and not another module.
                 if (currentCollider.TryGetComponent<Connection>(out var component)) {
-                    //Debug.LogWarning("Destroyed " + currentCollider.gameObject.name);
-
                     //'RemoveConnection' also deletes the connections' game object.
-                    component.GetParentModule().RemoveConnection(component);
+                    if (component.GetBoundModule() == null) {
+                        component.GetParentModule().RemoveConnection(component);
+                    }
                 }
             }
 

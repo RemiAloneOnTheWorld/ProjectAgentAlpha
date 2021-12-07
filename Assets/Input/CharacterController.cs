@@ -57,6 +57,14 @@ public class @CharacterController : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""58c22f92-7d2f-4752-8833-731daa8ac93c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -151,11 +159,22 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9f859a7b-3db9-4942-a83c-5a73da02ed13"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/backquote"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""921a0ed0-bb38-4bea-8cdd-413ac5f0b8e2"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -244,6 +263,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         m_MouseandKeyboard_Move = m_MouseandKeyboard.FindAction("Move", throwIfNotFound: true);
         m_MouseandKeyboard_Look = m_MouseandKeyboard.FindAction("Look", throwIfNotFound: true);
         m_MouseandKeyboard_Pause = m_MouseandKeyboard.FindAction("Pause", throwIfNotFound: true);
+        m_MouseandKeyboard_Menu = m_MouseandKeyboard.FindAction("Menu", throwIfNotFound: true);
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Move_Controller = m_Controller.FindAction("Move_Controller", throwIfNotFound: true);
@@ -304,6 +324,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
     private readonly InputAction m_MouseandKeyboard_Move;
     private readonly InputAction m_MouseandKeyboard_Look;
     private readonly InputAction m_MouseandKeyboard_Pause;
+    private readonly InputAction m_MouseandKeyboard_Menu;
     public struct MouseandKeyboardActions
     {
         private @CharacterController m_Wrapper;
@@ -313,6 +334,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_MouseandKeyboard_Move;
         public InputAction @Look => m_Wrapper.m_MouseandKeyboard_Look;
         public InputAction @Pause => m_Wrapper.m_MouseandKeyboard_Pause;
+        public InputAction @Menu => m_Wrapper.m_MouseandKeyboard_Menu;
         public InputActionMap Get() { return m_Wrapper.m_MouseandKeyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -337,6 +359,9 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPause;
+                @Menu.started -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_MouseandKeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -356,6 +381,9 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -424,6 +452,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
     public interface IControllerActions
     {
