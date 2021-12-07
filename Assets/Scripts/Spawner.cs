@@ -44,6 +44,8 @@ public class Spawner : MonoBehaviour
             GameObject cube = Instantiate<GameObject>(prefab);
             cube.transform.localPosition = new Vector3(randX,randY,randZ);
 
+            cube.transform.parent = this.transform;
+
             cubeList.Add(cube);
         }
     }

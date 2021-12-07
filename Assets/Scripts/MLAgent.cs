@@ -28,11 +28,12 @@ public class MLAgent : Agent
     private Vector3 beginPosition;
     [SerializeField]
     private Vector3 beginrotation;
-
+    [SerializeField]
+    private bool useVectorObs;
 
     public override void Initialize()
     {
-       print(spawner);
+    
     }
 
     public override void OnEpisodeBegin()
@@ -57,29 +58,39 @@ public class MLAgent : Agent
         sensor.AddObservation(goal.transform.position);
 
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
+
+        sensor.AddObservation(transform.position);
+
+        if(useVectorObs)
+            sensor.AddObservation(StepCount / (float)MaxStep);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
         Move(actions.DiscreteActions);
-        Strafe(actions.DiscreteActions);
         LookY(actions.DiscreteActions);
         LookX(actions.DiscreteActions);
         AddReward(-1f/MaxStep);
     }
 
-    private void OnCollisionEnter(Collision col) {
+    private void OnCollisionEnter(Collision col)
+    {
         if(col.gameObject.CompareTag("Goal")) {
             SetReward(1f);
             StartCoroutine(GoalScored(correct, 0.5f));
             EndEpisode();
         }
         if(col.gameObject.CompareTag("Block")) {
-            SetReward(-0.1f);
+            AddReward(-0.5f);
+            StartCoroutine(GoalScored(wrong, 0.5f));
+        }
+        if(col.gameObject.CompareTag("Wall")) {
+            AddReward(-0.1f);
         }
     }
 
-    IEnumerator GoalScored(Material mat, float time) {
+    IEnumerator GoalScored(Material mat, float time)
+    {
         backWall.GetComponent<Renderer>().material = mat;
         yield return new WaitForSeconds(time);
         backWall.GetComponent<Renderer>().material = glass;
@@ -88,7 +99,7 @@ public class MLAgent : Agent
     private void LookY(ActionSegment<int> discreteActions)
     {
         var rotateDir = Vector3.zero;
-        var action = discreteActions[2];
+        var action = discreteActions[1];
 
         switch (action)
         {            
@@ -106,7 +117,7 @@ public class MLAgent : Agent
     private void LookX(ActionSegment<int> discreteActions)
     {
         var rotateDir = Vector3.zero;
-        var action = discreteActions[3];
+        var action = discreteActions[2];
 
         switch (action)
         {            
@@ -119,24 +130,6 @@ public class MLAgent : Agent
                 break;
         }
         transform.Rotate(rotateDir, Time.deltaTime * 150f);               
-    }
-
-    private void Strafe(ActionSegment<int> discreteActions) 
-    {
-        Vector3 direction = Vector3.zero;
-        int action = discreteActions[1];
-     
-        switch (action)
-        {
-            case 1:
-                direction = transform.right * -1f;
-                break;
-
-            case 2:
-                direction = transform.right * 1f;
-                break;
-        }
-        mlAgentBody.AddForce(direction * runspeed, ForceMode.VelocityChange);
     }
 
     private void Move(ActionSegment<int> discreteActions)
@@ -154,7 +147,7 @@ public class MLAgent : Agent
                 direction = transform.forward * -1f;
                 break;
         }
-        mlAgentBody.AddForce(direction * runspeed, ForceMode.VelocityChange);
+        mlAgentBody.AddForce(direction * Time.deltaTime * runspeed, ForceMode.VelocityChange);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -164,17 +157,13 @@ public class MLAgent : Agent
             a[0] = 1;
         if (Input.GetKey(KeyCode.S))
             a[0] = 2;
-        if (Input.GetKey(KeyCode.A))
-            a[1] = 1;
-        if (Input.GetKey(KeyCode.D))
-            a[1] = 2;
         if (Input.GetKey(KeyCode.RightArrow))
-            a[2] = 1;
+            a[1] = 1;
         if (Input.GetKey(KeyCode.LeftArrow))
-            a[2] = 2;
+            a[1] = 2;
         if (Input.GetKey(KeyCode.UpArrow))
-            a[3] = 1;
+            a[2] = 1;
         if (Input.GetKey(KeyCode.DownArrow))
-            a[3] = 2;
+            a[2] = 2;
     }
 }
