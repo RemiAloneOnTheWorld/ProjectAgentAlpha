@@ -20,11 +20,14 @@ public class CameraController : MonoBehaviour
     private Player player1 = new Player();
     private Player player2 = new Player();
     private Animator animationStates;
+    private ScreenFader fader;
+    public GameObject panel;
 
     // Start is called before the first frame update
     void Start()
     {
         Player_Movement[] players = FindObjectsOfType<Player_Movement>();
+        fader = FindObjectOfType<ScreenFader>();
         animationStates = GetComponent<Animator>();
         player1.gameObject = players[0].gameObject;
         player2.gameObject = players[1].gameObject;
@@ -50,9 +53,8 @@ public class CameraController : MonoBehaviour
         ready++;
         if (ready == 2)
         {
-            PrePhase2(player1,0);
-            PrePhase2(player2,0.5f);
-            animationStates.SetFloat("Ready", ready);
+            StartCoroutine(startPhase());
+         
         }
     }
 
@@ -63,6 +65,17 @@ public class CameraController : MonoBehaviour
         EndPhase2(player2, 0);
         animationStates.SetFloat("Ready", ready);
     }
+
+    IEnumerator startPhase()
+    {
+        StartCoroutine(fader.fadeOut());
+        yield return new WaitForSeconds(4);
+        PrePhase2(player1, 0);
+        PrePhase2(player2, 0.5f);
+        animationStates.SetFloat("Ready", ready);
+        StartCoroutine(fader.fadeIn());
+    }
+
 
     private void PrePhase2(Player player, float yCam)
     {
