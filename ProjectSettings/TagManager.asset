@@ -8,6 +8,7 @@ TagManager:
   - Connection
   - BaseStation_1
   - BaseStation_2
+  - Planet
   layers:
   - Default
   - TransparentFX
