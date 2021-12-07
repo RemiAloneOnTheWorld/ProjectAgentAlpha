@@ -1,4 +1,6 @@
 using TMPro;
+using Unity.Barracuda;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,6 +9,8 @@ using UnityEngine.UI;
 public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
     private Connector _connector;
+
+    [SerializeField] private EventSystem eventSystem;
     
     //Stats
     [SerializeField] private TMP_Text currencyText;
@@ -33,6 +37,7 @@ public class UIHandler : MonoBehaviour {
         _connector = GetComponent<Connector>();
         if (_playerInput.currentActionMap.name.Equals("Controller")) {
             //TODO: Implement Controller
+            _playerInput.actions.FindAction("Menu_Controller").performed += ShowMenu;
         }
         else {
             //TODO: Implement Mouse & Keyboard
@@ -69,6 +74,12 @@ public class UIHandler : MonoBehaviour {
         if (_modulePreviewShown) return;
         previewWindow.gameObject.SetActive(true);
         _modulePreview = Instantiate(module, new Vector3(20, 0, 20), Quaternion.identity);
+        int previewLayer = LayerMask.NameToLayer("PreviewCamera");
+        _modulePreview.layer = previewLayer;
+        for (int i = 0; i < _modulePreview.transform.childCount; i++) {
+            _modulePreview.transform.GetChild(i).gameObject.layer = previewLayer;
+        }
+        
         Destroy(_modulePreview.GetComponent<Module>());
         previewCamera.transform.position = new Vector3(20, 0, 17);
         _modulePreviewShown = true;
@@ -94,13 +105,17 @@ public class UIHandler : MonoBehaviour {
         _menuShown = !_menuShown;
         ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
+        
+        if (_playerInput.currentActionMap.name.Equals("Controller")) {
+            SetCurrencyModule();
+            EventSystem.current.SetSelectedGameObject(currencyButton.gameObject);
+            currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+        }
+        
+        
         if (!_menuShown) {
+            Debug.Log("Module preview closed");
             CloseModulePreview();
         }
     }
-
-    public void TEST() {
-        Debug.Log("ASDASDASDASD");
-    }
-    
 }

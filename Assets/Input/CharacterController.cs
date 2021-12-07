@@ -215,6 +215,14 @@ public class @CharacterController : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu_Controller"",
+                    ""type"": ""Button"",
+                    ""id"": ""90410c36-b52b-4bc6-803a-ce98cf7af79c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -243,11 +251,22 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e1e6f59f-e890-40a0-89fd-217045f29211"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pick_Controller"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4300fb84-66ba-4eaf-8069-d27fe5528562"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu_Controller"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -270,6 +289,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         m_Controller_Look_Controller = m_Controller.FindAction("Look_Controller", throwIfNotFound: true);
         m_Controller_Pick_Controller = m_Controller.FindAction("Pick_Controller", throwIfNotFound: true);
         m_Controller_Scroll_Controller = m_Controller.FindAction("Scroll_Controller", throwIfNotFound: true);
+        m_Controller_Menu_Controller = m_Controller.FindAction("Menu_Controller", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -396,6 +416,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
     private readonly InputAction m_Controller_Look_Controller;
     private readonly InputAction m_Controller_Pick_Controller;
     private readonly InputAction m_Controller_Scroll_Controller;
+    private readonly InputAction m_Controller_Menu_Controller;
     public struct ControllerActions
     {
         private @CharacterController m_Wrapper;
@@ -404,6 +425,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         public InputAction @Look_Controller => m_Wrapper.m_Controller_Look_Controller;
         public InputAction @Pick_Controller => m_Wrapper.m_Controller_Pick_Controller;
         public InputAction @Scroll_Controller => m_Wrapper.m_Controller_Scroll_Controller;
+        public InputAction @Menu_Controller => m_Wrapper.m_Controller_Menu_Controller;
         public InputActionMap Get() { return m_Wrapper.m_Controller; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -425,6 +447,9 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 @Scroll_Controller.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnScroll_Controller;
                 @Scroll_Controller.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnScroll_Controller;
                 @Scroll_Controller.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnScroll_Controller;
+                @Menu_Controller.started -= m_Wrapper.m_ControllerActionsCallbackInterface.OnMenu_Controller;
+                @Menu_Controller.performed -= m_Wrapper.m_ControllerActionsCallbackInterface.OnMenu_Controller;
+                @Menu_Controller.canceled -= m_Wrapper.m_ControllerActionsCallbackInterface.OnMenu_Controller;
             }
             m_Wrapper.m_ControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -441,6 +466,9 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 @Scroll_Controller.started += instance.OnScroll_Controller;
                 @Scroll_Controller.performed += instance.OnScroll_Controller;
                 @Scroll_Controller.canceled += instance.OnScroll_Controller;
+                @Menu_Controller.started += instance.OnMenu_Controller;
+                @Menu_Controller.performed += instance.OnMenu_Controller;
+                @Menu_Controller.canceled += instance.OnMenu_Controller;
             }
         }
     }
@@ -460,5 +488,6 @@ public class @CharacterController : IInputActionCollection, IDisposable
         void OnLook_Controller(InputAction.CallbackContext context);
         void OnPick_Controller(InputAction.CallbackContext context);
         void OnScroll_Controller(InputAction.CallbackContext context);
+        void OnMenu_Controller(InputAction.CallbackContext context);
     }
 }

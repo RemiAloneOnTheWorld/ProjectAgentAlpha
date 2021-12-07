@@ -16,7 +16,12 @@ public class Connector : MonoBehaviour {
     [SerializeField] private RectTransform crosshair;
 
     private void Start() {
-        playerInput.actions.FindAction("Pick").performed += AddModule;
+        if (playerInput.currentActionMap.name.Equals("Controller")) {
+            playerInput.actions.FindAction("Pick_Controller").performed += AddModule;
+        }
+        else {
+            playerInput.actions.FindAction("Pick").performed += AddModule;
+        }
     }
 
     private void AddModule(InputAction.CallbackContext pContext) {
@@ -24,7 +29,7 @@ public class Connector : MonoBehaviour {
             pickupDistance) || !raycastHit.collider.CompareTag("Connection")) {
             return;
         }
-        
+
         if (_currentModule == null) {
             Debug.LogWarning("No module selected");
             return;

@@ -202,6 +202,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Menu_Controller",
+                    "type": "Button",
+                    "id": "90410c36-b52b-4bc6-803a-ce98cf7af79c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -230,11 +238,22 @@
                 {
                     "name": "",
                     "id": "e1e6f59f-e890-40a0-89fd-217045f29211",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Pick_Controller",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4300fb84-66ba-4eaf-8069-d27fe5528562",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu_Controller",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
