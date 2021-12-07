@@ -18,17 +18,19 @@ public class ScreenFader : MonoBehaviour
 
     public IEnumerator fadeOut()
     {
-        while (image.color.a < 0.98f){
+        while (image.color.a < 0.98f)
+        {
             Color startColor = image.color;
             image.color = Color.Lerp(startColor, Color.black, fadeSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
         image.color = new Color(0f, 0f, 0f, 1f);
-        yield return null;
+        yield return fadeIn();
     }
 
     public IEnumerator fadeIn()
     {
+        yield return new WaitForSeconds(1);
         while (image.color.a > 0.02f)
         {
             Color startColor = image.color;
@@ -36,6 +38,7 @@ public class ScreenFader : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         image.color = new Color(0f, 0f, 0f, 0f);
+
         yield return null;
     }
 }

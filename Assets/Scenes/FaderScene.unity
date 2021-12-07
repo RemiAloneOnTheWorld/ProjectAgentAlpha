@@ -399,9 +399,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 500
+  price: 0
   spaceships: 0
-  currencyText: {fileID: 1676395882}
-  factoryText: {fileID: 1025445628}
+  startMoney: 0
+  uiHandler: {fileID: 0}
 --- !u!65 &156991230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -668,15 +669,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 714205125184845540, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05530525
+      value: 0.05530526
       objectReference: {fileID: 0}
     - target: {fileID: 714205125184845540, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000037195893
+      value: 0.0000000015407042
       objectReference: {fileID: 0}
     - target: {fileID: 714205125184845540, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 2.0602814e-10
+      value: -8.5339666e-11
       objectReference: {fileID: 0}
     - target: {fileID: 4626858240665242481, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_RootOrder
@@ -988,7 +989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2d7829ffa355241b0cc79bce7076cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeSpeed: 1
+  fadeSpeed: 1.5
 --- !u!114 &691732415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2777,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4737687173168019096}
-  m_LocalRotation: {x: 0.05530525, y: -0.0000000037195893, z: 2.0602814e-10, w: 0.99846953}
+  m_LocalRotation: {x: 0.05530526, y: 0.0000000015407042, z: -8.5339666e-11, w: 0.99846953}
   m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2813,7 +2814,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5063191, y: 1}
+    m_SensorSize: {x: 0.664297, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2930,11 +2931,11 @@ MonoBehaviour:
     m_MinDuration: 0
   - m_FullHash: 307082134
     m_VirtualCamera: {fileID: 6114776307108971720}
-    m_ActivateAfter: 1
+    m_ActivateAfter: 2
     m_MinDuration: 0
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 0.5
+    m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -3072,7 +3073,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5063191, y: 1}
+    m_SensorSize: {x: 0.664297, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3241,7 +3242,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5063191, y: 1}
+    m_SensorSize: {x: 0.664297, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3416,7 +3417,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5063191, y: 1}
+    m_SensorSize: {x: 0.664297, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3490,11 +3491,11 @@ MonoBehaviour:
     m_MinDuration: 0
   - m_FullHash: 307082134
     m_VirtualCamera: {fileID: 6114776306169998223}
-    m_ActivateAfter: 1
+    m_ActivateAfter: 2
     m_MinDuration: 0
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 0.5
+    m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
