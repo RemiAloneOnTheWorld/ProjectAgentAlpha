@@ -63,6 +63,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -103,12 +107,13 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _smoothness: 0.7
     m_Colors:
     - _BaseColor: {r: 0.49056602, g: 0.1928325, b: 0.40329936, a: 0}
     - _Color: {r: 0.49056602, g: 0.1928325, b: 0.40329936, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _elevationMinMax: {r: 2, g: 2.190181, b: 0, a: 0}
+    - _elevationMinMax: {r: -0.16613361, g: 0.09509051, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5171408806867598185
 MonoBehaviour:
