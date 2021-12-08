@@ -17,13 +17,13 @@ public class Planet : MonoBehaviour
     [HideInInspector]
     public bool colourSettingsFoldOut;
     private TerrainFace[] terrainFaces;
-    private ShapeGenerator shapeGenerator;
-    private ColourGenerator colourGenerator;
+    private ShapeGenerator shapeGenerator = new ShapeGenerator();
+    private ColourGenerator colourGenerator = new ColourGenerator();
     [SerializeField, HideInInspector]
     private MeshFilter[] meshFilters;
     void Initialize() {
-        this.shapeGenerator = new ShapeGenerator(shapeSettings);
-        this.colourGenerator = new ColourGenerator(colourSettings);
+        shapeGenerator.UpdateSettings(shapeSettings);
+        colourGenerator.UpdateSettings(colourSettings);
 
         if(meshFilters == null || meshFilters.Length == 0)
             meshFilters = new MeshFilter[6];
@@ -81,9 +81,6 @@ public class Planet : MonoBehaviour
     }
 
     void GenerateColours() {
-        foreach (MeshFilter filter in meshFilters)
-        {
-            filter.GetComponent<MeshRenderer>().sharedMaterial.color = colourSettings.planetColour;
-        }
+        colourGenerator.UpdateColours();
     }
 }
