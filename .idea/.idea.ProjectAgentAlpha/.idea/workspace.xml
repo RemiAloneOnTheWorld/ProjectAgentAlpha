@@ -7,13 +7,7 @@
     <list default="true" id="4ef5fa9f-259f-42ab-8500-e1a88b58272c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectAgentAlpha/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectAgentAlpha/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene_Profiles/Post Processing Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene_Profiles/Post Processing Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player_Movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player_Movement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/CrewCreationModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/CrewCreationModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/SpaceshipManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/SpaceshipManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UIHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UIHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +81,7 @@
       <workItem from="1638452120864" duration="1429000" />
       <workItem from="1638527675190" duration="5548000" />
       <workItem from="1638789098341" duration="14150000" />
-      <workItem from="1638865658166" duration="12679000" />
+      <workItem from="1638865658166" duration="13787000" />
     </task>
     <servers />
   </component>
