@@ -49,7 +49,7 @@ public class Player_Movement : MonoBehaviour
         {
 
             case InputDeviceChange.Added:
-                //if (playerInput.user.hasMissingRequiredDevices || playerInput.user.)
+                if (playerInput.user.hasMissingRequiredDevices )
                 InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                 _uiHandler.ShowMessage("Device connected!", 2f);
                 break;
