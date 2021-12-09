@@ -21,6 +21,11 @@ public class Planet : MonoBehaviour
     private ColourGenerator colourGenerator = new ColourGenerator();
     [SerializeField, HideInInspector]
     private MeshFilter[] meshFilters;
+
+    private void Start() {
+        GeneratePlanet();
+    }
+
     void Initialize() {
         shapeGenerator.UpdateSettings(shapeSettings);
         colourGenerator.UpdateSettings(colourSettings);
