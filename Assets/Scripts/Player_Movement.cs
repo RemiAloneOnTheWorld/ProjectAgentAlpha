@@ -6,7 +6,8 @@ using UnityEngine.InputSystem.Users;
 
 
 [RequireComponent(typeof(PlayerInput))]
-public class Player_Movement : MonoBehaviour {
+public class Player_Movement : MonoBehaviour
+{
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float speed;
     [SerializeField] private float maxSpeed;
@@ -30,38 +31,37 @@ public class Player_Movement : MonoBehaviour {
     private float yaw;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         _uiHandler = GetComponent<UIHandler>();
-        if (playerInput.currentActionMap.name.Equals("Controller")) {
+        if (playerInput.currentActionMap.name.Equals("Controller"))
+        {
             _move = playerInput.actions.FindAction("Move_Controller");
             _look = playerInput.actions.FindAction("Look_Controller");
         }
-        else {
+        else
+        {
             _move = playerInput.actions.FindAction("Move");
             _look = playerInput.actions.FindAction("Look");
         }
-        //InputSystem.onDeviceChange += OnDeviceChanged;
+        InputSystem.onDeviceChange += OnDeviceChanged;
 
         _move.canceled += CancelMovement;
     }
 
     private void OnDeviceChanged(InputDevice device, InputDeviceChange change)
     {
-        print("f2");
-        if (InputDeviceChange.Added == change)
-        {
-            _uiHandler.ShowMessage("Device disconnected!", 2f);
-            InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
-        }
-
         switch (change)
         {
 
-            case:
+            case InputDeviceChange.Added:
+                InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                 break;
-            case:
+            case InputDeviceChange.Disconnected:
+                _uiHandler.ShowMessage("Device disconnected!", 2f);
                 break;
-            case:
+            case InputDeviceChange.Reconnected:
+                _uiHandler.ShowMessage("Device connected!", 2f);
                 break;
 
 
@@ -69,13 +69,16 @@ public class Player_Movement : MonoBehaviour {
     }
 
 
-    private void CancelMovement(InputAction.CallbackContext obj) {
+    private void CancelMovement(InputAction.CallbackContext obj)
+    {
         _moveInput = Vector3.zero;
     }
 
     // Update is called once per frame
-    void Update() {
-        if (_uiHandler.IsMenuShown()) {
+    void Update()
+    {
+        if (_uiHandler.IsMenuShown())
+        {
             return;
         }
 
@@ -83,18 +86,8 @@ public class Player_Movement : MonoBehaviour {
         updateDirection();
     }
 
-
-    public void OnDeviceLost()
+    private void updateDirection()
     {
-        _uiHandler.ShowMessage("Device disconnected!", 2f);
-    }
-
-    public void OnDeviceRegained()
-    {
-        _uiHandler.ShowMessage("Device connected!", 2f);
-    }
-
-    private void updateDirection() {
         var rotateDir2D = _look.ReadValue<Vector2>();
 
         pitch += rotationSpeed * -rotateDir2D.y;
@@ -103,11 +96,13 @@ public class Player_Movement : MonoBehaviour {
 
         pitch = Mathf.Clamp(pitch, -90f, 90f);
         // Wrap yaw:
-        while (yaw < 0f) {
+        while (yaw < 0f)
+        {
             yaw += 360f;
         }
 
-        while (yaw >= 360f) {
+        while (yaw >= 360f)
+        {
             yaw -= 360f;
         }
 
@@ -115,9 +110,10 @@ public class Player_Movement : MonoBehaviour {
     }
 
 
-    
 
-    private void updateMovement() {
+
+    private void updateMovement()
+    {
         var _moveInput2D = _move.ReadValue<Vector2>();
         _moveInput = _moveInput2D.x * transform.right;
         _moveInput += _moveInput2D.y * transform.forward;
@@ -125,11 +121,13 @@ public class Player_Movement : MonoBehaviour {
 
         //Semi-implicit Euler Integration
         _velocity += _moveInput * speed;
-        if (_velocity.magnitude > maxSpeed) {
+        if (_velocity.magnitude > maxSpeed)
+        {
             _velocity = _velocity.normalized * maxSpeed;
         }
 
-        if (_moveInput2D.magnitude <= 0) {
+        if (_moveInput2D.magnitude <= 0)
+        {
             _velocity *= deceleration;
         }
 
@@ -137,6 +135,6 @@ public class Player_Movement : MonoBehaviour {
         transform.position += _velocity * Time.deltaTime;
     }
 
-   
+
 }
 
