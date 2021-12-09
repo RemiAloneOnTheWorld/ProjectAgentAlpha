@@ -128,19 +128,17 @@ public class UIHandler : MonoBehaviour {
         ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
 
-        if (_playerInput.currentControlScheme.Equals("Gamepad") && _menuShown) {
-            SetCurrencyModule();
-            EventSystem.current.SetSelectedGameObject(currencyButton.gameObject);
-            currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+        if (_menuShown) {
+            if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+                EventSystem.current.SetSelectedGameObject(currencyButton.gameObject);
+                currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+            }
         }
-
-
-        if (!_menuShown) {
+        else{
             Debug.Log("Module preview closed");
             CloseModulePreview();
         }
     }
-    
     
     private void AnimateCrosshair() {
         var forward = transform.forward;
