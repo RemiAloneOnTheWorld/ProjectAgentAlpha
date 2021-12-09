@@ -87,6 +87,7 @@ public class UIHandler : MonoBehaviour {
     public void SetCurrencyModule() {
         if (_menuShown) {
             _connector.SetCurrencyModulePrefab();
+            ShowMenu(new InputAction.CallbackContext());
         }
     }
 
@@ -114,6 +115,7 @@ public class UIHandler : MonoBehaviour {
     public void SetFactoryModule() {
         if (_menuShown) {
             _connector.SetFactoryModulePrefab();
+            ShowMenu(new InputAction.CallbackContext());
         }
     }
 
@@ -126,7 +128,7 @@ public class UIHandler : MonoBehaviour {
         ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
 
-        if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+        if (_playerInput.currentControlScheme.Equals("Gamepad") && _menuShown) {
             SetCurrencyModule();
             EventSystem.current.SetSelectedGameObject(currencyButton.gameObject);
             currencyButton.GetComponent<EventTrigger>().OnSelect(null);
@@ -138,6 +140,7 @@ public class UIHandler : MonoBehaviour {
             CloseModulePreview();
         }
     }
+    
     
     private void AnimateCrosshair() {
         var forward = transform.forward;
