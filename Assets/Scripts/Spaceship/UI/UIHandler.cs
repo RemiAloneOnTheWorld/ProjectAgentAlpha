@@ -1,3 +1,4 @@
+using Cinemachine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine;
@@ -27,6 +28,12 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private float previewRotationSpeed;
     private bool _modulePreviewShown;
 
+    //Camera & crosshair
+    [SerializeField] private CinemachineVirtualCamera vcam;
+    [SerializeField] private RectTransform crosshair;
+    [SerializeField] private float crosshairDrift;
+    private Vector2 _initCrosshairPos;
+
     private void Start() {
         ShowCursor(_menuShown);
         _playerInput = GetComponent<PlayerInput>();
@@ -39,12 +46,19 @@ public class UIHandler : MonoBehaviour {
             //TODO: Implement Mouse & Keyboard
             _playerInput.actions.FindAction("Menu").performed += ShowMenu;
         }
+
+        _initCrosshairPos = crosshair.transform.position;
     }
+
+    private Vector3 startVac;
 
     private void Update() {
         if (_modulePreviewShown) {
             _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed * Time.deltaTime);
         }
+
+        AnimateCrosshair();
+        //startVac = 
     }
 
     public void SetCurrencyTextValue(float value) {
@@ -113,5 +127,12 @@ public class UIHandler : MonoBehaviour {
             Debug.Log("Module preview closed");
             CloseModulePreview();
         }
+    }
+    
+    private void AnimateCrosshair() {
+        var forward = transform.forward;
+        float x = Vector3.Dot(vcam.transform.right, forward);
+        float y = Vector3.Dot(vcam.transform.up, forward);
+        crosshair.transform.position = new Vector2(_initCrosshairPos.x + x * crosshairDrift, _initCrosshairPos.y + y * crosshairDrift);
     }
 }
