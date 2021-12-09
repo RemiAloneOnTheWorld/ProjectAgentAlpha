@@ -34,16 +34,10 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         _uiHandler = GetComponent<UIHandler>();
-        if (playerInput.currentActionMap.name.Equals("Controller"))
-        {
-            _move = playerInput.actions.FindAction("Move_Controller");
-            _look = playerInput.actions.FindAction("Look_Controller");
-        }
-        else
-        {
-            _move = playerInput.actions.FindAction("Move");
-            _look = playerInput.actions.FindAction("Look");
-        }
+        
+        _move = playerInput.actions.FindAction("Movement", true);
+        _look = playerInput.actions.FindAction("Look", true);
+        
         InputSystem.onDeviceChange += OnDeviceChanged;
 
         _move.canceled += CancelMovement;

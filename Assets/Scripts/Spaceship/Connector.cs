@@ -14,12 +14,7 @@ public class Connector : MonoBehaviour {
     [SerializeField] private RectTransform crosshair;
 
     private void Start() {
-        if (playerInput.currentActionMap.name.Equals("Controller")) {
-            playerInput.actions.FindAction("Pick_Controller").performed += AddModule;
-        }
-        else {
-            playerInput.actions.FindAction("Pick").performed += AddModule;
-        }
+        playerInput.actions.FindAction("Place").performed += AddModule;
     }
 
     private void AddModule(InputAction.CallbackContext pContext) {

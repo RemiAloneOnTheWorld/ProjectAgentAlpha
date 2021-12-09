@@ -42,27 +42,16 @@ public class UIHandler : MonoBehaviour {
         ShowCursor(_menuShown);
         _playerInput = GetComponent<PlayerInput>();
         _connector = GetComponent<Connector>();
-        if (_playerInput.currentActionMap.name.Equals("Controller")) {
-            //TODO: Implement Controller
-            _playerInput.actions.FindAction("Menu_Controller").performed += ShowMenu;
-        }
-        else {
-            //TODO: Implement Mouse & Keyboard
-            _playerInput.actions.FindAction("Menu").performed += ShowMenu;
-        }
-
+        _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
         _initCrosshairPos = crosshair.transform.position;
     }
-
-    private Vector3 startVac;
-
+    
     private void Update() {
         if (_modulePreviewShown) {
             _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed * Time.deltaTime);
         }
 
         AnimateCrosshair();
-        //startVac = 
     }
 
     public void ShowMessage(string message, float timeInSeconds)
@@ -137,7 +126,7 @@ public class UIHandler : MonoBehaviour {
         ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
 
-        if (_playerInput.currentActionMap.name.Equals("Controller")) {
+        if (_playerInput.currentControlScheme.Equals("Gamepad")) {
             SetCurrencyModule();
             EventSystem.current.SetSelectedGameObject(currencyButton.gameObject);
             currencyButton.GetComponent<EventTrigger>().OnSelect(null);

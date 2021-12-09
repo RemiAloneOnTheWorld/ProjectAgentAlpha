@@ -437,6 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currencyText: {fileID: 1121151440}
   spaceshipText: {fileID: 26120058}
+  messageText: {fileID: 0}
   buyMenu: {fileID: 370922789}
   currencyButton: {fileID: 1789008365}
   factoryButton: {fileID: 67739922}
@@ -619,6 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currencyText: {fileID: 1676395882}
   spaceshipText: {fileID: 1025445628}
+  messageText: {fileID: 0}
   buyMenu: {fileID: 1562081652}
   currencyButton: {fileID: 770128139}
   factoryButton: {fileID: 262492442}
@@ -797,15 +799,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714205125184845540, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05530525
+      value: 0.055305257
       objectReference: {fileID: 0}
     - target: {fileID: 714205125184845540, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000037195893
+      value: -0.0000000024853501
       objectReference: {fileID: 0}
     - target: {fileID: 714205125184845540, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 2.0602814e-10
+      value: 1.3766362e-10
       objectReference: {fileID: 0}
     - target: {fileID: 714205125184845541, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -814,6 +816,22 @@ PrefabInstance:
     - target: {fileID: 714205125184845541, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626858240665242480, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
+    - target: {fileID: 4626858240665242480, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Spaceship
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626858240665242480, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Gamepad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626858240665242480, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4626858240665242481, guid: 4ae6c1141c19b1c44b58772f1481377c, type: 3}
       propertyPath: m_RootOrder
@@ -1510,15 +1528,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 502706380039154275, guid: 5a6c0869618d78d479420c4968226565, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05530525
+      value: 0.055305257
       objectReference: {fileID: 0}
     - target: {fileID: 502706380039154275, guid: 5a6c0869618d78d479420c4968226565, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000037195893
+      value: -0.0000000024853501
       objectReference: {fileID: 0}
     - target: {fileID: 502706380039154275, guid: 5a6c0869618d78d479420c4968226565, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 2.0602814e-10
+      value: 1.3766362e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1520567474315289634, guid: 5a6c0869618d78d479420c4968226565, type: 3}
       propertyPath: m_Follow
@@ -1889,6 +1907,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3322964969593404476, guid: bcbbfaccb2ae86c47b731c233a2d6d31, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
+    - target: {fileID: 3322964969593404476, guid: bcbbfaccb2ae86c47b731c233a2d6d31, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Spaceship
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322964969593404476, guid: bcbbfaccb2ae86c47b731c233a2d6d31, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Mouse&Keyboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322964969593404476, guid: bcbbfaccb2ae86c47b731c233a2d6d31, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3322964969593404477, guid: bcbbfaccb2ae86c47b731c233a2d6d31, type: 3}
       propertyPath: speed
       value: 2
@@ -2006,17 +2040,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 2585d44c19cf0324d9cbecb71ab18a70, type: 3}
+  m_PointAction: {fileID: 8919720129117789248, guid: 2585d44c19cf0324d9cbecb71ab18a70, type: 3}
+  m_MoveAction: {fileID: -1835099137820019783, guid: 2585d44c19cf0324d9cbecb71ab18a70, type: 3}
+  m_SubmitAction: {fileID: -7417445458115741677, guid: 2585d44c19cf0324d9cbecb71ab18a70, type: 3}
+  m_CancelAction: {fileID: -3592452849637310037, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
+  m_LeftClickAction: {fileID: -7417445458115741677, guid: 2585d44c19cf0324d9cbecb71ab18a70, type: 3}
+  m_MiddleClickAction: {fileID: 5305936476663392337, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
+  m_RightClickAction: {fileID: 4245504591061217889, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
+  m_ScrollWheelAction: {fileID: 676885510498748110, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -4226023819940709618, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7960329794118121825, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
 --- !u!114 &1579212200
