@@ -1,5 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Users;
+
 
 [RequireComponent(typeof(PlayerInput))]
 public class Player_Movement : MonoBehaviour {
@@ -36,9 +40,34 @@ public class Player_Movement : MonoBehaviour {
             _move = playerInput.actions.FindAction("Move");
             _look = playerInput.actions.FindAction("Look");
         }
+        //InputSystem.onDeviceChange += OnDeviceChanged;
 
         _move.canceled += CancelMovement;
     }
+
+    private void OnDeviceChanged(InputDevice device, InputDeviceChange change)
+    {
+        print("f2");
+        if (InputDeviceChange.Added == change)
+        {
+            _uiHandler.ShowMessage("Device disconnected!", 2f);
+            InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+        }
+
+        switch (change)
+        {
+
+            case:
+                break;
+            case:
+                break;
+            case:
+                break;
+
+
+        }
+    }
+
 
     private void CancelMovement(InputAction.CallbackContext obj) {
         _moveInput = Vector3.zero;
@@ -52,6 +81,17 @@ public class Player_Movement : MonoBehaviour {
 
         updateMovement();
         updateDirection();
+    }
+
+
+    public void OnDeviceLost()
+    {
+        _uiHandler.ShowMessage("Device disconnected!", 2f);
+    }
+
+    public void OnDeviceRegained()
+    {
+        _uiHandler.ShowMessage("Device connected!", 2f);
     }
 
     private void updateDirection() {
@@ -74,6 +114,9 @@ public class Player_Movement : MonoBehaviour {
         transform.eulerAngles = new Vector3(pitch, yaw, 0f);
     }
 
+
+    
+
     private void updateMovement() {
         var _moveInput2D = _move.ReadValue<Vector2>();
         _moveInput = _moveInput2D.x * transform.right;
@@ -93,4 +136,7 @@ public class Player_Movement : MonoBehaviour {
         //_input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
         transform.position += _velocity * Time.deltaTime;
     }
+
+   
 }
+

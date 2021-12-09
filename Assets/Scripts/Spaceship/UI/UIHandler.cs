@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
@@ -12,6 +13,9 @@ public class UIHandler : MonoBehaviour {
     //Stats
     [SerializeField] private TMP_Text currencyText;
     [SerializeField] private TMP_Text spaceshipText;
+
+    //Message
+    [SerializeField] private TMP_Text messageText;
 
     //Buy menu
     [SerializeField] private GameObject buyMenu;
@@ -60,6 +64,23 @@ public class UIHandler : MonoBehaviour {
         AnimateCrosshair();
         //startVac = 
     }
+
+    public void ShowMessage(string message, float timeInSeconds)
+    {
+        messageText.GetComponentInParent<Image>().enabled = true;
+        messageText.text = message;
+        StartCoroutine(removeMessage(timeInSeconds));
+    }
+
+    IEnumerator removeMessage(float timeInSeconds)
+    {
+        yield return new WaitForSeconds(timeInSeconds);
+        messageText.text = "";
+        messageText.GetComponentInParent<Image>().enabled = false;
+
+    }
+
+
 
     public void SetCurrencyTextValue(float value) {
         currencyText.text = $"Currency: {value}";
