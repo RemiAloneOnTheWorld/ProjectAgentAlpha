@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7253366387946838000, guid: 0bec2aaf5d5d44947be668775065518b, type: 3}
   size: {x: 50, y: 50, z: 70}
-  minSpawnCount: 0
-  maxSpawnCount: 0
+  minSpawnCount: 5
+  maxSpawnCount: 10
   colour: {r: 0, g: 0, b: 0, a: 0}
   showSpawnRegion: 1
 --- !u!1 &4188030917398012975
