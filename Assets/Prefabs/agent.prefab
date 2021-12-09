@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4668572379447997620}
+  - component: {fileID: 2234856272287931159}
   - component: {fileID: 3764222084501613942}
   - component: {fileID: 7203269635151622769}
-  - component: {fileID: 8598968992402251750}
+  - component: {fileID: 4681152311083814708}
   - component: {fileID: 7746009803853718148}
   - component: {fileID: 2489847291132980608}
-  - component: {fileID: 6101492861704681425}
   m_Layer: 0
   m_Name: agent
   m_TagString: Untagged
@@ -37,6 +37,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2234856272287931159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083352690390817493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834df93ceb585e24faccd0305d6be3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 5000
+  correct: {fileID: 2100000, guid: e42c3d23c1b424344a85f355f4e1b343, type: 2}
+  wrong: {fileID: 2100000, guid: 6e1ba48d54ef4f44a9c078c6af5d21a1, type: 2}
+  glass: {fileID: 2100000, guid: ca76d2ae1ec9dff4bacba7842b4ba160, type: 2}
+  mlAgentBody: {fileID: 0}
+  backWall: {fileID: 0}
+  goal: {fileID: 0}
+  spawner: {fileID: 0}
+  maxSpeed: 250
+  runspeed: 40
+  beginPosition: {x: 0, y: 0, z: 0}
+  beginrotation: {x: 0, y: 0, z: 0}
+  useVectorObs: 1
 --- !u!114 &3764222084501613942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 8
     NumStackedVectorObservations: 3
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -59,10 +87,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 328d315d3c62808449053ca5518a844d, type: 3}
-  m_InferenceDevice: 2
+  m_Model: {fileID: 5022602860645237092, guid: 412bcc34977b2da479e65f7f4289dbca, type: 3}
+  m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: DoorBehaviour
+  m_BehaviorName: AgentAlpha
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -81,19 +109,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: RayPerceptionSensor
   m_DetectableTags:
-  - wall
-  - Symbol_O
-  - Symbol_X
-  - Symbol_*
-  - Symbol_T
-  - Symbol_O_Goal
-  - Symbol_X_Goal
-  - Symbol_*_Goal
-  - Symbol_T_Goal
-  m_RaysPerDirection: 5
-  m_MaxRayDegrees: 70
-  m_SphereCastRadius: 0.5
-  m_RayLength: 100
+  - Wall
+  - Goal
+  - Block
+  m_RaysPerDirection: 12
+  m_MaxRayDegrees: 180
+  m_SphereCastRadius: 1
+  m_RayLength: 250
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -102,7 +124,7 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
---- !u!114 &8598968992402251750
+--- !u!114 &4681152311083814708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 6
+  DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
 --- !u!54 &7746009803853718148
 Rigidbody:
@@ -127,10 +149,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!65 &2489847291132980608
 BoxCollider:
@@ -145,22 +167,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6101492861704681425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083352690390817493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
 --- !u!1 &3655506217964974999
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8654595251265335411
 Transform:
   m_ObjectHideFlags: 0
