@@ -12,12 +12,18 @@ public class Connector : MonoBehaviour {
     [SerializeField] private Module baseModule;
 
     [SerializeField] private RectTransform crosshair;
+    private UIHandler _uiHandler;
 
     private void Start() {
+        _uiHandler = GetComponent<UIHandler>();
         playerInput.actions.FindAction("Place").performed += AddModule;
     }
 
     private void AddModule(InputAction.CallbackContext pContext) {
+        if (_uiHandler.IsMenuShown()) {
+            return;
+        }
+        
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
             pickupDistance) || !raycastHit.collider.CompareTag("Connection")) {
             return;
