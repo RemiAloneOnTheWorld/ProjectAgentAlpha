@@ -65,6 +65,7 @@ public class Player_Movement : MonoBehaviour
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
                     print("yes");
+                    print(device.description + " " + this.name);
                 }
 
                 bool otherPlayerClaimed = false;
@@ -78,9 +79,12 @@ public class Player_Movement : MonoBehaviour
                 }
                 if (!otherPlayer.getPlayerInput().hasMissingRequiredDevices && otherPlayer.getPlayerInput().user.lostDevices.Count == 0 && !otherPlayerClaimed)
                 {
+                    playerInput.SwitchCurrentControlScheme(device) ;
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
                     print("No");
+                    print(device.description + " " + this.name);
+
                 }
             
                 break;
