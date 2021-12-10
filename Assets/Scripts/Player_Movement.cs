@@ -25,7 +25,7 @@ public class Player_Movement : MonoBehaviour
     [Range(0f, 1f)] public float deceleration;
 
     private UIHandler _uiHandler;
-
+    private Player_Movement otherPlayer;
 
     private float pitch;
     private float yaw;
@@ -33,6 +33,17 @@ public class Player_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var list = FindObjectsOfType<Player_Movement>();
+        if (list[0].Equals(this))
+        {
+            otherPlayer = list[1];
+        }
+        else
+        {
+            otherPlayer = list[0];
+        }
+
+
         _uiHandler = GetComponent<UIHandler>();
         
         _move = playerInput.actions.FindAction("Movement", true);
@@ -49,9 +60,29 @@ public class Player_Movement : MonoBehaviour
         {
 
             case InputDeviceChange.Added:
-                if (playerInput.user.hasMissingRequiredDevices )
-                InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
-                _uiHandler.ShowMessage("Device connected!", 2f);
+                if (playerInput.user.hasMissingRequiredDevices)
+                {
+                    InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+                    _uiHandler.ShowMessage("Device connected!", 2f);
+                    print("yes");
+                }
+
+                bool otherPlayerClaimed = false;
+                foreach (var item in otherPlayer.getPlayerInput().user.pairedDevices)
+                {
+                    if (item.Equals( device))
+                    {
+                        otherPlayerClaimed = true;
+                    }
+
+                }
+                if (!otherPlayer.getPlayerInput().hasMissingRequiredDevices && otherPlayer.getPlayerInput().user.lostDevices.Count == 0 && !otherPlayerClaimed)
+                {
+                    InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
+                    _uiHandler.ShowMessage("Device connected!", 2f);
+                    print("No");
+                }
+            
                 break;
             case InputDeviceChange.Disconnected:
                 _uiHandler.ShowMessage("Device disconnected!", 2f);
@@ -134,6 +165,10 @@ public class Player_Movement : MonoBehaviour
         transform.position += _velocity * Time.deltaTime;
     }
 
+    public PlayerInput getPlayerInput()
+    {
+        return playerInput;
+    }
 
 }
 
