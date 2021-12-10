@@ -11,6 +11,7 @@ public class OptionsMenu : MonoBehaviour
     public Dropdown resolutionList;
     public GameObject VolumeText;
     public GameObject SensitivityText;
+    public GameObject SensitivityP2Text;
     Resolution[] resolutions;
     
 
@@ -58,8 +59,16 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetSensitivity (float sensitivity)
     {
+        // Do something with Sensitivity value here
         TextMeshProUGUI sText = SensitivityText.GetComponent<TextMeshProUGUI>();
         sText.text = sensitivity.ToString();
+    }
+
+    public void SetP2Sensitivity (float sensitivity)
+    {
+        // Do something with Sensitivity value here
+        TextMeshProUGUI s2Text = SensitivityP2Text.GetComponent<TextMeshProUGUI>();
+        s2Text.text = sensitivity.ToString();
     }
 
     public void SetFullscreen (bool isFullscreen)
