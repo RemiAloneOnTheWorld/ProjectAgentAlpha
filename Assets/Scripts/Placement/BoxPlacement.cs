@@ -19,9 +19,18 @@ public class BoxPlacement : MonoBehaviour {
     private Vector3 _previousPosition;
 
     private void Start() {
-        playerInput.actions.FindAction("Pick").performed += PickupBox;
-        playerInput.actions.FindAction("Pick").canceled += DropBox;
-        playerInput.actions.FindAction("Scroll").performed += MoveWithScroll;
+        // if (playerInput.currentActionMap.name.Equals("Controller")){
+        //     playerInput.actions.FindAction("Pick_Controller").performed += PickupBox;
+        //     playerInput.actions.FindAction("Pick_Controller").canceled += DropBox;
+        //     playerInput.actions.FindAction("Scroll_Controller").performed += MoveWithScroll;
+        // }
+        // else
+        // {
+        //     playerInput.actions.FindAction("Pick").performed += PickupBox;
+        //     playerInput.actions.FindAction("Pick").canceled += DropBox;
+        //     playerInput.actions.FindAction("Scroll").performed += MoveWithScroll;
+        // }
+      
         _playerCameraTransform = playerCamera.transform;
     }
 
