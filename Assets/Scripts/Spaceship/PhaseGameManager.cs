@@ -8,6 +8,9 @@ public class PhaseGameManager : MonoBehaviour {
     private string _currentPlayerName;
     public EventType EventType { get; private set; }
 
+    private IEnumerator _prepCoroutine;
+    private IEnumerator _countdownCoroutine;
+
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, StartAttackPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerPreparationReady, PlayerIsReady);
@@ -25,13 +28,24 @@ public class PhaseGameManager : MonoBehaviour {
     }
 
     private void PlayerIsReady(EventData eventData) {
-        _currentPlayerName = ((PreparationReadyEventData) eventData).playerName;
-        StartCoroutine(StartPreparationCountdown());
+        PreparationReadyEventData preparationReadyEventData = (PreparationReadyEventData) eventData;
+
+        if (_countdownRunning) {
+            if (_currentPlayerName == preparationReadyEventData.playerName) {
+                StartCoroutine(AbortPrepPhaseCountdown());
+            }
+
+            return;
+        }
+        _currentPlayerName = preparationReadyEventData.playerName;
+        _prepCoroutine = StartPreparationCountdown();
+        StartCoroutine(_prepCoroutine);
     }
 
     private IEnumerator StartPreparationCountdown() {
         yield return new WaitForEndOfFrame();
-        StartCoroutine(StartCountdown(preparationTime));
+        _countdownCoroutine = StartCountdown(preparationTime);
+        StartCoroutine(_countdownCoroutine);
         yield return new WaitWhile(() => _countdownRunning);
         //This event initiates the camera transition and fade
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.PreparationPhaseOver));
@@ -40,6 +54,15 @@ public class PhaseGameManager : MonoBehaviour {
 
     private void StartAttackPhase(EventData eventData) { 
         StartCoroutine(AttackPhase());
+    }
+
+    private IEnumerator AbortPrepPhaseCountdown() {
+        StopCoroutine(_countdownCoroutine);
+        StopCoroutine(_prepCoroutine);
+        yield return null;
+        _countdownRunning = false;
+        yield return new WaitForEndOfFrame();
+        StartPrepPhase();
     }
 
     private IEnumerator AttackPhase() {
