@@ -14,13 +14,23 @@ public class Connector : MonoBehaviour {
     [SerializeField] private RectTransform crosshair;
     private UIHandler _uiHandler;
 
+    private bool _lockInteraction;
+
+    private void Awake() {
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPreparationPhaseOver);
+    }
+
+    private void OnPreparationPhaseOver(EventData eventData) {
+        _lockInteraction = true;
+    }
+
     private void Start() {
         _uiHandler = GetComponent<UIHandler>();
         playerInput.actions.FindAction("Place").performed += AddModule;
     }
 
     private void AddModule(InputAction.CallbackContext pContext) {
-        if (_uiHandler.IsMenuShown()) {
+        if (_uiHandler.IsMenuShown() || _lockInteraction) {
             return;
         }
         

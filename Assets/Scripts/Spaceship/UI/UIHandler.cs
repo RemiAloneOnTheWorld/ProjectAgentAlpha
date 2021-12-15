@@ -38,6 +38,18 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private float crosshairDrift;
     private Vector2 _initCrosshairPos;
 
+    private void Awake() {
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
+    }
+
+    private void OnPrepPhaseOver(EventData eventData) {
+        if (_menuShown) {
+            ShowMenu(new InputAction.CallbackContext());
+        }
+        
+        HideCrosshair();
+    }
+
     private void Start() {
         ShowCursor(_menuShown);
         _playerInput = GetComponent<PlayerInput>();
@@ -45,7 +57,7 @@ public class UIHandler : MonoBehaviour {
         _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
         _initCrosshairPos = crosshair.transform.position;
     }
-    
+
     private void Update() {
         if (_modulePreviewShown) {
             _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed * Time.deltaTime);
@@ -54,15 +66,13 @@ public class UIHandler : MonoBehaviour {
         AnimateCrosshair();
     }
 
-    public void ShowMessage(string message, float timeInSeconds)
-    {
+    public void ShowMessage(string message, float timeInSeconds) {
         messageText.GetComponentInParent<Image>().enabled = true;
         messageText.text = message;
         StartCoroutine(removeMessage(timeInSeconds));
     }
 
-    IEnumerator removeMessage(float timeInSeconds)
-    {
+    IEnumerator removeMessage(float timeInSeconds) {
         yield return new WaitForSeconds(timeInSeconds);
         messageText.text = "";
         messageText.GetComponentInParent<Image>().enabled = false;
@@ -134,16 +144,21 @@ public class UIHandler : MonoBehaviour {
                 currencyButton.GetComponent<EventTrigger>().OnSelect(null);
             }
         }
-        else{
+        else {
             Debug.Log("Module preview closed");
             CloseModulePreview();
         }
     }
-    
+
     private void AnimateCrosshair() {
         var forward = transform.forward;
         float x = Vector3.Dot(vcam.transform.right, forward);
         float y = Vector3.Dot(vcam.transform.up, forward);
-        crosshair.transform.position = new Vector2(_initCrosshairPos.x + x * crosshairDrift, _initCrosshairPos.y + y * crosshairDrift);
+        crosshair.transform.position =
+            new Vector2(_initCrosshairPos.x + x * crosshairDrift, _initCrosshairPos.y + y * crosshairDrift);
+    }
+
+    private void HideCrosshair() {
+        crosshair.gameObject.SetActive(false);
     }
 }

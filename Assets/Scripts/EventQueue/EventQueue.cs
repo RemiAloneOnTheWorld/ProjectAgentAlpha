@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EventQueue {
     public delegate void EventQueueHandler(EventData eventData);
@@ -22,7 +24,7 @@ public class EventQueue {
         if (!_subscriberDictionary.ContainsKey(eventType)) {
             _subscriberDictionary.Add(eventType, null);
         }
-
+        
         _subscriberDictionary[eventType] += eventQueueHandler;
     }
 
@@ -45,7 +47,7 @@ public class EventQueue {
 
     public void RaiseEvents() {
         foreach (var eventData in _eventDataList) {
-            if (!_subscriberDictionary.ContainsKey(eventData.eventType)) {
+            if (_subscriberDictionary.ContainsKey(eventData.eventType)) {
                 _subscriberDictionary[eventData.eventType]?.Invoke(eventData);
             }
         }
@@ -55,5 +57,11 @@ public class EventQueue {
 }
 
 public enum EventType {
-    Debug
+    Debug,
+    PreparationPhase,
+    PreparationPhaseOver,
+    InFadeToAttack,
+    AttackPhase,
+    AttackPhaseOver,
+    PhaseTimeUpdate
 }
