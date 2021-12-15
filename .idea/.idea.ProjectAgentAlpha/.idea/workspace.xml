@@ -6,17 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="4ef5fa9f-259f-42ab-8500-e1a88b58272c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectAgentAlpha/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectAgentAlpha/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlanetGeneration.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlanetGeneration.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Input/NewInput/InputNew.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Input/NewInput/InputNew.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/EventQueue/EventData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EventQueue/EventData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/EventQueue/EventQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EventQueue/EventQueue.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player_Movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player_Movement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScreenFader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScreenFader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/PhaseGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/PhaseGameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UI/UIHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UI/UIHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/PhaseUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/PhaseUIManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +97,7 @@
       <workItem from="1639405230480" duration="2261000" />
       <workItem from="1639472488704" duration="6186000" />
       <workItem from="1639483433070" duration="2626000" />
-      <workItem from="1639557699509" duration="5789000" />
+      <workItem from="1639557699509" duration="12209000" />
     </task>
     <servers />
   </component>

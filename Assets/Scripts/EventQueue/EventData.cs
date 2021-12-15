@@ -1,18 +1,9 @@
 //This acts as the base class for all event data.
-
 public class EventData {
     public readonly EventType eventType;
 
     public EventData(EventType eventType) {
         this.eventType = eventType;
-    }
-}
-
-public class DebugEventData : EventData {
-    public int debug;
-
-    public DebugEventData(int debug, EventType eventType) : base(eventType) {
-        this.debug = debug;
     }
 }
 
@@ -26,8 +17,26 @@ public class PhaseUIEventData : EventData {
 
 public class PhaseTimeData : EventData {
     public readonly float time;
-
-    public PhaseTimeData(EventType eventType, float time) : base(eventType) {
+    public readonly string playerName;
+    
+    public PhaseTimeData(EventType eventType, float time, string playerName) : base(eventType) {
         this.time = time;
+        this.playerName = playerName;
+    }
+}
+
+public class PreparationReadyEventData : EventData {
+    public readonly string playerName;
+
+    public PreparationReadyEventData(EventType eventType, string playerName) : base(eventType) {
+        this.playerName = playerName;
+    }
+}
+
+public class MessageEventData : EventData {
+    public readonly string message;
+
+    public MessageEventData(EventType eventType, string message) : base(eventType) {
+        this.message = message;
     }
 }

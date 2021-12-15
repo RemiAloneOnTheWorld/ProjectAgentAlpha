@@ -58,10 +58,13 @@ public class EventQueue {
 
 public enum EventType {
     Debug,
+    InitPreparationPhase,
     PreparationPhase,
     PreparationPhaseOver,
     InFadeToAttack,
     AttackPhase,
     AttackPhaseOver,
-    PhaseTimeUpdate
+    PrepPhaseTimeUpdate,
+    AttackPhaseTimeUpdate,
+    PlayerPreparationReady
 }

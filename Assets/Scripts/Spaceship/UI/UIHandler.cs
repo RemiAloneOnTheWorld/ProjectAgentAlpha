@@ -55,6 +55,7 @@ public class UIHandler : MonoBehaviour {
         _playerInput = GetComponent<PlayerInput>();
         _connector = GetComponent<Connector>();
         _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
+        _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
         _initCrosshairPos = crosshair.transform.position;
     }
 
@@ -160,5 +161,9 @@ public class UIHandler : MonoBehaviour {
 
     private void HideCrosshair() {
         crosshair.gameObject.SetActive(false);
+    }
+
+    private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
+        EventQueue.GetEventQueue().AddEvent(new PreparationReadyEventData(EventType.PlayerPreparationReady, gameObject.name));
     }
 }
