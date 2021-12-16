@@ -18,6 +18,7 @@ public class ColourGenerator
     }
 
     public void UpdateElevation(MinMax elevationMinMax) {
+        //add an elevation variable to the shader
         settings.planetMaterial.SetVector("_elevationMinMax", new Vector4(elevationMinMax.min, elevationMinMax.max));
     }
 
