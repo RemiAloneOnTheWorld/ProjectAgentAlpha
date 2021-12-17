@@ -8,11 +8,22 @@ public class Connector : MonoBehaviour {
 
     public GameObject currencyModule;
     public GameObject factoryModule;
+    public GameObject boxCreationModule;
     private GameObject _currentModule;
     [SerializeField] private Module baseModule;
 
     [SerializeField] private RectTransform crosshair;
     private UIHandler _uiHandler;
+
+    private bool _lockInteraction;
+
+    private void Awake() {
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPreparationPhaseOver);
+    }
+
+    private void OnPreparationPhaseOver(EventData eventData) {
+        _lockInteraction = true;
+    }
 
     private void Start() {
         _uiHandler = GetComponent<UIHandler>();
@@ -20,7 +31,7 @@ public class Connector : MonoBehaviour {
     }
 
     private void AddModule(InputAction.CallbackContext pContext) {
-        if (_uiHandler.IsMenuShown()) {
+        if (_uiHandler.IsMenuShown() || _lockInteraction) {
             return;
         }
         
@@ -74,6 +85,10 @@ public class Connector : MonoBehaviour {
     public void SetFactoryModulePrefab() {
         _currentModule = factoryModule;
         Debug.Log("Factory module set");
+    }
+
+    public void SetBoxCreationModule() {
+        _currentModule = boxCreationModule;
     }
 
     public GameObject GetCurrentModule() {
