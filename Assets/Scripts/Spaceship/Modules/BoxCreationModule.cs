@@ -1,14 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxCreationModule : MonoBehaviour {
+public class BoxCreationModule : Module {
     [SerializeField] private GameObject box;
     private List<Transform> _placementPositions = new List<Transform>();
 
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhase, GenerateBoxes);
-        foreach (var component in transform.GetComponentsInChildren<Transform>()) {
-            _placementPositions.Add(component);
+        for (int i = 0; i < transform.childCount; i++) {
+            if (transform.GetChild(i).CompareTag("Connection")) {
+                continue;
+            }
+            
+            _placementPositions.Add(transform.GetChild(i));
         }
     }
     
