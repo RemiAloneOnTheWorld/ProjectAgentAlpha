@@ -8,6 +8,7 @@ public class Connector : MonoBehaviour {
 
     public GameObject currencyModule;
     public GameObject factoryModule;
+    public GameObject boxCreationModule;
     private GameObject _currentModule;
     [SerializeField] private Module baseModule;
 
@@ -84,6 +85,10 @@ public class Connector : MonoBehaviour {
     public void SetFactoryModulePrefab() {
         _currentModule = factoryModule;
         Debug.Log("Factory module set");
+    }
+
+    public void SetBoxCreationModule() {
+        _currentModule = boxCreationModule;
     }
 
     public GameObject GetCurrentModule() {

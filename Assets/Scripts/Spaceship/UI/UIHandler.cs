@@ -130,6 +130,13 @@ public class UIHandler : MonoBehaviour {
         }
     }
 
+    public void SetBoxCreationModule() {
+        if (_menuShown) {
+            _connector.SetBoxCreationModule();
+            ShowMenu(new InputAction.CallbackContext());
+        }
+    }
+
     public bool IsMenuShown() {
         return _menuShown;
     }
