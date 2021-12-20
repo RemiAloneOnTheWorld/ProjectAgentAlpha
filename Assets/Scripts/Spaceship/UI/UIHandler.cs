@@ -23,8 +23,7 @@ public class UIHandler : MonoBehaviour {
 
     //Buttons
     [SerializeField] private Button currencyButton;
-    [SerializeField] private Button factoryButton;
-
+    
     //Preview window
     [SerializeField] private Camera previewCamera;
     [SerializeField] private RectTransform previewWindow;
@@ -80,8 +79,6 @@ public class UIHandler : MonoBehaviour {
 
     }
 
-
-
     public void SetCurrencyTextValue(float value) {
         currencyText.text = $"Currency: {value}";
     }
@@ -105,18 +102,11 @@ public class UIHandler : MonoBehaviour {
     public void ShowModulePreview(GameObject module) {
         if (_modulePreviewShown) return;
         previewWindow.gameObject.SetActive(true);
-        _modulePreview = Instantiate(module, new Vector3(20, 0, 20), Quaternion.identity);
-        int previewLayer = LayerMask.NameToLayer("PreviewCamera");
-        _modulePreview.layer = previewLayer;
-        for (int i = 0; i < _modulePreview.transform.childCount; i++) {
-            _modulePreview.transform.GetChild(i).gameObject.layer = previewLayer;
-        }
-
-        Destroy(_modulePreview.GetComponent<Module>());
-        previewCamera.transform.position = new Vector3(20, 0, 17);
+        _modulePreview = Instantiate(module, previewCamera.transform.position + new Vector3(0, -3, 15), Quaternion.identity);
+        previewCamera.transform.LookAt(_modulePreview.transform);
         _modulePreviewShown = true;
     }
-
+    
     public void CloseModulePreview() {
         previewWindow.gameObject.SetActive(false);
         Destroy(_modulePreview);
