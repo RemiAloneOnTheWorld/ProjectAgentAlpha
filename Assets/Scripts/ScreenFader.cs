@@ -9,6 +9,7 @@ public class ScreenFader : MonoBehaviour
     [SerializeField]
     private float fadeSpeed;
     private Image image;
+    public bool IsFading { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -16,15 +17,23 @@ public class ScreenFader : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    public IEnumerator fadeOut()
-    {
+    public IEnumerator fadeOut(EventType eventType) {
+        IsFading = true;
         while (image.color.a < 0.98f)
         {
             Color startColor = image.color;
             image.color = Color.Lerp(startColor, Color.black, fadeSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
+        
         image.color = new Color(0f, 0f, 0f, 1f);
+
+        if (eventType == EventType.PreparationPhaseOver) {
+            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToAttack, "Attack Phase"));   
+        }
+        else if(eventType == EventType.AttackPhaseOver){
+            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToAttack, "Preparation Phase"));   
+        }
         yield return fadeIn();
     }
 
@@ -38,7 +47,7 @@ public class ScreenFader : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         image.color = new Color(0f, 0f, 0f, 0f);
-
+        IsFading = false;
         yield return null;
     }
 }
