@@ -43,8 +43,13 @@ public class SpaceshipManager : Module {
         uiHandler.SetCurrencyTextValue(Money);
     }
 
-    public void AddCrew(int amount) {
+    public void AddSpaceships(int amount) {
         Spaceships += amount;
+        uiHandler.SetSpaceshipTextValue(Spaceships);
+    }
+
+    public void RemoveSpaceships(int amount) {
+        Spaceships -= amount;
         uiHandler.SetSpaceshipTextValue(Spaceships);
     }
 

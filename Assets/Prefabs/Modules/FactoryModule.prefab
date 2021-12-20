@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   price: 100
-  crewRespawnTime: 5
+  addedSpaceShips: 2
 --- !u!1 &4678403503401436496
 GameObject:
   m_ObjectHideFlags: 0
