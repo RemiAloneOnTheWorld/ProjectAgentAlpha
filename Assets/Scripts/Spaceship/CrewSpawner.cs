@@ -15,7 +15,7 @@ public class CrewSpawner : MonoBehaviour
     private Color colour;
     public GizmoType showSpawnRegion;
     private List<GameObject> spaceships;
-    private int totalCubes;
+    private int totalShips;
 
     private void Start()
     {
@@ -28,8 +28,8 @@ public class CrewSpawner : MonoBehaviour
     public void SpawnShips(EventData eventData)
     {
         SpaceshipManager station = GetComponentInParent<SpaceshipManager>();
-        int shipAmount = station.Spaceships;
-        for (int i = 0; i < shipAmount; i++)
+        totalShips = station.Spaceships;
+        for (int i = 0; i < totalShips; i++)
         {
             Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
             GameObject spaceship = Instantiate<GameObject>(prefab);
@@ -43,7 +43,7 @@ public class CrewSpawner : MonoBehaviour
         Debug.Log("destroying spaceships");
         if (spaceships != null)
         {
-            for (int i = 0; i < totalCubes; i++)
+            for (int i = 0; i < totalShips; i++)
             {
                 if (spaceships[i] != null)
                 {
