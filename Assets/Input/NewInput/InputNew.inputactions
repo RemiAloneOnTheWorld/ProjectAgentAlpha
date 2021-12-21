@@ -49,6 +49,9 @@
                     "name": "Ready",
                     "type": "Button",
                     "id": "f1460868-8319-425e-b422-1828923bc95f",
+                    "name": "PlaceCollect",
+                    "type": "Button",
+                    "id": "20be8212-3aa3-4afd-9f7b-9d22a82a047c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -217,6 +220,26 @@
                     "processors": "",
                     "groups": "Mouse&Keyboard",
                     "action": "Ready",
+                },
+                {        
+                    "name": "",        
+                    "id": "b739b9b2-5438-4aac-9f01-784df739d662",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse&Keyboard",
+                    "action": "PlaceCollect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "907c0944-4297-47bb-b870-cc5a92b294bf",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceCollect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
