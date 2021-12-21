@@ -14,36 +14,33 @@ public class CrewSpawner : MonoBehaviour
     [SerializeField]
     private Color colour;
     public GizmoType showSpawnRegion;
-
     private List<GameObject> spaceships;
-
     private int totalCubes;
 
     private void Start()
     {
         spaceships = new List<GameObject>();
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, SpawnShips);
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, RemoveShips);
     }
 
 
-    public void SpawnCube()
+    public void SpawnShips(EventData eventData)
     {
-        int shipAmount = SpaceshipManager.Spaceships;
+        SpaceshipManager station = GetComponentInParent<SpaceshipManager>();
+        int shipAmount = station.Spaceships;
         for (int i = 0; i < shipAmount; i++)
         {
             Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
             GameObject spaceship = Instantiate<GameObject>(prefab);
             spaceship.transform.position = pos;
-            spaceships.Add(spaceship);            
+            spaceships.Add(spaceship);
         }
     }
 
-    public void resetArea()
+    private void RemoveShips(EventData eventData)
     {
-        RemoveCubes();
-    }
-
-    private void RemoveCubes()
-    {
+        Debug.Log("destroying spaceships");
         if (spaceships != null)
         {
             for (int i = 0; i < totalCubes; i++)

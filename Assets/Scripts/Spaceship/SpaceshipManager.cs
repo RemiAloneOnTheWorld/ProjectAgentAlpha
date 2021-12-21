@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpaceshipManager : Module {
     [SerializeField] private int spaceships;
-    public static int Spaceships { get; private set; }
+    public int Spaceships { get; private set; }
     [SerializeField] private int startMoney;
 
     [SerializeField] private UIHandler uiHandler;

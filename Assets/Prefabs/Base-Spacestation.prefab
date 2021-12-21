@@ -80,7 +80,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2491721817031219216}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.399209, y: -1.9808474, z: -6.06}
+  m_LocalPosition: {x: 0, y: 0, z: -17.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4400413766542765068}
@@ -99,12 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1083352690390817493, guid: 5e7f12431ff3f5b4c9adcc208ea3af6c, type: 3}
-  size: {x: 1, y: 1, z: 1}
-  minSpawnCount: 0
-  maxSpawnCount: 0
-  colour: {r: 0, g: 0, b: 0, a: 0}
+  spawnRadius: 10
+  colour: {r: 1, g: 0, b: 0, a: 0}
   showSpawnRegion: 2
-  crewCreationModules: 0
+  player2: 0
 --- !u!1 &3374806168208131951
 GameObject:
   m_ObjectHideFlags: 0
