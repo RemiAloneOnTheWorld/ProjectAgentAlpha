@@ -39,6 +39,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private float crosshairDrift;
     private Vector2 _initCrosshairPos;
+    private int _lastScreenWidth;
 
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
@@ -59,14 +60,20 @@ public class UIHandler : MonoBehaviour {
         _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
         _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
         _initCrosshairPos = crosshair.transform.position;
+        _lastScreenWidth = Screen.width;
     }
 
     private void Update() {
         if (_modulePreviewShown) {
             _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed * Time.deltaTime);
         }
-
-        AnimateCrosshair();
+        
+        if (Screen.width != _lastScreenWidth) {
+            _initCrosshairPos = crosshair.transform.position;
+        }
+        else {
+            AnimateCrosshair();
+        }
     }
 
     public void ShowMessage(string message, float timeInSeconds) {
