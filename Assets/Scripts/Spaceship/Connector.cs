@@ -2,19 +2,24 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Connector : MonoBehaviour {
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float pickupDistance;
 
-    public GameObject currencyModule;
+    [Header("Player-related")] [SerializeField]
+    private Camera playerCamera;
+
+    [SerializeField] private PlayerInput playerInput;
+
+    [Header("Modules")] public GameObject currencyModule;
     public GameObject factoryModule;
     public GameObject boxCreationModule;
     private GameObject _currentModule;
-    [SerializeField] private Module baseModule;
 
-    [SerializeField] private RectTransform crosshair;
+    [Header("Base Space Station")] [SerializeField]
+    private Module baseModule;
+
+    [Header("Crosshair")] [SerializeField] private RectTransform crosshair;
+
     private UIHandler _uiHandler;
-
     private bool _lockInteraction;
 
     private void Awake() {
@@ -34,32 +39,46 @@ public class Connector : MonoBehaviour {
         if (_uiHandler.IsMenuShown() || _lockInteraction) {
             return;
         }
-        
+
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
-            pickupDistance) || !raycastHit.collider.CompareTag("Connection")) {
+                pickupDistance) || !raycastHit.collider.CompareTag("Connection")) {
             return;
         }
-
+        
         if (_currentModule == null) {
-            Debug.LogWarning("No module selected");
+            Debug.LogWarning("No module selected! Please select a module first.");
             return;
         }
-
-        if (!VerifyAdjustCredits()) {
-            return;
-        }
-
-        //This just uses the test module for now. This will later be selected via the UI/Shop.
+        
+        
         Connection connection = raycastHit.collider.gameObject.GetComponent<Connection>();
         Vector3 moduleDisplacement =
             raycastHit.collider.transform.position - connection.GetParentModule().transform.position;
-        Vector3 displacementVector = connection.transform.right;
+        
+        //This 6.5f is the distance between the connection prefab and the center of the actual module to be placed.
+        //I use this value since the scale value of the connector is 1, which creates misaligned modules.
+        Vector3 displacementVector = connection.transform.right * 6.5f;
         if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) < 0) {
             displacementVector = -displacementVector;
         }
 
         //TODO: This must be dependent on the modules size
         displacementVector *= _currentModule.transform.lossyScale.x / 2;
+
+        foreach (var overlap in Physics.OverlapBox(raycastHit.collider.transform.position + displacementVector,
+                     _currentModule.GetComponent<BoxCollider>().size / 2)) {
+            if (overlap.gameObject == raycastHit.collider.gameObject || 
+                overlap.gameObject == raycastHit.transform.GetComponentInChildren<BoxCollider>().gameObject) {
+                continue;
+            }
+            Debug.LogWarning("Cannot build module here.");
+            return;
+        }
+        
+        if (!VerifyAdjustCredits()) {
+            return;
+        }
+        
         GameObject module = Instantiate(_currentModule, raycastHit.collider.transform.position + displacementVector,
             connection.GetParentModule().transform.rotation);
 

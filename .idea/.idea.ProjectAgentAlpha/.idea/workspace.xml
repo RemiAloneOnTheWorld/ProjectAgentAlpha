@@ -11,9 +11,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Modules/CurrencyModule.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Modules/CurrencyModule.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Modules/FactoryModule.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Modules/FactoryModule.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Module.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Module.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UI/UIHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UI/UIHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI/PreviewTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/PreviewTexture.renderTexture" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +57,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="rider.run.widget.enabled.cache" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -105,7 +105,10 @@
       <workItem from="1639483433070" duration="2626000" />
       <workItem from="1639557699509" duration="14233000" />
       <workItem from="1639733557378" duration="574000" />
-      <workItem from="1639995351596" duration="2836000" />
+      <workItem from="1639995351596" duration="5152000" />
+      <workItem from="1640009504634" duration="7411000" />
+      <workItem from="1640035639836" duration="5912000" />
+      <workItem from="1640244266986" duration="372000" />
     </task>
     <servers />
   </component>
@@ -129,5 +132,9 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -10,6 +10,7 @@ public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
     private Connector _connector;
 
+    [Header("UI Game objects")]
     //Stats
     [SerializeField] private TMP_Text currencyText;
     [SerializeField] private TMP_Text spaceshipText;
@@ -23,14 +24,16 @@ public class UIHandler : MonoBehaviour {
 
     //Buttons
     [SerializeField] private Button currencyButton;
-    
+
+    [Header("Preview window")]
     //Preview window
     [SerializeField] private Camera previewCamera;
     [SerializeField] private RectTransform previewWindow;
-    private GameObject _modulePreview;
     [SerializeField] private float previewRotationSpeed;
+    private GameObject _modulePreview;
     private bool _modulePreviewShown;
 
+    [Header("Camera & Crosshair")]
     //Camera & crosshair
     [SerializeField] private CinemachineVirtualCamera vcam;
     [SerializeField] private RectTransform crosshair;
@@ -45,7 +48,7 @@ public class UIHandler : MonoBehaviour {
         if (_menuShown) {
             ShowMenu(new InputAction.CallbackContext());
         }
-        
+
         HideCrosshair();
     }
 
@@ -76,7 +79,6 @@ public class UIHandler : MonoBehaviour {
         yield return new WaitForSeconds(timeInSeconds);
         messageText.text = "";
         messageText.GetComponentInParent<Image>().enabled = false;
-
     }
 
     public void SetCurrencyTextValue(float value) {
@@ -106,7 +108,7 @@ public class UIHandler : MonoBehaviour {
         previewCamera.transform.LookAt(_modulePreview.transform);
         _modulePreviewShown = true;
     }
-    
+
     public void CloseModulePreview() {
         previewWindow.gameObject.SetActive(false);
         Destroy(_modulePreview);
@@ -143,7 +145,6 @@ public class UIHandler : MonoBehaviour {
             }
         }
         else {
-            Debug.Log("Module preview closed");
             CloseModulePreview();
         }
     }
@@ -161,6 +162,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
-        EventQueue.GetEventQueue().AddEvent(new PreparationReadyEventData(EventType.PlayerPreparationReady, gameObject.name));
+        EventQueue.GetEventQueue()
+            .AddEvent(new PreparationReadyEventData(EventType.PlayerPreparationReady, gameObject.name));
     }
 }
