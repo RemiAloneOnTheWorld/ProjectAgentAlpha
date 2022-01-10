@@ -67,7 +67,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""PlaceCollect"",
+                    ""name"": ""Place"",
                     ""type"": ""Button"",
                     ""id"": ""7f46f789-2001-44ac-aec4-9544a801e229"",
                     ""expectedControlType"": ""Button"",
@@ -193,7 +193,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PlaceCollect"",
+                    ""action"": ""Place"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -302,7 +302,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         m_MouseandKeyboard_Look = m_MouseandKeyboard.FindAction("Look", throwIfNotFound: true);
         m_MouseandKeyboard_Pause = m_MouseandKeyboard.FindAction("Pause", throwIfNotFound: true);
         m_MouseandKeyboard_Menu = m_MouseandKeyboard.FindAction("Menu", throwIfNotFound: true);
-        m_MouseandKeyboard_PlaceCollect = m_MouseandKeyboard.FindAction("PlaceCollect", throwIfNotFound: true);
+        m_MouseandKeyboard_Place = m_MouseandKeyboard.FindAction("Place", throwIfNotFound: true);
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Move_Controller = m_Controller.FindAction("Move_Controller", throwIfNotFound: true);
@@ -365,7 +365,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
     private readonly InputAction m_MouseandKeyboard_Look;
     private readonly InputAction m_MouseandKeyboard_Pause;
     private readonly InputAction m_MouseandKeyboard_Menu;
-    private readonly InputAction m_MouseandKeyboard_PlaceCollect;
+    private readonly InputAction m_MouseandKeyboard_Place;
     public struct MouseandKeyboardActions
     {
         private @CharacterController m_Wrapper;
@@ -376,7 +376,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_MouseandKeyboard_Look;
         public InputAction @Pause => m_Wrapper.m_MouseandKeyboard_Pause;
         public InputAction @Menu => m_Wrapper.m_MouseandKeyboard_Menu;
-        public InputAction @PlaceCollect => m_Wrapper.m_MouseandKeyboard_PlaceCollect;
+        public InputAction @Place => m_Wrapper.m_MouseandKeyboard_Place;
         public InputActionMap Get() { return m_Wrapper.m_MouseandKeyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -404,9 +404,9 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnMenu;
-                @PlaceCollect.started -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPlaceCollect;
-                @PlaceCollect.performed -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPlaceCollect;
-                @PlaceCollect.canceled -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPlaceCollect;
+                @Place.started -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPlace;
+                @Place.performed -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPlace;
+                @Place.canceled -= m_Wrapper.m_MouseandKeyboardActionsCallbackInterface.OnPlace;
             }
             m_Wrapper.m_MouseandKeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -429,9 +429,9 @@ public class @CharacterController : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
-                @PlaceCollect.started += instance.OnPlaceCollect;
-                @PlaceCollect.performed += instance.OnPlaceCollect;
-                @PlaceCollect.canceled += instance.OnPlaceCollect;
+                @Place.started += instance.OnPlace;
+                @Place.performed += instance.OnPlace;
+                @Place.canceled += instance.OnPlace;
             }
         }
     }
@@ -509,7 +509,7 @@ public class @CharacterController : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnPlaceCollect(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
     }
     public interface IControllerActions
     {

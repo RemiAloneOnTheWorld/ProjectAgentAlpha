@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "PlaceCollect",
+                    "name": "Place",
                     "type": "Button",
                     "id": "7f46f789-2001-44ac-aec4-9544a801e229",
                     "expectedControlType": "Button",
@@ -180,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlaceCollect",
+                    "action": "Place",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
