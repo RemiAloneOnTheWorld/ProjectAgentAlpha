@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2978731551150647119}
   - component: {fileID: 2811873808638181883}
-  - component: {fileID: 5147763811087217211}
+  - component: {fileID: 1920527361626663944}
   m_Layer: 0
   m_Name: FactoryModule
   m_TagString: Untagged
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   price: 100
-  crewRespawnTime: 5
---- !u!65 &5147763811087217211
+  spaceships: 2
+--- !u!65 &1920527361626663944
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,8 +62,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3, y: 5, z: 6.5}
-  m_Center: {x: -0.27, y: 0.72, z: 0}
+  m_Size: {x: 3.3, y: 5, z: 6.421853}
+  m_Center: {x: -0.26999998, y: 0.72, z: 0.039073348}
 --- !u!1001 &1338409822814282458
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4400413766542765068}
   - component: {fileID: 1386617365687415646}
-  - component: {fileID: 2821596746451357493}
+  - component: {fileID: 4412113219805289714}
   m_Layer: 0
   m_Name: Base-Spacestation
   m_TagString: Untagged
@@ -33,6 +33,7 @@ Transform:
   - {fileID: 4458261768067518492}
   - {fileID: 1065022149927202922}
   - {fileID: 7384564483760501634}
+  - {fileID: 7660663968896408129}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,7 +56,7 @@ MonoBehaviour:
   uiHandler: {fileID: 0}
   orbit: 0
   orbitSpeed: 0
---- !u!65 &2821596746451357493
+--- !u!65 &4412113219805289714
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,6 +69,53 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.33, y: 20, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2491721817031219216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7660663968896408129}
+  - component: {fileID: 516923119481551263}
+  m_Layer: 0
+  m_Name: SpaceshipSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7660663968896408129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491721817031219216}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -17.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4400413766542765068}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &516923119481551263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491721817031219216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088f5692919dcb64e9e2cbbbb1f29350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1083352690390817493, guid: 5e7f12431ff3f5b4c9adcc208ea3af6c, type: 3}
+  spawnRadius: 10
+  colour: {r: 1, g: 0, b: 0, a: 0}
+  showSpawnRegion: 2
 --- !u!1001 &562500909405556174
 PrefabInstance:
   m_ObjectHideFlags: 0
