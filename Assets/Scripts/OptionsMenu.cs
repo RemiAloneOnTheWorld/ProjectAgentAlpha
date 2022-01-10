@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public Dropdown resolutionList;
     public GameObject VolumeText;
+    public Slider volumeSlider;
     public GameObject SensitivityText;
     public GameObject SensitivityP2Text;
     Resolution[] resolutions;
-    
+    public PlayerInput _playerInput;
 
     private void Start()
     {
@@ -40,6 +43,8 @@ public class OptionsMenu : MonoBehaviour
         resolutionList.value = currentResolution;
         resolutionList.RefreshShownValue();
 
+        SelectMenuItem();
+        
     }
 
     public void SetVolume (float volume)
@@ -74,5 +79,21 @@ public class OptionsMenu : MonoBehaviour
     public void SetFullscreen (bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    public void OnControlsChanged()
+    {
+        SelectMenuItem();
+    }
+
+    public void SelectMenuItem()
+    {
+        if (_playerInput.currentControlScheme.Equals("Gamepad"))
+        {
+            EventSystem.current.SetSelectedGameObject(volumeSlider.gameObject);
+            volumeSlider.OnSelect(null);
+            print("Select options");
+        }
+
     }
 }

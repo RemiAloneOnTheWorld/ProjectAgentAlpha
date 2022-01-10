@@ -17,7 +17,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float minimumZoomDistance;
     [SerializeField] private bool useWorldAxis;
 
-    private InputAction _collect;
+    [Header("Materials")]
+    [SerializeField] private Material redBoxMat;
+    [SerializeField] private Material greenBoxMat;
+    [SerializeField] private Material boxMat;
+
     private bool selected;
     private GameObject _pickedBox;
     private Vector3 _previousPosition;
@@ -26,19 +30,20 @@ public class Inventory : MonoBehaviour
     void Start()
     // Start is called before the first frame update
     {
-        
+
         playerInput.actions.FindAction("PlaceBox", true).started += StartedPlace;
         playerInput.actions.FindAction("PlaceBox", true).canceled += CancelPlace;
         playerInput.actions.FindAction("CollectBox", true).canceled += CancelCollect;
     }
 
-    
+
     private void CancelCollect(InputAction.CallbackContext obj)
     {
-        
-        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position) ,out var raycastHit,
+
+        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
              pickupDistance) || !raycastHit.collider.CompareTag("Box"))
         {
+            print("no box found!");
             return;
         }
         Destroy(raycastHit.collider.gameObject);
@@ -49,7 +54,7 @@ public class Inventory : MonoBehaviour
     {
         selected = true;
         Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
-        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance) 
+        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance)
             || !raycastHit.collider.CompareTag("Box"))
         {
             _pickedBox = Instantiate<GameObject>(boxPrefab, pos, Quaternion.Euler(Vector3.zero));
@@ -57,7 +62,9 @@ public class Inventory : MonoBehaviour
         else
         {
             _pickedBox = raycastHit.collider.gameObject;
+
         }
+        _pickedBox.GetComponent<BoxCollider>().enabled = false;
         _previousPosition = _pickedBox.transform.position;
 
 
@@ -66,22 +73,24 @@ public class Inventory : MonoBehaviour
 
     private void CancelPlace(InputAction.CallbackContext pContext)
     {
-            selected = false;
-            if (BoxCount > 0)
+        selected = false;
+        if (BoxCount > 0)
+        {
+
+            Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
+            if (checkCollision(pos))
             {
+                print("Cant place!");
+                Destroy(_pickedBox);
+            }
+            else
+            {
+                _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
+                _pickedBox.GetComponent<BoxCollider>().enabled = true;
+                print("box Placed!");
+                BoxCount--;
 
-                Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
-                if (checkCollision(pos))
-                {
-                    print("Cant place!");
-                    Destroy(_pickedBox);
-                }
-                else
-                {
-                    print("box Placed!");
-                    BoxCount--;
-
-                }
+            }
         }
         else
         {
@@ -93,9 +102,10 @@ public class Inventory : MonoBehaviour
 
     private bool checkCollision(Vector3 pos)
     {
-
-        if (Physics.OverlapBox(pos, boxPrefab.transform.localScale * radiusHalfBox).Length > 0)
+        Collider[] collisions = Physics.OverlapBox(pos, boxPrefab.transform.localScale * radiusHalfBox);
+        if (collisions.Length > 0)
         {
+            print(collisions[collisions.Length - 1]);
             return true;
         }
         return false;
@@ -109,8 +119,9 @@ public class Inventory : MonoBehaviour
         if (selected)
         {
             MoveBox();
+
         }
-        
+
     }
 
     private void OnDrawGizmos()
@@ -140,12 +151,13 @@ public class Inventory : MonoBehaviour
             //Get distance from camera to box
             float cameraForwardProjection = Vector3.Dot(transform.forward,
                 (_pickedBox.transform.position - transform.position));
-            
-            if (cameraForwardProjection < minimumZoomDistance && _scrollValue < 0) {
+
+            if (cameraForwardProjection < minimumZoomDistance && _scrollValue < 0)
+            {
                 _scrollValue = 0;
             }
             //==============================================================================================================
-            
+
             Vector3 mousePositionMagnitude = new Vector3(crosshair.position.x, crosshair.position.y, _scrollValue);
             newPosition = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
         }
@@ -156,14 +168,26 @@ public class Inventory : MonoBehaviour
 
         _scrollValue += Vector3.Dot(transform.transform.forward, (_previousPosition - _pickedBox.transform.position));
         _previousPosition = _pickedBox.transform.position;
+        if (checkCollision(_pickedBox.transform.position))
+        {
+            _pickedBox.GetComponent<MeshRenderer>().material = redBoxMat;
+            print("box is red");
+        }
+        else
+        {
+            _pickedBox.GetComponent<MeshRenderer>().material = greenBoxMat;
+            print("box is green");
+        }
     }
 
-    private void MoveWithScroll(InputAction.CallbackContext pContext) {
-        if (!selected) {
+    private void MoveWithScroll(InputAction.CallbackContext pContext)
+    {
+        if (!selected)
+        {
             return;
         }
 
         _scrollValue += pContext.ReadValue<Vector2>().y * Time.deltaTime;
     }
-    
+
 }
