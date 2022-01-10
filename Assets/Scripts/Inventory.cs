@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,17 +21,15 @@ public class Inventory : MonoBehaviour
     private bool selected;
     private GameObject _pickedBox;
     private Vector3 _previousPosition;
-    private Transform _playerCameraTransform;
     private float _scrollValue;
 
-    // Start is called before the first frame update
     void Start()
+    // Start is called before the first frame update
     {
         
         playerInput.actions.FindAction("PlaceBox", true).started += StartedPlace;
         playerInput.actions.FindAction("PlaceBox", true).canceled += CancelPlace;
         playerInput.actions.FindAction("CollectBox", true).canceled += CancelCollect;
-        _playerCameraTransform = playerCamera.transform;
     }
 
     
@@ -54,8 +49,8 @@ public class Inventory : MonoBehaviour
     {
         selected = true;
         Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
-        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
-             pickupDistance) || !raycastHit.collider.CompareTag("Box"))
+        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance) 
+            || !raycastHit.collider.CompareTag("Box"))
         {
             _pickedBox = Instantiate<GameObject>(boxPrefab, pos, Quaternion.Euler(Vector3.zero));
         }
@@ -141,18 +136,17 @@ public class Inventory : MonoBehaviour
         //Method 2 
         else
         {
-            float cameraForwardProjection = Vector3.Dot(_playerCameraTransform.forward,
-                (_pickedBox.transform.position - _playerCameraTransform.position));
-
-            if (Vector3.Dot(_playerCameraTransform.forward, _pickedBox.transform.position - playerCamera.transform.position)
-                < minimumZoomDistance && _scrollValue < 0)
-            {
+            //=================================This only relevant when scrolling is enabled.================================
+            //Get distance from camera to box
+            float cameraForwardProjection = Vector3.Dot(transform.forward,
+                (_pickedBox.transform.position - transform.position));
+            
+            if (cameraForwardProjection < minimumZoomDistance && _scrollValue < 0) {
                 _scrollValue = 0;
             }
-
-            Vector3 mousePositionMagnitude = new Vector3(crosshair.position.x,
-               crosshair.position.y, cameraForwardProjection + _scrollValue);
-
+            //==============================================================================================================
+            
+            Vector3 mousePositionMagnitude = new Vector3(crosshair.position.x, crosshair.position.y, _scrollValue);
             newPosition = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
         }
 
@@ -160,11 +154,16 @@ public class Inventory : MonoBehaviour
         _pickedBox.transform.position =
             useLerp ? Vector3.Lerp(_pickedBox.transform.position, newPosition, lerp) : newPosition;
 
-        _scrollValue += Vector3.Dot(playerCamera.transform.forward, (_previousPosition - _pickedBox.transform.position));
+        _scrollValue += Vector3.Dot(transform.transform.forward, (_previousPosition - _pickedBox.transform.position));
         _previousPosition = _pickedBox.transform.position;
     }
 
+    private void MoveWithScroll(InputAction.CallbackContext pContext) {
+        if (!selected) {
+            return;
+        }
 
-
-
+        _scrollValue += pContext.ReadValue<Vector2>().y * Time.deltaTime;
+    }
+    
 }
