@@ -103,6 +103,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetCurrencyModule() {
+        Debug.Log("Curr mod set");
         if (_menuShown) {
             _connector.SetCurrencyModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
@@ -124,6 +125,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetFactoryModule() {
+        Debug.Log("Fac mod set");
         if (_menuShown) {
             _connector.SetFactoryModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
@@ -131,6 +133,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetBoxCreationModule() {
+        Debug.Log("Box mod set");
         if (_menuShown) {
             _connector.SetBoxCreationModule();
             ShowMenu(new InputAction.CallbackContext());
@@ -172,5 +175,17 @@ public class UIHandler : MonoBehaviour {
     private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
         EventQueue.GetEventQueue()
             .AddEvent(new PreparationReadyEventData(EventType.PlayerPreparationReady, gameObject.name));
+    }
+
+    public void Test1() {
+        Debug.LogWarning("Test1");
+    }
+    
+    public void Test2() {
+        Debug.LogWarning("Test2");
+    }
+    
+    public void Test3() {
+        Debug.LogWarning("Test3");
     }
 }

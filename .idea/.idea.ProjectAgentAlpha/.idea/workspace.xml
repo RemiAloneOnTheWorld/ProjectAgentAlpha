@@ -7,14 +7,18 @@
     <list default="true" id="4ef5fa9f-259f-42ab-8500-e1a88b58272c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectAgentAlpha/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectAgentAlpha/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animation/CameraController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/CameraController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Graphics/PlanetMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Graphics/PlanetMat.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/GameScene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/GameScene_timers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Base-Spacestation.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Base-Spacestation.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Controller.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Controller.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player1 Third.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player1 Third.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player2 Third.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player2 Third.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Canvas.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EventQueue/EventQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EventQueue/EventQueue.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScreenFader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScreenFader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Module.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Module.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/PhaseGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/PhaseGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/ModuleDesctructionPreview.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/ModuleDestructionPreview.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/ModuleDesctructionPreview.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/ModuleDestructionPreview.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/Connector.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UI/UIHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spaceship/UI/UIHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +116,7 @@
       <workItem from="1640035639836" duration="5912000" />
       <workItem from="1640244266986" duration="1144000" />
       <workItem from="1641819380846" duration="9943000" />
-      <workItem from="1641889524069" duration="2353000" />
+      <workItem from="1641889524069" duration="13164000" />
     </task>
     <servers />
   </component>

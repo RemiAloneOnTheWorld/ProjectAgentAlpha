@@ -108,6 +108,7 @@ public class Connector : MonoBehaviour {
 
     public void SetBoxCreationModule() {
         _currentModule = boxCreationModule;
+        Debug.Log("Box module set");
     }
 
     public GameObject GetCurrentModule() {

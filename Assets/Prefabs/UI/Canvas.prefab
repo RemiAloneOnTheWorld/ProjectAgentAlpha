@@ -578,7 +578,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SetFactoryModule
+        m_MethodName: SetBoxCreationModule
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -610,7 +610,7 @@ MonoBehaviour:
           m_MethodName: ShowModulePreview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 1996524154288813403, guid: 0b581882f397a47458bb6aec192bee1e, type: 3}
+            m_ObjectArgument: {fileID: 5553455755266852388, guid: 167bff6eae9218d42b519f5d663e174b, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -698,7 +698,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Factory Module
+  m_text: Box Creation Module
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1027,7 +1027,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SetFactoryModule
+        m_MethodName: SetBoxCreationModule
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1059,7 +1059,7 @@ MonoBehaviour:
           m_MethodName: ShowModulePreview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 1996524154288813403, guid: 0b581882f397a47458bb6aec192bee1e, type: 3}
+            m_ObjectArgument: {fileID: 5553455755266852388, guid: 167bff6eae9218d42b519f5d663e174b, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -1871,7 +1871,7 @@ MonoBehaviour:
           m_MethodName: ShowModulePreview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8996090907342836104, guid: 73db2e442a34ae448a3a1bbed3ccce94, type: 3}
+            m_ObjectArgument: {fileID: 2852725478171782957, guid: 8d42f07fab83bea43bc450241af42ef5, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -1983,7 +1983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6750206590026248149
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2545,7 +2545,7 @@ MonoBehaviour:
           m_MethodName: ShowModulePreview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 1996524154288813403, guid: 0b581882f397a47458bb6aec192bee1e, type: 3}
+            m_ObjectArgument: {fileID: 3319186596075058237, guid: 38f5326a130fb3041a1991fb66cfde26, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -2897,7 +2897,7 @@ MonoBehaviour:
           m_MethodName: ShowModulePreview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 1996524154288813403, guid: 0b581882f397a47458bb6aec192bee1e, type: 3}
+            m_ObjectArgument: {fileID: 3319186596075058237, guid: 38f5326a130fb3041a1991fb66cfde26, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -3884,7 +3884,7 @@ MonoBehaviour:
           m_MethodName: ShowModulePreview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8996090907342836104, guid: 73db2e442a34ae448a3a1bbed3ccce94, type: 3}
+            m_ObjectArgument: {fileID: 2852725478171782957, guid: 8d42f07fab83bea43bc450241af42ef5, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -4308,7 +4308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6750206591183831942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4331,7 +4331,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -170}
-  m_SizeDelta: {x: 250, y: 195}
+  m_SizeDelta: {x: 250, y: 215}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6750206591183831940
 CanvasRenderer:
