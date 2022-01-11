@@ -10,7 +10,7 @@ public class CurrencyModule : Module {
     protected override void Start() {
         base.Start();
         if(!testMoneyPerSecond)
-            EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, updateCurrency);
+            EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, updateCurrency);
         //TODO: Overwrite for currency module.
     }
 
