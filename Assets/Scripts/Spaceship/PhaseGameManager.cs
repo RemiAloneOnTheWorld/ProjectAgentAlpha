@@ -6,7 +6,7 @@ public class PhaseGameManager : MonoBehaviour {
     [SerializeField] private float attackTime;
     private bool _countdownRunning;
     private string _currentPlayerName;
-    public EventType EventType { get; private set; }
+    public static EventType EventType { get; private set; }
 
     private IEnumerator _prepCoroutine;
     private IEnumerator _countdownCoroutine;
@@ -23,13 +23,15 @@ public class PhaseGameManager : MonoBehaviour {
     private void StartPrepPhase() {
         EventType = EventType.PreparationPhase;
         //Preparation phase starts
-        EventQueue.GetEventQueue().AddEvent(new MessageEventData(EventType.InitPreparationPhase, "Ready? Press 'R' or 'North Button'"));
+        EventQueue.GetEventQueue().AddEvent(
+            new MessageEventData(EventType.InitPreparationPhase, "Ready? Press 'R' or 'North Button'"));
         EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.PreparationPhase, "Preparation Phase"));
     }
 
     private void PlayerIsReady(EventData eventData) {
         PreparationReadyEventData preparationReadyEventData = (PreparationReadyEventData) eventData;
 
+        //This lets the player who started the countdown, abort it again.
         if (_countdownRunning) {
             if (_currentPlayerName == preparationReadyEventData.playerName) {
                 StartCoroutine(AbortPrepPhaseCountdown());
@@ -37,6 +39,7 @@ public class PhaseGameManager : MonoBehaviour {
 
             return;
         }
+        
         _currentPlayerName = preparationReadyEventData.playerName;
         _prepCoroutine = StartPreparationCountdown();
         StartCoroutine(_prepCoroutine);
@@ -56,6 +59,7 @@ public class PhaseGameManager : MonoBehaviour {
         StartCoroutine(AttackPhase());
     }
 
+    //Stops all running coroutines and starts preparation phase again.
     private IEnumerator AbortPrepPhaseCountdown() {
         StopCoroutine(_countdownCoroutine);
         StopCoroutine(_prepCoroutine);
@@ -73,6 +77,7 @@ public class PhaseGameManager : MonoBehaviour {
         //This event initiates the camera transition and fade
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhaseOver));
         Debug.Log("Start spaceship destruction");
+        EventType = EventType.DestructionPhase;
     }
     
     private IEnumerator StartCountdown(float time) {
@@ -87,4 +92,10 @@ public class PhaseGameManager : MonoBehaviour {
 
         _countdownRunning = false;
     }
+    
+    //Destruction phase
+    /*
+     * 1. Fade screens
+     * 2. On black-fade; zoom in onto the main module
+     */
 }

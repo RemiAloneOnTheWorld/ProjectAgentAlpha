@@ -18,9 +18,12 @@ public class CameraController : MonoBehaviour {
     private Animator animationStates;
     private ScreenFader fader;
     public GameObject panel;
+    private static readonly int OnAttackPhase = Animator.StringToHash("OnAttackPhase");
+    private static readonly int OnDestroyPhase = Animator.StringToHash("OnDestructionPhase");
 
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, Ready);
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
     }
 
     // Start is called before the first frame update
@@ -51,6 +54,19 @@ public class CameraController : MonoBehaviour {
         ready = 2;
         StartCoroutine(StartPhase(eventData));
         animationStates.SetFloat("Ready", ready);
+        animationStates.SetTrigger(OnAttackPhase);
+    }
+
+    private IEnumerator E_OnAttackPhaseOver(EventData eventData) {
+        StartCoroutine(fader.fadeOut(eventData.eventType));
+        yield return new WaitForSeconds(2);
+        yield return new WaitWhile(() => fader.IsFading);
+    }
+
+    private void OnAttackPhaseOver(EventData eventData) {
+        //animationStates.ResetTrigger(OnAttackPhase);
+        animationStates.SetTrigger(OnDestroyPhase);
+        StartCoroutine(E_OnAttackPhaseOver(eventData));
     }
 
     public void UnReady(EventData eventData) {

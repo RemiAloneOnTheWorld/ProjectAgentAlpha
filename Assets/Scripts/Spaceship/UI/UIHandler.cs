@@ -40,7 +40,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private float crosshairDrift;
     private Vector2 _initCrosshairPos;
     private int _lastScreenWidth;
-
+    
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
     }
@@ -59,6 +59,7 @@ public class UIHandler : MonoBehaviour {
         _connector = GetComponent<Connector>();
         _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
         _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
+        
         _initCrosshairPos = crosshair.transform.position;
         _lastScreenWidth = Screen.width;
     }

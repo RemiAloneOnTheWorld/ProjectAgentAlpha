@@ -65,6 +65,7 @@ public enum EventType {
     AttackPhase,
     AttackPhaseOver,
     PrepPhaseTimeUpdate,
+    DestructionPhase,
     AttackPhaseTimeUpdate,
     PlayerPreparationReady
 }

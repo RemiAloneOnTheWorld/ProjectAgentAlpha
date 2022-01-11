@@ -29,10 +29,10 @@ public class ScreenFader : MonoBehaviour
         image.color = new Color(0f, 0f, 0f, 1f);
 
         if (eventType == EventType.PreparationPhaseOver) {
-            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToAttack, "Attack Phase"));   
+            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToAttack, "AI Attack Phase"));   
         }
         else if(eventType == EventType.AttackPhaseOver){
-            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToAttack, "Preparation Phase"));   
+            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToAttack, "Destruction Phase"));   
         }
         yield return fadeIn();
     }
