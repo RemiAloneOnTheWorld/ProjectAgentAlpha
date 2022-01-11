@@ -30,6 +30,12 @@ public class SpaceshipManager : Module {
         }
 
         _planet = GameObject.FindWithTag("Planet");
+
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, showMoney);
+    }
+
+    private void showMoney(EventData eventData) {
+        Debug.Log(this.name + " amount of money: " + this.Money);
     }
 
     private void Update() {
