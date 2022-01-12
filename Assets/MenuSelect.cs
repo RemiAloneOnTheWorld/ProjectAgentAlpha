@@ -6,40 +6,75 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MenuSelect : MonoBehaviour
-{
+{   [SerializeField] private PlayerInput playerInput;
+    
+    [Header("SelectButtons")]
     [SerializeField] private Button menuSelectButton;
     [SerializeField] private Slider optionsSelectButton;
     [SerializeField] private Button aboutSelectButton;
-    [SerializeField] private PlayerInput playerInput;
+    [Header("Menus")]
+    [SerializeField] private GameObject startMenu;
+    [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject aboutMenu;
+
+
 
     public void Start()
     {
 
-        SelectStartMenu();
+        StartCoroutine(SelectStartMenu());
 
     }
 
+    public void ShowStartMenu()
+    {
+        startMenu.SetActive(true);
+        optionsMenu.SetActive(false);
+        aboutMenu.SetActive(false);
+        StartCoroutine(SelectStartMenu());
+    }
+
+    public void ShowOptionsMenu()
+    {
+        startMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+        aboutMenu.SetActive(false);
+        StartCoroutine(SelectOptionsMenu());
+    }
+
+    public void ShowAboutMenu()
+    {
+        startMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        aboutMenu.SetActive(true);
+        StartCoroutine(SelectAboutMenu());
+    }
+
     //StartMenu
-    public void SelectStartMenu()
+
+    IEnumerator SelectStartMenu()
     {
         if (playerInput.currentControlScheme.Equals("Gamepad"))
         {
             EventSystem.current.SetSelectedGameObject(null);
             print("In method " + menuSelectButton.gameObject);
+            yield return new WaitForEndOfFrame();
             //EventSystem.current.SetSelectedGameObject(menuSelectButton.gameObject);
             menuSelectButton.Select();
             menuSelectButton.OnSelect(null);
             print("Select menu");
+            
            
         }
     }
     //OptionsMenu
-    public void SelectOptionsMenu()
+    IEnumerator SelectOptionsMenu()
     {
         if (playerInput.currentControlScheme.Equals("Gamepad"))
         {
             EventSystem.current.SetSelectedGameObject(null);
             print("In method " + optionsSelectButton.gameObject);
+            yield return new WaitForEndOfFrame();
             //EventSystem.current.SetSelectedGameObject(optionsSelectButton.gameObject);
 
             optionsSelectButton.Select();
@@ -51,12 +86,13 @@ public class MenuSelect : MonoBehaviour
 
     //AboutMenu
 
-    public void SelectAboutMenu()
+    IEnumerator SelectAboutMenu()
     {
         if (playerInput.currentControlScheme.Equals("Gamepad"))
         {
             EventSystem.current.SetSelectedGameObject(null);
             print("In method " + aboutSelectButton.gameObject);
+            yield return new WaitForEndOfFrame();
             //EventSystem.current.SetSelectedGameObject(aboutSelectButton.gameObject);
             aboutSelectButton.Select();
             aboutSelectButton.OnSelect(null);
@@ -75,15 +111,15 @@ public class MenuSelect : MonoBehaviour
         {
             if (menuSelectButton.transform.parent.gameObject.activeSelf == true)
             {
-                SelectStartMenu();
+                StartCoroutine(SelectStartMenu());
             }
             if (optionsSelectButton.transform.parent.gameObject.activeSelf == true)
             {
-                SelectOptionsMenu();
+                StartCoroutine(SelectOptionsMenu());
             }
             if (aboutSelectButton.transform.parent.gameObject.activeSelf == true)
             {
-                SelectAboutMenu();
+                StartCoroutine(SelectAboutMenu());
             }
         }
         else
