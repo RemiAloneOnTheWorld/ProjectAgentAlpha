@@ -13,17 +13,17 @@ public class NoiseSettings
 
     public void randomizeRigidSettings() {
         randomizeSimpleSettings();
-        rigidNoiseSettings.weightMultiplier = Random.Range(0f,1f);
+        rigidNoiseSettings.weightMultiplier = Random.Range(0f,16f);
     }
 
     public void randomizeSimpleSettings() {
-        simpleNoiseSettings.strength = Random.Range(.2f,.1f);
-        simpleNoiseSettings.roughness = Random.Range(.5f,1f);
-        simpleNoiseSettings.persistence = Random.Range(.2f,.9f);
-        simpleNoiseSettings.baseRoughness = Random.Range(.2f,1f);
+        simpleNoiseSettings.strength = Random.Range(.02f,.1f);
+        simpleNoiseSettings.roughness = Random.Range(1.2f,1.8f);
+        simpleNoiseSettings.persistence = Random.Range(.8f,1.1f);
+        simpleNoiseSettings.baseRoughness = Random.Range(1.1f,1.5f);
         simpleNoiseSettings.numLayers = Random.Range(1,9);
         simpleNoiseSettings.centre = new Vector3(Random.Range(0,265), Random.Range(0,265), Random.Range(0,265));
-        simpleNoiseSettings.minValue = Random.Range(.5f,1.5f);
+        simpleNoiseSettings.minValue = Random.Range(2f,2.5f);
     }
 
     [System.Serializable]
