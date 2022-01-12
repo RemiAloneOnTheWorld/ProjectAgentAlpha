@@ -16,7 +16,6 @@ public class OptionsMenu : MonoBehaviour
     public GameObject SensitivityText;
     public GameObject SensitivityP2Text;
     Resolution[] resolutions;
-    public PlayerInput _playerInput;
 
     private void Start()
     {
@@ -43,11 +42,11 @@ public class OptionsMenu : MonoBehaviour
         resolutionList.value = currentResolution;
         resolutionList.RefreshShownValue();
 
-        SelectMenuItem();
-        
+     
+
     }
 
-    public void SetVolume (float volume)
+    public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
         float percentage = ((volume + 80) / 80) * 100;
@@ -56,44 +55,30 @@ public class OptionsMenu : MonoBehaviour
         vText.text = pInt.ToString() + "%";
     }
 
-    public void SetResolution (int resolutionI)
+    public void SetResolution(int resolutionI)
     {
         Resolution resolution = resolutions[resolutionI];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetSensitivity (float sensitivity)
+    public void SetSensitivity(float sensitivity)
     {
         // Do something with Sensitivity value here
         TextMeshProUGUI sText = SensitivityText.GetComponent<TextMeshProUGUI>();
         sText.text = sensitivity.ToString();
     }
 
-    public void SetP2Sensitivity (float sensitivity)
+    public void SetP2Sensitivity(float sensitivity)
     {
         // Do something with Sensitivity value here
         TextMeshProUGUI s2Text = SensitivityP2Text.GetComponent<TextMeshProUGUI>();
         s2Text.text = sensitivity.ToString();
     }
 
-    public void SetFullscreen (bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
 
-    public void OnControlsChanged()
-    {
-        SelectMenuItem();
-    }
 
-    public void SelectMenuItem()
-    {
-        if (_playerInput.currentControlScheme.Equals("Gamepad"))
-        {
-            EventSystem.current.SetSelectedGameObject(volumeSlider.gameObject);
-            volumeSlider.OnSelect(null);
-            print("Select options");
-        }
-
-    }
 }

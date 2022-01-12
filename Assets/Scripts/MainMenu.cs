@@ -8,18 +8,6 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private PlayerInput _playerInput;
-    [SerializeField] private Button startButton;
-
-    private void Start()
-    {
-        SelectMenuItem();
-    }
-
-    public void OnControlsChanged()
-    {
-        SelectMenuItem();
-    }
 
     public void RunGame ()
     {
@@ -29,15 +17,5 @@ public class MainMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void SelectMenuItem()
-    {
-        if (_playerInput.currentControlScheme.Equals("Gamepad"))
-        {
-            EventSystem.current.SetSelectedGameObject(startButton.gameObject);
-            startButton.OnSelect(null);
-            print("Select menu");
-        }
     }
 }
