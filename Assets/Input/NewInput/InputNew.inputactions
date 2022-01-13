@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Ready",
+                    "type": "Button",
+                    "id": "1b0ab2d8-4540-42c2-8c42-d0bd230deaca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -225,9 +233,11 @@
                     "processors": "",
                     "groups": "Mouse&Keyboard",
                     "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
-                {        
-                    "name": "",        
+                {
+                    "name": "",
                     "id": "b739b9b2-5438-4aac-9f01-784df739d662",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
