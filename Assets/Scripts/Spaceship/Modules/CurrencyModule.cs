@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class CurrencyModule : Module {
     [SerializeField] private float moneyPerSecond;
+    [SerializeField] private bool testMoneyPerSecond;
     private float _timePassed;
 
     protected override void Start() {
         base.Start();
+        if(!testMoneyPerSecond)
+            EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, updateCurrency);
         //TODO: Overwrite for currency module.
     }
 
     private void Update() {
-        AddCurrencyOverTime();
+        if(testMoneyPerSecond)
+            AddCurrencyOverTime();
+    }
+
+    private void updateCurrency(EventData eventData) {
+        ((SpaceshipManager) GetBaseModule()).AddMoney(moneyPerSecond);	        
     }
 
     private void AddCurrencyOverTime() {

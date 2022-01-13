@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cceeadee1b4d7a744950d59528a94d78, type: 3}
-  m_Name: Planet Shape
+  m_Name: Planet Shape Random
   m_EditorClassIdentifier: 
   planetRadius: 15
   noiseLayers:
@@ -19,13 +19,13 @@ MonoBehaviour:
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 0.05
-        roughness: 1.44
-        persistence: 0.9
-        baseRoughness: 1.25
-        minValue: 2.22
+        strength: 0.05684898
+        roughness: 1.3465813
+        persistence: 1.0192357
+        baseRoughness: 1.1954303
+        minValue: 2.2163546
         numLayers: 5
-        centre: {x: 2.15, y: 1.18, z: 1.27}
+        centre: {x: 227, y: 7, z: 104}
       rigidNoiseSettings:
         strength: 1
         roughness: 2
@@ -34,19 +34,19 @@ MonoBehaviour:
         minValue: 0
         numLayers: 1
         centre: {x: 0, y: 0, z: 0}
-        weightMultiplier: 0.8
-  - enabled: 0
-    useFirstLayerAsMask: 0
+        weightMultiplier: 10.865261
+  - enabled: 1
+    useFirstLayerAsMask: 1
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 1
-        roughness: 2
-        persistence: 0.5
-        baseRoughness: 1
-        minValue: 0
-        numLayers: 1
-        centre: {x: 0, y: 0, z: 0}
+        strength: 0.075465575
+        roughness: 1.3606329
+        persistence: 0.8634653
+        baseRoughness: 1.4584056
+        minValue: 2.2148643
+        numLayers: 7
+        centre: {x: 173, y: 137, z: 49}
       rigidNoiseSettings:
         strength: 1
         roughness: 2
@@ -55,19 +55,19 @@ MonoBehaviour:
         minValue: 0
         numLayers: 1
         centre: {x: 0, y: 0, z: 0}
-        weightMultiplier: 0.8
+        weightMultiplier: 3.368309
   - enabled: 1
     useFirstLayerAsMask: 1
     noiseSettings:
       filterType: 1
       simpleNoiseSettings:
-        strength: 1
-        roughness: 2
-        persistence: 0.5
-        baseRoughness: 1
-        minValue: 0
-        numLayers: 1
-        centre: {x: 0, y: 0, z: 0}
+        strength: 0.0755977
+        roughness: 1.6637874
+        persistence: 0.89600694
+        baseRoughness: 1.2825222
+        minValue: 2.124683
+        numLayers: 4
+        centre: {x: 195, y: 64, z: 170}
       rigidNoiseSettings:
         strength: 0.2
         roughness: 1.5
@@ -76,4 +76,4 @@ MonoBehaviour:
         minValue: 0
         numLayers: 5
         centre: {x: 0, y: 0, z: 0}
-        weightMultiplier: 4
+        weightMultiplier: 1.455843

@@ -15,5 +15,13 @@ public class ShapeSettings : ScriptableObject
         public bool enabled;
         public bool useFirstLayerAsMask;
         public NoiseSettings noiseSettings;
+
+        public void randomizeSettings() {
+            if(noiseSettings.rigidNoiseSettings != null) {
+                noiseSettings.randomizeRigidSettings();
+            } else if(noiseSettings.simpleNoiseSettings != null) {
+                noiseSettings.randomizeSimpleSettings();
+            }
+        }
     }
 }
