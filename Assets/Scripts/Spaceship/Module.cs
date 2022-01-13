@@ -28,6 +28,10 @@ public abstract class Module : MonoBehaviour {
         _baseModule = baseModule;
     }
 
+    public int ConnectionCount() {
+        return Connections.Count(connection => connection.GetBoundModule() != null);
+    }
+
     public Module GetParentModule() {
         return _parentModule;
     }

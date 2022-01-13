@@ -18,9 +18,15 @@ public class UIHandler : MonoBehaviour {
     //Message
     [SerializeField] private TMP_Text messageText;
 
+    //Player UI
+    [SerializeField] private RectTransform playerUI;
+    private Vector3 _initialPlayerUIPosition;
+    
     //Buy menu
     [SerializeField] private GameObject buyMenu;
     private bool _menuShown;
+
+    [SerializeField] private TMP_Text moduleNameText, moduleHealthText, moduleConnectionsText;
 
     //Buttons
     [SerializeField] private Button currencyButton;
@@ -43,6 +49,9 @@ public class UIHandler : MonoBehaviour {
     
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
     }
 
     private void OnPrepPhaseOver(EventData eventData) {
@@ -50,7 +59,27 @@ public class UIHandler : MonoBehaviour {
             ShowMenu(new InputAction.CallbackContext());
         }
 
-        HideCrosshair();
+        ShowCrosshair(false);
+    }
+
+    private void OnDestructionPhaseOver(EventData eventData) {
+        ShowCrosshair(true);
+        ShowCursor(false);
+        ShowModuleInformation(false);
+        if (playerUI.name == "Player1") {
+            playerUI.position = _initialPlayerUIPosition;
+        }
+    }
+
+    private void OnAttackPhaseOver(EventData eventData) {
+        ShowCursor(true);
+    }
+
+    private void LowerPlayerUIStats(EventData eventData) {
+        //Move UI of player below vertical half.
+        if (playerUI.name == "Player1") {
+            playerUI.position = new Vector2(playerUI.position.x, playerUI.rect.height);
+        }
     }
 
     private void Start() {
@@ -62,6 +91,7 @@ public class UIHandler : MonoBehaviour {
         
         _initCrosshairPos = crosshair.transform.position;
         _lastScreenWidth = Screen.width;
+        _initialPlayerUIPosition = playerUI.position;
     }
 
     private void Update() {
@@ -168,24 +198,56 @@ public class UIHandler : MonoBehaviour {
             new Vector2(_initCrosshairPos.x + x * crosshairDrift, _initCrosshairPos.y + y * crosshairDrift);
     }
 
-    private void HideCrosshair() {
-        crosshair.gameObject.SetActive(false);
+    private void ShowCrosshair(bool hide) {
+        crosshair.gameObject.SetActive(hide);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
-        EventQueue.GetEventQueue()
-            .AddEvent(new PreparationReadyEventData(EventType.PlayerPreparationReady, gameObject.name));
+        
+        //TODO: Forbid during attack phase
+        EventQueue.GetEventQueue().AddEvent(PhaseGameManager.EventType == EventType.PreparationPhase
+            ? new PlayerReadyEventData(EventType.PlayerPreparationReady, gameObject.name)
+            : new PlayerReadyEventData(EventType.PlayerDestructionReady, gameObject.name));
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void ShowModuleInformation(bool show) {
+        moduleNameText.transform.parent.gameObject.SetActive(show);
     }
 
-    public void Test1() {
-        Debug.LogWarning("Test1");
+    public void SetModuleInformation(ModuleInformation moduleInformation) {
+        moduleNameText.text = $"Name: {moduleInformation.moduleName}";
+        moduleHealthText.text = $"Health: {moduleInformation.currentHealth}/{moduleInformation.totalHealth}";
+        moduleConnectionsText.text = $"Modules \n Connected: {moduleInformation.amountConnectedModules}";
     }
-    
-    public void Test2() {
-        Debug.LogWarning("Test2");
-    }
-    
-    public void Test3() {
-        Debug.LogWarning("Test3");
+}
+
+public readonly struct ModuleInformation {
+    public readonly string moduleName;
+    public readonly int currentHealth;
+    public readonly int totalHealth;
+    public readonly int amountConnectedModules;
+
+    public ModuleInformation(string moduleName, int currentHealth, int totalHealth, int amountConnectedModules) {
+        this.moduleName = moduleName;
+        this.currentHealth = currentHealth;
+        this.totalHealth = totalHealth;
+        this.amountConnectedModules = amountConnectedModules;
     }
 }

@@ -1,15 +1,12 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Cinemachine;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.PostProcessing;
 
-public class ModuleDestructionPreview : MonoBehaviour
-{
-    private PlayerInput _playerInput;
+public class ModuleDestructionPreview : MonoBehaviour {
+    private UIHandler _uiHandler;
     
+    private PlayerInput _playerInput;
     private InputAction _move;
 
     [Header("Module Destruction Preview")]
@@ -21,8 +18,9 @@ public class ModuleDestructionPreview : MonoBehaviour
     [SerializeField] private SpaceshipManager spaceshipManager;
     private Module _currentModule;
     private Vector3 _offsetVector;
+    private Vector3 _camerasStartPosition;
     private bool _transitionActivated, _inTransition;
-    private Queue<Vector2> _moveRequests = new Queue<Vector2>();
+    //private Queue<Vector2> _moveRequests = new Queue<Vector2>();
 
     private void Start() {
         //Get movement input here to use Vector2 as input for module preview during destruction.
@@ -34,36 +32,46 @@ public class ModuleDestructionPreview : MonoBehaviour
         
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, 
             data => _currentModule = spaceshipManager);
+        
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
 
         _offsetVector = _currentModule.transform.position - destructionPreviewCameraOne.transform.position;
         _currentCamera = destructionPreviewCameraOne;
+        _camerasStartPosition = destructionPreviewCameraOne.transform.position;
+
+        _uiHandler = GetComponent<UIHandler>();
     }
 
     private void Update() {
         CheckTransitionState();
-        if (_moveRequests.Count > 0 && !_transitionActivated && !_inTransition) {
-            MoveToNextModule(_moveRequests.Dequeue());
-        }
+        //if (_moveRequests.Count > 0 && !_transitionActivated && !_inTransition) {
+        //    MoveToNextModule(_moveRequests.Dequeue());
+        //}
+    }
+
+    private void OnAttackPhaseOver(EventData eventData) {
+        _currentModule = spaceshipManager;
+        destructionPreviewCameraOne.transform.position = _camerasStartPosition;
+        destructionPreviewCameraTwo.transform.position = _camerasStartPosition;
+        _currentCamera = destructionPreviewCameraOne;
     }
 
     private void CheckTransitionState() {
         if (_transitionActivated) {
-            Debug.LogWarning("Checking _transition activated");
             if (stateDrivenCamera.IsBlending) {
                 _inTransition = true;
-                Debug.LogWarning("Is Blending");
             }
         }
 
         if (_inTransition) {
             _transitionActivated = false;
             if (!stateDrivenCamera.IsBlending) {
+                _uiHandler.ShowModuleInformation(true);
+                _uiHandler.SetModuleInformation(new ModuleInformation(_currentModule.name, _currentModule.Health, 200, 
+                    _currentModule.ConnectionCount()));
                 _inTransition = false;
-                Debug.LogWarning("Is not blending. Ready for input");
             }
         }
-        
-        Debug.Log("Brain blending:" + stateDrivenCamera.IsBlending);
     }
 
     private void AcceptMoveToModule(InputAction.CallbackContext callbackContext) {
@@ -80,7 +88,7 @@ public class ModuleDestructionPreview : MonoBehaviour
         }
         
         if (_transitionActivated || _inTransition) {
-           _moveRequests.Enqueue(direction);
+            //_moveRequests.Enqueue(direction);
            return;
         }
         
@@ -114,7 +122,9 @@ public class ModuleDestructionPreview : MonoBehaviour
         if (candidateModule != null) {
             _currentModule = candidateModule;
             _transitionActivated = true;
-
+            _uiHandler.ShowModuleInformation(false);
+            
+            
             if (destructionPreviewCameraOne == _currentCamera) {
                 destructionPreviewCameraTwo.transform.position = _currentModule.transform.position - _offsetVector;
                 cameraController.SwitchToSecondDestructionCamera();
@@ -127,6 +137,8 @@ public class ModuleDestructionPreview : MonoBehaviour
             _currentCamera = destructionPreviewCameraOne == _currentCamera
                 ? destructionPreviewCameraTwo
                 : destructionPreviewCameraOne;
+            
+            
         }
         else {
             Debug.LogWarning("No available module there");

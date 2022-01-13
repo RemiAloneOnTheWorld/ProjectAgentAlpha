@@ -24,6 +24,7 @@ public class CameraController : MonoBehaviour {
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, Ready);
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
     }
 
     // Start is called before the first frame update
@@ -58,9 +59,11 @@ public class CameraController : MonoBehaviour {
     }
 
     private IEnumerator E_OnAttackPhaseOver(EventData eventData) {
+        yield return new WaitForEndOfFrame();
         StartCoroutine(fader.fadeOut(eventData.eventType));
-        yield return new WaitForSeconds(2);
+        //yield return new WaitForSeconds(2);
         yield return new WaitWhile(() => fader.IsFading);
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.DestructionPhase));
     }
 
     private void OnAttackPhaseOver(EventData eventData) {
@@ -82,7 +85,9 @@ public class CameraController : MonoBehaviour {
         //player1Camera.SetFloat("Ready", ready);
         //player2Camera.SetFloat("Ready", ready);
         yield return new WaitWhile(() => fader.IsFading);
-        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhase));
+        
+        if(PhaseGameManager.EventType == EventType.PreparationPhase)
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhase));
     }
 
     IEnumerator EndPhase(EventData eventData) {
@@ -92,6 +97,10 @@ public class CameraController : MonoBehaviour {
         EndPhase2(player2, 0f);
         //player1Animator.SetFloat("Ready", ready);
         //player2Animator.SetFloat("Ready", ready);
+        player1Camera.OnDestructionPhaseOver();
+        player2Camera.OnDestructionPhaseOver();
+        yield return new WaitWhile(() => fader.IsFading);
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.PreparationPhase));
     }
     
 
@@ -103,5 +112,9 @@ public class CameraController : MonoBehaviour {
     private void EndPhase2(Player player, float xCam) {
         //player.gameObject.GetComponent<MeshRenderer>().enabled = true;
         player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(xCam, 0, 0.5f, 1);
+    }
+
+    private void OnDestructionPhaseOver(EventData eventData) {
+        StartCoroutine(EndPhase(eventData));
     }
 }
