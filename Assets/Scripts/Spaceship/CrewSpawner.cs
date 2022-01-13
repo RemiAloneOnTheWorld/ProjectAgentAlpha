@@ -9,78 +9,65 @@ public class CrewSpawner : MonoBehaviour
     private GameObject prefab;
 
     [SerializeField]
-    private Vector3 size;
+    private float spawnRadius = 10;
 
-    [SerializeField]
-    private int minSpawnCount = 0;
-    [SerializeField]
-    private int maxSpawnCount = 0;
     [SerializeField]
     private Color colour;
     public GizmoType showSpawnRegion;
-
-    public int crewCreationModules;
-
-    private List<GameObject> cubeList;
-
-    private int totalCubes;
+    private List<GameObject> spaceships;
+    private int totalShips;
 
     private void Start()
     {
-        cubeList = new List<GameObject>();
+        spaceships = new List<GameObject>();
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, SpawnShips);
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, RemoveShips);
     }
 
 
-    public void SpawnCube()
+    public void SpawnShips(EventData eventData)
     {
-        float randX = Random.Range(size.x / 2 * -1 + transform.position.x, size.x / 2 + transform.position.x);
-        float randY = Random.Range(size.y / 2 * -1 + transform.position.y, size.y / 2 + transform.position.y);
-        float randZ = Random.Range(size.z / 2 * -1 + transform.position.z, size.z / 2 + transform.position.z);
-        GameObject cube = Instantiate<GameObject>(prefab);
-        cube.transform.localPosition = new Vector3(randX, randY, randZ);
-
-        cubeList.Add(cube);
-    }
-
-    public void resetArea()
-    {
-        RemoveCubes();
-    }
-
-    private void RemoveCubes()
-    {
-        if (cubeList != null)
+        SpaceshipManager station = GetComponentInParent<SpaceshipManager>();
+        totalShips = station.Spaceships;
+        for (int i = 0; i < totalShips; i++)
         {
-            for (int i = 0; i < totalCubes; i++)
+            Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
+            GameObject spaceship = Instantiate<GameObject>(prefab);
+            spaceship.transform.position = pos;
+            spaceships.Add(spaceship);
+        }
+    }
+
+    private void RemoveShips(EventData eventData)
+    {
+        Debug.Log("destroying spaceships");
+        if (spaceships != null)
+        {
+            for (int i = 0; i < totalShips; i++)
             {
-                if (cubeList[i] != null)
+                if (spaceships[i] != null)
                 {
-                    Destroy(cubeList[i]);
+                    Destroy(spaceships[i]);
                 }
             }
         }
-        cubeList = new List<GameObject>();
+        spaceships = new List<GameObject>();
     }
 
-    private void OnDrawGizmos()
-    {
-        if (showSpawnRegion == GizmoType.Always)
-        {
+    private void OnDrawGizmos() {
+        if(showSpawnRegion == GizmoType.Always) {
+            DrawGizmos();
+        }    
+    }
+
+    private void OnDrawGizmosSelected() {
+        if(showSpawnRegion == GizmoType.SelectedOnly) {
             DrawGizmos();
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (showSpawnRegion == GizmoType.SelectedOnly)
-        {
-            DrawGizmos();
-        }
-    }
-
-    private void DrawGizmos()
-    {
+    private void DrawGizmos() {
         Gizmos.color = new Color(colour.r, colour.g, colour.b, 0.3f);
-        Gizmos.DrawCube(transform.position, size);
+        Gizmos.DrawSphere(transform.position, spawnRadius);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -29,6 +30,16 @@ public class Player_Movement : MonoBehaviour
 
     private float pitch;
     private float yaw;
+
+    private bool _lockMovement;
+
+    private void Awake() {
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
+    }
+
+    private void OnPrepPhaseOver(EventData eventData) {
+        _lockMovement = true;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +75,7 @@ public class Player_Movement : MonoBehaviour
                 {
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
-                    print("yes");
+                    print("Device is for P2");
                     print(device.description + " " + this.name);
                 }
 
@@ -82,7 +93,7 @@ public class Player_Movement : MonoBehaviour
                     playerInput.SwitchCurrentControlScheme(device) ;
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
-                    print("No");
+                    print("Device is for P1");
                     print(device.description + " " + this.name);
 
                 }
@@ -111,7 +122,7 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_uiHandler.IsMenuShown())
+        if (_uiHandler.IsMenuShown() || _lockMovement)
         {
             return;
         }
