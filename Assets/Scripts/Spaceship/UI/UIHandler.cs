@@ -155,7 +155,6 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetFactoryModule() {
-        Debug.Log("Fac mod set");
         if (_menuShown) {
             _connector.SetFactoryModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
@@ -163,7 +162,6 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetBoxCreationModule() {
-        Debug.Log("Box mod set");
         if (_menuShown) {
             _connector.SetBoxCreationModule();
             ShowMenu(new InputAction.CallbackContext());

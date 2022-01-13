@@ -19,7 +19,6 @@ public class PhaseGameManager : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, StartDestructionPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerPreparationReady, PlayerIsReady);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerDestructionReady, PlayerIsReady);
-        
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, StartPrepPhase);
     }
     
@@ -68,7 +67,7 @@ public class PhaseGameManager : MonoBehaviour {
         //This lets the player who started the countdown, abort it again.
         if (_countdownRunning) {
             if (_currentPlayerName == playerReadyEventData.playerName) {
-                StartCoroutine(AbortPrepPhaseCountdown());
+                StartCoroutine(AbortReadyCountdown());
             }
 
             return;
@@ -96,13 +95,12 @@ public class PhaseGameManager : MonoBehaviour {
         EventQueue.GetEventQueue().AddEvent(new EventData(eventPublishType));
     }
     
-
     private void StartAttackPhase(EventData eventData) { 
         StartCoroutine(AttackPhase());
     }
 
     //Stops all running coroutines and starts preparation phase again.
-    private IEnumerator AbortPrepPhaseCountdown() {
+    private IEnumerator AbortReadyCountdown() {
         StopCoroutine(_countdownCoroutine);
         StopCoroutine(_prepCoroutine);
         yield return null;
