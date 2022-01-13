@@ -75,7 +75,7 @@ public class Player_Movement : MonoBehaviour
                 {
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
-                    print("yes");
+                    print("Device is for P2");
                     print(device.description + " " + this.name);
                 }
 
@@ -93,7 +93,7 @@ public class Player_Movement : MonoBehaviour
                     playerInput.SwitchCurrentControlScheme(device) ;
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
-                    print("No");
+                    print("Device is for P1");
                     print(device.description + " " + this.name);
 
                 }

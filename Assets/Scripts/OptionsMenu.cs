@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public Dropdown resolutionList;
     public GameObject VolumeText;
+    public Slider volumeSlider;
     public GameObject SensitivityText;
     public GameObject SensitivityP2Text;
     Resolution[] resolutions;
-    
 
     private void Start()
     {
@@ -40,9 +42,11 @@ public class OptionsMenu : MonoBehaviour
         resolutionList.value = currentResolution;
         resolutionList.RefreshShownValue();
 
+     
+
     }
 
-    public void SetVolume (float volume)
+    public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
         float percentage = ((volume + 80) / 80) * 100;
@@ -51,28 +55,30 @@ public class OptionsMenu : MonoBehaviour
         vText.text = pInt.ToString() + "%";
     }
 
-    public void SetResolution (int resolutionI)
+    public void SetResolution(int resolutionI)
     {
         Resolution resolution = resolutions[resolutionI];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetSensitivity (float sensitivity)
+    public void SetSensitivity(float sensitivity)
     {
         // Do something with Sensitivity value here
         TextMeshProUGUI sText = SensitivityText.GetComponent<TextMeshProUGUI>();
         sText.text = sensitivity.ToString();
     }
 
-    public void SetP2Sensitivity (float sensitivity)
+    public void SetP2Sensitivity(float sensitivity)
     {
         // Do something with Sensitivity value here
         TextMeshProUGUI s2Text = SensitivityP2Text.GetComponent<TextMeshProUGUI>();
         s2Text.text = sensitivity.ToString();
     }
 
-    public void SetFullscreen (bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
+
+
 }

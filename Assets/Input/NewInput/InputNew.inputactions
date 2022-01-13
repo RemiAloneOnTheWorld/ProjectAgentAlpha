@@ -46,9 +46,25 @@
                     "interactions": ""
                 },
                 {
+                    "name": "PlaceBox",
+                    "type": "Button",
+                    "id": "20be8212-3aa3-4afd-9f7b-9d22a82a047c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "CollectBox",
+                    "type": "Button",
+                    "id": "87d55a18-5c21-4e55-86d9-b35d2e566187",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Ready",
                     "type": "Button",
-                    "id": "f1460868-8319-425e-b422-1828923bc95f",
+                    "id": "1b0ab2d8-4540-42c2-8c42-d0bd230deaca",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -219,6 +235,50 @@
                     "action": "Ready",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b739b9b2-5438-4aac-9f01-784df739d662",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse&Keyboard",
+                    "action": "PlaceBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "907c0944-4297-47bb-b870-cc5a92b294bf",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1c89295-157e-4ecf-9448-f330e1b51302",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse&Keyboard",
+                    "action": "CollectBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5e98baf-0913-4fb3-971c-d08145e3fcb2",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CollectBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -247,6 +307,14 @@
                     "type": "PassThrough",
                     "id": "e06d3b7d-0710-4016-bbe8-ff3e2e4492c7",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "da00d494-3ba7-4b96-82c9-51103ecb6ec3",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -348,6 +416,17 @@
                     "processors": "",
                     "groups": "Mouse&Keyboard;Gamepad",
                     "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2234de45-65a3-4322-ac02-1891278365fd",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
