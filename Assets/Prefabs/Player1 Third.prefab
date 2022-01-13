@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3322964969191126963}
   - component: {fileID: 3322964969191126961}
   - component: {fileID: 3322964969191126962}
+  - component: {fileID: 1539357370}
   m_Layer: 6
   m_Name: P1 Cam
   m_TagString: Untagged
@@ -27,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322964969191126964}
   m_LocalRotation: {x: 0.05530526, y: 0.0000000015407042, z: -8.5339666e-11, w: 0.99846953}
-  m_LocalPosition: {x: 137.39, y: 4.61, z: -31.901001}
+  m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3322964969593404474}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.341, y: 0, z: 0}
 --- !u!20 &3322964969191126963
 Camera:
   m_ObjectHideFlags: 0
@@ -49,7 +50,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 16.286203
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.5
@@ -64,7 +65,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967167
+    m_Bits: 4294966911
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -96,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
+  m_ShowDebugText: 1
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
@@ -118,6 +119,38 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1539357370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322964969191126964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: 0
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &3322964969593404465
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +166,10 @@ GameObject:
   - component: {fileID: 3322964969593404478}
   - component: {fileID: 3322964969593404479}
   - component: {fileID: 3322964969593404464}
-  m_Layer: 6
+  - component: {fileID: 372591786}
+  - component: {fileID: 372591787}
+  - component: {fileID: 372591794}
+  m_Layer: 0
   m_Name: Player1 Third
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
@@ -186,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: a06eba15b8f8e514b8ef953fd3d46b02, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 0935ff17a34fe4a4e811b52327a000f7, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -199,9 +235,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Mouse and Keyboard
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Mouse&Keyboard
+  m_DefaultActionMap: Spaceship
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &3322964969593404477
@@ -217,8 +253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 3322964969593404476}
-  speed: 0.5
-  maxSpeed: 5
+  speed: 2
+  maxSpeed: 25
   rotationSpeed: 0.1
   smoothTime: 0.05
   deceleration: 0.96
@@ -288,3 +324,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &372591786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322964969593404465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1572f8a6175d67c4d89f41275d5550a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currencyText: {fileID: 0}
+  spaceshipText: {fileID: 0}
+  messageText: {fileID: 0}
+  buyMenu: {fileID: 0}
+  currencyButton: {fileID: 0}
+  previewCamera: {fileID: 0}
+  previewWindow: {fileID: 0}
+  previewRotationSpeed: 20
+  vcam: {fileID: 0}
+  crosshair: {fileID: 0}
+  crosshairDrift: 250
+--- !u!114 &372591787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322964969593404465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09be2d7004002d4eb898e542588da8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupDistance: 100
+  playerCamera: {fileID: 3322964969191126963}
+  playerInput: {fileID: 3322964969593404476}
+  currencyModule: {fileID: 8996090907342836104, guid: 73db2e442a34ae448a3a1bbed3ccce94, type: 3}
+  factoryModule: {fileID: 1996524154288813403, guid: 0b581882f397a47458bb6aec192bee1e, type: 3}
+  boxCreationModule: {fileID: 6359352634188585971, guid: 502c9cfcf7f441742917f78e27de348d, type: 3}
+  baseModule: {fileID: 0}
+  crosshair: {fileID: 0}
+--- !u!114 &372591794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322964969593404465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3792a57ff5a90247b82fef1365605e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateDrivenCamera: {fileID: 0}
+  destructionPreviewCameraOne: {fileID: 0}
+  destructionPreviewCameraTwo: {fileID: 0}
+  cameraController: {fileID: 0}
+  spaceshipManager: {fileID: 0}

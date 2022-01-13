@@ -23,11 +23,12 @@ public class Connector : MonoBehaviour {
     private bool _lockInteraction;
 
     private void Awake() {
-        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPreparationPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, data => LockInteraction(true));
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, data => LockInteraction(false));
     }
 
-    private void OnPreparationPhaseOver(EventData eventData) {
-        _lockInteraction = true;
+    private void LockInteraction(bool enable) {
+        _lockInteraction = enable;
     }
 
     private void Start() {
@@ -108,6 +109,7 @@ public class Connector : MonoBehaviour {
 
     public void SetBoxCreationModule() {
         _currentModule = boxCreationModule;
+        Debug.Log("Box module set");
     }
 
     public GameObject GetCurrentModule() {
