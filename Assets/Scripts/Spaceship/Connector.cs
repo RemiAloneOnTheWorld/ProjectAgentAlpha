@@ -1,3 +1,4 @@
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -53,8 +54,9 @@ public class Connector : MonoBehaviour {
         
         
         Connection connection = raycastHit.collider.gameObject.GetComponent<Connection>();
-        Vector3 moduleDisplacement =
-            raycastHit.collider.transform.position - connection.GetParentModule().transform.position;
+        Debug.LogWarning("Parent null?: " + connection.GetParentModule() == null);
+        Vector3 moduleDisplacement = raycastHit.collider.gameObject.transform.position - connection.GetParentModule().transform.position;
+        
         
         //This 6.5f is the distance between the connection prefab and the center of the actual module to be placed.
         //I use this value since the scale value of the connector is 1, which creates misaligned modules.
