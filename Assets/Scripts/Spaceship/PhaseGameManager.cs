@@ -42,6 +42,7 @@ public class PhaseGameManager : MonoBehaviour {
 
     private IEnumerator PreparationPhase() {
         yield return new WaitForEndOfFrame();
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.PreparationPhase));
         EventQueue.GetEventQueue().AddEvent(new MessageEventData(EventType.InitPreparationPhase, 
             "Initiate attack? Press 'R' or 'North Button'"));
         EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToPreparation, "Preparation Phase"));

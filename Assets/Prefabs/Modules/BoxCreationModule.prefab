@@ -124,8 +124,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   price: 100
-  box: {fileID: 4444184946298112911, guid: b1a643424c29d294b97d33472cceafbb, type: 3}
-  placementPositions: []
+  box: {fileID: 3339259265492070164, guid: 4f40adfcfdc67a242a136eab49019d58, type: 3}
+  placementPositions:
+  - {fileID: 1714672370019967108}
+  - {fileID: 1509738774956608240}
 --- !u!1001 &995047859929300614
 PrefabInstance:
   m_ObjectHideFlags: 0
