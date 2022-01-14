@@ -4,8 +4,8 @@ public class CrewCreationModule : Module
 {
     [SerializeField] private int spaceships;
 
-    protected override void Start()
-    {
+    protected override void Start() {
+        base.Start();
         ((SpaceshipManager)GetBaseModule()).AddSpaceships(spaceships);
     }
 

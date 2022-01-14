@@ -103,7 +103,8 @@ public abstract class Module : MonoBehaviour {
         foreach (var connection in connections) {
             bool hadOverlap = false;
             foreach (var overlap in Physics.OverlapBox(connection.transform.position,
-                         connection.GetComponentInChildren<BoxCollider>().transform.localScale / 2)) {
+                         connection.GetComponentInChildren<BoxCollider>().transform.lossyScale / 2)) {
+
                 if (overlap.gameObject == gameObject || colliderObjects.Contains(overlap.gameObject) ||
                     overlap.gameObject == connection.GetComponentInChildren<BoxCollider>().gameObject) {
                     continue;
@@ -111,6 +112,7 @@ public abstract class Module : MonoBehaviour {
                 
                 Destroy(connection.gameObject);
                 hadOverlap = true;
+                Debug.LogWarning("Overlap detected");
                 break;
                 
             }
