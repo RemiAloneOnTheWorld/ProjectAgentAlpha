@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CurrencyModule : Module {
-    [SerializeField] private float moneyPerSecond;
+    [SerializeField] private float currencyGenerated;
     [SerializeField] private bool testMoneyPerSecond;
     private float _timePassed;
 
@@ -20,13 +20,13 @@ public class CurrencyModule : Module {
     }
 
     private void updateCurrency(EventData eventData) {
-        ((SpaceshipManager) GetBaseModule()).AddMoney(moneyPerSecond);	        
+        ((SpaceshipManager) GetBaseModule()).AddMoney(currencyGenerated);	        
     }
 
     private void AddCurrencyOverTime() {
         _timePassed += Time.deltaTime;
         if (_timePassed >= 1) {
-            ((SpaceshipManager) GetBaseModule()).AddMoney(moneyPerSecond);
+            ((SpaceshipManager) GetBaseModule()).AddMoney(currencyGenerated);
             _timePassed = 0;
         }
     }
