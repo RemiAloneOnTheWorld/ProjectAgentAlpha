@@ -41,7 +41,7 @@ public class Inventory : MonoBehaviour
     {
 
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
-             pickupDistance) || !raycastHit.collider.CompareTag("Box"))
+             pickupDistance) || !raycastHit.collider.CompareTag("Block"))
         {
             print("no box found!");
             return;
@@ -55,10 +55,14 @@ public class Inventory : MonoBehaviour
         selected = true;
         Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance)
-            || !raycastHit.collider.CompareTag("Box"))
+            || !raycastHit.collider.CompareTag("Block"))
         {
             _pickedBox = Instantiate<GameObject>(boxPrefab, pos, Quaternion.Euler(Vector3.zero));
-        }
+            if (BoxCount > 0)
+            {
+                BoxCount--;
+            }
+        }   
         else
         {
             _pickedBox = raycastHit.collider.gameObject;
@@ -66,7 +70,7 @@ public class Inventory : MonoBehaviour
         }
         _pickedBox.GetComponent<BoxCollider>().enabled = false;
         _previousPosition = _pickedBox.transform.position;
-
+        
 
     }
 
@@ -74,7 +78,7 @@ public class Inventory : MonoBehaviour
     private void CancelPlace(InputAction.CallbackContext pContext)
     {
         selected = false;
-        if (BoxCount > 0)
+        if (BoxCount  > -1)
         {
 
             Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
@@ -82,13 +86,14 @@ public class Inventory : MonoBehaviour
             {
                 print("Cant place!");
                 Destroy(_pickedBox);
+                BoxCount++;
             }
             else
             {
                 _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
                 _pickedBox.GetComponent<BoxCollider>().enabled = true;
                 print("box Placed!");
-                BoxCount--;
+               
 
             }
         }

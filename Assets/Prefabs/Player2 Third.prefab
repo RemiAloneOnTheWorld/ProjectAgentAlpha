@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 308976454}
   - component: {fileID: 308976455}
   - component: {fileID: 308976463}
+  - component: {fileID: 7977529222608905447}
   m_Layer: 0
   m_Name: Player2 Third
   m_TagString: Untagged
@@ -380,6 +381,33 @@ MonoBehaviour:
   destructionPreviewCameraTwo: {fileID: 0}
   cameraController: {fileID: 0}
   spaceshipManager: {fileID: 0}
+--- !u!114 &7977529222608905447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626858240665242495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1161316f95e8d3f41b76defb67ba5669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 4626858240665242480}
+  BoxCount: 0
+  pickupDistance: 30
+  placeDistance: 50
+  playerCamera: {fileID: 714205125184845541}
+  boxPrefab: {fileID: 4444184946298112911, guid: b1a643424c29d294b97d33472cceafbb, type: 3}
+  radiusHalfBox: 0.8
+  crosshair: {fileID: 0}
+  useLerp: 1
+  lerp: 0.155
+  minimumZoomDistance: 30
+  useWorldAxis: 0
+  redBoxMat: {fileID: 2100000, guid: 92acc6eb4c2891047bf92fc32217c705, type: 2}
+  greenBoxMat: {fileID: 2100000, guid: 4ea499b9e8b0f7c48911e6e5a7ba154e, type: 2}
+  boxMat: {fileID: 2100000, guid: a2ca4792ee9994547aaa0deebfda33be, type: 2}
 --- !u!1001 &7963863860804040215
 PrefabInstance:
   m_ObjectHideFlags: 0
