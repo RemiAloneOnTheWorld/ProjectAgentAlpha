@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322964969191126964}
-  m_LocalRotation: {x: 0.05530525, y: -0.0000000037195893, z: 2.0602814e-10, w: 0.99846953}
+  m_LocalRotation: {x: 0.055305257, y: -0.0000000024853501, z: 1.3766362e-10, w: 0.99846953}
   m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -343,13 +343,16 @@ MonoBehaviour:
   messageText: {fileID: 0}
   playerUI: {fileID: 0}
   buyMenu: {fileID: 0}
-  moduleNameText: {fileID: 0}
-  moduleHealthText: {fileID: 0}
-  moduleConnectionsText: {fileID: 0}
+  moduleDestructionNameText: {fileID: 0}
+  moduleDestructionModuleHealthText: {fileID: 0}
+  moduleDestructionConnectionsText: {fileID: 0}
   currencyButton: {fileID: 0}
   previewCamera: {fileID: 0}
   previewWindow: {fileID: 0}
   previewRotationSpeed: 20
+  moduleShopNameText: {fileID: 0}
+  moduleShopHealthText: {fileID: 0}
+  moduleShopDescriptionText: {fileID: 0}
   vcam: {fileID: 0}
   crosshair: {fileID: 0}
   crosshairDrift: 250
@@ -371,6 +374,7 @@ MonoBehaviour:
   currencyModule: {fileID: 8996090907342836104, guid: 73db2e442a34ae448a3a1bbed3ccce94, type: 3}
   factoryModule: {fileID: 1996524154288813403, guid: 0b581882f397a47458bb6aec192bee1e, type: 3}
   boxCreationModule: {fileID: 6359352634188585971, guid: 502c9cfcf7f441742917f78e27de348d, type: 3}
+  removeConnectionOnClick: 1
   baseModule: {fileID: 0}
   crosshair: {fileID: 0}
 --- !u!114 &372591794
@@ -402,8 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1161316f95e8d3f41b76defb67ba5669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
-  BoxCount: 0
+  playerInput: {fileID: 3322964969593404476}
+  BoxCount: 5
   pickupDistance: 30
   placeDistance: 50
   playerCamera: {fileID: 3322964969191126963}
@@ -424,6 +428,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3322964969593404474}
     m_Modifications:
+    - target: {fileID: 3401169380172635312, guid: eaba5a5da5459b846aa0f7056770d994, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5675339829847468467, guid: eaba5a5da5459b846aa0f7056770d994, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -484,7 +492,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpaceShuttle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3401169378238555557, guid: eaba5a5da5459b846aa0f7056770d994, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eaba5a5da5459b846aa0f7056770d994, type: 3}
 --- !u!4 &456083882091030370 stripped
 Transform:

@@ -26,18 +26,22 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private GameObject buyMenu;
     private bool _menuShown;
 
-    [SerializeField] private TMP_Text moduleNameText, moduleHealthText, moduleConnectionsText;
+    [Header("Destruction Preview")]
+    [SerializeField] private TMP_Text moduleDestructionNameText;
+    [SerializeField] private TMP_Text moduleDestructionModuleHealthText;
+    [SerializeField] private TMP_Text moduleDestructionConnectionsText;
 
     //Buttons
     [SerializeField] private Button currencyButton;
 
-    [Header("Preview window")]
+    [Header("Shop Preview window")]
     //Preview window
     [SerializeField] private Camera previewCamera;
     [SerializeField] private RectTransform previewWindow;
     [SerializeField] private float previewRotationSpeed;
     private GameObject _modulePreview;
     private bool _modulePreviewShown;
+    [SerializeField] private TMP_Text moduleShopNameText, moduleShopHealthText, moduleShopDescriptionText;
 
     [Header("Camera & Crosshair")]
     //Camera & crosshair
@@ -143,6 +147,12 @@ public class UIHandler : MonoBehaviour {
     public void ShowModulePreview(GameObject module) {
         if (_modulePreviewShown) return;
         previewWindow.gameObject.SetActive(true);
+
+        //Assign module information
+        ModuleDataWrapper moduleData = module.GetComponent<ModuleDataWrapper>();
+        moduleShopNameText.text = $"Name: {moduleData.GetName()}";
+        moduleShopHealthText.text = $"Health: {moduleData.GetHealth()}";
+        moduleShopDescriptionText.text = moduleData.GetDescription();
         _modulePreview = Instantiate(module, previewCamera.transform.position + new Vector3(0, -3, 15), Quaternion.identity);
         previewCamera.transform.LookAt(_modulePreview.transform);
         _modulePreviewShown = true;
@@ -199,16 +209,6 @@ public class UIHandler : MonoBehaviour {
     private void ShowCrosshair(bool hide) {
         crosshair.gameObject.SetActive(hide);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
         
         //TODO: Forbid during attack phase
@@ -216,36 +216,14 @@ public class UIHandler : MonoBehaviour {
             ? new PlayerReadyEventData(EventType.PlayerPreparationReady, gameObject.name)
             : new PlayerReadyEventData(EventType.PlayerDestructionReady, gameObject.name));
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public void ShowModuleInformation(bool show) {
-        moduleNameText.transform.parent.gameObject.SetActive(show);
+        moduleDestructionNameText.transform.parent.gameObject.SetActive(show);
     }
 
-    public void SetModuleInformation(ModuleInformation moduleInformation) {
-        moduleNameText.text = $"Name: {moduleInformation.moduleName}";
-        moduleHealthText.text = $"Health: {moduleInformation.currentHealth}/{moduleInformation.totalHealth}";
-        moduleConnectionsText.text = $"Modules \n Connected: {moduleInformation.amountConnectedModules}";
-    }
-}
-
-public readonly struct ModuleInformation {
-    public readonly string moduleName;
-    public readonly int currentHealth;
-    public readonly int totalHealth;
-    public readonly int amountConnectedModules;
-
-    public ModuleInformation(string moduleName, int currentHealth, int totalHealth, int amountConnectedModules) {
-        this.moduleName = moduleName;
-        this.currentHealth = currentHealth;
-        this.totalHealth = totalHealth;
-        this.amountConnectedModules = amountConnectedModules;
+    public void SetModuleInformation(Module module) {
+        moduleDestructionNameText.text = $"Name: {module.GetModuleName()}";
+        moduleDestructionModuleHealthText.text = $"Health: {module.CurrentHealth}/{module.GetStartingHealth()}";
+        moduleDestructionConnectionsText.text = $"Modules \n Connected: {module.ConnectionCount()}";
     }
 }

@@ -67,8 +67,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
             _transitionActivated = false;
             if (!stateDrivenCamera.IsBlending) {
                 _uiHandler.ShowModuleInformation(true);
-                _uiHandler.SetModuleInformation(new ModuleInformation(_currentModule.name, _currentModule.Health, 200, 
-                    _currentModule.ConnectionCount()));
+                _uiHandler.SetModuleInformation(_currentModule);
                 _inTransition = false;
             }
         }
