@@ -31,10 +31,12 @@ public class PlayerCameraController : MonoBehaviour {
     public void SwitchToFirstDestructionCamera() {
         _animator.ResetTrigger(OnSwitchToSecond);
         _animator.SetTrigger(OnSwitchToFirst);
+        Debug.LogWarning("Switched to first");
     }
 
     public void SwitchToSecondDestructionCamera() {
         _animator.ResetTrigger(OnSwitchToFirst);
         _animator.SetTrigger(OnSwitchToSecond);
+        Debug.LogWarning("Switched to second");
     }
 }

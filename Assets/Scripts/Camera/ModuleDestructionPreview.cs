@@ -91,7 +91,9 @@ public class ModuleDestructionPreview : MonoBehaviour {
             //_moveRequests.Enqueue(direction);
            return;
         }
-        
+
+        Debug.LogWarning("Accepted input");
+
         float smallestAngle = float.PositiveInfinity;
         Module candidateModule = null;
 
