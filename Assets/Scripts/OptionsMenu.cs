@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public Dropdown resolutionList;
     public GameObject VolumeText;
-    public Slider volumeSlider;
     public GameObject SensitivityText;
     public GameObject SensitivityP2Text;
     Resolution[] resolutions;
+
 
     private void Start()
     {
@@ -42,7 +40,20 @@ public class OptionsMenu : MonoBehaviour
         resolutionList.value = currentResolution;
         resolutionList.RefreshShownValue();
 
-     
+        float s1 = PlayerPrefs.GetFloat("P1Sensitivity");
+        float s2 = PlayerPrefs.GetFloat("P2Sensitivity");
+
+        if (s1 != 0)
+        {
+            TextMeshProUGUI sText = SensitivityText.GetComponent<TextMeshProUGUI>();
+            sText.text = s1.ToString();
+        }
+
+        if (s2 != 0)
+        {
+            TextMeshProUGUI s2Text = SensitivityP2Text.GetComponent<TextMeshProUGUI>();
+            s2Text.text = s2.ToString();
+        }
 
     }
 
@@ -63,14 +74,14 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetSensitivity(float sensitivity)
     {
-        // Do something with Sensitivity value here
+        PlayerPrefs.SetFloat("P1Sensitivity", sensitivity);
         TextMeshProUGUI sText = SensitivityText.GetComponent<TextMeshProUGUI>();
         sText.text = sensitivity.ToString();
     }
 
     public void SetP2Sensitivity(float sensitivity)
     {
-        // Do something with Sensitivity value here
+        PlayerPrefs.SetFloat("P2Sensitivity", sensitivity);
         TextMeshProUGUI s2Text = SensitivityP2Text.GetComponent<TextMeshProUGUI>();
         s2Text.text = sensitivity.ToString();
     }
@@ -79,6 +90,4 @@ public class OptionsMenu : MonoBehaviour
     {
         Screen.fullScreen = isFullscreen;
     }
-
-
 }
