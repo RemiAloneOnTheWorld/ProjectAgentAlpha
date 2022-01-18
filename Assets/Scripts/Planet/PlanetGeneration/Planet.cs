@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,8 +21,10 @@ public class Planet : MonoBehaviour
     private ColourGenerator colourGenerator = new ColourGenerator();
     [SerializeField, HideInInspector]
     private MeshFilter[] meshFilters;
+    private GameObject sphere;
 
     private void Start() {
+
         GeneratePlanet();
     }
 
@@ -32,7 +34,7 @@ public class Planet : MonoBehaviour
 
         if(meshFilters == null || meshFilters.Length == 0)
             meshFilters = new MeshFilter[6];
-        
+
         terrainFaces = new TerrainFace[6];
         Vector3[] directions = {Vector3.up, Vector3.down, Vector3.forward,Vector3.back, Vector3.left, Vector3.right};
 
@@ -53,6 +55,22 @@ public class Planet : MonoBehaviour
         meshFilters[i].gameObject.SetActive(renderFace);
         }
     }
+        public void GenerateSphere(){
+          GameObject _sphere = GameObject.FindWithTag("Sphere");
+
+          if(_sphere != null){
+            GameObject.DestroyImmediate(_sphere, false);
+          }
+          sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+          sphere.tag = "Sphere";
+          sphere.transform.SetParent(this.transform);
+          Debug.Log(sphere.transform.parent.name);
+          sphere.transform.position = this.transform.position;
+          float atmosphereSize = shapeSettings.planetRadius * 2.25f;
+          sphere.transform.localScale = new Vector3(atmosphereSize, atmosphereSize, atmosphereSize);
+          sphere.GetComponent<Renderer>().material = colourSettings.atmosphereMaterial;
+    }
+
 
     public void RandomizePlanet() {
         foreach(ShapeSettings.noiseLayer noiseLayer in shapeSettings.noiseLayers) {
@@ -61,6 +79,7 @@ public class Planet : MonoBehaviour
     }
 
     public void GeneratePlanet() {
+        GenerateSphere();
         Initialize();
         GenerateMesh();
         GenerateColours();
@@ -68,6 +87,7 @@ public class Planet : MonoBehaviour
 
     public void OnShapeSettingsUpdated() {
         if(autoUpdate) {
+            GenerateSphere();
             Initialize();
             GenerateMesh();
         }
@@ -77,7 +97,7 @@ public class Planet : MonoBehaviour
         if(autoUpdate) {
             Initialize();
             GenerateColours();
-        } 
+        }
 
     }
 

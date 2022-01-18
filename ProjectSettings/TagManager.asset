@@ -12,6 +12,7 @@ TagManager:
   - BaseStation_1
   - BaseStation_2
   - Planet
+  - Sphere
   layers:
   - Default
   - TransparentFX
