@@ -66,7 +66,8 @@ public class Planet : MonoBehaviour
           sphere.transform.SetParent(this.transform);
           Debug.Log(sphere.transform.parent.name);
           sphere.transform.position = this.transform.position;
-          sphere.transform.localScale = new Vector3(shapeSettings.planetRadius * 2 + 3, shapeSettings.planetRadius * 2 + 3, shapeSettings.planetRadius * 2 + 3);
+          float atmosphereSize = shapeSettings.planetRadius * 2.25f;
+          sphere.transform.localScale = new Vector3(atmosphereSize, atmosphereSize, atmosphereSize);
           sphere.GetComponent<Renderer>().material = colourSettings.atmosphereMaterial;
     }
 
