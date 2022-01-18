@@ -35,10 +35,15 @@ public class Player_Movement : MonoBehaviour
 
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
     }
 
     private void OnPrepPhaseOver(EventData eventData) {
         _lockMovement = true;
+    }
+
+    private void OnDestructionPhaseOver(EventData eventData) {
+        _lockMovement = false;
     }
 
     // Start is called before the first frame update
@@ -75,7 +80,7 @@ public class Player_Movement : MonoBehaviour
                 {
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
-                    print("yes");
+                    print("Device is for P2");
                     print(device.description + " " + this.name);
                 }
 
@@ -93,7 +98,7 @@ public class Player_Movement : MonoBehaviour
                     playerInput.SwitchCurrentControlScheme(device) ;
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
                     _uiHandler.ShowMessage("Device connected!", 2f);
-                    print("No");
+                    print("Device is for P1");
                     print(device.description + " " + this.name);
 
                 }

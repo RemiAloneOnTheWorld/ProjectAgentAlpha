@@ -2,29 +2,16 @@ using UnityEngine;
 
 public class CrewCreationModule : Module
 {
-    [SerializeField] private float crewRespawnTime;
-    private float _timePassed;
-    GameObject crewSpawner;
+    [SerializeField] private int spaceships;
 
-    protected override void Start()
-    {
-        crewSpawner = GameObject.Find("CrewSpawner");
+    protected override void Start() {
         base.Start();
+        ((SpaceshipManager)GetBaseModule()).AddSpaceships(spaceships);
     }
 
-    void Update()
+    public override void DestroyModule()
     {
-        SpawnCrewOverTime();
-    }
-
-    private void SpawnCrewOverTime()
-    {
-        _timePassed += Time.deltaTime;
-        if (_timePassed >= crewRespawnTime)
-        {
-            crewSpawner.GetComponent<CrewSpawner>().SpawnCube();
-            ((SpaceshipManager)GetBaseModule()).AddCrew(1);
-            _timePassed = 0;
-        }
+        ((SpaceshipManager)GetBaseModule()).RemoveSpaceships(spaceships);
+        base.DestroyModule();
     }
 }

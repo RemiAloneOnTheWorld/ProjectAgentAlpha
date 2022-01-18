@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class EventQueue {
     public delegate void EventQueueHandler(EventData eventData);
@@ -58,13 +56,28 @@ public class EventQueue {
 
 public enum EventType {
     Debug,
+    //Preparation
+    InFadeToPreparation,
     InitPreparationPhase,
     PreparationPhase,
     PreparationPhaseOver,
+    
+    //Attack
     InFadeToAttack,
     AttackPhase,
     AttackPhaseOver,
+    
+    //Destruction
+    InFadeToDestruction,
+    DestructionPhase,
+    DestructionPhaseOver,
+    
+    //Time related
     PrepPhaseTimeUpdate,
     AttackPhaseTimeUpdate,
-    PlayerPreparationReady
+    DestructionPhaseTimeUpdate,
+    
+    
+    PlayerPreparationReady,
+    PlayerDestructionReady
 }

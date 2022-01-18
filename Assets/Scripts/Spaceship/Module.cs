@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class Module : MonoBehaviour {
     [SerializeField] protected int health;
@@ -25,6 +26,14 @@ public abstract class Module : MonoBehaviour {
 
     public void SetBaseModule(Module baseModule) {
         _baseModule = baseModule;
+    }
+
+    public int ConnectionCount() {
+        return Connections.Count(connection => connection.GetBoundModule() != null);
+    }
+
+    public Module GetParentModule() {
+        return _parentModule;
     }
 
     public Module GetBaseModule() {
@@ -82,50 +91,36 @@ public abstract class Module : MonoBehaviour {
 
 
     private void RemoveOverlapConnections() {
-        //This only grabs the sub-gameobjects with 'Connection' script.
-        Component[] components = transform.GetComponentsInChildren(typeof(Connection));
+        
+        Connection[] connections = gameObject.GetComponentsInChildren<Connection>();
+        List<GameObject> colliderObjects = new List<GameObject>();
 
-        //Add it to list so 'contains' can be called in the overlap test.
-        List<GameObject> connectors = new List<GameObject>();
-
-        foreach (var component in components) {
-            connectors.Add(component.gameObject);
+        foreach (var connection in connections) {
+            colliderObjects.Add(connection.gameObject);
+            colliderObjects.Add(connection.GetComponentInChildren<BoxCollider>().gameObject);
         }
 
-        foreach (var connection in components) {
-            //Todo: Use same displacement vector in connectors and here.
-            var connectionTransform = connection.transform;
-            var moduleDisplacement = transform.position - connectionTransform.position;
-            var displacementVector = connectionTransform.right;
-            if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) > 0) {
-                displacementVector = -displacementVector;
-            }
+        foreach (var connection in connections) {
+            bool hadOverlap = false;
+            foreach (var overlap in Physics.OverlapBox(connection.transform.position,
+                         connection.GetComponentInChildren<BoxCollider>().transform.lossyScale / 2)) {
 
-            //TODO: Make this dependent on the actual size of the module.
-            displacementVector *= transform.lossyScale.x / 2;
-
-            //TODO: Make the half-extents dependent on the actual size of the module.
-            foreach (var currentCollider in Physics.OverlapBox(connection.transform.position + displacementVector,
-                transform.lossyScale * 0.3f)) {
-                //Check if collision occured with own connections and module.
-                if (currentCollider.gameObject == gameObject || connectors.Contains(currentCollider.gameObject)) {
+                if (overlap.gameObject == gameObject || colliderObjects.Contains(overlap.gameObject) ||
+                    overlap.gameObject == connection.GetComponentInChildren<BoxCollider>().gameObject) {
                     continue;
                 }
-
+                
                 Destroy(connection.gameObject);
-
-                //Tries to get the 'Connection' component to ensure that it is indeed a connection
-                //and not another module.
-                if (currentCollider.TryGetComponent<Connection>(out var component)) {
-                    //'RemoveConnection' also deletes the connections' game object.
-                    if (component.GetBoundModule() == null) {
-                        component.GetParentModule().RemoveConnection(component);
-                    }
-                }
+                hadOverlap = true;
+                Debug.LogWarning("Overlap detected");
+                break;
+                
             }
 
-            Connections.Add((Connection) connection);
-            ((Connection) connection).SetParentModule(this);
+            if (!hadOverlap) {
+                Connections.Add(connection);
+                connection.SetParentModule(this);
+            }
         }
     }
 }

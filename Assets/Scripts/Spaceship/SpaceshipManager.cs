@@ -30,6 +30,12 @@ public class SpaceshipManager : Module {
         }
 
         _planet = GameObject.FindWithTag("Planet");
+
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, showMoney);
+    }
+
+    private void showMoney(EventData eventData) {
+        Debug.Log(this.name + " amount of money: " + this.Money);
     }
 
     private void Update() {
@@ -43,8 +49,13 @@ public class SpaceshipManager : Module {
         uiHandler.SetCurrencyTextValue(Money);
     }
 
-    public void AddCrew(int amount) {
+    public void AddSpaceships(int amount) {
         Spaceships += amount;
+        uiHandler.SetSpaceshipTextValue(Spaceships);
+    }
+
+    public void RemoveSpaceships(int amount) {
+        Spaceships -= amount;
         uiHandler.SetSpaceshipTextValue(Spaceships);
     }
 

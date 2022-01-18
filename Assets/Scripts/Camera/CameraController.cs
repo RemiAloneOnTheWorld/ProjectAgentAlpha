@@ -15,19 +15,22 @@ public class CameraController : MonoBehaviour {
 
     private Player player1 = new Player();
     private Player player2 = new Player();
-    private Animator animationStates;
     private ScreenFader fader;
     public GameObject panel;
+    
+    [SerializeField] private PlayerCameraController player1Camera;
+    [SerializeField] private PlayerCameraController player2Camera;
 
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, Ready);
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
     }
 
     // Start is called before the first frame update
     void Start() {
         Player_Movement[] players = FindObjectsOfType<Player_Movement>();
         fader = FindObjectOfType<ScreenFader>();
-        animationStates = GetComponent<Animator>();
         player1.gameObject = players[0].gameObject;
         player2.gameObject = players[1].gameObject;
     }
@@ -50,9 +53,25 @@ public class CameraController : MonoBehaviour {
     public void Ready(EventData eventData) {
         ready = 2;
         StartCoroutine(StartPhase(eventData));
-        animationStates.SetFloat("Ready", ready);
+        //animationStates.SetFloat("Ready", ready);
+        player1Camera.OnPrepPhaseOver();
+        player2Camera.OnPrepPhaseOver();
     }
 
+    private IEnumerator E_OnAttackPhaseOver(EventData eventData) {
+        yield return new WaitForEndOfFrame();
+        StartCoroutine(fader.fadeOut(eventData.eventType));
+        //yield return new WaitForSeconds(2);
+        yield return new WaitWhile(() => fader.IsFading);
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.DestructionPhase));
+    }
+
+    private void OnAttackPhaseOver(EventData eventData) {
+        player1Camera.OnAttackPhaseOver();
+        player2Camera.OnAttackPhaseOver();
+        StartCoroutine(E_OnAttackPhaseOver(eventData));
+    }
+    
     public void UnReady(EventData eventData) {
         ready = 0;
         StartCoroutine(EndPhase(eventData));
@@ -63,9 +82,12 @@ public class CameraController : MonoBehaviour {
         yield return new WaitForSeconds(2);
         PrePhase2(player1, 0);
         PrePhase2(player2, 0.5f);
-        animationStates.SetFloat("Ready", ready);
+        //player1Camera.SetFloat("Ready", ready);
+        //player2Camera.SetFloat("Ready", ready);
         yield return new WaitWhile(() => fader.IsFading);
-        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhase));
+        
+        if(PhaseGameManager.EventType == EventType.PreparationPhase)
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhase));
     }
 
     IEnumerator EndPhase(EventData eventData) {
@@ -73,9 +95,14 @@ public class CameraController : MonoBehaviour {
         yield return new WaitForSeconds(2);
         EndPhase2(player1, 0.5f);
         EndPhase2(player2, 0f);
-        animationStates.SetFloat("Ready", ready);
+        //player1Animator.SetFloat("Ready", ready);
+        //player2Animator.SetFloat("Ready", ready);
+        player1Camera.OnDestructionPhaseOver();
+        player2Camera.OnDestructionPhaseOver();
+        yield return new WaitWhile(() => fader.IsFading);
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.PreparationPhase));
     }
-
+    
 
     private void PrePhase2(Player player, float yCam) {
         //player.gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -85,5 +112,9 @@ public class CameraController : MonoBehaviour {
     private void EndPhase2(Player player, float xCam) {
         //player.gameObject.GetComponent<MeshRenderer>().enabled = true;
         player.gameObject.GetComponentInChildren<Camera>().rect = new Rect(xCam, 0, 0.5f, 1);
+    }
+
+    private void OnDestructionPhaseOver(EventData eventData) {
+        StartCoroutine(EndPhase(eventData));
     }
 }

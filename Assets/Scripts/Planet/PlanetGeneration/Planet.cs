@@ -72,6 +72,12 @@ public class Planet : MonoBehaviour
     }
 
 
+    public void RandomizePlanet() {
+        foreach(ShapeSettings.noiseLayer noiseLayer in shapeSettings.noiseLayers) {
+            noiseLayer.randomizeSettings();
+        }
+    }
+
     public void GeneratePlanet() {
         GenerateSphere();
         Initialize();

@@ -11,15 +11,12 @@ public class MLAgent : Agent
     [SerializeField]
     private Material wrong;
     [SerializeField]
-    private Material glass;
+    private Material standard;
     [SerializeField]
     private Rigidbody mlAgentBody;
+    public GameObject goal;
     [SerializeField]
-    private GameObject backWall;
-    [SerializeField]
-    private GameObject goal;
-    [SerializeField]
-    private Spawner spawner;
+    private Spawner spawner = null;
     [SerializeField]
     public float maxSpeed = 200f;
     [SerializeField]
@@ -30,19 +27,32 @@ public class MLAgent : Agent
     private Vector3 beginrotation;
     [SerializeField]
     private bool useVectorObs;
+    [SerializeField]
+    private bool useBeginPosition;
 
     public override void Initialize()
     {
-    
+        GameObject[] goals = GameObject.FindGameObjectsWithTag("Goal");
+        if(goal != null)
+            return;
+        if(Vector3.Distance(goals[0].transform.position, transform.position) > Vector3.Distance(goals[1].transform.position, transform.position)) {
+            goal = goals[1];
+        } else {
+            goal = goals[0];
+        }
+        beginPosition = transform.localPosition;
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = beginPosition;
+        if (useBeginPosition)
+            transform.localPosition = beginPosition;
+
         transform.rotation = Quaternion.Euler(beginrotation.x, beginrotation.y, beginrotation.z);
         mlAgentBody.velocity *= 0f;
         mlAgentBody.angularVelocity *= 0f;
-        spawner.resetArea();
+        if(spawner != null)
+            spawner.resetArea();
     }
 
    void Update()
@@ -91,9 +101,9 @@ public class MLAgent : Agent
 
     IEnumerator GoalScored(Material mat, float time)
     {
-        backWall.GetComponent<Renderer>().material = mat;
+        goal.GetComponent<Renderer>().material = mat;
         yield return new WaitForSeconds(time);
-        backWall.GetComponent<Renderer>().material = glass;
+        goal.GetComponent<Renderer>().material = standard;
     }
 
     private void LookY(ActionSegment<int> discreteActions)

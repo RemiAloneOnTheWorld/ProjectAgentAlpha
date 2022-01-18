@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cceeadee1b4d7a744950d59528a94d78, type: 3}
   m_Name: Planet Shape
   m_EditorClassIdentifier: 
-  planetRadius: 50
+  planetRadius: 15
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
         baseRoughness: 1.25
         minValue: 2.22
         numLayers: 5
-        centre: {x: 0, y: 0, z: 0}
+        centre: {x: 2.15, y: 1.18, z: 1.27}
       rigidNoiseSettings:
         strength: 1
         roughness: 2
