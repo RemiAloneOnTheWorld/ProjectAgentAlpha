@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4681152311083814708}
   - component: {fileID: 7746009803853718148}
   - component: {fileID: 2489847291132980608}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: agent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   beginPosition: {x: 0, y: 0, z: 0}
   beginrotation: {x: 0, y: 0, z: 0}
   useVectorObs: 1
-  training: 1
+  training: 0
 --- !u!114 &3764222084501613942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 32d95706e84452441bc9fab8582bd3bd, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 674290562be841c42928fcafac0b1c5c, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: AgentAlpha
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 4795446231534357268}
   - component: {fileID: 6301912879804801298}
   - component: {fileID: 3086781578044621528}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AgentCube_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 876760844129026696}
   - component: {fileID: 2751333621662146407}
   - component: {fileID: 5960979551273939852}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 8654595251265335411}
   - component: {fileID: 6456153086815586207}
   - component: {fileID: 1833619261733984309}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AgentView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 1015117191734751149}
   - component: {fileID: 4846542669595258965}
   - component: {fileID: 8937727833133050039}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 7560532255781680253}
   - component: {fileID: 1251228323003134591}
   - component: {fileID: 5054612837020503869}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 7552891505637936331}
   - component: {fileID: 385546087090244421}
   - component: {fileID: 9199636914260299042}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Headband
   m_TagString: Untagged
   m_Icon: {fileID: 0}

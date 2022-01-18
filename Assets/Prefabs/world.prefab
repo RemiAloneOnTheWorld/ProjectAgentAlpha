@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7253366387946838000, guid: 0bec2aaf5d5d44947be668775065518b, type: 3}
   size: {x: 50, y: 50, z: 70}
-  minSpawnCount: 8
-  maxSpawnCount: 12
+  minSpawnCount: 0
+  maxSpawnCount: 0
   colour: {r: 0, g: 0, b: 0, a: 0}
   showSpawnRegion: 1
 --- !u!1 &4188030917398012975
@@ -850,7 +850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7253366387946838000, guid: 0bec2aaf5d5d44947be668775065518b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bec2aaf5d5d44947be668775065518b, type: 3}
