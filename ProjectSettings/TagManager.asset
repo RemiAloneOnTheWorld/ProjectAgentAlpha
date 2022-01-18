@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Goal
+  - Block
+  - Box
+  - Connection
+  - BaseStation_1
+  - BaseStation_2
+  - Planet
+  - Sphere
   layers:
   - Default
   - TransparentFX
@@ -11,10 +20,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - P1
+  - P2
+  - PreviewCamera
+  - PostProcessing
   - 
   - 
   - 
