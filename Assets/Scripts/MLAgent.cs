@@ -85,7 +85,7 @@ public class MLAgent : Agent
 
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
 
-        sensor.AddObservation(transform.position);
+        // sensor.AddObservation(transform.position);
 
         if(useVectorObs)
             sensor.AddObservation(StepCount / (float)MaxStep);
