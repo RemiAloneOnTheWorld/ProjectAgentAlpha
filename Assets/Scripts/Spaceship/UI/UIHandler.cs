@@ -14,6 +14,7 @@ public class UIHandler : MonoBehaviour {
     //Stats
     [SerializeField] private TMP_Text currencyText;
     [SerializeField] private TMP_Text spaceshipText;
+    [SerializeField] private TMP_Text boxesText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
@@ -125,6 +126,11 @@ public class UIHandler : MonoBehaviour {
 
     public void SetSpaceshipTextValue(int value) {
         spaceshipText.text = $"Spaceships: {value}";
+    }
+
+    public void SetBoxesTextValue(int value)
+    {
+        boxesText.text = $"Boxes: {value}";
     }
 
     private void ShowCursor(bool showCursor) {
