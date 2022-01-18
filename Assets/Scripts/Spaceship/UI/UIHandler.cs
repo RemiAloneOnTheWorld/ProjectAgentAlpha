@@ -69,7 +69,7 @@ public class UIHandler : MonoBehaviour {
     private void OnDestructionPhaseOver(EventData eventData) {
         ShowCrosshair(true);
         ShowCursor(false);
-        ShowModuleInformation(false);
+        ShowDestructionPreviewInfo(false);
         if (playerUI.name == "Player1") {
             playerUI.position = _initialPlayerUIPosition;
         }
@@ -217,11 +217,11 @@ public class UIHandler : MonoBehaviour {
             : new PlayerReadyEventData(EventType.PlayerDestructionReady, gameObject.name));
     }
 
-    public void ShowModuleInformation(bool show) {
+    public void ShowDestructionPreviewInfo(bool show) {
         moduleDestructionNameText.transform.parent.gameObject.SetActive(show);
     }
 
-    public void SetModuleInformation(Module module) {
+    public void SetDestructionPreviewInfo(Module module) {
         moduleDestructionNameText.text = $"Name: {module.GetModuleName()}";
         moduleDestructionModuleHealthText.text = $"Health: {module.CurrentHealth}/{module.GetStartingHealth()}";
         moduleDestructionConnectionsText.text = $"Modules \n Connected: {module.ConnectionCount()}";

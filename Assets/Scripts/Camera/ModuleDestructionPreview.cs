@@ -66,8 +66,8 @@ public class ModuleDestructionPreview : MonoBehaviour {
         if (_inTransition) {
             _transitionActivated = false;
             if (!stateDrivenCamera.IsBlending) {
-                _uiHandler.ShowModuleInformation(true);
-                _uiHandler.SetModuleInformation(_currentModule);
+                _uiHandler.ShowDestructionPreviewInfo(true);
+                _uiHandler.SetDestructionPreviewInfo(_currentModule);
                 _inTransition = false;
             }
         }
@@ -123,7 +123,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
         if (candidateModule != null) {
             _currentModule = candidateModule;
             _transitionActivated = true;
-            _uiHandler.ShowModuleInformation(false);
+            _uiHandler.ShowDestructionPreviewInfo(false);
             
             
             if (destructionPreviewCameraOne == _currentCamera) {
