@@ -60,7 +60,7 @@ public abstract class Module : MonoBehaviour {
     //modules will probably be removed based on the module they're bound to, opposing the docking, where
     //the clicked connection is of importance.
     public void RemoveDockedModule(Module module) {
-        for (int i = Connections.Count; i >= 0; i--) {
+        for (int i = Connections.Count - 1; i >= 0; i--) {
             if (Connections.ElementAt(i).GetBoundModule() == module) {
                 Connections.ElementAt(i).RemoveModule();
             }
@@ -70,8 +70,25 @@ public abstract class Module : MonoBehaviour {
     public virtual void DestroyModule() {
         //Destroy the game object for now.
         _parentModule.RemoveDockedModule(this);
+
+        //TODO: Check if currency suffices.
+
         foreach (var module in Connections) {
             RemoveDockedModule(module.GetBoundModule());
+        }
+
+        Destroy(gameObject);
+    }
+
+    //Calls method on sub-modules recursively.
+    public virtual void DestroyModuleWithSubs() {
+        _parentModule.RemoveDockedModule(this);
+        foreach (var connection in Connections) {
+            if (connection.GetBoundModule() != null)
+            {
+                connection.GetBoundModule().DestroyModuleWithSubs();
+            }
+            //connection.GetBoundModule().DestroyModuleWithSubs();
         }
 
         Destroy(gameObject);

@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ModuleDestructionPreview : MonoBehaviour {
     private UIHandler _uiHandler;
-    
+
     private PlayerInput _playerInput;
     private InputAction _move;
 
@@ -21,6 +21,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
     private Vector3 _camerasStartPosition;
     private bool _transitionActivated, _inTransition;
     //private Queue<Vector2> _moveRequests = new Queue<Vector2>();
+    private bool _inDestructionProcess;
 
     private void Start() {
         //Get movement input here to use Vector2 as input for module preview during destruction.
@@ -29,10 +30,10 @@ public class ModuleDestructionPreview : MonoBehaviour {
         _move.performed += AcceptMoveToModule;
 
         _currentModule = spaceshipManager;
-        
-        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, 
+
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase,
             data => _currentModule = spaceshipManager);
-        
+
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
 
         _offsetVector = _currentModule.transform.position - destructionPreviewCameraOne.transform.position;
@@ -78,17 +79,18 @@ public class ModuleDestructionPreview : MonoBehaviour {
     }
 
     private void MoveToNextModule(Vector2 direction) {
+        if (_inDestructionProcess || direction.magnitude > 1) {
+            return;
+        }
+
         if (PhaseGameManager.EventType != EventType.DestructionPhase) {
             return;
         }
-        
-        if (direction.magnitude > 1) {
-            return;
-        }
-        
+
+
         if (_transitionActivated || _inTransition) {
             //_moveRequests.Enqueue(direction);
-           return;
+            return;
         }
 
         Debug.LogWarning("Accepted input");
@@ -109,40 +111,70 @@ public class ModuleDestructionPreview : MonoBehaviour {
                 candidateModule = currentConnection.GetBoundModule();
             }
         }
-        
+
         //Also take the parent module into consideration, since it isn't considered a connection going from
         //the current module.
         if (_currentModule.GetParentModule() != null) {
             Vector3 moduleToParent = _currentModule.GetParentModule().transform.position - _currentModule.transform.position;
-            float angleParent = Vector3.Angle(direction3D, new Vector3(moduleToParent.x,0, moduleToParent.z));
+            float angleParent = Vector3.Angle(direction3D, new Vector3(moduleToParent.x, 0, moduleToParent.z));
             if (angleParent < 45 && angleParent < smallestAngle) {
                 candidateModule = _currentModule.GetParentModule();
-            }   
+            }
         }
 
         if (candidateModule != null) {
             _currentModule = candidateModule;
-            _transitionActivated = true;
-            _uiHandler.ShowDestructionPreviewInfo(false);
-            
-            
-            if (destructionPreviewCameraOne == _currentCamera) {
-                destructionPreviewCameraTwo.transform.position = _currentModule.transform.position - _offsetVector;
-                cameraController.SwitchToSecondDestructionCamera();
-            }
-            else {
-                destructionPreviewCameraOne.transform.position = _currentModule.transform.position - _offsetVector;
-                cameraController.SwitchToFirstDestructionCamera();
-            }
 
-            _currentCamera = destructionPreviewCameraOne == _currentCamera
-                ? destructionPreviewCameraTwo
-                : destructionPreviewCameraOne;
-            
-            
+            SwitchCameras(_currentModule);
         }
         else {
             Debug.LogWarning("No available module there");
         }
+    }
+
+
+
+    //TODO: Destroy module
+    public void DestroyModule() {
+        if (_inDestructionProcess) {
+            return;
+        }
+
+        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2"))
+        {
+            Debug.Log("Destroying the base station is currently undefined.");
+            return;
+        }
+
+        _inDestructionProcess = true;
+        Module baseModule = _currentModule.GetBaseModule();
+        _currentModule.DestroyModuleWithSubs();
+        StartCoroutine(StartCountdown(baseModule));
+        _currentModule = baseModule;
+    }
+
+    private IEnumerator StartCountdown(Module module) {
+        yield return new WaitForSecondsRealtime(3);
+        SwitchCameras(module);
+        _inDestructionProcess = false;
+    }
+
+    private void SwitchCameras(Module module) {
+        _transitionActivated = true;
+        _uiHandler.ShowDestructionPreviewInfo(false);
+
+        if (destructionPreviewCameraOne == _currentCamera) {
+            destructionPreviewCameraTwo.transform.position = module.transform.position - _offsetVector;
+            cameraController.SwitchToSecondDestructionCamera();
+        }
+        else {
+            destructionPreviewCameraOne.transform.position = module.transform.position - _offsetVector;
+            cameraController.SwitchToFirstDestructionCamera();
+        }
+
+        _currentCamera = destructionPreviewCameraOne == _currentCamera
+            ? destructionPreviewCameraTwo
+            : destructionPreviewCameraOne;
+
     }
 }

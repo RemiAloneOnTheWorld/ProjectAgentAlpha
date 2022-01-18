@@ -21,7 +21,7 @@ public class UIHandler : MonoBehaviour {
     //Player UI
     [SerializeField] private RectTransform playerUI;
     private Vector3 _initialPlayerUIPosition;
-    
+
     //Buy menu
     [SerializeField] private GameObject buyMenu;
     private bool _menuShown;
@@ -33,6 +33,7 @@ public class UIHandler : MonoBehaviour {
 
     //Buttons
     [SerializeField] private Button currencyButton;
+    [SerializeField] private Button destroyButton;
 
     [Header("Shop Preview window")]
     //Preview window
@@ -50,7 +51,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private float crosshairDrift;
     private Vector2 _initCrosshairPos;
     private int _lastScreenWidth;
-    
+
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
@@ -92,7 +93,7 @@ public class UIHandler : MonoBehaviour {
         _connector = GetComponent<Connector>();
         _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
         _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
-        
+
         _initCrosshairPos = crosshair.transform.position;
         _lastScreenWidth = Screen.width;
         _initialPlayerUIPosition = playerUI.position;
@@ -102,7 +103,7 @@ public class UIHandler : MonoBehaviour {
         if (_modulePreviewShown) {
             _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed * Time.deltaTime);
         }
-        
+
         if (Screen.width != _lastScreenWidth) {
             _initCrosshairPos = crosshair.transform.position;
         }
@@ -183,6 +184,11 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void ShowMenu(InputAction.CallbackContext pContext) {
+        if (PhaseGameManager.EventType != EventType.PreparationPhase) {
+            return;
+        }
+
+
         _menuShown = !_menuShown;
         ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
@@ -210,7 +216,7 @@ public class UIHandler : MonoBehaviour {
         crosshair.gameObject.SetActive(hide);
     }
     private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
-        
+
         //TODO: Forbid during attack phase
         EventQueue.GetEventQueue().AddEvent(PhaseGameManager.EventType == EventType.PreparationPhase
             ? new PlayerReadyEventData(EventType.PlayerPreparationReady, gameObject.name)
@@ -225,5 +231,9 @@ public class UIHandler : MonoBehaviour {
         moduleDestructionNameText.text = $"Name: {module.GetModuleName()}";
         moduleDestructionModuleHealthText.text = $"Health: {module.CurrentHealth}/{module.GetStartingHealth()}";
         moduleDestructionConnectionsText.text = $"Modules \n Connected: {module.ConnectionCount()}";
+        if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+            EventSystem.current.SetSelectedGameObject(destroyButton.gameObject);
+            //currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+        }
     }
 }

@@ -20,5 +20,11 @@ public class BoxCreationModule : Module {
             Gizmos.DrawCube(currentBox.position, currentBox.localScale);   
         }
     }
+
+    public override void DestroyModuleWithSubs()
+    {
+        base.DestroyModuleWithSubs();
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhase, GenerateBoxes);
+    }
 }
 
