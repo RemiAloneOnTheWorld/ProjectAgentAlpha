@@ -88,15 +88,14 @@ public class Inventory : MonoBehaviour
         if (BoxCount  > -1)
         {
 
-            Vector3 pos = playerCamera.ScreenToWorldPoint(_pickedBox.transform.position);
+            Vector3 pos = _pickedBox.transform.position;
             if (checkCollision(pos))
             {
                 print("Cant place!");
                 print(_pickedBox + " should be destroyed");
                 Destroy(_pickedBox);
                 BoxCount++;
-            }
-            else
+            } else
             {
                 _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
                 _pickedBox.GetComponent<BoxCollider>().enabled = true;
