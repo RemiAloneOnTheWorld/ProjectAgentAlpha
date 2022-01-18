@@ -88,8 +88,7 @@ public class Inventory : MonoBehaviour
         if (BoxCount  > -1)
         {
 
-            Vector3 pos = _pickedBox.transform.position;
-            if (checkCollision(pos))
+            if (checkCollision(_pickedBox.transform.position))
             {
                 print("Cant place!");
                 print(_pickedBox + " should be destroyed");
