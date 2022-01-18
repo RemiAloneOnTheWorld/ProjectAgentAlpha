@@ -25,10 +25,10 @@ public class PhaseTimeData : EventData {
     }
 }
 
-public class PreparationReadyEventData : EventData {
+public class PlayerReadyEventData : EventData {
     public readonly string playerName;
 
-    public PreparationReadyEventData(EventType eventType, string playerName) : base(eventType) {
+    public PlayerReadyEventData(EventType eventType, string playerName) : base(eventType) {
         this.playerName = playerName;
     }
 }

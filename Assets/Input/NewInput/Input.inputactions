@@ -205,17 +205,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c3fec71a-3eb4-4348-aee3-1d914b5c7a32",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "PauseMenu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0dcea59e-baf4-4c70-a6e9-50ea1325bcbc",
                     "path": "<Keyboard>/backquote",
                     "interactions": "",
@@ -232,6 +221,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse&Keyboard",
+                    "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6100a043-ee38-423f-8fa7-98654887e86c",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Ready",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -414,7 +414,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Mouse&Keyboard;Gamepad",
+                    "groups": "Mouse&Keyboard",
                     "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false

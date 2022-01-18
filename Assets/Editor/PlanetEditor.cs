@@ -27,6 +27,11 @@ public class PlanetEditor : Editor
             planet.GeneratePlanet();
         }
 
+        if(GUILayout.Button("Random Planet")) {
+            planet.RandomizePlanet();
+            planet.GeneratePlanet();
+        }
+
         DrawSettingsEditor(planet.shapeSettings , planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldOut, ref shapeEditor);
         DrawSettingsEditor(planet.colourSettings, planet.OnColourSettingsUpdated, ref planet.colourSettingsFoldOut, ref colourEditor);
     }

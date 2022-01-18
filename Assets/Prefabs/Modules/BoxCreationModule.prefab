@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3311291563892573203}
   - component: {fileID: 3571203695934425842}
-  - component: {fileID: 9181185244719603063}
+  - component: {fileID: -4492895392214405081}
   m_Layer: 0
   m_Name: BoxCreationModule
   m_TagString: Untagged
@@ -108,9 +108,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.4791, y: 3.0931706, z: 3.5137057}
-  m_Center: {x: -0.09348345, y: -0.008992672, z: -0.000039339066}
---- !u!114 &9181185244719603063
+  m_Size: {x: 5.5, y: 3.139897, z: 3}
+  m_Center: {x: -0.09348345, y: -0.007251382, z: -0.000039339066}
+--- !u!114 &-4492895392214405081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff2e94c42b74014685309bfd7f77bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  price: 125
+  health: 200
+  price: 100
   box: {fileID: 3339259265492070164, guid: 4f40adfcfdc67a242a136eab49019d58, type: 3}
   placementPositions:
   - {fileID: 1714672370019967108}

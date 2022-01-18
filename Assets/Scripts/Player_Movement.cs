@@ -35,10 +35,15 @@ public class Player_Movement : MonoBehaviour
 
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
     }
 
     private void OnPrepPhaseOver(EventData eventData) {
         _lockMovement = true;
+    }
+
+    private void OnDestructionPhaseOver(EventData eventData) {
+        _lockMovement = false;
     }
 
     // Start is called before the first frame update

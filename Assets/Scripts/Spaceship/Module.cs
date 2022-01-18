@@ -28,6 +28,14 @@ public abstract class Module : MonoBehaviour {
         _baseModule = baseModule;
     }
 
+    public int ConnectionCount() {
+        return Connections.Count(connection => connection.GetBoundModule() != null);
+    }
+
+    public Module GetParentModule() {
+        return _parentModule;
+    }
+
     public Module GetBaseModule() {
         return _baseModule;
     }
@@ -85,24 +93,26 @@ public abstract class Module : MonoBehaviour {
     private void RemoveOverlapConnections() {
         
         Connection[] connections = gameObject.GetComponentsInChildren<Connection>();
-        List<GameObject> lol = new List<GameObject>();
+        List<GameObject> colliderObjects = new List<GameObject>();
 
         foreach (var connection in connections) {
-            lol.Add(connection.gameObject);
-            lol.Add(connection.GetComponentInChildren<BoxCollider>().gameObject);
+            colliderObjects.Add(connection.gameObject);
+            colliderObjects.Add(connection.GetComponentInChildren<BoxCollider>().gameObject);
         }
 
         foreach (var connection in connections) {
             bool hadOverlap = false;
             foreach (var overlap in Physics.OverlapBox(connection.transform.position,
-                         connection.GetComponentInChildren<BoxCollider>().transform.localScale / 2)) {
-                if (overlap.gameObject == gameObject || lol.Contains(overlap.gameObject) ||
+                         connection.GetComponentInChildren<BoxCollider>().transform.lossyScale / 2)) {
+
+                if (overlap.gameObject == gameObject || colliderObjects.Contains(overlap.gameObject) ||
                     overlap.gameObject == connection.GetComponentInChildren<BoxCollider>().gameObject) {
                     continue;
                 }
                 
                 Destroy(connection.gameObject);
                 hadOverlap = true;
+                Debug.LogWarning("Overlap detected");
                 break;
                 
             }
