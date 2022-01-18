@@ -14,9 +14,9 @@ public class MLAgent : Agent
     private Material standard;
     [SerializeField]
     private Rigidbody mlAgentBody;
-    public GameObject goal;
+    public GameObject[] goals;
     [SerializeField]
-    private Spawner spawner = null;
+    private Spawner[] spawners = null;
     [SerializeField]
     public float maxSpeed = 200f;
     [SerializeField]
@@ -29,34 +29,11 @@ public class MLAgent : Agent
     private bool useVectorObs;
     [SerializeField]
     private bool training;
+    private GameObject goal;
 
     public override void Initialize()
     {
         beginPosition = transform.localPosition;
-    }
-
-    private void Start() {
-        if(!training)
-            goal = FindClosestGoal();   
-    }
-
-    public GameObject FindClosestGoal() {
-        GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("Goal");
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (GameObject go in gos)
-        {
-            Vector3 diff = go.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
-            {
-                closest = go;
-                distance = curDistance;
-            }
-        }
-        return closest;
     }
 
     public override void OnEpisodeBegin()
@@ -64,11 +41,21 @@ public class MLAgent : Agent
         if (training)
             transform.localPosition = beginPosition;
 
+        foreach (GameObject goal in goals) {
+            goal.SetActive(false);
+        }
+
+        int randomGoal = Random.Range(0,2);
+        goals[randomGoal].SetActive(true);
+        goal = goals[randomGoal];
+
         transform.rotation = Quaternion.Euler(beginrotation.x, beginrotation.y, beginrotation.z);
         mlAgentBody.velocity *= 0f;
         mlAgentBody.angularVelocity *= 0f;
-        if(spawner != null)
-            spawner.resetArea();
+        if(spawners != null)
+            foreach (Spawner spawner in spawners) {
+                spawner.resetArea();
+            }
     }
 
    void Update()
@@ -81,8 +68,6 @@ public class MLAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(goal.transform.position);
-
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
 
         // sensor.AddObservation(transform.position);

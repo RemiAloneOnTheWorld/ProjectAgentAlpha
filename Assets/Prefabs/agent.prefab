@@ -57,14 +57,14 @@ MonoBehaviour:
   wrong: {fileID: 2100000, guid: 92acc6eb4c2891047bf92fc32217c705, type: 2}
   standard: {fileID: 2100000, guid: a2ca4792ee9994547aaa0deebfda33be, type: 2}
   mlAgentBody: {fileID: 7746009803853718148}
-  goal: {fileID: 0}
-  spawner: {fileID: 0}
+  goals: []
+  spawners: []
   maxSpeed: 250
   runspeed: 40
   beginPosition: {x: 0, y: 0, z: 0}
   beginrotation: {x: 0, y: 0, z: 0}
   useVectorObs: 1
-  training: 0
+  training: 1
 --- !u!114 &3764222084501613942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 674290562be841c42928fcafac0b1c5c, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 00fd85a90ae2a084eae47ee3c98ee6a8, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: AgentAlpha
