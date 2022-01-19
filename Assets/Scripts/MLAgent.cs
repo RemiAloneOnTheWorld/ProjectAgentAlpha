@@ -36,18 +36,43 @@ public class MLAgent : Agent
         beginPosition = transform.localPosition;
     }
 
+    private void Start() {
+        if(!training)
+            goal = findClosestGoal();
+    }
+
+    public GameObject findClosestGoal() {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Goal");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
+    }
+
     public override void OnEpisodeBegin()
     {
-        if (training)
+        if (training) {
             transform.localPosition = beginPosition;
 
-        foreach (GameObject goal in goals) {
-            goal.SetActive(false);
-        }
+            foreach (GameObject goal in goals) {
+                goal.SetActive(false);
+            }
 
-        int randomGoal = Random.Range(0,2);
-        goals[randomGoal].SetActive(true);
-        goal = goals[randomGoal];
+            int randomGoal = Random.Range(0,2);
+            goals[randomGoal].SetActive(true);
+            goal = goals[randomGoal];
+        }
 
         transform.rotation = Quaternion.Euler(beginrotation.x, beginrotation.y, beginrotation.z);
         mlAgentBody.velocity *= 0f;
@@ -69,8 +94,6 @@ public class MLAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
-
-        // sensor.AddObservation(transform.position);
 
         if(useVectorObs)
             sensor.AddObservation(StepCount / (float)MaxStep);
