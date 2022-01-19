@@ -11,6 +11,9 @@ public class CrewSpawner : MonoBehaviour
     private float spawnRadius = 10;
 
     [SerializeField]
+    private SpaceshipManager spaceshipManager;
+
+    [SerializeField]
     private Color colour;
     public GizmoType showSpawnRegion;
     private List<GameObject> spaceships;
@@ -32,6 +35,7 @@ public class CrewSpawner : MonoBehaviour
         {
             Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
             GameObject spaceship = Instantiate<GameObject>(prefab);
+            spaceship.GetComponent<MLAgent>().SetSpaceshipManager(spaceshipManager);
             spaceship.transform.position = pos;
             spaceships.Add(spaceship);
         }

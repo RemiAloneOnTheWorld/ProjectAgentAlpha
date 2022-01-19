@@ -15,7 +15,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera destructionPreviewCameraTwo;
     private CinemachineVirtualCamera _currentCamera;
     [SerializeField] private PlayerCameraController cameraController;
-    [SerializeField] private SpaceshipManager spaceshipManager;
+    [SerializeField] private SpaceshipManager enemySpaceshipManager, spaceshipManager;
     private Module _currentModule;
     private Vector3 _offsetVector;
     private Vector3 _camerasStartPosition;
@@ -29,10 +29,10 @@ public class ModuleDestructionPreview : MonoBehaviour {
         _move = _playerInput.actions.FindAction("Movement", true);
         _move.performed += AcceptMoveToModule;
 
-        _currentModule = spaceshipManager;
+        _currentModule = enemySpaceshipManager;
 
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase,
-            data => _currentModule = spaceshipManager);
+            data => _currentModule = enemySpaceshipManager);
 
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
 
@@ -51,7 +51,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
     }
 
     private void OnAttackPhaseOver(EventData eventData) {
-        _currentModule = spaceshipManager;
+        _currentModule = enemySpaceshipManager;
         destructionPreviewCameraOne.transform.position = _camerasStartPosition;
         destructionPreviewCameraTwo.transform.position = _camerasStartPosition;
         _currentCamera = destructionPreviewCameraOne;
@@ -144,12 +144,12 @@ public class ModuleDestructionPreview : MonoBehaviour {
 
         //Todo: Check for and reduce currency (spaceships)
         int destructionCost = _currentModule.GetDestructionCost();
-        if (destructionCost > spaceshipManager.Spaceships) {
+        if (destructionCost > spaceshipManager.ArrivedSpaceships) {
             return;
         }
 
-        spaceshipManager.RemoveSpaceships(destructionCost);
-        _uiHandler.SetSpaceshipTextValue(spaceshipManager.Spaceships);
+        spaceshipManager.ArrivedSpaceships -= destructionCost;
+        _uiHandler.SetArrivedSpaceshipValue(spaceshipManager.ArrivedSpaceships);
 
         _inDestructionProcess = true;
         Module baseModule = _currentModule.GetBaseModule();

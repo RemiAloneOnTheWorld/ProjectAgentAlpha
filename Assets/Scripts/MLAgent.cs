@@ -30,6 +30,10 @@ public class MLAgent : Agent
     [SerializeField]
     private bool useBeginPosition;
 
+    private SpaceshipManager _spaceshipManager;
+    private bool _addArrivedCount = true;
+
+
     public override void Initialize()
     {
         GameObject[] goals = GameObject.FindGameObjectsWithTag("Goal");
@@ -89,6 +93,13 @@ public class MLAgent : Agent
             SetReward(1f);
             StartCoroutine(GoalScored(correct, 0.5f));
             EndEpisode();
+
+            //Add to arrived spaceships.
+            if (_addArrivedCount)
+            {
+                _spaceshipManager.ArrivedSpaceships++;
+                _addArrivedCount = false;
+            }
         }
         if(col.gameObject.CompareTag("Block")) {
             AddReward(-0.5f);
@@ -175,5 +186,10 @@ public class MLAgent : Agent
             a[2] = 1;
         if (Input.GetKey(KeyCode.DownArrow))
             a[2] = 2;
+    }
+
+    public void SetSpaceshipManager(SpaceshipManager manager)
+    {
+        _spaceshipManager = manager;
     }
 }

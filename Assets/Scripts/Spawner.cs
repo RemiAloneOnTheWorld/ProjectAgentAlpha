@@ -23,6 +23,7 @@ public class Spawner : MonoBehaviour
 
     private int totalCubes;
 
+
     private void Start() {
         cubeList = new List<GameObject>();
         SpawnCubes();

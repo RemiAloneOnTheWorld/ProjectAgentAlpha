@@ -14,6 +14,7 @@ public class UIHandler : MonoBehaviour {
     //Stats
     [SerializeField] private TMP_Text currencyText;
     [SerializeField] private TMP_Text spaceshipText;
+    [SerializeField] private TMP_Text arrivedSpaceshipText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
@@ -52,6 +53,9 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private float crosshairDrift;
     private Vector2 _initCrosshairPos;
     private int _lastScreenWidth;
+
+    [Header("Spaceship Manager")] [SerializeField]
+    private SpaceshipManager spaceshipManager;
 
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
@@ -131,6 +135,10 @@ public class UIHandler : MonoBehaviour {
 
     public void SetSpaceshipTextValue(int value) {
         spaceshipText.text = $"Spaceships: {value}";
+    }
+
+    public void SetArrivedSpaceshipValue(int value) {
+        arrivedSpaceshipText.text = $"Arrived Spaceships: {value}";
     }
 
     private void ShowCursor(bool showCursor) {
@@ -241,7 +249,7 @@ public class UIHandler : MonoBehaviour {
             return;
         }
 
-        if (moduleDestructionCost >= module.GetBaseModule().GetComponent<SpaceshipManager>().Spaceships) {
+        if (moduleDestructionCost > spaceshipManager.ArrivedSpaceships) {
             destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
         }
         else {

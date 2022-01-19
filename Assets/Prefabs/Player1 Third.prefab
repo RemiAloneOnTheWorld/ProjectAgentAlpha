@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322964969191126964}
-  m_LocalRotation: {x: 0.055305257, y: -0.0000000024853501, z: 1.3766362e-10, w: 0.99846953}
+  m_LocalRotation: {x: 0.05530525, y: -0.0000000037195893, z: 2.0602814e-10, w: 0.99846953}
   m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -340,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currencyText: {fileID: 0}
   spaceshipText: {fileID: 0}
+  arrivedSpaceshipText: {fileID: 0}
   messageText: {fileID: 0}
   playerUI: {fileID: 0}
   buyMenu: {fileID: 0}
@@ -358,6 +359,7 @@ MonoBehaviour:
   vcam: {fileID: 0}
   crosshair: {fileID: 0}
   crosshairDrift: 250
+  spaceshipManager: {fileID: 0}
 --- !u!114 &372591787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +397,7 @@ MonoBehaviour:
   destructionPreviewCameraOne: {fileID: 0}
   destructionPreviewCameraTwo: {fileID: 0}
   cameraController: {fileID: 0}
+  enemySpaceshipManager: {fileID: 0}
   spaceshipManager: {fileID: 0}
 --- !u!114 &2230541115287820883
 MonoBehaviour:
