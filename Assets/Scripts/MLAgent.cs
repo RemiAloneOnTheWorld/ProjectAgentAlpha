@@ -14,9 +14,9 @@ public class MLAgent : Agent
     private Material standard;
     [SerializeField]
     private Rigidbody mlAgentBody;
-    public GameObject goal;
+    public GameObject[] goals;
     [SerializeField]
-    private Spawner spawner = null;
+    private Spawner[] spawners = null;
     [SerializeField]
     public float maxSpeed = 200f;
     [SerializeField]
@@ -28,31 +28,59 @@ public class MLAgent : Agent
     [SerializeField]
     private bool useVectorObs;
     [SerializeField]
-    private bool useBeginPosition;
+    private bool training;
+    private GameObject goal;
 
     public override void Initialize()
     {
-        GameObject[] goals = GameObject.FindGameObjectsWithTag("Goal");
-        if(goal != null)
-            return;
-        if(Vector3.Distance(goals[0].transform.position, transform.position) > Vector3.Distance(goals[1].transform.position, transform.position)) {
-            goal = goals[1];
-        } else {
-            goal = goals[0];
-        }
         beginPosition = transform.localPosition;
+    }
+
+    private void Start() {
+        if(!training)
+            goal = findClosestGoal();
+    }
+
+    public GameObject findClosestGoal() {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Goal");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
     }
 
     public override void OnEpisodeBegin()
     {
-        if (useBeginPosition)
+        if (training) {
             transform.localPosition = beginPosition;
+
+            foreach (GameObject goal in goals) {
+                goal.SetActive(false);
+            }
+
+            int randomGoal = Random.Range(0,2);
+            goals[randomGoal].SetActive(true);
+            goal = goals[randomGoal];
+        }
 
         transform.rotation = Quaternion.Euler(beginrotation.x, beginrotation.y, beginrotation.z);
         mlAgentBody.velocity *= 0f;
         mlAgentBody.angularVelocity *= 0f;
-        if(spawner != null)
-            spawner.resetArea();
+        if(spawners != null)
+            foreach (Spawner spawner in spawners) {
+                spawner.resetArea();
+            }
     }
 
    void Update()
@@ -65,11 +93,7 @@ public class MLAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(goal.transform.position);
-
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
-
-        sensor.AddObservation(transform.position);
 
         if(useVectorObs)
             sensor.AddObservation(StepCount / (float)MaxStep);
@@ -104,6 +128,8 @@ public class MLAgent : Agent
         goal.GetComponent<Renderer>().material = mat;
         yield return new WaitForSeconds(time);
         goal.GetComponent<Renderer>().material = standard;
+        if(!training)
+            this.enabled = false;
     }
 
     private void LookY(ActionSegment<int> discreteActions)

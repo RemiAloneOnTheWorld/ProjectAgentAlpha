@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 500
   price: 0
-  spaceships: 1
+  spaceships: 10
   startMoney: 500
   uiHandler: {fileID: 0}
   orbit: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   prefab: {fileID: 1083352690390817493, guid: 5e7f12431ff3f5b4c9adcc208ea3af6c, type: 3}
   spawnRadius: 10
   colour: {r: 1, g: 0, b: 0, a: 0}
-  showSpawnRegion: 2
+  showSpawnRegion: 1
 --- !u!1001 &562500909405556174
 PrefabInstance:
   m_ObjectHideFlags: 0
