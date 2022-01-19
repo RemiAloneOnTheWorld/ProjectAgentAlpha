@@ -17,3 +17,4 @@ MonoBehaviour:
   price: 150
   description: This module generates placement box, which can be picked up and place
     during each preparation phase.
+  destructionPrice: 15

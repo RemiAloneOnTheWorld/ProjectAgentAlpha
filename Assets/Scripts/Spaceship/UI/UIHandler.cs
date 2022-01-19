@@ -30,6 +30,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private TMP_Text moduleDestructionNameText;
     [SerializeField] private TMP_Text moduleDestructionModuleHealthText;
     [SerializeField] private TMP_Text moduleDestructionConnectionsText;
+    [SerializeField] private TMP_Text moduleDestructionPriceText;
 
     //Buttons
     [SerializeField] private Button currencyButton;
@@ -230,10 +231,25 @@ public class UIHandler : MonoBehaviour {
     public void SetDestructionPreviewInfo(Module module) {
         moduleDestructionNameText.text = $"Name: {module.GetModuleName()}";
         moduleDestructionModuleHealthText.text = $"Health: {module.CurrentHealth}/{module.GetStartingHealth()}";
-        moduleDestructionConnectionsText.text = $"Modules \n Connected: {module.ConnectionCount()}";
-        if (_playerInput.currentControlScheme.Equals("Gamepad")) {
-            EventSystem.current.SetSelectedGameObject(destroyButton.gameObject);
-            //currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+        moduleDestructionConnectionsText.text = $"Modules connected: {module.ConnectionCount()}";
+
+        int moduleDestructionCost = module.GetDestructionCost();
+        moduleDestructionPriceText.text = $"Destruction cost: {moduleDestructionCost}";
+
+        if (module == module.GetBaseModule() || module.GetBaseModule() == null) {
+            //Behaviour is not defined yet.
+            return;
+        }
+
+        if (moduleDestructionCost >= module.GetBaseModule().GetComponent<SpaceshipManager>().Spaceships) {
+            destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
+        }
+        else {
+            destroyButton.GetComponentInChildren<TMP_Text>().text = "Destroy!";
+            if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+                EventSystem.current.SetSelectedGameObject(destroyButton.gameObject);
+                //currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+            }
         }
     }
 }

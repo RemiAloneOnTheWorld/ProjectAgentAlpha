@@ -16,3 +16,4 @@ MonoBehaviour:
   health: 200
   price: 50
   description: This module generates a set amount of currency on each attack phase.
+  destructionPrice: 10

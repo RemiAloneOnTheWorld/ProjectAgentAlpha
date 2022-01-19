@@ -7,4 +7,5 @@ public class ModuleData : ScriptableObject
     public int health;
     public int price;
     public string description;
+    public int destructionPrice;
 }

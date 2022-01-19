@@ -132,19 +132,24 @@ public class ModuleDestructionPreview : MonoBehaviour {
         }
     }
 
-
-
-    //TODO: Destroy module
     public void DestroyModule() {
         if (_inDestructionProcess) {
             return;
         }
 
-        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2"))
-        {
+        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2")) {
             Debug.Log("Destroying the base station is currently undefined.");
             return;
         }
+
+        //Todo: Check for and reduce currency (spaceships)
+        int destructionCost = _currentModule.GetDestructionCost();
+        if (destructionCost > spaceshipManager.Spaceships) {
+            return;
+        }
+
+        spaceshipManager.RemoveSpaceships(destructionCost);
+        _uiHandler.SetSpaceshipTextValue(spaceshipManager.Spaceships);
 
         _inDestructionProcess = true;
         Module baseModule = _currentModule.GetBaseModule();

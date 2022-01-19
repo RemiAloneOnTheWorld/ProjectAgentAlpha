@@ -346,7 +346,9 @@ MonoBehaviour:
   moduleDestructionNameText: {fileID: 0}
   moduleDestructionModuleHealthText: {fileID: 0}
   moduleDestructionConnectionsText: {fileID: 0}
+  moduleDestructionPriceText: {fileID: 0}
   currencyButton: {fileID: 0}
+  destroyButton: {fileID: 0}
   previewCamera: {fileID: 0}
   previewWindow: {fileID: 0}
   previewRotationSpeed: 20

@@ -84,8 +84,7 @@ public abstract class Module : MonoBehaviour {
     public virtual void DestroyModuleWithSubs() {
         _parentModule.RemoveDockedModule(this);
         foreach (var connection in Connections) {
-            if (connection.GetBoundModule() != null)
-            {
+            if (connection.GetBoundModule() != null) {
                 connection.GetBoundModule().DestroyModuleWithSubs();
             }
             //connection.GetBoundModule().DestroyModuleWithSubs();
@@ -145,5 +144,17 @@ public abstract class Module : MonoBehaviour {
                 connection.SetParentModule(this);
             }
         }
+    }
+
+    public int GetDestructionCost() {
+        int costModules = moduleData.destructionPrice;
+        foreach (var currentConnection in Connections) {
+            Module module = currentConnection.GetBoundModule();
+            if (module != null) {
+                costModules += module.GetDestructionCost();
+            }
+        }
+
+        return costModules;
     }
 }
