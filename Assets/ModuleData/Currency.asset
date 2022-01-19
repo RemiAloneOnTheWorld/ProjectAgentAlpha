@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Currency Module
   health: 200
-  price: 50
+  price: 150
   description: This module generates a set amount of currency on each attack phase.
-  destructionPrice: 10
+  destructionPrice: 5

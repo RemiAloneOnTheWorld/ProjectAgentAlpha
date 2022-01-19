@@ -20,6 +20,9 @@ public class SpaceshipManager : Module {
     [SerializeField] private bool orbit;
     [SerializeField] private float orbitSpeed;
 
+    [SerializeField]
+    private int baseMoney;
+
     private float _x, _z;
     private GameObject _planet;
 
@@ -33,6 +36,9 @@ public class SpaceshipManager : Module {
         //Set UI to values
         uiHandler.SetCurrencyTextValue(Money);
         uiHandler.SetSpaceshipTextValue(Spaceships);
+
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, 
+            (EventData eventData) => AddMoney(baseMoney));
 
         if (gameObject.CompareTag("BaseStation_2")) {
             _z = Mathf.PI;

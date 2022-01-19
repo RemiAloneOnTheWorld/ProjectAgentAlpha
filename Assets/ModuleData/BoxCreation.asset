@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BoxCreation
   m_EditorClassIdentifier: 
   name: Box Creation Module
-  health: 100
-  price: 150
+  health: 200
+  price: 200
   description: This module generates placement box, which can be picked up and place
     during each preparation phase.
-  destructionPrice: 15
+  destructionPrice: 10

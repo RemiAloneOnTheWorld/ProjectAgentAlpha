@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Factory Module
   health: 250
-  price: 200
+  price: 300
   description: This module trains and builds spaceships, which are being sent out
     to attack the planet!
-  destructionPrice: 20
+  destructionPrice: 15

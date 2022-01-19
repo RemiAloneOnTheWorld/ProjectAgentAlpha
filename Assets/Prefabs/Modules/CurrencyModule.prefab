@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moduleData: {fileID: 11400000, guid: 81fee0f85c6fa0747ad12355f0d59bec, type: 2}
-  currencyGenerated: 10
+  currencyGenerated: 75
   testMoneyPerSecond: 0
 --- !u!65 &3679085160620805117
 BoxCollider:

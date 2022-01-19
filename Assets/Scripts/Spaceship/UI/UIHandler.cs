@@ -44,7 +44,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private float previewRotationSpeed;
     private GameObject _modulePreview;
     private bool _modulePreviewShown;
-    [SerializeField] private TMP_Text moduleShopNameText, moduleShopHealthText, moduleShopDescriptionText;
+    [SerializeField] private TMP_Text moduleShopNameText, moduleShopPriceText, moduleShopHealthText, moduleShopDescriptionText;
 
     [Header("Camera & Crosshair")]
     //Camera & crosshair
@@ -134,6 +134,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetCurrencyTextValue(float value) {
+        Debug.Log("Set currency");
         currencyText.text = $"Currency: {value}";
     }
 
@@ -151,7 +152,6 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetCurrencyModule() {
-        Debug.Log("Curr mod set");
         if (_menuShown) {
             _connector.SetCurrencyModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
@@ -165,6 +165,7 @@ public class UIHandler : MonoBehaviour {
         //Assign module information
         ModuleDataWrapper moduleData = module.GetComponent<ModuleDataWrapper>();
         moduleShopNameText.text = $"Name: {moduleData.GetName()}";
+        moduleShopPriceText.text = $"Price: {moduleData.GetPrice()}";
         moduleShopHealthText.text = $"Health: {moduleData.GetHealth()}";
         moduleShopDescriptionText.text = moduleData.GetDescription();
         _modulePreview = Instantiate(module, previewCamera.transform.position + new Vector3(0, -3, 15), Quaternion.identity);

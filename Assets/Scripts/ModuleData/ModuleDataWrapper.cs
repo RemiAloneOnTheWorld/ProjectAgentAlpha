@@ -18,4 +18,6 @@ public class ModuleDataWrapper : MonoBehaviour
     {
         return moduleData.description;
     }
+
+    public int GetPrice() => moduleData.price;
 }

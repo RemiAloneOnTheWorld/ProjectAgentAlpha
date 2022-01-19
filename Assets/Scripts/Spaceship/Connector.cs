@@ -110,6 +110,7 @@ public class Connector : MonoBehaviour {
             connection.GetParentModule().transform.rotation);
 
         connection.SetBoundModule(module.GetComponent<Module>(), baseModule);
+
     }
 
     private bool VerifyAdjustCredits() {

@@ -7,7 +7,7 @@ public abstract class Module : MonoBehaviour {
     [SerializeField] private ModuleData moduleData;
     public int CurrentHealth { get; private set; }
 
-    public int Price { get; private set; }
+    public int Price => moduleData.price;
 
     private Module _parentModule;
     private Module _baseModule;
@@ -106,7 +106,6 @@ public abstract class Module : MonoBehaviour {
 
     protected virtual void Start() {
         CurrentHealth = moduleData.health;
-        Price = moduleData.price;
         Connections = new List<Connection>();
         RemoveOverlapConnections();
     }
