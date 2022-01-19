@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4412113219805289714}
   m_Layer: 0
   m_Name: Base-Spacestation
-  m_TagString: BaseStation_1
+  m_TagString: BaseStation_2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,10 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b0bd93e05b78940ac9f8f2c0adc4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
-  price: 0
-  spaceships: 10
-  startMoney: 500
+  moduleData: {fileID: 11400000, guid: 967b231752d153c4e868ab1a14727c79, type: 2}
+  spaceships: 50
+  startMoney: 2000
   uiHandler: {fileID: 0}
   orbit: 0
   orbitSpeed: 0.01
@@ -114,8 +113,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1083352690390817493, guid: 5e7f12431ff3f5b4c9adcc208ea3af6c, type: 3}
   spawnRadius: 10
+  spaceshipManager: {fileID: 1386617365687415646}
   colour: {r: 1, g: 0, b: 0, a: 0}
-  showSpawnRegion: 1
+  showSpawnRegion: 2
 --- !u!1001 &562500909405556174
 PrefabInstance:
   m_ObjectHideFlags: 0

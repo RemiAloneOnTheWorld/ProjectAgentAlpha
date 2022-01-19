@@ -30,4 +30,13 @@ public class CurrencyModule : Module {
             _timePassed = 0;
         }
     }
+
+    public override void DestroyModuleWithSubs()
+    {
+        base.DestroyModuleWithSubs();
+        if (!testMoneyPerSecond)
+        {
+            EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseOver, updateCurrency);
+        }
+    }
 }

@@ -2,18 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class Module : MonoBehaviour {
-    [SerializeField] protected int health;
-    public int Health { get; protected set; }
+    [SerializeField] private ModuleData moduleData;
+    public int CurrentHealth { get; private set; }
 
-    [SerializeField] private int price;
-
-    public int Price {
-        get => price;
-        private set => price = value;
-    }
+    public int Price { get; private set; }
 
     private Module _parentModule;
     private Module _baseModule;
@@ -26,6 +20,18 @@ public abstract class Module : MonoBehaviour {
 
     public void SetBaseModule(Module baseModule) {
         _baseModule = baseModule;
+    }
+
+    public string GetModuleName() {
+        return moduleData.name;
+    }
+
+    public string GetModuleDescription() {
+        return moduleData.description;
+    }
+
+    public int GetStartingHealth() {
+        return moduleData.health;
     }
 
     public int ConnectionCount() {
@@ -54,7 +60,7 @@ public abstract class Module : MonoBehaviour {
     //modules will probably be removed based on the module they're bound to, opposing the docking, where
     //the clicked connection is of importance.
     public void RemoveDockedModule(Module module) {
-        for (int i = Connections.Count; i >= 0; i--) {
+        for (int i = Connections.Count - 1; i >= 0; i--) {
             if (Connections.ElementAt(i).GetBoundModule() == module) {
                 Connections.ElementAt(i).RemoveModule();
             }
@@ -64,6 +70,9 @@ public abstract class Module : MonoBehaviour {
     public virtual void DestroyModule() {
         //Destroy the game object for now.
         _parentModule.RemoveDockedModule(this);
+
+        //TODO: Check if currency suffices.
+
         foreach (var module in Connections) {
             RemoveDockedModule(module.GetBoundModule());
         }
@@ -71,27 +80,40 @@ public abstract class Module : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    //Calls method on sub-modules recursively.
+    public virtual void DestroyModuleWithSubs() {
+        _parentModule.RemoveDockedModule(this);
+        foreach (var connection in Connections) {
+            if (connection.GetBoundModule() != null) {
+                connection.GetBoundModule().DestroyModuleWithSubs();
+            }
+            //connection.GetBoundModule().DestroyModuleWithSubs();
+        }
+
+        Destroy(gameObject);
+    }
+
     public virtual void ResetModule() {
-        Health = health;
+        CurrentHealth = moduleData.health;
     }
 
     public virtual void ApplyDamage(in int amount) {
-        Health -= amount;
-        if (Health <= 0) {
+        CurrentHealth -= amount;
+        if (CurrentHealth <= 0) {
             Debug.Log($"Module: {gameObject.name} destroyed");
         }
     }
 
     protected virtual void Start() {
-        Health = health;
-        Price = price;
+        CurrentHealth = moduleData.health;
+        Price = moduleData.price;
         Connections = new List<Connection>();
         RemoveOverlapConnections();
     }
 
 
     private void RemoveOverlapConnections() {
-        
+
         Connection[] connections = gameObject.GetComponentsInChildren<Connection>();
         List<GameObject> colliderObjects = new List<GameObject>();
 
@@ -109,12 +131,12 @@ public abstract class Module : MonoBehaviour {
                     overlap.gameObject == connection.GetComponentInChildren<BoxCollider>().gameObject) {
                     continue;
                 }
-                
+
                 Destroy(connection.gameObject);
                 hadOverlap = true;
                 Debug.LogWarning("Overlap detected");
                 break;
-                
+
             }
 
             if (!hadOverlap) {
@@ -122,5 +144,17 @@ public abstract class Module : MonoBehaviour {
                 connection.SetParentModule(this);
             }
         }
+    }
+
+    public int GetDestructionCost() {
+        int costModules = moduleData.destructionPrice;
+        foreach (var currentConnection in Connections) {
+            Module module = currentConnection.GetBoundModule();
+            if (module != null) {
+                costModules += module.GetDestructionCost();
+            }
+        }
+
+        return costModules;
     }
 }

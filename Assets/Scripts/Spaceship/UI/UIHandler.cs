@@ -14,7 +14,7 @@ public class UIHandler : MonoBehaviour {
     //Stats
     [SerializeField] private TMP_Text currencyText;
     [SerializeField] private TMP_Text spaceshipText;
-    [SerializeField] private TMP_Text boxesText;
+    [SerializeField] private TMP_Text arrivedSpaceshipText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
@@ -22,23 +22,29 @@ public class UIHandler : MonoBehaviour {
     //Player UI
     [SerializeField] private RectTransform playerUI;
     private Vector3 _initialPlayerUIPosition;
-    
+
     //Buy menu
     [SerializeField] private GameObject buyMenu;
     private bool _menuShown;
 
-    [SerializeField] private TMP_Text moduleNameText, moduleHealthText, moduleConnectionsText;
+    [Header("Destruction Preview")]
+    [SerializeField] private TMP_Text moduleDestructionNameText;
+    [SerializeField] private TMP_Text moduleDestructionModuleHealthText;
+    [SerializeField] private TMP_Text moduleDestructionConnectionsText;
+    [SerializeField] private TMP_Text moduleDestructionPriceText;
 
     //Buttons
     [SerializeField] private Button currencyButton;
+    [SerializeField] private Button destroyButton;
 
-    [Header("Preview window")]
+    [Header("Shop Preview window")]
     //Preview window
     [SerializeField] private Camera previewCamera;
     [SerializeField] private RectTransform previewWindow;
     [SerializeField] private float previewRotationSpeed;
     private GameObject _modulePreview;
     private bool _modulePreviewShown;
+    [SerializeField] private TMP_Text moduleShopNameText, moduleShopHealthText, moduleShopDescriptionText;
 
     [Header("Camera & Crosshair")]
     //Camera & crosshair
@@ -47,7 +53,10 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private float crosshairDrift;
     private Vector2 _initCrosshairPos;
     private int _lastScreenWidth;
-    
+
+    [Header("Spaceship Manager")] [SerializeField]
+    private SpaceshipManager spaceshipManager;
+
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
@@ -66,7 +75,7 @@ public class UIHandler : MonoBehaviour {
     private void OnDestructionPhaseOver(EventData eventData) {
         ShowCrosshair(true);
         ShowCursor(false);
-        ShowModuleInformation(false);
+        ShowDestructionPreviewInfo(false);
         if (playerUI.name == "Player1") {
             playerUI.position = _initialPlayerUIPosition;
         }
@@ -89,7 +98,7 @@ public class UIHandler : MonoBehaviour {
         _connector = GetComponent<Connector>();
         _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
         _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
-        
+
         _initCrosshairPos = crosshair.transform.position;
         _lastScreenWidth = Screen.width;
         _initialPlayerUIPosition = playerUI.position;
@@ -99,7 +108,7 @@ public class UIHandler : MonoBehaviour {
         if (_modulePreviewShown) {
             _modulePreview.transform.Rotate(Vector3.up, previewRotationSpeed * Time.deltaTime);
         }
-        
+
         if (Screen.width != _lastScreenWidth) {
             _initCrosshairPos = crosshair.transform.position;
         }
@@ -128,9 +137,8 @@ public class UIHandler : MonoBehaviour {
         spaceshipText.text = $"Spaceships: {value}";
     }
 
-    public void SetBoxesTextValue(int value)
-    {
-        boxesText.text = $"Boxes: {value}";
+    public void SetArrivedSpaceshipValue(int value) {
+        arrivedSpaceshipText.text = $"Arrived Spaceships: {value}";
     }
 
     private void ShowCursor(bool showCursor) {
@@ -149,6 +157,12 @@ public class UIHandler : MonoBehaviour {
     public void ShowModulePreview(GameObject module) {
         if (_modulePreviewShown) return;
         previewWindow.gameObject.SetActive(true);
+
+        //Assign module information
+        ModuleDataWrapper moduleData = module.GetComponent<ModuleDataWrapper>();
+        moduleShopNameText.text = $"Name: {moduleData.GetName()}";
+        moduleShopHealthText.text = $"Health: {moduleData.GetHealth()}";
+        moduleShopDescriptionText.text = moduleData.GetDescription();
         _modulePreview = Instantiate(module, previewCamera.transform.position + new Vector3(0, -3, 15), Quaternion.identity);
         previewCamera.transform.LookAt(_modulePreview.transform);
         _modulePreviewShown = true;
@@ -179,6 +193,11 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void ShowMenu(InputAction.CallbackContext pContext) {
+        if (PhaseGameManager.EventType != EventType.PreparationPhase) {
+            return;
+        }
+
+
         _menuShown = !_menuShown;
         ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
@@ -205,53 +224,40 @@ public class UIHandler : MonoBehaviour {
     private void ShowCrosshair(bool hide) {
         crosshair.gameObject.SetActive(hide);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
-        
+
         //TODO: Forbid during attack phase
         EventQueue.GetEventQueue().AddEvent(PhaseGameManager.EventType == EventType.PreparationPhase
             ? new PlayerReadyEventData(EventType.PlayerPreparationReady, gameObject.name)
             : new PlayerReadyEventData(EventType.PlayerDestructionReady, gameObject.name));
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public void ShowModuleInformation(bool show) {
-        moduleNameText.transform.parent.gameObject.SetActive(show);
+
+    public void ShowDestructionPreviewInfo(bool show) {
+        moduleDestructionNameText.transform.parent.gameObject.SetActive(show);
     }
 
-    public void SetModuleInformation(ModuleInformation moduleInformation) {
-        moduleNameText.text = $"Name: {moduleInformation.moduleName}";
-        moduleHealthText.text = $"Health: {moduleInformation.currentHealth}/{moduleInformation.totalHealth}";
-        moduleConnectionsText.text = $"Modules \n Connected: {moduleInformation.amountConnectedModules}";
-    }
-}
+    public void SetDestructionPreviewInfo(Module module) {
+        moduleDestructionNameText.text = $"Name: {module.GetModuleName()}";
+        moduleDestructionModuleHealthText.text = $"Health: {module.CurrentHealth}/{module.GetStartingHealth()}";
+        moduleDestructionConnectionsText.text = $"Modules connected: {module.ConnectionCount()}";
 
-public readonly struct ModuleInformation {
-    public readonly string moduleName;
-    public readonly int currentHealth;
-    public readonly int totalHealth;
-    public readonly int amountConnectedModules;
+        int moduleDestructionCost = module.GetDestructionCost();
+        moduleDestructionPriceText.text = $"Destruction cost: {moduleDestructionCost}";
 
-    public ModuleInformation(string moduleName, int currentHealth, int totalHealth, int amountConnectedModules) {
-        this.moduleName = moduleName;
-        this.currentHealth = currentHealth;
-        this.totalHealth = totalHealth;
-        this.amountConnectedModules = amountConnectedModules;
+        if (module == module.GetBaseModule() || module.GetBaseModule() == null) {
+            //Behaviour is not defined yet.
+            return;
+        }
+
+        if (moduleDestructionCost > spaceshipManager.ArrivedSpaceships) {
+            destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
+        }
+        else {
+            destroyButton.GetComponentInChildren<TMP_Text>().text = "Destroy!";
+            if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+                EventSystem.current.SetSelectedGameObject(destroyButton.gameObject);
+                //currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+            }
+        }
     }
 }

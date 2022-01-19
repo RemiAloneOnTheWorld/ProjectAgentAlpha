@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fcc9690c4690ca42b2307254aaf3bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
-  price: 50
-  moneyPerSecond: 2
+  moduleData: {fileID: 11400000, guid: 81fee0f85c6fa0747ad12355f0d59bec, type: 2}
+  currencyGenerated: 10
+  testMoneyPerSecond: 0
 --- !u!65 &3679085160620805117
 BoxCollider:
   m_ObjectHideFlags: 0
