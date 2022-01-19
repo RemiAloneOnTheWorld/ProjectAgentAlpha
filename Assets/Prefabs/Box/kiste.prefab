@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085492628186795971}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: -0.409, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 7653642382244982176}
   m_RootOrder: 0
@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 7653642382244982176}
   - component: {fileID: 5617893433828718417}
   - component: {fileID: 7656311579320627893}
+  - component: {fileID: 985866419053699724}
   m_Layer: 0
   m_Name: kiste
   m_TagString: Block
@@ -108,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7024739789708883738}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -42.12, y: 0, z: -3.41}
+  m_LocalPosition: {x: 0, y: 3.14, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 7081636638079261944}
@@ -135,7 +136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: a2ca4792ee9994547aaa0deebfda33be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,5 +169,13 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0336876, y: 2.0001864, z: 1.9750977}
-  m_Center: {x: 0, y: 1.0007987, z: -0.0014150143}
+  m_Size: {x: 0.82648176, y: 0.84595966, z: 0.84324694}
+  m_Center: {x: 0.0018336773, y: -0.010170412, z: 0.021991193}
+--- !u!33 &985866419053699724
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024739789708883738}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

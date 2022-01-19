@@ -66,7 +66,9 @@ public class Inventory : MonoBehaviour
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance)
             || !raycastHit.collider.CompareTag("Block"))
         {
-            _pickedBox = Instantiate<GameObject>(GetRandomBox(), pos, Quaternion.Euler(Vector3.zero));
+            GameObject box = GetRandomBox();
+            print(box.transform.rotation);
+            _pickedBox = Instantiate<GameObject>(box, pos, box.transform.rotation);
             if (BoxCount > 0)
             {
                 BoxCount--;
@@ -101,7 +103,7 @@ public class Inventory : MonoBehaviour
                 BoxCount++;
             } else
             {
-                _pickedBox.GetComponent<MeshRenderer>().material = null;
+                _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
                 _pickedBox.GetComponent<Collider>().enabled = true;
                
 

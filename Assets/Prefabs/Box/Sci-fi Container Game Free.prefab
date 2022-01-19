@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 8570991780038957584}
   - component: {fileID: 5678575680499099351}
   - component: {fileID: 6672786086860313149}
+  - component: {fileID: 4751338956560633536}
   m_Layer: 0
   m_Name: Sci-fi Container Game Free
   m_TagString: Block
@@ -135,7 +136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: a2ca4792ee9994547aaa0deebfda33be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,3 +171,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.010012689, y: 0.010034094, z: 0.010272693}
   m_Center: {x: -0.00002380705, y: -0.00032043742, z: 0.004892268}
+--- !u!33 &4751338956560633536
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9059438359938826410}
+  m_Mesh: {fileID: 6995616103630575568, guid: 4fdf86869c48042db8d51a2ed08f551c, type: 3}
