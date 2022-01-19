@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +12,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int placeDistance;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject boxPrefab;
+    [SerializeField] private GameObject[] boxPrefabs;
     [Range(0f, 1f)] public float radiusHalfBox;
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private bool useLerp;
@@ -26,6 +28,7 @@ public class Inventory : MonoBehaviour
 
     private bool selected;
     private GameObject _pickedBox;
+    private GameObject _tempBox;
     private Vector3 _previousPosition;
     private float _scrollValue;
 
@@ -45,7 +48,6 @@ public class Inventory : MonoBehaviour
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
              pickupDistance) || !raycastHit.collider.CompareTag("Block"))
         {
-            print("no box found!");
             return;
         }
         if(BoxCount == -1)
@@ -64,7 +66,7 @@ public class Inventory : MonoBehaviour
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance)
             || !raycastHit.collider.CompareTag("Block"))
         {
-            _pickedBox = Instantiate<GameObject>(boxPrefab, pos, Quaternion.Euler(Vector3.zero));
+            _pickedBox = Instantiate<GameObject>(GetRandomBox(), pos, Quaternion.Euler(Vector3.zero));
             if (BoxCount > 0)
             {
                 BoxCount--;
@@ -75,12 +77,17 @@ public class Inventory : MonoBehaviour
             _pickedBox = raycastHit.collider.gameObject;
 
         }
-        _pickedBox.GetComponent<BoxCollider>().enabled = false;
+        _pickedBox.GetComponent<Collider>().enabled = false;
         _previousPosition = _pickedBox.transform.position;
         
 
     }
 
+    private GameObject GetRandomBox()
+    {
+        int randomNumber = (int) UnityEngine.Random.Range(0, boxPrefabs.Length);
+        return (GameObject) boxPrefabs[randomNumber];
+    }
 
     private void CancelPlace(InputAction.CallbackContext pContext)
     {
@@ -90,15 +97,14 @@ public class Inventory : MonoBehaviour
 
             if (checkCollision(_pickedBox.transform.position))
             {
-                print("Cant place!");
-                print(_pickedBox + " should be destroyed");
                 Destroy(_pickedBox);
                 BoxCount++;
             } else
             {
-                _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
-                _pickedBox.GetComponent<BoxCollider>().enabled = true;
-                print("box Placed!");
+                _pickedBox.GetComponent<MeshRenderer>().material = null;
+                _pickedBox.GetComponent<Collider>().enabled = true;
+               
+
                if(BoxCount == 0)
                 {
                     BoxCount--;
@@ -108,7 +114,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            print("no boxes in inventory!");
+          
             Destroy(_pickedBox);
         }
         UIHandler.SetBoxesTextValue(BoxCount > 0 ? BoxCount : 0);
@@ -120,12 +126,7 @@ public class Inventory : MonoBehaviour
         Collider[] collisions = Physics.OverlapBox(pos, boxPrefab.transform.localScale * radiusHalfBox);
         if (collisions.Length > 0)
         {
-            print(collisions[collisions.Length - 1]);
             return true;
-        }
-        if(collisions.Length == 0)
-        {
-            print("No collision");
         }
         return false;
 
@@ -181,12 +182,10 @@ public class Inventory : MonoBehaviour
         if (collision)
         {
             _pickedBox.GetComponent<MeshRenderer>().material = redBoxMat;
-            print("box is red");
         }
         else
         {
-            _pickedBox.GetComponent<MeshRenderer>().material = greenBoxMat;
-            print("box is green");
+            _pickedBox.GetComponent<MeshRenderer>().material = greenBoxMat;  
         }
     }
 
