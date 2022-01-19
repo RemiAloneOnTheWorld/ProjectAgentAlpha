@@ -119,10 +119,12 @@ public class MLAgent : Agent
             EndEpisode();
 
             //Add to arrived spaceships.
-            if (_addArrivedCount)
-            {
-                _spaceshipManager.ArrivedSpaceships++;
-                _addArrivedCount = false;
+            if(!training) {
+                if (_addArrivedCount)
+                {
+                    _spaceshipManager.ArrivedSpaceships++;
+                    _addArrivedCount = false;
+                }
             }
         }
         if(col.gameObject.CompareTag("Block")) {

@@ -64,6 +64,10 @@ public class UIHandler : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
     }
 
+    public void SetBoxesTextValue(int totalBoxes) {
+        
+    }
+
     private void OnPrepPhaseOver(EventData eventData) {
         if (_menuShown) {
             ShowMenu(new InputAction.CallbackContext());

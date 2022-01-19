@@ -64,7 +64,7 @@ MonoBehaviour:
   beginPosition: {x: 0, y: 0, z: 0}
   beginrotation: {x: 0, y: 0, z: 0}
   useVectorObs: 1
-  training: 0
+  training: 1
 --- !u!114 &3764222084501613942
 MonoBehaviour:
   m_ObjectHideFlags: 0
