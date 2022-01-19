@@ -160,7 +160,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3322964969593404474}
-  - component: {fileID: 3322964969593404475}
   - component: {fileID: 3322964969593404476}
   - component: {fileID: 3322964969593404477}
   - component: {fileID: 3322964969593404478}
@@ -193,25 +192,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3322964969593404475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3322964969593404465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5b932572c508948ac984e10477d096, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 3322964969191126963}
-  playerInput: {fileID: 3322964969593404476}
-  pickupDistance: 100
-  useWorldAxis: 0
-  useLerp: 1
-  lerp: 0.075
-  minimumZoomDistance: 2
 --- !u!114 &3322964969593404476
 MonoBehaviour:
   m_ObjectHideFlags: 0
