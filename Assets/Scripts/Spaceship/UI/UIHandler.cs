@@ -15,6 +15,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private TMP_Text currencyText;
     [SerializeField] private TMP_Text spaceshipText;
     [SerializeField] private TMP_Text arrivedSpaceshipText;
+    [SerializeField] private TMP_Text boxesText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
@@ -64,8 +65,8 @@ public class UIHandler : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
     }
 
-    public void SetBoxesTextValue(int totalBoxes) {
-        
+    public void SetBoxesTextValue(int value) {
+        boxesText.text = value.ToString();
     }
 
     private void OnPrepPhaseOver(EventData eventData) {
@@ -135,15 +136,15 @@ public class UIHandler : MonoBehaviour {
 
     public void SetCurrencyTextValue(float value) {
         Debug.Log("Set currency");
-        currencyText.text = $"Currency: {value}";
+        currencyText.text = value.ToString();
     }
 
     public void SetSpaceshipTextValue(int value) {
-        spaceshipText.text = $"Spaceships: {value}";
+        spaceshipText.text =value.ToString();
     }
 
     public void SetArrivedSpaceshipValue(int value) {
-        arrivedSpaceshipText.text = $"Arrived Spaceships: {value}";
+        arrivedSpaceshipText.text = value.ToString();
     }
 
     private void ShowCursor(bool showCursor) {
