@@ -3,18 +3,31 @@ using UnityEngine;
 
 public class SpaceshipManager : Module {
     [SerializeField] private int spaceships;
+
+    private int _arrivedSpaceships;
+    public int ArrivedSpaceships {
+        get => _arrivedSpaceships;
+        set {
+            _arrivedSpaceships = value;
+            uiHandler.SetArrivedSpaceshipValue(_arrivedSpaceships);
+        }
+    }
+
     public int Spaceships { get; private set; }
     [SerializeField] private int startMoney;
 
     [SerializeField] private UIHandler uiHandler;
     [SerializeField] private bool orbit;
     [SerializeField] private float orbitSpeed;
-    
+
+    [SerializeField]
+    private int baseMoney;
+
     private float _x, _z;
     private GameObject _planet;
 
     public float Money { get; set; }
-    
+
     protected override void Start() {
         base.Start();
         Spaceships = spaceships;
@@ -23,6 +36,9 @@ public class SpaceshipManager : Module {
         //Set UI to values
         uiHandler.SetCurrencyTextValue(Money);
         uiHandler.SetSpaceshipTextValue(Spaceships);
+
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, 
+            (EventData eventData) => AddMoney(baseMoney));
 
         if (gameObject.CompareTag("BaseStation_2")) {
             _z = Mathf.PI;
@@ -58,6 +74,8 @@ public class SpaceshipManager : Module {
         Spaceships -= amount;
         uiHandler.SetSpaceshipTextValue(Spaceships);
     }
+
+    //Todo: Add arrived on collision
 
     private void Orbit() {
         transform.position = new Vector3(Mathf.Cos(_x), 0, Mathf.Sin(_z)) * 150;
