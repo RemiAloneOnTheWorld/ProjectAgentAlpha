@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moduleData: {fileID: 11400000, guid: 81fee0f85c6fa0747ad12355f0d59bec, type: 2}
+  explosionPrefab: {fileID: 2851441938389197133, guid: 7962665ee5413054290659607dcfa0c6, type: 3}
   currencyGenerated: 75
   testMoneyPerSecond: 0
 --- !u!65 &3679085160620805117

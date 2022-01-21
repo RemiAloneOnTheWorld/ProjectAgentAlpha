@@ -24609,7 +24609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2851441938389197133, guid: 7962665ee5413054290659607dcfa0c6, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2851441938389197133, guid: 7962665ee5413054290659607dcfa0c6, type: 3}
       propertyPath: prewarm

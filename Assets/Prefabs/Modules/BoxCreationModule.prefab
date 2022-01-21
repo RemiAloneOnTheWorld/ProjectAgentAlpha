@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moduleData: {fileID: 11400000, guid: eb999ebdd58cfa745979751cc94e864e, type: 2}
+  explosionPrefab: {fileID: 2851441938389197133, guid: 7962665ee5413054290659607dcfa0c6, type: 3}
   box: {fileID: 3339259265492070164, guid: 4f40adfcfdc67a242a136eab49019d58, type: 3}
   placementPositions:
   - {fileID: 1714672370019967108}
