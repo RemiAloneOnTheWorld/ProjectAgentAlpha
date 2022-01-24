@@ -1,8 +1,6 @@
-using System;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Users;
 
 
@@ -14,6 +12,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float smoothTime;
+    [SerializeField] private float moveDistance = 500;
 
     private InputAction _move;
     private InputAction _look;
@@ -181,8 +180,18 @@ public class Player_Movement : MonoBehaviour
             _velocity *= deceleration;
         }
 
+        Vector3 newPosition = transform.position + _velocity * Time.deltaTime;
+
+        if(Vector3.Distance(Vector3.zero, newPosition) < moveDistance - 25) {
+            _uiHandler.warningText.enabled = false;
+        } else {
+            _uiHandler.warningText.enabled = true;
+        }
+
         //_input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
-        transform.position += _velocity * Time.deltaTime;
+        if(Vector3.Distance(Vector3.zero, newPosition) < moveDistance) {
+            transform.position = newPosition;
+        }
     }
 
     public PlayerInput getPlayerInput()
