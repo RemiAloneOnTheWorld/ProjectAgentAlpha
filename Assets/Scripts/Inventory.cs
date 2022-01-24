@@ -5,21 +5,29 @@ using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
-
+    [Header("Player objects")]
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private UIHandler UIHandler;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private RectTransform crosshair;
+    [SerializeField] private GameObject enemyWorld;
+
+    [Header("Inventory settings")]
     [SerializeField] private int BoxCount = 0;
     [SerializeField] private int pickupDistance;
     [SerializeField] private int placeDistance;
-    [SerializeField] private Camera playerCamera;
+    [Range(0f, 1f)] public float radiusHalfBox;
+
+    [Header("Boxes")]
     [SerializeField] private GameObject boxPrefab;
     [SerializeField] private GameObject[] boxPrefabs;
-    [Range(0f, 1f)] public float radiusHalfBox;
-    [SerializeField] private RectTransform crosshair;
+
+    [Header("Lerp settings")]
     [SerializeField] private bool useLerp;
     [SerializeField] [Range(0, 1)] private float lerp;
     [SerializeField] private float minimumZoomDistance;
     [SerializeField] private bool useWorldAxis;
-    [SerializeField] private UIHandler UIHandler;
+    
 
     [Header("Materials")]
     [SerializeField] private Material redBoxMat;
@@ -31,11 +39,11 @@ public class Inventory : MonoBehaviour
     private GameObject _tempBox;
     private Vector3 _previousPosition;
     private float _scrollValue;
+    private bool inWorld = false;
 
     void Start()
     // Start is called before the first frame update
     {
-
         playerInput.actions.FindAction("PlaceBox", true).started += StartedPlace;
         playerInput.actions.FindAction("PlaceBox", true).canceled += CancelPlace;
         playerInput.actions.FindAction("CollectBox", true).canceled += CancelCollect;
@@ -85,6 +93,7 @@ public class Inventory : MonoBehaviour
 
     }
 
+
     private GameObject GetRandomBox()
     {
         int randomNumber = (int) UnityEngine.Random.Range(0, boxPrefabs.Length);
@@ -97,7 +106,7 @@ public class Inventory : MonoBehaviour
         if (BoxCount  > -1)
         {
 
-            if (checkCollision(_pickedBox.transform.position))
+            if (!inWorld && checkCollision(_pickedBox.transform.position) )
             {
                 Destroy(_pickedBox);
                 BoxCount++;
@@ -146,6 +155,8 @@ public class Inventory : MonoBehaviour
 
     }
 
+
+
     private void MoveBox()
     {
         Vector3 newPosition;
@@ -180,8 +191,8 @@ public class Inventory : MonoBehaviour
             useLerp ? Vector3.Lerp(_pickedBox.transform.position, newPosition, lerp) : newPosition;
 
         _previousPosition = _pickedBox.transform.position;
-        bool collision = checkCollision(_pickedBox.transform.position);
-        if (collision)
+        
+        if (!inWorld && checkCollision(_pickedBox.transform.position))
         {
             _pickedBox.GetComponent<MeshRenderer>().material = redBoxMat;
         }
@@ -200,5 +211,11 @@ public class Inventory : MonoBehaviour
 
         _scrollValue += pContext.ReadValue<Vector2>().y * Time.deltaTime;
     }
+
+    private void findWorldBounds()
+    {
+
+    }
+
 
 }
