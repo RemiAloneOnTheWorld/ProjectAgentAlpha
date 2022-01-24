@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cceeadee1b4d7a744950d59528a94d78, type: 3}
+  m_Name: Planet Shape Main Menu
+  m_EditorClassIdentifier: 
+  planetRadius: 100
+  noiseLayers:
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    noiseSettings:
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 0.09786781
+        roughness: 1.7349553
+        persistence: 1.0675313
+        baseRoughness: 1.2947104
+        minValue: 2.4802523
+        numLayers: 4
+        centre: {x: 35, y: 159, z: 73}
+      rigidNoiseSettings:
+        strength: 1
+        roughness: 2
+        persistence: 0.5
+        baseRoughness: 1
+        minValue: 0
+        numLayers: 1
+        centre: {x: 0, y: 0, z: 0}
+        weightMultiplier: 10.035681
+  - enabled: 0
+    useFirstLayerAsMask: 0
+    noiseSettings:
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 0.048190817
+        roughness: 1.5117059
+        persistence: 0.80804527
+        baseRoughness: 1.141182
+        minValue: 2.2421036
+        numLayers: 1
+        centre: {x: 118, y: 55, z: 123}
+      rigidNoiseSettings:
+        strength: 1
+        roughness: 2
+        persistence: 0.5
+        baseRoughness: 1
+        minValue: 0
+        numLayers: 1
+        centre: {x: 0, y: 0, z: 0}
+        weightMultiplier: 3.0541344
+  - enabled: 1
+    useFirstLayerAsMask: 1
+    noiseSettings:
+      filterType: 1
+      simpleNoiseSettings:
+        strength: 0.09219572
+        roughness: 1.4623911
+        persistence: 0.83017683
+        baseRoughness: 1.15014
+        minValue: 2.1757855
+        numLayers: 6
+        centre: {x: 127, y: 18, z: 103}
+      rigidNoiseSettings:
+        strength: 0.2
+        roughness: 1.5
+        persistence: 1.25
+        baseRoughness: 2.5
+        minValue: 0
+        numLayers: 5
+        centre: {x: 0, y: 0, z: 0}
+        weightMultiplier: 0.46497154
