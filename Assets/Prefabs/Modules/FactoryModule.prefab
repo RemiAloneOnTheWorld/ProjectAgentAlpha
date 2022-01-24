@@ -48,8 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26475629c6f0b94e8eba254f15fb6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
-  price: 100
+  moduleData: {fileID: 11400000, guid: 4004e7a80a9c24b41a89d3c73adad37a, type: 2}
   spaceships: 2
 --- !u!65 &1920527361626663944
 BoxCollider:

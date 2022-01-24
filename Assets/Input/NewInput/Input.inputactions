@@ -1,5 +1,5 @@
 {
-    "name": "InputNew",
+    "name": "Input",
     "maps": [
         {
             "name": "Spaceship",
@@ -65,6 +65,14 @@
                     "name": "Ready",
                     "type": "Button",
                     "id": "1b0ab2d8-4540-42c2-8c42-d0bd230deaca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RemoveConnection",
+                    "type": "Button",
+                    "id": "dc1f23da-79fc-48ef-a9da-26a7662309e7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -277,6 +285,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "CollectBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db10733b-6e4e-4f09-b645-bf6fd286de69",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse&Keyboard",
+                    "action": "RemoveConnection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8dea174c-ee8f-4220-a4ec-24ddb5a52269",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "RemoveConnection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

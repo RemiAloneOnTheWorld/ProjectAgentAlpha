@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,12 +12,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int placeDistance;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject boxPrefab;
+    [SerializeField] private GameObject[] boxPrefabs;
     [Range(0f, 1f)] public float radiusHalfBox;
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private bool useLerp;
     [SerializeField] [Range(0, 1)] private float lerp;
     [SerializeField] private float minimumZoomDistance;
     [SerializeField] private bool useWorldAxis;
+    [SerializeField] private UIHandler UIHandler;
 
     [Header("Materials")]
     [SerializeField] private Material redBoxMat;
@@ -24,6 +28,7 @@ public class Inventory : MonoBehaviour
 
     private bool selected;
     private GameObject _pickedBox;
+    private GameObject _tempBox;
     private Vector3 _previousPosition;
     private float _scrollValue;
 
@@ -43,11 +48,15 @@ public class Inventory : MonoBehaviour
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
              pickupDistance) || !raycastHit.collider.CompareTag("Block"))
         {
-            print("no box found!");
             return;
+        }
+        if(BoxCount == -1)
+        {
+            BoxCount++;
         }
         Destroy(raycastHit.collider.gameObject);
         BoxCount++;
+        UIHandler.SetBoxesTextValue(BoxCount > 0 ? BoxCount : 0);
     }
 
     private void StartedPlace(InputAction.CallbackContext obj)
@@ -57,7 +66,9 @@ public class Inventory : MonoBehaviour
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance)
             || !raycastHit.collider.CompareTag("Block"))
         {
-            _pickedBox = Instantiate<GameObject>(boxPrefab, pos, Quaternion.Euler(Vector3.zero));
+            GameObject box = GetRandomBox();
+            print(box.transform.rotation);
+            _pickedBox = Instantiate<GameObject>(box, pos, box.transform.rotation);
             if (BoxCount > 0)
             {
                 BoxCount--;
@@ -68,12 +79,17 @@ public class Inventory : MonoBehaviour
             _pickedBox = raycastHit.collider.gameObject;
 
         }
-        _pickedBox.GetComponent<BoxCollider>().enabled = false;
+        _pickedBox.GetComponent<Collider>().enabled = false;
         _previousPosition = _pickedBox.transform.position;
         
 
     }
 
+    private GameObject GetRandomBox()
+    {
+        int randomNumber = (int) UnityEngine.Random.Range(0, boxPrefabs.Length);
+        return (GameObject) boxPrefabs[randomNumber];
+    }
 
     private void CancelPlace(InputAction.CallbackContext pContext)
     {
@@ -81,27 +97,29 @@ public class Inventory : MonoBehaviour
         if (BoxCount  > -1)
         {
 
-            Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
-            if (checkCollision(pos))
+            if (checkCollision(_pickedBox.transform.position))
             {
-                print("Cant place!");
                 Destroy(_pickedBox);
                 BoxCount++;
-            }
-            else
+            } else
             {
                 _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
-                _pickedBox.GetComponent<BoxCollider>().enabled = true;
-                print("box Placed!");
+                _pickedBox.GetComponent<Collider>().enabled = true;
                
+
+               if(BoxCount == 0)
+                {
+                    BoxCount--;
+                }
 
             }
         }
         else
         {
-            print("no boxes in inventory!");
+          
             Destroy(_pickedBox);
         }
+        UIHandler.SetBoxesTextValue(BoxCount > 0 ? BoxCount : 0);
     }
 
 
@@ -110,7 +128,6 @@ public class Inventory : MonoBehaviour
         Collider[] collisions = Physics.OverlapBox(pos, boxPrefab.transform.localScale * radiusHalfBox);
         if (collisions.Length > 0)
         {
-            print(collisions[collisions.Length - 1]);
             return true;
         }
         return false;
@@ -127,15 +144,6 @@ public class Inventory : MonoBehaviour
 
         }
 
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (selected)
-        {
-            print("drawGizmo");
-            Gizmos.DrawWireCube(playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance)), boxPrefab.transform.localScale * radiusHalfBox);
-        }
     }
 
     private void MoveBox()
@@ -157,12 +165,12 @@ public class Inventory : MonoBehaviour
             float cameraForwardProjection = Vector3.Dot(transform.forward,
                 (_pickedBox.transform.position - transform.position));
 
-            if (cameraForwardProjection < minimumZoomDistance && _scrollValue < 0)
+            if (cameraForwardProjection < minimumZoomDistance && _scrollValue < minimumZoomDistance)
             {
-                _scrollValue = 0;
+                _scrollValue = minimumZoomDistance;
             }
             //==============================================================================================================
-
+            
             Vector3 mousePositionMagnitude = new Vector3(crosshair.position.x, crosshair.position.y, _scrollValue);
             newPosition = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
         }
@@ -171,17 +179,15 @@ public class Inventory : MonoBehaviour
         _pickedBox.transform.position =
             useLerp ? Vector3.Lerp(_pickedBox.transform.position, newPosition, lerp) : newPosition;
 
-        _scrollValue += Vector3.Dot(transform.transform.forward, (_previousPosition - _pickedBox.transform.position));
         _previousPosition = _pickedBox.transform.position;
-        if (checkCollision(_pickedBox.transform.position))
+        bool collision = checkCollision(_pickedBox.transform.position);
+        if (collision)
         {
             _pickedBox.GetComponent<MeshRenderer>().material = redBoxMat;
-            print("box is red");
         }
         else
         {
-            _pickedBox.GetComponent<MeshRenderer>().material = greenBoxMat;
-            print("box is green");
+            _pickedBox.GetComponent<MeshRenderer>().material = greenBoxMat;  
         }
     }
 

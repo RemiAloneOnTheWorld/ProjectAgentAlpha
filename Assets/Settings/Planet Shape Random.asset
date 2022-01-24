@@ -19,13 +19,13 @@ MonoBehaviour:
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 0.05684898
-        roughness: 1.3465813
-        persistence: 1.0192357
-        baseRoughness: 1.1954303
-        minValue: 2.2163546
-        numLayers: 5
-        centre: {x: 227, y: 7, z: 104}
+        strength: 0.09158325
+        roughness: 1.5423702
+        persistence: 1.0730454
+        baseRoughness: 1.4695847
+        minValue: 2.449561
+        numLayers: 4
+        centre: {x: 76, y: 72, z: 81}
       rigidNoiseSettings:
         strength: 1
         roughness: 2
@@ -34,19 +34,19 @@ MonoBehaviour:
         minValue: 0
         numLayers: 1
         centre: {x: 0, y: 0, z: 0}
-        weightMultiplier: 10.865261
+        weightMultiplier: 1.2750168
   - enabled: 1
     useFirstLayerAsMask: 1
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 0.075465575
-        roughness: 1.3606329
-        persistence: 0.8634653
-        baseRoughness: 1.4584056
-        minValue: 2.2148643
-        numLayers: 7
-        centre: {x: 173, y: 137, z: 49}
+        strength: 0.05701041
+        roughness: 1.6587785
+        persistence: 0.9520997
+        baseRoughness: 1.1677456
+        minValue: 2.225583
+        numLayers: 6
+        centre: {x: 244, y: 145, z: 176}
       rigidNoiseSettings:
         strength: 1
         roughness: 2
@@ -55,19 +55,19 @@ MonoBehaviour:
         minValue: 0
         numLayers: 1
         centre: {x: 0, y: 0, z: 0}
-        weightMultiplier: 3.368309
+        weightMultiplier: 0.13306808
   - enabled: 1
     useFirstLayerAsMask: 1
     noiseSettings:
       filterType: 1
       simpleNoiseSettings:
-        strength: 0.0755977
-        roughness: 1.6637874
-        persistence: 0.89600694
-        baseRoughness: 1.2825222
-        minValue: 2.124683
+        strength: 0.046339575
+        roughness: 1.3516227
+        persistence: 0.820785
+        baseRoughness: 1.1105564
+        minValue: 2.1942592
         numLayers: 4
-        centre: {x: 195, y: 64, z: 170}
+        centre: {x: 75, y: 37, z: 241}
       rigidNoiseSettings:
         strength: 0.2
         roughness: 1.5
@@ -76,4 +76,4 @@ MonoBehaviour:
         minValue: 0
         numLayers: 5
         centre: {x: 0, y: 0, z: 0}
-        weightMultiplier: 1.455843
+        weightMultiplier: 12.019625

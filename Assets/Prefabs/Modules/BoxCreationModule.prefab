@@ -122,8 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff2e94c42b74014685309bfd7f77bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
-  price: 100
+  moduleData: {fileID: 11400000, guid: eb999ebdd58cfa745979751cc94e864e, type: 2}
   box: {fileID: 3339259265492070164, guid: 4f40adfcfdc67a242a136eab49019d58, type: 3}
   placementPositions:
   - {fileID: 1714672370019967108}

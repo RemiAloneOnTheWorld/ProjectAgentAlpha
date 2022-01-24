@@ -10,7 +10,7 @@ public class PlayerCameraController : MonoBehaviour {
 
     private void Start() {
         _animator = GetComponent<Animator>();
-        
+
     }
 
     public void OnPrepPhaseOver() {
