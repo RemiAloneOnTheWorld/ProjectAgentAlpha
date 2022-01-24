@@ -16,6 +16,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private TMP_Text spaceshipText;
     [SerializeField] private TMP_Text arrivedSpaceshipText;
     [SerializeField] private TMP_Text boxesText;
+    [SerializeField] public TMP_Text warningText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
