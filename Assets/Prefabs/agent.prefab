@@ -55,7 +55,7 @@ MonoBehaviour:
   MaxStep: 5000
   correct: {fileID: 2100000, guid: e42c3d23c1b424344a85f355f4e1b343, type: 2}
   wrong: {fileID: 2100000, guid: 92acc6eb4c2891047bf92fc32217c705, type: 2}
-  standard: {fileID: 2100000, guid: a2ca4792ee9994547aaa0deebfda33be, type: 2}
+  standard: {fileID: 7135248526902129815, guid: a3d1de5d07ad4fa48a9e79ffb848e856, type: 3}
   mlAgentBody: {fileID: 7746009803853718148}
   goals: []
   spawners: []
@@ -64,7 +64,7 @@ MonoBehaviour:
   beginPosition: {x: 0, y: 0, z: 0}
   beginrotation: {x: 0, y: 0, z: 0}
   useVectorObs: 1
-  training: 0
+  training: 1
 --- !u!114 &3764222084501613942
 MonoBehaviour:
   m_ObjectHideFlags: 0
