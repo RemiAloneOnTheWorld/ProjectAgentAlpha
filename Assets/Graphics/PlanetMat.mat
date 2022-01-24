@@ -115,7 +115,6 @@ Material:
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _elevationMinMax: {r: -0.07855037, g: 0.048874743, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &5171408806867598185
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
