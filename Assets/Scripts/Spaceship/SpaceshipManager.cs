@@ -32,6 +32,8 @@ public class SpaceshipManager : Module {
         base.Start();
         Spaceships = spaceships;
         Money = startMoney;
+        
+        SetBaseModule(this);
 
         //Set UI to values
         uiHandler.SetCurrencyTextValue(Money);

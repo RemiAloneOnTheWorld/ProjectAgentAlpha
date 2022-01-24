@@ -5,10 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
     private Connector _connector;
+
+    private bool _isController;
 
     [Header("UI Game objects")]
     //Stats
@@ -27,6 +30,7 @@ public class UIHandler : MonoBehaviour {
     //Buy menu
     [SerializeField] private GameObject buyMenu;
     private bool _menuShown;
+    private GameObject _currentBuyMenuButton;
 
     [Header("Destruction Preview")]
     [SerializeField] private TMP_Text moduleDestructionNameText;
@@ -63,6 +67,7 @@ public class UIHandler : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.OnMouseModuleSelect, SetSelectedButton);
     }
 
     public void SetBoxesTextValue(int value) {
@@ -107,6 +112,8 @@ public class UIHandler : MonoBehaviour {
         _initCrosshairPos = crosshair.transform.position;
         _lastScreenWidth = Screen.width;
         _initialPlayerUIPosition = playerUI.position;
+
+        _isController = _playerInput.currentControlScheme.Equals("Gamepad");
     }
 
     private void Update() {
@@ -156,13 +163,23 @@ public class UIHandler : MonoBehaviour {
         if (_menuShown) {
             _connector.SetCurrencyModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
+            
+            if (!_isController) {
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));    
+            }
         }
     }
 
     public void ShowModulePreview(GameObject module) {
+        if (_isController) {
+            if (EventSystem.current.currentSelectedGameObject != _currentBuyMenuButton) {
+                CloseModulePreview();
+            }
+        }
+        
         if (_modulePreviewShown) return;
         previewWindow.gameObject.SetActive(true);
-
+        
         //Assign module information
         ModuleDataWrapper moduleData = module.GetComponent<ModuleDataWrapper>();
         moduleShopNameText.text = $"Name: {moduleData.GetName()}";
@@ -184,6 +201,10 @@ public class UIHandler : MonoBehaviour {
         if (_menuShown) {
             _connector.SetFactoryModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
+            
+            if (!_isController) {
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));    
+            }
         }
     }
 
@@ -191,6 +212,10 @@ public class UIHandler : MonoBehaviour {
         if (_menuShown) {
             _connector.SetBoxCreationModule();
             ShowMenu(new InputAction.CallbackContext());
+            
+            if (!_isController) {
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));    
+            }
         }
     }
 
@@ -203,19 +228,26 @@ public class UIHandler : MonoBehaviour {
             return;
         }
 
-
+        Debug.Log("Show menu called on " + gameObject.name);
+        
         _menuShown = !_menuShown;
-        ShowCursor(_menuShown);
         buyMenu.SetActive(_menuShown);
 
         if (_menuShown) {
-            if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+            if (_isController) {
                 EventSystem.current.SetSelectedGameObject(currencyButton.gameObject);
+                _currentBuyMenuButton = currencyButton.gameObject;
                 currencyButton.GetComponent<EventTrigger>().OnSelect(null);
+            }
+            else {
+                ShowCursor(_menuShown);
             }
         }
         else {
             CloseModulePreview();
+            if (!_playerInput.currentControlScheme.Equals("Gamepad")) {
+                ShowCursor(_menuShown);
+            }
         }
     }
 
@@ -262,8 +294,18 @@ public class UIHandler : MonoBehaviour {
             destroyButton.GetComponentInChildren<TMP_Text>().text = "Destroy!";
             if (_playerInput.currentControlScheme.Equals("Gamepad")) {
                 EventSystem.current.SetSelectedGameObject(destroyButton.gameObject);
-                //currencyButton.GetComponent<EventTrigger>().OnSelect(null);
             }
         }
     }
+
+    public void CacheSelectedButton(Button button) {
+        _currentBuyMenuButton = button.gameObject;
+    }
+    
+    private void SetSelectedButton(EventData eventData) {
+        if (_isController) {
+            EventSystem.current.SetSelectedGameObject(_currentBuyMenuButton);
+        }
+    }
+    
 }

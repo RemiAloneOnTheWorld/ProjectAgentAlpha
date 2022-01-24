@@ -79,5 +79,7 @@ public enum EventType {
     
     
     PlayerPreparationReady,
-    PlayerDestructionReady
+    PlayerDestructionReady,
+    
+    OnMouseModuleSelect
 }
