@@ -83,7 +83,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
             return;
         }
 
-        if (PhaseGameManager.EventType != EventType.DestructionPhase) {
+        if (PhaseGameManager.CurrentEventType != EventType.DestructionPhase) {
             return;
         }
 

@@ -8,19 +8,32 @@ public class PhaseUIManager : MonoBehaviour {
     private float _timer;
 
     private void Awake() {
-        //EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhase, SetText);
-        EventQueue.GetEventQueue().Subscribe(EventType.InitPreparationPhase, SetTimeText);
-        EventQueue.GetEventQueue().Subscribe(EventType.PrepPhaseTimeUpdate, SetTime);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, SetTimeText);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, SetPhaseText);
+        
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, SetTimeText);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, SetPhaseText);
+        
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, SetTimeText);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, SetPhaseText);
+        
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseTimeUpdate, SetTime);
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseTimeUpdate, SetTime);
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseTimeUpdate, SetTime);
-        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, SetText);
-        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, SetText);
-        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, SetText);
     }
 
-    private void SetText(EventData eventData) {
-        PhaseUIEventData uiEventData = (PhaseUIEventData) eventData;
-        phase.text = uiEventData.phaseName;
+    private void SetPhaseText(EventData eventData) {
+        switch (eventData.eventType) {
+            case EventType.InFadeToPreparation:
+                phase.text = "Preparation Phase";
+                break;
+            case EventType.InFadeToAttack:
+                phase.text = "Spaceship Attack Phase";
+                break;
+            case EventType.InFadeToDestruction:
+                phase.text = "Destruction Phase";
+                break;
+        }
     }
 
     private void SetTime(EventData eventData) {
@@ -29,11 +42,11 @@ public class PhaseUIManager : MonoBehaviour {
         int seconds = (int) timeData.time % 60;
 
         switch (eventData.eventType) {
-            case EventType.PrepPhaseTimeUpdate:
+            case EventType.PreparationPhaseTimeUpdate:
                 time.text = $"{timeData.playerName} has initiated an attack! Time left: {minutes:00}:{seconds:00}";
                 break;
             case EventType.AttackPhaseTimeUpdate:
-                time.text = $"Time left: {minutes:00}:{seconds:00}";
+                time.text = $"Spaceships are attacking! Time left: {minutes:00}:{seconds:00}";
                 break;
             case EventType.DestructionPhaseTimeUpdate:
                 time.text = $"{timeData.playerName}'s attack is over! Time left: {minutes:00}:{seconds:00}";
@@ -45,7 +58,16 @@ public class PhaseUIManager : MonoBehaviour {
     }
 
     private void SetTimeText(EventData eventData) {
-        MessageEventData messageEventData = (MessageEventData) eventData;
-        time.text = messageEventData.message;
+        switch (eventData.eventType) {
+            case EventType.InFadeToPreparation:
+                time.text = "Initiate attack? Press 'R' or 'North Button'";
+                break;
+            case EventType.InFadeToAttack:
+                time.text = "";
+                break;
+            case EventType.InFadeToDestruction:
+                time.text = "Done attacking? Press 'R' or 'North Button'";
+                break;
+        }
     }
 }

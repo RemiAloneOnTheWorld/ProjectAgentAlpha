@@ -224,7 +224,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void ShowMenu(InputAction.CallbackContext pContext) {
-        if (PhaseGameManager.EventType != EventType.PreparationPhase) {
+        if (PhaseGameManager.CurrentEventType != EventType.PreparationPhase) {
             return;
         }
 
@@ -265,7 +265,7 @@ public class UIHandler : MonoBehaviour {
     private void OnPlayerPreparationReady(InputAction.CallbackContext callbackContext) {
 
         //TODO: Forbid during attack phase
-        EventQueue.GetEventQueue().AddEvent(PhaseGameManager.EventType == EventType.PreparationPhase
+        EventQueue.GetEventQueue().AddEvent(PhaseGameManager.CurrentEventType == EventType.PreparationPhase
             ? new PlayerReadyEventData(EventType.PlayerPreparationReady, gameObject.name)
             : new PlayerReadyEventData(EventType.PlayerDestructionReady, gameObject.name));
     }
