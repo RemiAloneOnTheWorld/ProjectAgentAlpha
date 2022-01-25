@@ -30,6 +30,7 @@ public class UIHandler : MonoBehaviour {
 
     //Buy menu
     [SerializeField] private GameObject buyMenu;
+    [SerializeField] private GameObject pauseMenu; 
     private bool _menuShown;
     private GameObject _currentBuyMenuButton;
 
@@ -109,6 +110,7 @@ public class UIHandler : MonoBehaviour {
         _connector = GetComponent<Connector>();
         _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
         _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
+        _playerInput.actions.FindAction("PauseMenu").performed += ShowPauseMenu;
 
         _initCrosshairPos = crosshair.transform.position;
         _lastScreenWidth = Screen.width;
@@ -249,6 +251,20 @@ public class UIHandler : MonoBehaviour {
                 ShowCursor(_menuShown);
             }
         }
+    }
+
+
+    public void closePauseMenu() {
+        Time.timeScale = 1f;
+        ShowCursor(false);
+        pauseMenu.SetActive(false);
+        Debug.Log("pause canceled");
+    }
+
+    private void ShowPauseMenu(InputAction.CallbackContext pContext) {
+        Time.timeScale = 0f;
+        ShowCursor(true);
+        pauseMenu.SetActive(true);
     }
 
     private void AnimateCrosshair() {
