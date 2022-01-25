@@ -141,8 +141,6 @@ public class MLAgent : Agent
         goal.GetComponent<Renderer>().material = mat;
         yield return new WaitForSeconds(time);
         goal.GetComponent<Renderer>().material = standard;
-        if(!training)
-            this.enabled = false;
     }
 
     private void LookY(ActionSegment<int> discreteActions)
