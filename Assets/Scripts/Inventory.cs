@@ -5,21 +5,31 @@ using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
-
+    [Header("Player objects")]
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private UIHandler UIHandler;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private RectTransform crosshair;
+    [SerializeField] private GameObject enemyWorld;
+    [SerializeField] private GameObject aiSpawn;
+    [SerializeField] private float spawnRadius;
+
+    [Header("Inventory settings")]
     [SerializeField] private int BoxCount = 0;
     [SerializeField] private int pickupDistance;
     [SerializeField] private int placeDistance;
-    [SerializeField] private Camera playerCamera;
+    [Range(0f, 1f)] public float radiusHalfBox;
+
+    [Header("Boxes")]
     [SerializeField] private GameObject boxPrefab;
     [SerializeField] private GameObject[] boxPrefabs;
-    [Range(0f, 1f)] public float radiusHalfBox;
-    [SerializeField] private RectTransform crosshair;
+
+    [Header("Lerp settings")]
     [SerializeField] private bool useLerp;
     [SerializeField] [Range(0, 1)] private float lerp;
     [SerializeField] private float minimumZoomDistance;
     [SerializeField] private bool useWorldAxis;
-    [SerializeField] private UIHandler UIHandler;
+
 
     [Header("Materials")]
     [SerializeField] private Material redBoxMat;
@@ -31,11 +41,12 @@ public class Inventory : MonoBehaviour
     private GameObject _tempBox;
     private Vector3 _previousPosition;
     private float _scrollValue;
+    private bool inWorld = false;
 
     void Start()
     // Start is called before the first frame update
     {
-
+        UIHandler.SetBoxesTextValue(BoxCount > 0 ? BoxCount : 0);
         playerInput.actions.FindAction("PlaceBox", true).started += StartedPlace;
         playerInput.actions.FindAction("PlaceBox", true).canceled += CancelPlace;
         playerInput.actions.FindAction("CollectBox", true).canceled += CancelCollect;
@@ -50,7 +61,7 @@ public class Inventory : MonoBehaviour
         {
             return;
         }
-        if(BoxCount == -1)
+        if (BoxCount == -1)
         {
             BoxCount++;
         }
@@ -73,7 +84,7 @@ public class Inventory : MonoBehaviour
             {
                 BoxCount--;
             }
-        }   
+        }
         else
         {
             _pickedBox = raycastHit.collider.gameObject;
@@ -81,23 +92,24 @@ public class Inventory : MonoBehaviour
         }
         _pickedBox.GetComponent<Collider>().enabled = false;
         _previousPosition = _pickedBox.transform.position;
-        
+
 
     }
 
+
     private GameObject GetRandomBox()
     {
-        int randomNumber = (int) UnityEngine.Random.Range(0, boxPrefabs.Length);
-        return (GameObject) boxPrefabs[randomNumber];
+        int randomNumber = (int)UnityEngine.Random.Range(0, boxPrefabs.Length);
+        return (GameObject)boxPrefabs[randomNumber];
     }
 
     private void CancelPlace(InputAction.CallbackContext pContext)
     {
         selected = false;
-        if (BoxCount  > -1)
+        if (BoxCount > -1)
         {
-
-            if (checkCollision(_pickedBox.transform.position))
+           
+            if (!inWorldBounds(_pickedBox.transform.position) || checkCollision(_pickedBox.transform.position))
             {
                 Destroy(_pickedBox);
                 BoxCount++;
@@ -105,9 +117,9 @@ public class Inventory : MonoBehaviour
             {
                 _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
                 _pickedBox.GetComponent<Collider>().enabled = true;
-               
 
-               if(BoxCount == 0)
+
+                if (BoxCount == 0)
                 {
                     BoxCount--;
                 }
@@ -116,7 +128,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-          
+
             Destroy(_pickedBox);
         }
         UIHandler.SetBoxesTextValue(BoxCount > 0 ? BoxCount : 0);
@@ -146,6 +158,8 @@ public class Inventory : MonoBehaviour
 
     }
 
+
+
     private void MoveBox()
     {
         Vector3 newPosition;
@@ -170,7 +184,7 @@ public class Inventory : MonoBehaviour
                 _scrollValue = minimumZoomDistance;
             }
             //==============================================================================================================
-            
+
             Vector3 mousePositionMagnitude = new Vector3(crosshair.position.x, crosshair.position.y, _scrollValue);
             newPosition = playerCamera.ScreenToWorldPoint(mousePositionMagnitude);
         }
@@ -180,8 +194,8 @@ public class Inventory : MonoBehaviour
             useLerp ? Vector3.Lerp(_pickedBox.transform.position, newPosition, lerp) : newPosition;
 
         _previousPosition = _pickedBox.transform.position;
-        bool collision = checkCollision(_pickedBox.transform.position);
-        if (collision)
+
+        if (!inWorldBounds(_pickedBox.transform.position) || checkCollision(_pickedBox.transform.position))
         {
             _pickedBox.GetComponent<MeshRenderer>().material = redBoxMat;
         }
@@ -200,5 +214,28 @@ public class Inventory : MonoBehaviour
 
         _scrollValue += pContext.ReadValue<Vector2>().y * Time.deltaTime;
     }
+
+    private bool inWorldBounds(Vector3 point)
+    {
+        float maxX = -Mathf.Infinity , maxY = -Mathf.Infinity, maxZ = -Mathf.Infinity, minX = Mathf.Infinity, minY = Mathf.Infinity, minZ = Mathf.Infinity;
+
+        foreach (Transform wall in enemyWorld.transform)
+        {   
+            Vector3 pos = wall.position;
+            maxX = Math.Max(pos.x, maxX);
+            maxY = Math.Max(pos.y, maxY);
+            maxZ = Math.Max(pos.z, maxZ);
+            minX = Math.Min(pos.x, minX);
+            minY = Math.Min(pos.y, minY);
+            minZ = Math.Min(pos.z, minZ);
+        }
+        print($"maxX: {maxX}\nmaxY: {maxY}\nmaxZ: {maxZ}\nminX: {minX}\nminY: {minY}\nminZ: {minZ}");
+        print((maxX > point.x)  + "\n" + (maxY > point.y) + "\n" + (maxZ > point.z) + "\n" + (minX < point.x) + "\n" + (minY < point.y) + "\n" + (minZ < point.z)  + "\n");
+      
+        return maxX > point.x && minX < point.x &&
+            maxY > point.y && minY < point.y &&
+            maxZ > point.z && minZ < point.z  && Vector3.Distance(aiSpawn.transform.position, point) > spawnRadius;
+    }
+
 
 }
