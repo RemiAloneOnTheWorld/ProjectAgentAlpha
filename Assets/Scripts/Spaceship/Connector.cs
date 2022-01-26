@@ -33,14 +33,21 @@ public class Connector : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, data => LockInteraction(false));
     }
 
-    private void LockInteraction(bool enable) {
-        _lockInteraction = enable;
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver, data => LockInteraction(true));
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhaseOver, data => LockInteraction(false));
+        playerInput.actions.FindAction("Place").performed -= AddModule;
+        playerInput.actions.FindAction("RemoveConnection").performed -= RemoveConnection;
     }
 
     private void Start() {
         _uiHandler = GetComponent<UIHandler>();
         playerInput.actions.FindAction("Place").performed += AddModule;
         playerInput.actions.FindAction("RemoveConnection").performed += RemoveConnection;
+    }
+
+    private void LockInteraction(bool enable) {
+        _lockInteraction = enable;
     }
 
     private void RemoveConnection(InputAction.CallbackContext pContext) {

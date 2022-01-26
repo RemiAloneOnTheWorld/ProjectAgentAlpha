@@ -22,6 +22,21 @@ public class PhaseUIManager : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseTimeUpdate, SetTime);
     }
 
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToPreparation, SetTimeText);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToPreparation, SetPhaseText);
+        
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToAttack, SetTimeText);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToAttack, SetPhaseText);
+        
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToDestruction, SetTimeText);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToDestruction, SetPhaseText);
+        
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseTimeUpdate, SetTime);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseTimeUpdate, SetTime);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhaseTimeUpdate, SetTime);
+    }
+
     private void SetPhaseText(EventData eventData) {
         switch (eventData.eventType) {
             case EventType.InFadeToPreparation:

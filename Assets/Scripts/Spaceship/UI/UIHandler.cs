@@ -74,6 +74,32 @@ public class UIHandler : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.OnMouseModuleSelect, SetSelectedButton);
     }
 
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver,OnPrepPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.OnMouseModuleSelect, SetSelectedButton);
+        _playerInput.actions.FindAction("BuyMenu").performed -= ShowMenu;
+        _playerInput.actions.FindAction("Ready").performed -= OnPlayerPreparationReady;
+        _playerInput.actions.FindAction("PauseMenu").performed -= ShowPauseMenu;
+        }
+
+    private void Start() {
+        ShowCursor(_menuShown);
+        _playerInput = GetComponent<PlayerInput>();
+        _connector = GetComponent<Connector>();
+        _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
+        _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
+        _playerInput.actions.FindAction("PauseMenu").performed += ShowPauseMenu;
+
+        _initCrosshairPos = crosshair.transform.position;
+        _lastScreenWidth = Screen.width;
+        _initialPlayerUIPosition = playerUI.position;
+
+        _isController = _playerInput.currentControlScheme.Equals("Gamepad");
+    }
+
     public void SetBoxesTextValue(int value) {
         boxesText.text = value.ToString();
     }
@@ -104,21 +130,6 @@ public class UIHandler : MonoBehaviour {
         if (playerUI.name == "Player1") {
             playerUI.position = new Vector2(playerUI.position.x, playerUI.rect.height);
         }
-    }
-
-    private void Start() {
-        ShowCursor(_menuShown);
-        _playerInput = GetComponent<PlayerInput>();
-        _connector = GetComponent<Connector>();
-        _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
-        _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
-        _playerInput.actions.FindAction("PauseMenu").performed += ShowPauseMenu;
-
-        _initCrosshairPos = crosshair.transform.position;
-        _lastScreenWidth = Screen.width;
-        _initialPlayerUIPosition = playerUI.position;
-
-        _isController = _playerInput.currentControlScheme.Equals("Gamepad");
     }
 
     private void Update() {
@@ -265,7 +276,11 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void returnMainMenu() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Time.timeScale = 1f;
+        ShowCursor(true);
+        ShowCrosshair(false);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     private void ShowPauseMenu(InputAction.CallbackContext pContext) {

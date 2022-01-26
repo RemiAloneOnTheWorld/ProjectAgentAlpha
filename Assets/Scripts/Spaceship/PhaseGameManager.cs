@@ -30,6 +30,19 @@ public class PhaseGameManager : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerDestructionReady, PlayerIsReady);
     }
 
+    private void OnDisable() {
+        //Preparation phase
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhase, StartPreparationPhase);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PlayerPreparationReady, PlayerIsReady);
+
+        //Attack Phase
+        EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhase, StartAttackPhase);
+
+        //Destruction Phase
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhase, StartDestructionPhase);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PlayerDestructionReady, PlayerIsReady);
+    }
+
     void Start() {
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToPreparation));
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.PreparationPhase));
