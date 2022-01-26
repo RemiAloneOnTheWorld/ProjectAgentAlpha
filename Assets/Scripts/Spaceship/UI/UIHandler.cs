@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
 public class UIHandler : MonoBehaviour {
@@ -42,6 +43,7 @@ public class UIHandler : MonoBehaviour {
 
     //Buttons
     [SerializeField] private Button currencyButton;
+    [SerializeField] private Button resumeButton;
     [SerializeField] private Button destroyButton;
 
     [Header("Shop Preview window")]
@@ -230,8 +232,6 @@ public class UIHandler : MonoBehaviour {
             return;
         }
 
-        Debug.Log("Show menu called on " + gameObject.name);
-        
         _menuShown = !_menuShown;
         buyMenu.SetActive(_menuShown);
 
@@ -253,7 +253,6 @@ public class UIHandler : MonoBehaviour {
         }
     }
 
-
     public void closePauseMenu() {
         Time.timeScale = 1f;
         ShowCursor(false);
@@ -261,10 +260,23 @@ public class UIHandler : MonoBehaviour {
         Debug.Log("pause canceled");
     }
 
+    public void quitGame() {
+        Application.Quit();
+    }
+
+    public void returnMainMenu() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
     private void ShowPauseMenu(InputAction.CallbackContext pContext) {
         Time.timeScale = 0f;
-        ShowCursor(true);
         pauseMenu.SetActive(true);
+        if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+            EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+            resumeButton.GetComponent<EventTrigger>().OnSelect(null);
+        } else {
+            ShowCursor(true);
+        }
     }
 
     private void AnimateCrosshair() {

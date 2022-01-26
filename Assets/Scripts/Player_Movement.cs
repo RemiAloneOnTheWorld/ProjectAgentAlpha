@@ -202,7 +202,7 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_uiHandler.IsMenuShown() || _lockMovement)
+        if (_uiHandler.IsMenuShown() ||_lockMovement)
         {
             return;
         }
@@ -213,6 +213,9 @@ public class Player_Movement : MonoBehaviour
 
     private void updateDirection()
     {
+        if(Time.timeScale == 0f)
+            return;
+            
         var rotateDir2D = _look.ReadValue<Vector2>();
 
         pitch += rotationSpeed * -rotateDir2D.y;
