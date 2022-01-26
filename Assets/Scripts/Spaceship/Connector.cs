@@ -151,7 +151,7 @@ public class Connector : MonoBehaviour {
 
 
         _currentPreviewModule = Instantiate(moduleToPreview, connection.transform.position + displacementVector,
-            _connectionHovered.GetParentModule().transform.rotation);
+            connection.transform.rotation);
 
     }
 

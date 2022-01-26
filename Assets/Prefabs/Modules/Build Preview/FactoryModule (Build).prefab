@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 7823073741605428583}
   - component: {fileID: 5794643553569624782}
   - component: {fileID: 8218737484118341792}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 8638629393184758618}
   - component: {fileID: 5459981266733993139}
   - component: {fileID: 2730840704442376091}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Container02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 387083116353747238}
   - component: {fileID: 8869157169104534184}
   - component: {fileID: 1163896838348496726}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 8170153807670377570}
   - component: {fileID: 4514556324220918378}
   - component: {fileID: 2076398181977440987}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -664,7 +664,7 @@ GameObject:
   - component: {fileID: 3762763728178505993}
   - component: {fileID: 9013852881786543444}
   - component: {fileID: 975642560440513343}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_NormalConnector07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 8982709997380398299}
   - component: {fileID: 4909056134791467081}
   - component: {fileID: 8654212333546680618}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -828,7 +828,7 @@ GameObject:
   - component: {fileID: 3301597982715724685}
   - component: {fileID: 4555210737400642165}
   - component: {fileID: 6745888305629493997}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1074,7 +1074,7 @@ GameObject:
   - component: {fileID: 6357889330422576393}
   - component: {fileID: 3365095494083427825}
   - component: {fileID: 5227859703963442738}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 3471220445302277696}
   - component: {fileID: 6350885579684772141}
   - component: {fileID: 5622405800869025118}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1238,7 +1238,7 @@ GameObject:
   - component: {fileID: 7469843071305262934}
   - component: {fileID: 277524563750409066}
   - component: {fileID: 8391600160754580257}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector03_Main01_Cable03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1318,7 +1318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 527949000068738916}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1472,7 +1472,7 @@ GameObject:
   - component: {fileID: 1836124515742541619}
   - component: {fileID: 7228346062377203580}
   - component: {fileID: 3979560066815361144}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector03_Main01_Outer01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1554,7 +1554,7 @@ GameObject:
   - component: {fileID: 1210721691159919153}
   - component: {fileID: 5838644167659950612}
   - component: {fileID: 1191588878006085324}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector02_Main02_Cable03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1718,7 +1718,7 @@ GameObject:
   - component: {fileID: 4711610010493926281}
   - component: {fileID: 4718574248759731502}
   - component: {fileID: 6109283575032323396}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1800,7 +1800,7 @@ GameObject:
   - component: {fileID: 4592128126338626568}
   - component: {fileID: 161846235242012826}
   - component: {fileID: 8810346566147715093}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1882,7 +1882,7 @@ GameObject:
   - component: {fileID: 2057579667906388951}
   - component: {fileID: 6187816102371469596}
   - component: {fileID: 1992648855976668434}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Container01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1964,7 +1964,7 @@ GameObject:
   - component: {fileID: 2690002784046548829}
   - component: {fileID: 5997123868380240419}
   - component: {fileID: 2902098936362419501}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2046,7 +2046,7 @@ GameObject:
   - component: {fileID: 7215503888375177154}
   - component: {fileID: 5424737902055008203}
   - component: {fileID: 3790745694393779858}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2538,7 +2538,7 @@ GameObject:
   - component: {fileID: 3244180895261737997}
   - component: {fileID: 7471562908699540604}
   - component: {fileID: 2704478292053896892}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2620,7 +2620,7 @@ GameObject:
   - component: {fileID: 8174790205684187011}
   - component: {fileID: 1422474529846641367}
   - component: {fileID: 6421512738019391835}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector02_Main02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2702,7 +2702,7 @@ GameObject:
   - component: {fileID: 1974617838422650849}
   - component: {fileID: 4453985576420652323}
   - component: {fileID: 4909123598046787569}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2866,7 +2866,7 @@ GameObject:
   - component: {fileID: 2068094015912283462}
   - component: {fileID: 8320055276883516754}
   - component: {fileID: 3198460419396129863}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3112,7 +3112,7 @@ GameObject:
   - component: {fileID: 1621514569590070302}
   - component: {fileID: 4445867361265959631}
   - component: {fileID: 3634968229557488896}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Long02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3276,7 +3276,7 @@ GameObject:
   - component: {fileID: 8029443695562011771}
   - component: {fileID: 5951914988515560449}
   - component: {fileID: 9128852385874935301}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3358,7 +3358,7 @@ GameObject:
   - component: {fileID: 6352925742907095606}
   - component: {fileID: 6364082871692335354}
   - component: {fileID: 8820393815202818463}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector03_Main01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3440,7 +3440,7 @@ GameObject:
   - component: {fileID: 6290198163702397074}
   - component: {fileID: 6352034080269277849}
   - component: {fileID: 4608653342517135523}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3551,7 +3551,7 @@ BoxCollider:
   m_GameObject: {fileID: 2245679303486013330}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3566,7 +3566,7 @@ GameObject:
   - component: {fileID: 6935643619343148881}
   - component: {fileID: 2497987992290236778}
   - component: {fileID: 3189316025971550097}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Large02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3730,7 +3730,7 @@ GameObject:
   - component: {fileID: 375058255774841944}
   - component: {fileID: 8306737471172341209}
   - component: {fileID: 994303410564903346}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector02_Main02_OuterRing01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3812,7 +3812,7 @@ GameObject:
   - component: {fileID: 442085291219121453}
   - component: {fileID: 5243256813818547754}
   - component: {fileID: 297873085954411370}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_NormalConnector08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3923,7 +3923,7 @@ BoxCollider:
   m_GameObject: {fileID: 2402981253413806213}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3938,7 +3938,7 @@ GameObject:
   - component: {fileID: 2112164727402905140}
   - component: {fileID: 1577657338946080389}
   - component: {fileID: 2943836451201804773}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Large02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4184,7 +4184,7 @@ GameObject:
   - component: {fileID: 766216753050116350}
   - component: {fileID: 6721587611425932550}
   - component: {fileID: 4610749780744340085}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4430,7 +4430,7 @@ GameObject:
   - component: {fileID: 4183639979602800700}
   - component: {fileID: 6850636855458051853}
   - component: {fileID: 3319577121058239709}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4758,7 +4758,7 @@ GameObject:
   - component: {fileID: 1163734675911957912}
   - component: {fileID: 1781880713476066492}
   - component: {fileID: 766288850597056328}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4840,7 +4840,7 @@ GameObject:
   - component: {fileID: 771076701725300279}
   - component: {fileID: 6898556906809597025}
   - component: {fileID: 273143739538875535}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 6604612397334015746}
   - component: {fileID: 2592700307014207895}
   - component: {fileID: 4903816999388992512}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Large_Hole01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5004,7 +5004,7 @@ GameObject:
   - component: {fileID: 4389010932783011900}
   - component: {fileID: 908911028983060677}
   - component: {fileID: 8155056107757376679}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5086,7 +5086,7 @@ GameObject:
   - component: {fileID: 5292214540855331742}
   - component: {fileID: 1654439417590986696}
   - component: {fileID: 8889579867541329373}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5168,7 +5168,7 @@ GameObject:
   - component: {fileID: 4365407884934335917}
   - component: {fileID: 5209523676525439164}
   - component: {fileID: 7571246263215250019}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Long_Detail04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5250,7 +5250,7 @@ GameObject:
   - component: {fileID: 4206775977743193382}
   - component: {fileID: 1614306692613524871}
   - component: {fileID: 5032830610046071859}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5414,7 +5414,7 @@ GameObject:
   - component: {fileID: 4680863860788417950}
   - component: {fileID: 4599670897463482194}
   - component: {fileID: 1245180898604809219}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5496,7 +5496,7 @@ GameObject:
   - component: {fileID: 5973208828187189886}
   - component: {fileID: 1004555591955662710}
   - component: {fileID: 5455859062212984217}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_NormalConnector03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5742,7 +5742,7 @@ GameObject:
   - component: {fileID: 3031971910689926183}
   - component: {fileID: 2720046337617571581}
   - component: {fileID: 6632558374190256264}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5824,7 +5824,7 @@ GameObject:
   - component: {fileID: 6366900824225134089}
   - component: {fileID: 7625318665301839325}
   - component: {fileID: 4645780624647461463}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Long_Detail03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5906,7 +5906,7 @@ GameObject:
   - component: {fileID: 1466320436786296447}
   - component: {fileID: 2968530659187073788}
   - component: {fileID: 1722967500679226266}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6316,7 +6316,7 @@ GameObject:
   - component: {fileID: 1591567694478533749}
   - component: {fileID: 8278522633495107732}
   - component: {fileID: 4734658784982908822}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6480,7 +6480,7 @@ GameObject:
   - component: {fileID: 2676948881307348991}
   - component: {fileID: 6844995614851535135}
   - component: {fileID: 1867092287385965778}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6562,7 +6562,7 @@ GameObject:
   - component: {fileID: 4852536300883253281}
   - component: {fileID: 5287615783046474224}
   - component: {fileID: 1855954641285356869}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6644,7 +6644,7 @@ GameObject:
   - component: {fileID: 7510875552655129316}
   - component: {fileID: 2866435759489729449}
   - component: {fileID: 2612430033186411409}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector03_Main01_OuterRing01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6808,7 +6808,7 @@ GameObject:
   - component: {fileID: 6083929509245958876}
   - component: {fileID: 8237653774110029288}
   - component: {fileID: 1006982738025300955}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Long_Detail02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6890,7 +6890,7 @@ GameObject:
   - component: {fileID: 2378915104988286686}
   - component: {fileID: 7861419466331863919}
   - component: {fileID: 358187935851229737}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector02_Main02_Cable02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6972,7 +6972,7 @@ GameObject:
   - component: {fileID: 1209882407205319622}
   - component: {fileID: 9203891451099801407}
   - component: {fileID: 2044222323052307150}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector01_Main01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7054,7 +7054,7 @@ GameObject:
   - component: {fileID: 1549072153787933360}
   - component: {fileID: 883951263432629596}
   - component: {fileID: 6527720807981825467}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_EndPoint01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7218,7 +7218,7 @@ GameObject:
   - component: {fileID: 5603859606735271582}
   - component: {fileID: 210674650944488673}
   - component: {fileID: 2639570007112780347}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector04_Main04_Cable02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7300,7 +7300,7 @@ GameObject:
   - component: {fileID: 6833529050385076751}
   - component: {fileID: 5635894321397281759}
   - component: {fileID: 7055687783329572018}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7382,7 +7382,7 @@ GameObject:
   - component: {fileID: 4014242171947924435}
   - component: {fileID: 1687455582803422927}
   - component: {fileID: 119867527296732471}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7626,7 +7626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5553466121189595563}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Habitation_And_Logistics_Outpost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7718,7 +7718,7 @@ GameObject:
   - component: {fileID: 5403434868343742067}
   - component: {fileID: 211940162281088348}
   - component: {fileID: 5034081860983885956}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector03_Main01_Cable02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8046,7 +8046,7 @@ GameObject:
   - component: {fileID: 2865969125390323099}
   - component: {fileID: 6206347021113424600}
   - component: {fileID: 432799306232293323}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_SatelliteDish01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8128,7 +8128,7 @@ GameObject:
   - component: {fileID: 5721452288179000755}
   - component: {fileID: 5865083600193306392}
   - component: {fileID: 8286617643731744631}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8292,7 +8292,7 @@ GameObject:
   - component: {fileID: 4990053157912599948}
   - component: {fileID: 5921647939822183583}
   - component: {fileID: 8335928055090601029}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8374,7 +8374,7 @@ GameObject:
   - component: {fileID: 5954536582767940705}
   - component: {fileID: 8676717038295812924}
   - component: {fileID: 8993864226985503665}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector04_Main04_Outer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8456,7 +8456,7 @@ GameObject:
   - component: {fileID: 3255092181834980503}
   - component: {fileID: 4564783154274400002}
   - component: {fileID: 1281118842745266992}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8590,7 +8590,7 @@ SphereCollider:
   m_GameObject: {fileID: 5628333815008462554}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: -2, y: 0, z: 0}
@@ -8699,7 +8699,7 @@ GameObject:
   - component: {fileID: 983841457160589723}
   - component: {fileID: 5110952255498689813}
   - component: {fileID: 6152826529315610903}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_NormalConnector04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8781,7 +8781,7 @@ GameObject:
   - component: {fileID: 729368124324949150}
   - component: {fileID: 44716165834371685}
   - component: {fileID: 8813157048213434681}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector04_Main04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9027,7 +9027,7 @@ GameObject:
   - component: {fileID: 6538514297925789976}
   - component: {fileID: 974091203146359470}
   - component: {fileID: 8281684050214054595}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Long_Detail01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9191,7 +9191,7 @@ GameObject:
   - component: {fileID: 1460892610314337554}
   - component: {fileID: 6909676707334472778}
   - component: {fileID: 7631929847736769661}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Long01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9273,7 +9273,7 @@ GameObject:
   - component: {fileID: 9195943333907808925}
   - component: {fileID: 491138152975780056}
   - component: {fileID: 6178775746786888687}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_SatelliteDish02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9355,7 +9355,7 @@ GameObject:
   - component: {fileID: 7573632822184570160}
   - component: {fileID: 6735193605699991423}
   - component: {fileID: 1110699749673865750}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9519,7 +9519,7 @@ GameObject:
   - component: {fileID: 7121059251648714610}
   - component: {fileID: 1059824708067998914}
   - component: {fileID: 5361053169886160300}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9683,7 +9683,7 @@ GameObject:
   - component: {fileID: 516151986543622379}
   - component: {fileID: 7785040925249891850}
   - component: {fileID: 1955221283807016412}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9765,7 +9765,7 @@ GameObject:
   - component: {fileID: 7339378856035515540}
   - component: {fileID: 5597599889422847655}
   - component: {fileID: 1647158032253216925}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9929,7 +9929,7 @@ GameObject:
   - component: {fileID: 528513537631909866}
   - component: {fileID: 9160797321787810273}
   - component: {fileID: 3043963886675131413}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Large01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10175,7 +10175,7 @@ GameObject:
   - component: {fileID: 8973992948885961690}
   - component: {fileID: 6327673158215666390}
   - component: {fileID: 5178352511539554307}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10257,7 +10257,7 @@ GameObject:
   - component: {fileID: 4937461965806805546}
   - component: {fileID: 9084655804067602999}
   - component: {fileID: 6330513591006628761}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector02_Main02_Outer01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10339,7 +10339,7 @@ GameObject:
   - component: {fileID: 5019231346557099663}
   - component: {fileID: 8176808027203981786}
   - component: {fileID: 5659991153543483275}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector04_Main04_Cable01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10421,7 +10421,7 @@ GameObject:
   - component: {fileID: 2032794070875885399}
   - component: {fileID: 2148028947617040494}
   - component: {fileID: 6646503617041218439}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_NormalConnector05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10503,7 +10503,7 @@ GameObject:
   - component: {fileID: 6269470444484117736}
   - component: {fileID: 6132634357984469198}
   - component: {fileID: 8038311074230808154}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10585,7 +10585,7 @@ GameObject:
   - component: {fileID: 1269173455862496886}
   - component: {fileID: 8936447900780307395}
   - component: {fileID: 6880826076926953636}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector01_Main01_Cable01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10667,7 +10667,7 @@ GameObject:
   - component: {fileID: 6276315459951076150}
   - component: {fileID: 5775001916890411041}
   - component: {fileID: 5523127632315543116}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector01_Main01_Cable03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10749,7 +10749,7 @@ GameObject:
   - component: {fileID: 6064434596459337262}
   - component: {fileID: 1344702082508384298}
   - component: {fileID: 6361088798397144063}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10995,7 +10995,7 @@ GameObject:
   - component: {fileID: 7651573363484991173}
   - component: {fileID: 8151901527947511295}
   - component: {fileID: 1620442699342486379}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_NormalConnector02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11077,7 +11077,7 @@ GameObject:
   - component: {fileID: 6376383597306937789}
   - component: {fileID: 1470808741093085193}
   - component: {fileID: 8088610830145625164}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector04_Main04_Cable03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11241,7 +11241,7 @@ GameObject:
   - component: {fileID: 4479717745575270146}
   - component: {fileID: 5552081431869623410}
   - component: {fileID: 430779565927292649}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11487,7 +11487,7 @@ GameObject:
   - component: {fileID: 5743020340010123609}
   - component: {fileID: 1756146179375793407}
   - component: {fileID: 2838618751841249039}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector04_Main04_OuterRing01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11815,7 +11815,7 @@ GameObject:
   - component: {fileID: 186872421281864850}
   - component: {fileID: 8633751460542691442}
   - component: {fileID: 6326174122822226913}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Large01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11926,7 +11926,7 @@ BoxCollider:
   m_GameObject: {fileID: 7956584182108996325}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -11941,7 +11941,7 @@ GameObject:
   - component: {fileID: 2350807028442003703}
   - component: {fileID: 8450217649435544021}
   - component: {fileID: 8805279566715773185}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12023,7 +12023,7 @@ GameObject:
   - component: {fileID: 6653929083094861673}
   - component: {fileID: 674908043659289936}
   - component: {fileID: 4182685049392934343}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12105,7 +12105,7 @@ GameObject:
   - component: {fileID: 6664085627649442989}
   - component: {fileID: 561351232525610941}
   - component: {fileID: 2244159613184699055}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_NormalConnector01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12269,7 +12269,7 @@ GameObject:
   - component: {fileID: 1335690279772429252}
   - component: {fileID: 5152132254519346400}
   - component: {fileID: 4508079296163170043}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector03_Main01_Cable01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12351,7 +12351,7 @@ GameObject:
   - component: {fileID: 264472880450851707}
   - component: {fileID: 522197938101869718}
   - component: {fileID: 6588991093083830243}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12433,7 +12433,7 @@ GameObject:
   - component: {fileID: 8647830266481768215}
   - component: {fileID: 1581839339082159085}
   - component: {fileID: 4576698310398832891}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Control03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12567,7 +12567,7 @@ SphereCollider:
   m_GameObject: {fileID: 8099864747190245837}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: -2, y: 0, z: 0}
@@ -12594,7 +12594,7 @@ GameObject:
   - component: {fileID: 6278672138749906106}
   - component: {fileID: 817319974946603554}
   - component: {fileID: 2452222952116874809}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector01_Main01_Cable02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12676,7 +12676,7 @@ GameObject:
   - component: {fileID: 7862786527577173507}
   - component: {fileID: 6752013064859324735}
   - component: {fileID: 2928294106957940577}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canadarm_Rotor_Normal14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12758,7 +12758,7 @@ GameObject:
   - component: {fileID: 6516534580736455926}
   - component: {fileID: 8646170004862331036}
   - component: {fileID: 8119473341122620193}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector01_Main01_Outer01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12840,7 +12840,7 @@ GameObject:
   - component: {fileID: 2529653966379528065}
   - component: {fileID: 4812906034049234038}
   - component: {fileID: 242648829421463193}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Container03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12922,7 +12922,7 @@ GameObject:
   - component: {fileID: 798105598546596012}
   - component: {fileID: 3253705204729341898}
   - component: {fileID: 6406662565227942640}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Panel_Small06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13004,7 +13004,7 @@ GameObject:
   - component: {fileID: 4937328090919666727}
   - component: {fileID: 8607900993283870560}
   - component: {fileID: 908770702467490561}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FactoryModule (Build)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13038,7 +13038,7 @@ BoxCollider:
   m_GameObject: {fileID: 8531903531896608307}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 3.3766239, y: 5, z: 6.5709643}
   m_Center: {x: -0.26999998, y: 0.77975357, z: 0.039073467}
@@ -13148,7 +13148,7 @@ GameObject:
   - component: {fileID: 51668984475031219}
   - component: {fileID: 5692579986361199719}
   - component: {fileID: 6222025508235527}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector01_Main01_OuterRing01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13312,7 +13312,7 @@ GameObject:
   - component: {fileID: 8681975262024251695}
   - component: {fileID: 6702733390014311628}
   - component: {fileID: 2148246067180080673}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13558,7 +13558,7 @@ GameObject:
   - component: {fileID: 2204817297039162304}
   - component: {fileID: 7268861747240654114}
   - component: {fileID: 3462902421540403933}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Handle05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13640,7 +13640,7 @@ GameObject:
   - component: {fileID: 8818241406465418218}
   - component: {fileID: 5996708336166230589}
   - component: {fileID: 7175926256375622993}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13722,7 +13722,7 @@ GameObject:
   - component: {fileID: 3030683423212754422}
   - component: {fileID: 7020895468408377709}
   - component: {fileID: 43592974546262462}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HALO_Connector02_Main02_Cable01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

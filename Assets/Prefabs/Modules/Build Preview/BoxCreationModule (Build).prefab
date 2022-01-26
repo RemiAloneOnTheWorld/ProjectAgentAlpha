@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8473853198717317298}
   - component: {fileID: 7629740310862577235}
   - component: {fileID: 2290696359841567815}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BoxCreationModule (Build)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ BoxCollider:
   m_GameObject: {fileID: 12889795257413458}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 5.5, y: 3.139897, z: 3}
   m_Center: {x: -0.09348345, y: -0.007251382, z: -0.000039339066}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 3023498688204467604}
   - component: {fileID: 4731397746806479290}
   - component: {fileID: 7154532102932178911}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 4391926149338305762}
   - component: {fileID: 7678350814946733144}
   - component: {fileID: 8440521682663383399}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 2745957846246840159}
   - component: {fileID: 1160020219729662698}
   - component: {fileID: 3580558902929874809}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Outer01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 7942415954916775934}
   - component: {fileID: 5009454850276353421}
   - component: {fileID: 2324839385146447470}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 7606077333435757784}
   - component: {fileID: 525505507506521332}
   - component: {fileID: 3755581741453644152}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Outer03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 4684914059647389471}
   - component: {fileID: 8506898917187111}
   - component: {fileID: 178432497715425835}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Large02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +730,7 @@ GameObject:
   - component: {fileID: 5540999151083655042}
   - component: {fileID: 8490023284830938385}
   - component: {fileID: 5317435803175255793}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 6530342082377509565}
   - component: {fileID: 7559529432219093730}
   - component: {fileID: 1712169771709217655}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable02 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1005,7 +1005,7 @@ BoxCollider:
   m_GameObject: {fileID: 845475288041122576}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1348,7 +1348,7 @@ GameObject:
   - component: {fileID: 1058177537725231630}
   - component: {fileID: 14110567413703562}
   - component: {fileID: 2983959039455005611}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Main02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1430,7 +1430,7 @@ GameObject:
   - component: {fileID: 2840754691615167417}
   - component: {fileID: 5843021037321701597}
   - component: {fileID: 7368936521111248886}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Large01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1512,7 +1512,7 @@ GameObject:
   - component: {fileID: 5719599790919136577}
   - component: {fileID: 6616169321554566044}
   - component: {fileID: 4916249968484546642}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Small01 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1594,7 +1594,7 @@ GameObject:
   - component: {fileID: 8236756286963221941}
   - component: {fileID: 1823389967270345937}
   - component: {fileID: 1158417515174440680}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1676,7 +1676,7 @@ GameObject:
   - component: {fileID: 6971315391763740901}
   - component: {fileID: 3340905391200601980}
   - component: {fileID: 2659264955027886255}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable02 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1758,7 @@ GameObject:
   - component: {fileID: 7816212934661195499}
   - component: {fileID: 5333025238479340257}
   - component: {fileID: 7886186830163308701}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Large03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1869,7 @@ BoxCollider:
   m_GameObject: {fileID: 1862473426665895292}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1964,7 +1964,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5739419755123397669}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PlacementPosition
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -1994,7 +1994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5521014977695514193}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PlacementPosition (1)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -2108,7 +2108,7 @@ GameObject:
   - component: {fileID: 4323387988374789238}
   - component: {fileID: 5046833473287303141}
   - component: {fileID: 1746837672829278371}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Main01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2272,7 +2272,7 @@ GameObject:
   - component: {fileID: 3320411025440786387}
   - component: {fileID: 3672733974237138429}
   - component: {fileID: 2265692944963554237}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2436,7 +2436,7 @@ GameObject:
   - component: {fileID: 6217240346367351011}
   - component: {fileID: 4412563402826047023}
   - component: {fileID: 779965060705143179}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2518,7 +2518,7 @@ GameObject:
   - component: {fileID: 125788003123175321}
   - component: {fileID: 7079687992186603848}
   - component: {fileID: 4824832000273475409}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable00 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2600,7 +2600,7 @@ GameObject:
   - component: {fileID: 4265319726895203535}
   - component: {fileID: 5053340592129609614}
   - component: {fileID: 4043711720991631159}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2928,7 +2928,7 @@ GameObject:
   - component: {fileID: 8815989151712155374}
   - component: {fileID: 4206681466700645457}
   - component: {fileID: 1456180218947073498}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3256,7 +3256,7 @@ GameObject:
   - component: {fileID: 3597227375702057603}
   - component: {fileID: 7243912855464915848}
   - component: {fileID: 8773937808838763159}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Railing05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3338,7 +3338,7 @@ GameObject:
   - component: {fileID: 2049617643924648272}
   - component: {fileID: 6795034440165238980}
   - component: {fileID: 7573788649842422977}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3420,7 +3420,7 @@ GameObject:
   - component: {fileID: 8666220087901914579}
   - component: {fileID: 8032696669795754458}
   - component: {fileID: 1851400563714667037}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3502,7 +3502,7 @@ GameObject:
   - component: {fileID: 1697252625844972613}
   - component: {fileID: 7403232607275150127}
   - component: {fileID: 5323000915125613118}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Small01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3666,7 +3666,7 @@ GameObject:
   - component: {fileID: 2457460738874009251}
   - component: {fileID: 6979605150298980635}
   - component: {fileID: 5593372806113209317}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3912,7 +3912,7 @@ GameObject:
   - component: {fileID: 2488838937694929126}
   - component: {fileID: 4188430051918586746}
   - component: {fileID: 3646331902378232683}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_OuterRing02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3994,7 +3994,7 @@ GameObject:
   - component: {fileID: 8043775858700631478}
   - component: {fileID: 4488996596414706049}
   - component: {fileID: 2587254304720344631}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4322,7 +4322,7 @@ GameObject:
   - component: {fileID: 3207664372461373348}
   - component: {fileID: 1268343179224099707}
   - component: {fileID: 6615730621508887661}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4486,7 +4486,7 @@ GameObject:
   - component: {fileID: 8995123922380647122}
   - component: {fileID: 874905185125540080}
   - component: {fileID: 1514213925692174439}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Small03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4814,7 +4814,7 @@ GameObject:
   - component: {fileID: 3358195246644141776}
   - component: {fileID: 7389073497286392262}
   - component: {fileID: 4036667983932402831}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Railing03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4978,7 +4978,7 @@ GameObject:
   - component: {fileID: 7706679826530174724}
   - component: {fileID: 111891953269631867}
   - component: {fileID: 3034064293247742435}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable02 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5060,7 +5060,7 @@ GameObject:
   - component: {fileID: 8963622934010375171}
   - component: {fileID: 5497973400451635351}
   - component: {fileID: 7636742198899542268}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5142,7 +5142,7 @@ GameObject:
   - component: {fileID: 6765048809314413480}
   - component: {fileID: 1484895038034072841}
   - component: {fileID: 1976952742457959936}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_OuterRing04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5470,7 +5470,7 @@ GameObject:
   - component: {fileID: 1587885390033809877}
   - component: {fileID: 3189365772584946522}
   - component: {fileID: 6001088073658647886}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5552,7 +5552,7 @@ GameObject:
   - component: {fileID: 435733825644524874}
   - component: {fileID: 2376219044136862503}
   - component: {fileID: 5056873717659656981}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5716,7 +5716,7 @@ GameObject:
   - component: {fileID: 609985096850275365}
   - component: {fileID: 6591692169304594989}
   - component: {fileID: 2182304961699144721}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_OuterRing03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5880,7 +5880,7 @@ GameObject:
   - component: {fileID: 6524661149486523048}
   - component: {fileID: 7534247727862152510}
   - component: {fileID: 8607940637135198246}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable00 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5962,7 +5962,7 @@ GameObject:
   - component: {fileID: 7024680682122366995}
   - component: {fileID: 5514447186791292687}
   - component: {fileID: 4831871794160246804}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Large04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6044,7 +6044,7 @@ GameObject:
   - component: {fileID: 3197363067241509287}
   - component: {fileID: 6248889668791600641}
   - component: {fileID: 4657255100434401417}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable01 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6126,7 +6126,7 @@ GameObject:
   - component: {fileID: 2770168935666698490}
   - component: {fileID: 3312126246862286645}
   - component: {fileID: 7137479739277427175}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Outer04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6290,7 +6290,7 @@ GameObject:
   - component: {fileID: 1769913616884705704}
   - component: {fileID: 259482614123193680}
   - component: {fileID: 6189003795179975857}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable01 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6372,7 +6372,7 @@ GameObject:
   - component: {fileID: 1855304349550920693}
   - component: {fileID: 84656198515816881}
   - component: {fileID: 8207497721385935734}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6536,7 +6536,7 @@ GameObject:
   - component: {fileID: 4196216697792021111}
   - component: {fileID: 226454928003261710}
   - component: {fileID: 7096852392611628545}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6618,7 +6618,7 @@ GameObject:
   - component: {fileID: 4208783888770631699}
   - component: {fileID: 530876155850187258}
   - component: {fileID: 5597746973922141541}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6752,7 +6752,7 @@ SphereCollider:
   m_GameObject: {fileID: 7275981039725366607}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: -2, y: 0, z: 0}
@@ -6779,7 +6779,7 @@ GameObject:
   - component: {fileID: 2807605694412992901}
   - component: {fileID: 7541088095456040256}
   - component: {fileID: 3262249979636501571}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6861,7 +6861,7 @@ GameObject:
   - component: {fileID: 6347403584203169299}
   - component: {fileID: 8979031193875036226}
   - component: {fileID: 911844652356360325}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6943,7 +6943,7 @@ GameObject:
   - component: {fileID: 7562299319229728213}
   - component: {fileID: 5633184374438749121}
   - component: {fileID: 7423416423089472858}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7025,7 +7025,7 @@ GameObject:
   - component: {fileID: 3525259635919980873}
   - component: {fileID: 472907081423887149}
   - component: {fileID: 6598834107468881591}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7107,7 +7107,7 @@ GameObject:
   - component: {fileID: 3945665797130559953}
   - component: {fileID: 7985009041396150440}
   - component: {fileID: 3034126152637604215}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Railing02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7353,7 +7353,7 @@ GameObject:
   - component: {fileID: 5154284717622641640}
   - component: {fileID: 4435722813482406616}
   - component: {fileID: 7142524733042398475}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7433,7 +7433,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2550061302345978211}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7608,7 +7608,7 @@ GameObject:
   - component: {fileID: 1331066473984794169}
   - component: {fileID: 7205654996495825300}
   - component: {fileID: 4604006292918050338}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7772,7 +7772,7 @@ GameObject:
   - component: {fileID: 2816859888848007801}
   - component: {fileID: 9165530681197568511}
   - component: {fileID: 5803970747567238419}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Railing04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7854,7 +7854,7 @@ GameObject:
   - component: {fileID: 8372520680082412358}
   - component: {fileID: 8170416996892627615}
   - component: {fileID: 1246464909156798482}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable01 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7936,7 +7936,7 @@ GameObject:
   - component: {fileID: 7938666974065675187}
   - component: {fileID: 3013683736133713815}
   - component: {fileID: 2249569938184897426}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_OuterRing01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8018,7 +8018,7 @@ GameObject:
   - component: {fileID: 4361992569030417775}
   - component: {fileID: 4987535790041821238}
   - component: {fileID: 7243911044729219400}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_RAAP_Small02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8152,7 +8152,7 @@ SphereCollider:
   m_GameObject: {fileID: 8546166098746626851}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: -2, y: 0, z: 0}
@@ -8179,7 +8179,7 @@ GameObject:
   - component: {fileID: 8898349969585996116}
   - component: {fileID: 4264173641310334916}
   - component: {fileID: 4404368404683084553}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Main03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8261,7 +8261,7 @@ GameObject:
   - component: {fileID: 5697751011342458899}
   - component: {fileID: 131199713350440719}
   - component: {fileID: 5349852581595819293}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Detail20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8425,7 +8425,7 @@ GameObject:
   - component: {fileID: 1781770274856586371}
   - component: {fileID: 6903809477866592407}
   - component: {fileID: 1148666076876812154}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Outer02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8589,7 +8589,7 @@ GameObject:
   - component: {fileID: 3929589587879950683}
   - component: {fileID: 7871166800609333891}
   - component: {fileID: 3402139310503647060}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Cable00 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8753,7 +8753,7 @@ GameObject:
   - component: {fileID: 6333718508560200923}
   - component: {fileID: 6206209070919416870}
   - component: {fileID: 8877650399260171188}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Railing01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8835,7 +8835,7 @@ GameObject:
   - component: {fileID: 1363229464748977363}
   - component: {fileID: 7758068745162533325}
   - component: {fileID: 1969972325813897676}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrewAirlock_Main04
   m_TagString: Untagged
   m_Icon: {fileID: 0}

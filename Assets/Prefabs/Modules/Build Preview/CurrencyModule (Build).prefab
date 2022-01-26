@@ -227,7 +227,7 @@ SphereCollider:
   m_GameObject: {fileID: 645681351758191963}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: -2, y: 0, z: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1662322219064485315}
   - component: {fileID: 160702415875073290}
   - component: {fileID: 3277925390676844673}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ SphereCollider:
   m_GameObject: {fileID: 1075666164044287570}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: -2, y: 0, z: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 3949423824072228501}
   - component: {fileID: 7982537488040978687}
   - component: {fileID: 5221041623045628668}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Container05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 936894261042087759}
   - component: {fileID: 7519575116212668787}
   - component: {fileID: 2052624086278864658}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: 4417632016317246459}
   - component: {fileID: 1365183291492713274}
   - component: {fileID: 5338174402868649434}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_SatelliteDish01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 7698872392567528032}
   - component: {fileID: 983896762680422512}
   - component: {fileID: 906431294468851419}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Container03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1235,7 +1235,7 @@ GameObject:
   - component: {fileID: 7631704660890842446}
   - component: {fileID: 8676848891025827605}
   - component: {fileID: 1502475273353838566}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1317,7 +1317,7 @@ GameObject:
   - component: {fileID: 7329455040218204927}
   - component: {fileID: 2391231356924533734}
   - component: {fileID: 781840574284427841}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Connector01_Outer01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1399,7 +1399,7 @@ GameObject:
   - component: {fileID: 5564828194109289834}
   - component: {fileID: 5743202733704418384}
   - component: {fileID: 7023175494955173867}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_SolarPanel01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1481,7 +1481,7 @@ GameObject:
   - component: {fileID: 4680735857651455488}
   - component: {fileID: 8829682172143073365}
   - component: {fileID: 1363932884339326757}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Sensor06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1645,7 +1645,7 @@ GameObject:
   - component: {fileID: 3084782580027431132}
   - component: {fileID: 7284972739522544300}
   - component: {fileID: 3361581743166897743}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CurrencyModule (Build)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1678,7 @@ BoxCollider:
   m_GameObject: {fileID: 3084782580027431129}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 6, y: 47, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1870,7 +1870,7 @@ GameObject:
   - component: {fileID: 4996673462574410511}
   - component: {fileID: 6986693358162702100}
   - component: {fileID: 3753865392714029803}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Container02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2116,7 +2116,7 @@ GameObject:
   - component: {fileID: 5989760379312207933}
   - component: {fileID: 1719500658123438534}
   - component: {fileID: 3024307966169568050}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Container04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2280,7 +2280,7 @@ GameObject:
   - component: {fileID: 3962983037753189875}
   - component: {fileID: 209292399039359943}
   - component: {fileID: 4893394686779688612}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Connector01_Cable02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2360,7 +2360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3547883208923383203}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Power_And_Propulsion_Element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2757,7 +2757,7 @@ GameObject:
   - component: {fileID: 6184803560633521676}
   - component: {fileID: 6862976791477852899}
   - component: {fileID: 1827715892563458369}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3167,7 +3167,7 @@ GameObject:
   - component: {fileID: 3415481247780297218}
   - component: {fileID: 1638717025114679248}
   - component: {fileID: 8793347919192190136}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Plate01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3331,7 +3331,7 @@ GameObject:
   - component: {fileID: 3918943316697254009}
   - component: {fileID: 1017810265917070551}
   - component: {fileID: 1994923895133330845}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Connector01_OuterRing01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3495,7 +3495,7 @@ GameObject:
   - component: {fileID: 2412793972093748757}
   - component: {fileID: 3162345127958266936}
   - component: {fileID: 7794251441420771846}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Container06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3741,7 +3741,7 @@ GameObject:
   - component: {fileID: 6591992206908451280}
   - component: {fileID: 8513359258034924896}
   - component: {fileID: 6173043729804470487}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_SideThruster03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3905,7 +3905,7 @@ GameObject:
   - component: {fileID: 1300945192029430826}
   - component: {fileID: 4164532121761914631}
   - component: {fileID: 6112912633720456030}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Sensor02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4069,7 +4069,7 @@ GameObject:
   - component: {fileID: 2091046059099543068}
   - component: {fileID: 3178893938605916278}
   - component: {fileID: 1224774086148110289}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_SideThruster04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4315,7 +4315,7 @@ GameObject:
   - component: {fileID: 17234457369552550}
   - component: {fileID: 5990051384148930957}
   - component: {fileID: 8638039668198787957}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Container07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4397,7 +4397,7 @@ GameObject:
   - component: {fileID: 2644535926420052233}
   - component: {fileID: 821096781992299018}
   - component: {fileID: 6920595515458323183}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Connector01_Main01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4479,7 +4479,7 @@ GameObject:
   - component: {fileID: 4436882685674434564}
   - component: {fileID: 4657485249651858599}
   - component: {fileID: 5278158535196577244}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Sensor04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4643,7 +4643,7 @@ GameObject:
   - component: {fileID: 4765990100293155088}
   - component: {fileID: 2243318095998418899}
   - component: {fileID: 752654153858479323}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4725,7 +4725,7 @@ GameObject:
   - component: {fileID: 521140494266160593}
   - component: {fileID: 3489230435516355144}
   - component: {fileID: 5877833579316650455}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Connector01_Cable03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4889,7 +4889,7 @@ GameObject:
   - component: {fileID: 250319670391742089}
   - component: {fileID: 1599141901884723425}
   - component: {fileID: 8458774257676439985}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_SideThruster01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4971,7 +4971,7 @@ GameObject:
   - component: {fileID: 884334218423514356}
   - component: {fileID: 3927268864620190985}
   - component: {fileID: 6868422326963889757}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5164,7 +5164,7 @@ BoxCollider:
   m_GameObject: {fileID: 7038925910632130573}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -5425,7 +5425,7 @@ GameObject:
   - component: {fileID: 7607083184325724925}
   - component: {fileID: 927576159336993360}
   - component: {fileID: 8871163046661602194}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5589,7 +5589,7 @@ GameObject:
   - component: {fileID: 5269379202363782101}
   - component: {fileID: 7390594913217762728}
   - component: {fileID: 584874680045920419}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Sensor05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5753,7 +5753,7 @@ GameObject:
   - component: {fileID: 3939917471302102975}
   - component: {fileID: 1362813207367934264}
   - component: {fileID: 1464072281032740608}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Container01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5864,7 +5864,7 @@ BoxCollider:
   m_GameObject: {fileID: 7473489091622157060}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -5879,7 +5879,7 @@ GameObject:
   - component: {fileID: 2269116075345662432}
   - component: {fileID: 8596533970399268167}
   - component: {fileID: 4478497016503117866}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6043,7 +6043,7 @@ GameObject:
   - component: {fileID: 2929256141457962260}
   - component: {fileID: 7879793945678847679}
   - component: {fileID: 19566712842167722}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_SolarPanel02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6125,7 +6125,7 @@ GameObject:
   - component: {fileID: 8657924711068721354}
   - component: {fileID: 2368052855299776271}
   - component: {fileID: 5803806461463467625}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Sensor03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6289,7 +6289,7 @@ GameObject:
   - component: {fileID: 1960333570309660230}
   - component: {fileID: 8832315248584413519}
   - component: {fileID: 2692421394541527988}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Connector01_Cable01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6371,7 +6371,7 @@ GameObject:
   - component: {fileID: 6407492067552218019}
   - component: {fileID: 7213847439967034559}
   - component: {fileID: 1112482793124306224}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Sensor01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6453,7 +6453,7 @@ GameObject:
   - component: {fileID: 8103484122229853971}
   - component: {fileID: 5053672691207111682}
   - component: {fileID: 4079658361126653012}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_SideThruster02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6617,7 +6617,7 @@ GameObject:
   - component: {fileID: 3794234202603054145}
   - component: {fileID: 683476953346192368}
   - component: {fileID: 852435103141351096}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_RCS05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6699,7 +6699,7 @@ GameObject:
   - component: {fileID: 5846286433090954789}
   - component: {fileID: 9136019192038451224}
   - component: {fileID: 6047960638667881101}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PAPE_Plate02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
