@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moduleData: {fileID: 11400000, guid: 4004e7a80a9c24b41a89d3c73adad37a, type: 2}
+  explosionPrefab: {fileID: 2851441938389197133, guid: 7962665ee5413054290659607dcfa0c6, type: 3}
   spaceships: 2
 --- !u!65 &1920527361626663944
 BoxCollider:

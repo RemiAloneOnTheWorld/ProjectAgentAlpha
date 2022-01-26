@@ -32,6 +32,10 @@ public class Player_Movement : MonoBehaviour
 
     private bool _lockMovement;
 
+    [SerializeField] private GameObject[] forwardEngines;
+    [SerializeField] private GameObject[] leftEngines;
+    [SerializeField] private GameObject[] rightEngines;
+
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
@@ -58,6 +62,8 @@ public class Player_Movement : MonoBehaviour
             otherPlayer = list[0];
         }
 
+        playerInput.actions.FindAction("Movement", true).performed += updateParticles;
+        playerInput.actions.FindAction("Look", true).performed += updateRotationParticles;
 
         _uiHandler = GetComponent<UIHandler>();
         
@@ -67,6 +73,76 @@ public class Player_Movement : MonoBehaviour
         InputSystem.onDeviceChange += OnDeviceChanged;
 
         _move.canceled += CancelMovement;
+    }
+
+
+    private void updateParticles(InputAction.CallbackContext obj)
+    {
+
+        Vector2 _moveInput2D = obj.ReadValue<Vector2>();
+        if (_moveInput2D.y > 0)
+        {
+            Debug.Log("forward");
+            foreach (GameObject sys in forwardEngines)
+            {
+                ParticleSystem ps = sys.GetComponent<ParticleSystem>();
+                var main = ps.main;
+                main.startLifetime = 5f;
+            }
+        }
+        else
+        {
+            Debug.Log("halt");
+            foreach (GameObject sys in forwardEngines)
+            {
+                ParticleSystem ps = sys.GetComponent<ParticleSystem>();
+                var main = ps.main;
+                main.startLifetime = 0.7f;
+            }
+        }
+    }
+
+    private void updateRotationParticles(InputAction.CallbackContext obj)
+    {
+
+        Vector2 rotateDir2D = obj.ReadValue<Vector2>();
+        if (rotateDir2D.x < 0f)
+        {
+            Debug.Log("left");
+            foreach (GameObject sys in leftEngines)
+            {
+                ParticleSystem ps = sys.GetComponent<ParticleSystem>();
+                var main = ps.main;
+                main.startLifetime = 5f;
+            }
+        }
+        else if (rotateDir2D.x > 0f)
+        {
+            Debug.Log("right");
+            foreach (GameObject sys in rightEngines)
+            {
+                ParticleSystem ps = sys.GetComponent<ParticleSystem>();
+                var main = ps.main;
+                main.startLifetime = 5f;
+            }
+        }
+        else
+        {
+            Debug.Log("rlstop");
+            foreach (GameObject sys in leftEngines)
+            {
+                ParticleSystem ps = sys.GetComponent<ParticleSystem>();
+                var main = ps.main;
+                main.startLifetime = 0.7f;
+            }
+
+            foreach (GameObject sys in rightEngines)
+            {
+                ParticleSystem ps = sys.GetComponent<ParticleSystem>();
+                var main = ps.main;
+                main.startLifetime = 0.7f;
+            }
+        }
     }
 
     private void OnDeviceChanged(InputDevice device, InputDeviceChange change)
@@ -157,8 +233,6 @@ public class Player_Movement : MonoBehaviour
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0f);
     }
-
-
 
 
     private void updateMovement()

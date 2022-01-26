@@ -12,6 +12,8 @@ public abstract class Module : MonoBehaviour {
     private Module _parentModule;
     private Module _baseModule;
 
+    [SerializeField] private ParticleSystem explosionPrefab;
+
     public List<Connection> Connections { get; protected set; }
 
     public void SetParentModule(Module module) {
@@ -77,6 +79,7 @@ public abstract class Module : MonoBehaviour {
             RemoveDockedModule(module.GetBoundModule());
         }
 
+        Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
@@ -90,6 +93,7 @@ public abstract class Module : MonoBehaviour {
             //connection.GetBoundModule().DestroyModuleWithSubs();
         }
 
+        Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
