@@ -98,6 +98,8 @@ public class MLAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(Vector3.Distance(goal.transform.position, transform.position));
+        
+        sensor.AddObservation(goal.transform);
 
         if(useVectorObs)
             sensor.AddObservation(StepCount / (float)MaxStep);
