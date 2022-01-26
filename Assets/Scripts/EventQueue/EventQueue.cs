@@ -58,7 +58,6 @@ public enum EventType {
     Debug,
     //Preparation
     InFadeToPreparation,
-    InitPreparationPhase,
     PreparationPhase,
     PreparationPhaseOver,
     
@@ -73,11 +72,12 @@ public enum EventType {
     DestructionPhaseOver,
     
     //Time related
-    PrepPhaseTimeUpdate,
+    PreparationPhaseTimeUpdate,
     AttackPhaseTimeUpdate,
     DestructionPhaseTimeUpdate,
     
-    
     PlayerPreparationReady,
-    PlayerDestructionReady
+    PlayerDestructionReady,
+    
+    OnMouseModuleSelect
 }

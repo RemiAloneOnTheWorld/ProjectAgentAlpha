@@ -50,6 +50,9 @@ public class Connector : MonoBehaviour {
                 if (raycastHit.collider.transform.parent.CompareTag("Connection")) {
                     //Delete
                     Connection colliderConnection = raycastHit.collider.transform.parent.GetComponent<Connection>();
+                    if (!colliderConnection.GetParentModule().GetBaseModule().CompareTag(baseModule.tag)) {
+                        return;
+                    }
                     if (colliderConnection.GetBoundModule() == null) {
                         colliderConnection.GetParentModule().RemoveConnection(colliderConnection);
                     }
@@ -76,9 +79,13 @@ public class Connector : MonoBehaviour {
             Debug.LogWarning("No module selected! Please select a module first.");
             return;
         }
-
-
+        
         Connection connection = raycastHit.collider.gameObject.GetComponent<Connection>();
+        
+        if(!connection.GetParentModule().GetBaseModule().CompareTag(baseModule.tag)) {
+            return;
+        }
+        
         Vector3 moduleDisplacement = raycastHit.collider.gameObject.transform.position - connection.GetParentModule().transform.position;
 
 

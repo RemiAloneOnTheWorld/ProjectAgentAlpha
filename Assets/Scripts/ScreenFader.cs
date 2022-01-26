@@ -28,18 +28,13 @@ public class ScreenFader : MonoBehaviour
         image.color = new Color(0f, 0f, 0f, 1f);
 
         if (eventType == EventType.PreparationPhaseOver) {
-            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToAttack, "AI Attack Phase"));
-            EventQueue.GetEventQueue().AddEvent(new MessageEventData(EventType.InitPreparationPhase, ""));
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToAttack));
         }
         else if(eventType == EventType.AttackPhaseOver){
-            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToDestruction, "Destruction Phase"));
-            EventQueue.GetEventQueue().AddEvent(new MessageEventData(EventType.InitPreparationPhase, 
-                "Done attacking? Press 'R' or 'North Button'"));
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToDestruction));
         }
         else {
-            EventQueue.GetEventQueue().AddEvent(new MessageEventData(EventType.InitPreparationPhase, 
-                "Initiate attack? Press 'R' or 'North Button'"));
-            EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToPreparation, "Preparation Phase"));
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToPreparation));
         }
         yield return fadeIn();
     }

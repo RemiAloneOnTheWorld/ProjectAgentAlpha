@@ -1,4 +1,5 @@
 //This acts as the base class for all event data.
+
 public class EventData {
     public readonly EventType eventType;
 
@@ -9,7 +10,7 @@ public class EventData {
 
 public class PhaseUIEventData : EventData {
     public readonly string phaseName;
-    
+
     public PhaseUIEventData(EventType eventType, string phaseName) : base(eventType) {
         this.phaseName = phaseName;
     }
@@ -18,7 +19,7 @@ public class PhaseUIEventData : EventData {
 public class PhaseTimeData : EventData {
     public readonly float time;
     public readonly string playerName;
-    
+
     public PhaseTimeData(EventType eventType, float time, string playerName) : base(eventType) {
         this.time = time;
         this.playerName = playerName;

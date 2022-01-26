@@ -51,25 +51,24 @@ public class CameraController : MonoBehaviour {
     }
 
     public void Ready(EventData eventData) {
-        ready = 2;
+        //ready = 2;
         StartCoroutine(StartPhase(eventData));
-        //animationStates.SetFloat("Ready", ready);
-        player1Camera.OnPrepPhaseOver();
-        player2Camera.OnPrepPhaseOver();
     }
 
-    private IEnumerator E_OnAttackPhaseOver(EventData eventData) {
-        yield return new WaitForEndOfFrame();
+    private IEnumerator AttackPhaseOver(EventData eventData) {
+        player1Camera.OnAttackPhaseOver();
+        player2Camera.OnAttackPhaseOver();
+        
         StartCoroutine(fader.fadeOut(eventData.eventType));
-        //yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2);
+        
         yield return new WaitWhile(() => fader.IsFading);
+        
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.DestructionPhase));
     }
 
     private void OnAttackPhaseOver(EventData eventData) {
-        player1Camera.OnAttackPhaseOver();
-        player2Camera.OnAttackPhaseOver();
-        StartCoroutine(E_OnAttackPhaseOver(eventData));
+        StartCoroutine(AttackPhaseOver(eventData));
     }
     
     public void UnReady(EventData eventData) {
@@ -78,28 +77,36 @@ public class CameraController : MonoBehaviour {
     }
 
     IEnumerator StartPhase(EventData eventData) {
+        player1Camera.OnPrepPhaseOver();
+        player2Camera.OnPrepPhaseOver();
+        
         StartCoroutine(fader.fadeOut(eventData.eventType));
         yield return new WaitForSeconds(2);
+        
         PrePhase2(player1, 0);
         PrePhase2(player2, 0.5f);
+        
         //player1Camera.SetFloat("Ready", ready);
         //player2Camera.SetFloat("Ready", ready);
         yield return new WaitWhile(() => fader.IsFading);
-        
-        if(PhaseGameManager.EventType == EventType.PreparationPhase)
-            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhase));
+
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhase));
     }
 
     IEnumerator EndPhase(EventData eventData) {
-        StartCoroutine(fader.fadeOut(eventData.eventType));
-        yield return new WaitForSeconds(2);
-        EndPhase2(player1, 0.5f);
-        EndPhase2(player2, 0f);
-        //player1Animator.SetFloat("Ready", ready);
-        //player2Animator.SetFloat("Ready", ready);
         player1Camera.OnDestructionPhaseOver();
         player2Camera.OnDestructionPhaseOver();
+        
+        StartCoroutine(fader.fadeOut(eventData.eventType));
+        yield return new WaitForSeconds(2);
+        
+        EndPhase2(player1, 0.5f);
+        EndPhase2(player2, 0f);
+        
+        //player1Animator.SetFloat("Ready", ready);
+        //player2Animator.SetFloat("Ready", ready);
         yield return new WaitWhile(() => fader.IsFading);
+        
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.PreparationPhase));
     }
     

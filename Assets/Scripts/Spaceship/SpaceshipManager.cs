@@ -33,11 +33,13 @@ public class SpaceshipManager : Module {
         Spaceships = spaceships;
         Money = startMoney;
 
+        SetBaseModule(this);
+
         //Set UI to values
         uiHandler.SetCurrencyTextValue(Money);
         uiHandler.SetSpaceshipTextValue(Spaceships);
 
-        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, 
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver,
             (EventData eventData) => AddMoney(baseMoney));
 
         if (gameObject.CompareTag("BaseStation_2")) {
@@ -82,5 +84,9 @@ public class SpaceshipManager : Module {
         _x += Time.deltaTime * orbitSpeed;
         _z += Time.deltaTime * orbitSpeed;
         transform.LookAt(_planet.transform);
+    }
+
+    private void RemoveBoxesInLane() {
+
     }
 }

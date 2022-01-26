@@ -2,27 +2,41 @@ using System.Collections;
 using UnityEngine;
 
 public class PhaseGameManager : MonoBehaviour {
-    [SerializeField] private float preparationTime;
+    [Header("Phase Times")] [SerializeField]
+    private float preparationTime;
+
     [SerializeField] private float attackTime;
     [SerializeField] private float destructionTime;
-    
-    private bool _countdownRunning;
-    private string _currentPlayerName;
-    public static EventType EventType { get; private set; }
 
-    private IEnumerator _prepCoroutine;
+    private bool _countdownRunning;
+    private string _readyPlayer;
+
+    public static EventType CurrentEventType { get; private set; }
+
+    private IEnumerator _playerReadyCountdown;
     private IEnumerator _countdownCoroutine;
 
     private void Awake() {
-        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, StartAttackPhase);
-        
-        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, StartDestructionPhase);
+        //Preparation phase
+        //EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, StartPreparationPhase);
+        EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhase, StartPreparationPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerPreparationReady, PlayerIsReady);
+
+        //Attack Phase
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, StartAttackPhase);
+
+        //Destruction Phase
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, StartDestructionPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerDestructionReady, PlayerIsReady);
-        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, StartPrepPhase);
     }
-    
-    /*
+
+    /*  Functionality
+     *  --------------------------------------------------------------------------------------------------------------------
+     *
+     *
+     *
+     *
+     * 
      * 1. Start preparation phase by calling 'StartPrepPhase' - this sets text elements and the current phase.
      * 2. Players pressed 'ready' - 'PlayerIsReady' is called by event. Event is raised by UIHandler TODO: Move it from there. 
      *      - Phase text is set
@@ -30,36 +44,18 @@ public class PhaseGameManager : MonoBehaviour {
      * 3. Countdown over, calls 'PreparationPhaseOver' event
      * 
      */
-    
+
     void Start() {
-        StartPrepPhase(null);
-    }
-
-    private void StartPrepPhase(EventData eventData) {
-        EventType = EventType.PreparationPhase;
-        StartCoroutine(PreparationPhase());
-    }
-
-    private IEnumerator PreparationPhase() {
-        yield return new WaitForEndOfFrame();
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToPreparation));
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.PreparationPhase));
-        EventQueue.GetEventQueue().AddEvent(new MessageEventData(EventType.InitPreparationPhase, 
-            "Initiate attack? Press 'R' or 'North Button'"));
-        EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToPreparation, "Preparation Phase"));
-    }
-    
-    private void StartDestructionPhase(EventData eventData) {
-        EventType = EventType.DestructionPhase;
-        StartCoroutine(DestructionPhase());
     }
 
-    private IEnumerator DestructionPhase() {
-        EventType = EventType.DestructionPhase;
-        yield return new WaitForEndOfFrame();
-        EventQueue.GetEventQueue().AddEvent(new PhaseUIEventData(EventType.InFadeToDestruction, 
-            "Destruction Phase"));
-        EventQueue.GetEventQueue().AddEvent(new MessageEventData(EventType.InitPreparationPhase, 
-            "Done attacking? Press 'R' or 'North Button'"));
+    private void StartPreparationPhase(EventData eventData) {
+        CurrentEventType = EventType.PreparationPhase;
+    }
+
+    private void StartDestructionPhase(EventData eventData) {
+        CurrentEventType = EventType.DestructionPhase;
     }
 
     private void PlayerIsReady(EventData eventData) {
@@ -67,65 +63,64 @@ public class PhaseGameManager : MonoBehaviour {
 
         //This lets the player who started the countdown, abort it again.
         if (_countdownRunning) {
-            if (_currentPlayerName == playerReadyEventData.playerName) {
+            if (_readyPlayer == playerReadyEventData.playerName) {
                 StartCoroutine(AbortReadyCountdown());
             }
 
             return;
         }
-        
-        _currentPlayerName = playerReadyEventData.playerName;
-        
-        _prepCoroutine = StartReadyCountdown(eventData.eventType == EventType.PlayerPreparationReady ?
-            EventType.PreparationPhaseOver
+
+        _readyPlayer = playerReadyEventData.playerName;
+
+        _playerReadyCountdown = StartReadyCountdown(eventData.eventType == EventType.PlayerPreparationReady
+            ? EventType.PreparationPhaseOver
             : EventType.DestructionPhaseOver);
-        
-        
-        StartCoroutine(_prepCoroutine);
+
+
+        StartCoroutine(_playerReadyCountdown);
     }
 
     private IEnumerator StartReadyCountdown(EventType eventPublishType) {
         yield return new WaitForEndOfFrame();
-        _countdownCoroutine = StartCountdown(eventPublishType == EventType.PreparationPhaseOver ? preparationTime :
-            destructionTime);
-        
+        _countdownCoroutine =
+            StartCountdown(eventPublishType == EventType.PreparationPhaseOver ? preparationTime : destructionTime);
+
         StartCoroutine(_countdownCoroutine);
         yield return new WaitWhile(() => _countdownRunning);
-        
+
         //This event initiates the camera transition and fade
         EventQueue.GetEventQueue().AddEvent(new EventData(eventPublishType));
     }
-    
-    private void StartAttackPhase(EventData eventData) { 
+
+    private void StartAttackPhase(EventData eventData) {
         StartCoroutine(AttackPhase());
+    }
+
+    private IEnumerator AttackPhase() {
+        CurrentEventType = EventType.AttackPhase;
+        yield return new WaitForEndOfFrame();
+        StartCoroutine(StartCountdown(attackTime));
+        yield return new WaitWhile(() => _countdownRunning);
+
+        //This event initiates the camera transition and fade
+        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhaseOver));
     }
 
     //Stops all running coroutines and starts preparation phase again.
     private IEnumerator AbortReadyCountdown() {
         StopCoroutine(_countdownCoroutine);
-        StopCoroutine(_prepCoroutine);
-        yield return null;
+        StopCoroutine(_playerReadyCountdown);
         _countdownRunning = false;
         yield return new WaitForEndOfFrame();
 
-        if (EventType == EventType.PreparationPhase) {
-            StartPrepPhase(null);
+        if (CurrentEventType == EventType.PreparationPhase) {
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToPreparation));
         }
-        else if (EventType == EventType.DestructionPhase) {
-            StartDestructionPhase(new EventData(EventType.DestructionPhase));
+        else if (CurrentEventType == EventType.DestructionPhase) {
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToDestruction));
         }
     }
 
-    private IEnumerator AttackPhase() {
-        EventType = EventType.AttackPhase;
-        yield return new WaitForEndOfFrame();
-        StartCoroutine(StartCountdown(attackTime));
-        yield return new WaitWhile(() => _countdownRunning);
-        
-        //This event initiates the camera transition and fade
-        EventQueue.GetEventQueue().AddEvent(new EventData(EventType.AttackPhaseOver));
-    }
-    
     private IEnumerator StartCountdown(float time) {
         _countdownRunning = true;
         float timer = time;
@@ -133,9 +128,9 @@ public class PhaseGameManager : MonoBehaviour {
             timer -= Time.deltaTime;
 
             EventType eventType = EventType.Debug;
-            switch (EventType) {
+            switch (CurrentEventType) {
                 case EventType.PreparationPhase:
-                    eventType = EventType.PrepPhaseTimeUpdate;
+                    eventType = EventType.PreparationPhaseTimeUpdate;
                     break;
                 case EventType.AttackPhase:
                     eventType = EventType.AttackPhaseTimeUpdate;
@@ -144,16 +139,11 @@ public class PhaseGameManager : MonoBehaviour {
                     eventType = EventType.DestructionPhaseTimeUpdate;
                     break;
             }
-            
-            EventQueue.GetEventQueue().AddEvent(new PhaseTimeData(eventType, timer, _currentPlayerName));
-            
-            
-            
+
+            EventQueue.GetEventQueue().AddEvent(new PhaseTimeData(eventType, timer, _readyPlayer));
             yield return null;
         }
 
         _countdownRunning = false;
     }
-    
-    
 }
