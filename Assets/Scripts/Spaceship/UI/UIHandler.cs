@@ -142,7 +142,6 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetCurrencyTextValue(float value) {
-        Debug.Log("Set currency");
         currencyText.text = value.ToString();
     }
 

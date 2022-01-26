@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrewSpawner : MonoBehaviour
-{
+public class CrewSpawner : MonoBehaviour {
     public enum GizmoType { Never, SelectedOnly, Always }
     [SerializeField]
     private GameObject prefab;
@@ -19,20 +18,17 @@ public class CrewSpawner : MonoBehaviour
     private List<GameObject> spaceships;
     private int totalShips;
 
-    private void Start()
-    {
+    private void Start() {
         spaceships = new List<GameObject>();
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, SpawnShips);
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, RemoveShips);
     }
 
 
-    public void SpawnShips(EventData eventData)
-    {
+    public void SpawnShips(EventData eventData) {
         SpaceshipManager station = GetComponentInParent<SpaceshipManager>();
         totalShips = station.Spaceships;
-        for (int i = 0; i < totalShips; i++)
-        {
+        for (int i = 0; i < totalShips; i++) {
             Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
             GameObject spaceship = Instantiate<GameObject>(prefab);
             spaceship.GetComponent<MLAgent>().SetSpaceshipManager(spaceshipManager);
@@ -41,15 +37,11 @@ public class CrewSpawner : MonoBehaviour
         }
     }
 
-    private void RemoveShips(EventData eventData)
-    {
+    private void RemoveShips(EventData eventData) {
         Debug.Log("destroying spaceships");
-        if (spaceships != null)
-        {
-            for (int i = 0; i < totalShips; i++)
-            {
-                if (spaceships[i] != null)
-                {
+        if (spaceships != null) {
+            for (int i = 0; i < totalShips; i++) {
+                if (spaceships[i] != null) {
                     Destroy(spaceships[i]);
                 }
             }
@@ -58,13 +50,13 @@ public class CrewSpawner : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
-        if(showSpawnRegion == GizmoType.Always) {
+        if (showSpawnRegion == GizmoType.Always) {
             DrawGizmos();
-        }    
+        }
     }
 
     private void OnDrawGizmosSelected() {
-        if(showSpawnRegion == GizmoType.SelectedOnly) {
+        if (showSpawnRegion == GizmoType.SelectedOnly) {
             DrawGizmos();
         }
     }
