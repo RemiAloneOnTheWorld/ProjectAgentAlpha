@@ -17,10 +17,6 @@ public class LaneManager : MonoBehaviour {
 
         _halfExtends = new Vector3(xzCollider.transform.lossyScale.x, yzCollider.transform.lossyScale.y,
             xzCollider.transform.lossyScale.z) / 2;
-
-        var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        obj.transform.position = _position;
-        obj.transform.localScale = _halfExtends;
     }
 
     private void DestroyBoxesInLane(EventData eventData) {

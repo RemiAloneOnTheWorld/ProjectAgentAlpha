@@ -2,7 +2,8 @@ using System.Collections;
 using UnityEngine;
 
 public class PhaseGameManager : MonoBehaviour {
-    [Header("Phase Times")] [SerializeField]
+    [Header("Phase Times")]
+    [SerializeField]
     private float preparationTime;
 
     [SerializeField] private float attackTime;
@@ -18,7 +19,6 @@ public class PhaseGameManager : MonoBehaviour {
 
     private void Awake() {
         //Preparation phase
-        //EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, StartPreparationPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhase, StartPreparationPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerPreparationReady, PlayerIsReady);
 
@@ -29,21 +29,6 @@ public class PhaseGameManager : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, StartDestructionPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerDestructionReady, PlayerIsReady);
     }
-
-    /*  Functionality
-     *  --------------------------------------------------------------------------------------------------------------------
-     *
-     *
-     *
-     *
-     * 
-     * 1. Start preparation phase by calling 'StartPrepPhase' - this sets text elements and the current phase.
-     * 2. Players pressed 'ready' - 'PlayerIsReady' is called by event. Event is raised by UIHandler TODO: Move it from there. 
-     *      - Phase text is set
-     *      - Countdown gets started
-     * 3. Countdown over, calls 'PreparationPhaseOver' event
-     * 
-     */
 
     void Start() {
         EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToPreparation));
@@ -59,7 +44,11 @@ public class PhaseGameManager : MonoBehaviour {
     }
 
     private void PlayerIsReady(EventData eventData) {
-        PlayerReadyEventData playerReadyEventData = (PlayerReadyEventData) eventData;
+        PlayerReadyEventData playerReadyEventData = (PlayerReadyEventData)eventData;
+
+        if (CurrentEventType == EventType.AttackPhase) {
+            return;
+        }
 
         //This lets the player who started the countdown, abort it again.
         if (_countdownRunning) {
