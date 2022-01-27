@@ -28,6 +28,9 @@ public class PhaseGameManager : MonoBehaviour {
         //Destruction Phase
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, StartDestructionPhase);
         EventQueue.GetEventQueue().Subscribe(EventType.PlayerDestructionReady, PlayerIsReady);
+
+        //Game over
+        EventQueue.GetEventQueue().Subscribe(EventType.GameOver, OnGameOver);
     }
 
     private void OnDisable() {
@@ -56,10 +59,15 @@ public class PhaseGameManager : MonoBehaviour {
         CurrentEventType = EventType.DestructionPhase;
     }
 
+    private void OnGameOver(EventData eventData) {
+        CurrentEventType = EventType.GameOver;
+        StartCoroutine(AbortReadyCountdown());
+    }
+
     private void PlayerIsReady(EventData eventData) {
         PlayerReadyEventData playerReadyEventData = (PlayerReadyEventData)eventData;
 
-        if (CurrentEventType == EventType.AttackPhase) {
+        if (CurrentEventType == EventType.AttackPhase || CurrentEventType == EventType.GameOver) {
             return;
         }
 
@@ -115,11 +123,14 @@ public class PhaseGameManager : MonoBehaviour {
         _countdownRunning = false;
         yield return new WaitForEndOfFrame();
 
-        if (CurrentEventType == EventType.PreparationPhase) {
-            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToPreparation));
-        }
-        else if (CurrentEventType == EventType.DestructionPhase) {
-            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToDestruction));
+
+        if (CurrentEventType != EventType.GameOver) {
+            if (CurrentEventType == EventType.PreparationPhase) {
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToPreparation));
+            }
+            else if (CurrentEventType == EventType.DestructionPhase) {
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.InFadeToDestruction));
+            }
         }
     }
 

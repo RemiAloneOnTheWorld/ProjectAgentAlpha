@@ -14,6 +14,10 @@ public class UIHandler : MonoBehaviour {
 
     private bool _isController;
 
+    [Header("Player UI Parent")]
+    [SerializeField]
+    private GameObject playerUIParent;
+
     [Header("UI Game objects")]
     //Stats
     [SerializeField] private TMP_Text currencyText;
@@ -64,7 +68,8 @@ public class UIHandler : MonoBehaviour {
     private Vector2 _initCrosshairPos;
     private int _lastScreenWidth;
 
-    [Header("Spaceship Manager")] [SerializeField]
+    [Header("Spaceship Manager")]
+    [SerializeField]
     private SpaceshipManager spaceshipManager;
 
     private void Awake() {
@@ -73,6 +78,7 @@ public class UIHandler : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.OnMouseModuleSelect, SetSelectedButton);
+        EventQueue.GetEventQueue().Subscribe(EventType.GameOver, OnGameOver);
     }
 
     private void OnDisable() {
@@ -163,7 +169,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void SetSpaceshipTextValue(int value) {
-        spaceshipText.text =value.ToString();
+        spaceshipText.text = value.ToString();
     }
 
     public void SetArrivedSpaceshipValue(int value) {
@@ -179,9 +185,9 @@ public class UIHandler : MonoBehaviour {
         if (_menuShown) {
             _connector.SetCurrencyModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
-            
+
             if (!_isController) {
-                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));    
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));
             }
         }
     }
@@ -192,10 +198,10 @@ public class UIHandler : MonoBehaviour {
                 CloseModulePreview();
             }
         }
-        
+
         if (_modulePreviewShown) return;
         previewWindow.gameObject.SetActive(true);
-        
+
         //Assign module information
         ModuleDataWrapper moduleData = module.GetComponent<ModuleDataWrapper>();
         moduleShopNameText.text = $"Name: {moduleData.GetName()}";
@@ -217,9 +223,9 @@ public class UIHandler : MonoBehaviour {
         if (_menuShown) {
             _connector.SetFactoryModulePrefab();
             ShowMenu(new InputAction.CallbackContext());
-            
+
             if (!_isController) {
-                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));    
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));
             }
         }
     }
@@ -228,9 +234,9 @@ public class UIHandler : MonoBehaviour {
         if (_menuShown) {
             _connector.SetBoxCreationModule();
             ShowMenu(new InputAction.CallbackContext());
-            
+
             if (!_isController) {
-                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));    
+                EventQueue.GetEventQueue().AddEvent(new EventData(EventType.OnMouseModuleSelect));
             }
         }
     }
@@ -347,11 +353,14 @@ public class UIHandler : MonoBehaviour {
     public void CacheSelectedButton(Button button) {
         _currentBuyMenuButton = button.gameObject;
     }
-    
+
     private void SetSelectedButton(EventData eventData) {
         if (_isController) {
             EventSystem.current.SetSelectedGameObject(_currentBuyMenuButton);
         }
     }
-    
+
+    private void OnGameOver(EventData eventData) {
+        playerUIParent.SetActive(false);
+    }
 }
