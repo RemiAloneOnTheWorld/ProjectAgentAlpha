@@ -71,7 +71,7 @@ public abstract class Module : MonoBehaviour {
 
     public virtual void DestroyModule() {
         //Destroy the game object for now.
-        _parentModule.RemoveDockedModule(this);
+        _parentModule?.RemoveDockedModule(this);
 
         //TODO: Check if currency suffices.
 
@@ -85,7 +85,7 @@ public abstract class Module : MonoBehaviour {
 
     //Calls method on sub-modules recursively.
     public virtual void DestroyModuleWithSubs() {
-        _parentModule.RemoveDockedModule(this);
+        _parentModule?.RemoveDockedModule(this);
         foreach (var connection in Connections) {
             if (connection.GetBoundModule() != null) {
                 connection.GetBoundModule().DestroyModuleWithSubs();

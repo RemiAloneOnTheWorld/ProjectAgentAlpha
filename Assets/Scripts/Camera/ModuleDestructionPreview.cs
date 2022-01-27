@@ -48,6 +48,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
             data => _currentModule = enemySpaceshipManager);
 
         EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
+        _move.performed -= AcceptMoveToModule;
     }
 
     private void Update() {
@@ -144,10 +145,6 @@ public class ModuleDestructionPreview : MonoBehaviour {
             return;
         }
 
-        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2")) {
-            Debug.Log("Destroying the base station is currently undefined.");
-            return;
-        }
 
         //Todo: Check for and reduce currency (spaceships)
         int destructionCost = _currentModule.GetDestructionCost();
@@ -161,6 +158,14 @@ public class ModuleDestructionPreview : MonoBehaviour {
         _inDestructionProcess = true;
         Module baseModule = _currentModule.GetBaseModule();
         _currentModule.DestroyModuleWithSubs();
+
+        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2"))
+        {
+            EventQueue.GetEventQueue().AddEvent(new EventData(EventType.GameOver));
+            return;
+        }
+
+
         StartCoroutine(StartCountdown(baseModule));
         _currentModule = baseModule;
     }
