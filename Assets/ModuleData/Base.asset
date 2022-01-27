@@ -17,3 +17,4 @@ MonoBehaviour:
   price: 0
   description: This is your base module. All expansions, attacks and potential reign
     over the entire universe starts here.
+  destructionPrice: 30
