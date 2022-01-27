@@ -10,16 +10,27 @@ public class PhaseUIManager : MonoBehaviour {
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, SetTimeText);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, SetPhaseText);
-        
+
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, SetTimeText);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, SetPhaseText);
-        
+
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, SetTimeText);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, SetPhaseText);
-        
+
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseTimeUpdate, SetTime);
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseTimeUpdate, SetTime);
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseTimeUpdate, SetTime);
+
+        EventQueue.GetEventQueue().Subscribe(EventType.GameOver, OnGameOver);
+    }
+
+    private void OnGameOver(EventData eventData) {
+        phase.gameObject.SetActive(false);
+        time.gameObject.SetActive(false);
+
+        //Todo: Show game over UI and go back to menu or restart
+
+
     }
 
     private void SetPhaseText(EventData eventData) {
@@ -37,9 +48,9 @@ public class PhaseUIManager : MonoBehaviour {
     }
 
     private void SetTime(EventData eventData) {
-        PhaseTimeData timeData = (PhaseTimeData) eventData;
-        int minutes = (int) timeData.time / 60;
-        int seconds = (int) timeData.time % 60;
+        PhaseTimeData timeData = (PhaseTimeData)eventData;
+        int minutes = (int)timeData.time / 60;
+        int seconds = (int)timeData.time % 60;
 
         switch (eventData.eventType) {
             case EventType.PreparationPhaseTimeUpdate:

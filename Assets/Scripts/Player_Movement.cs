@@ -39,6 +39,7 @@ public class Player_Movement : MonoBehaviour
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.GameOver, OnPrepPhaseOver);
     }
 
     private void OnPrepPhaseOver(EventData eventData) {
@@ -82,7 +83,6 @@ public class Player_Movement : MonoBehaviour
         Vector2 _moveInput2D = obj.ReadValue<Vector2>();
         if (_moveInput2D.y > 0)
         {
-            Debug.Log("forward");
             foreach (GameObject sys in forwardEngines)
             {
                 ParticleSystem ps = sys.GetComponent<ParticleSystem>();
@@ -92,7 +92,6 @@ public class Player_Movement : MonoBehaviour
         }
         else
         {
-            Debug.Log("halt");
             foreach (GameObject sys in forwardEngines)
             {
                 ParticleSystem ps = sys.GetComponent<ParticleSystem>();
@@ -108,7 +107,6 @@ public class Player_Movement : MonoBehaviour
         Vector2 rotateDir2D = obj.ReadValue<Vector2>();
         if (rotateDir2D.x < 0f)
         {
-            Debug.Log("left");
             foreach (GameObject sys in leftEngines)
             {
                 ParticleSystem ps = sys.GetComponent<ParticleSystem>();
@@ -118,7 +116,6 @@ public class Player_Movement : MonoBehaviour
         }
         else if (rotateDir2D.x > 0f)
         {
-            Debug.Log("right");
             foreach (GameObject sys in rightEngines)
             {
                 ParticleSystem ps = sys.GetComponent<ParticleSystem>();
@@ -128,7 +125,6 @@ public class Player_Movement : MonoBehaviour
         }
         else
         {
-            Debug.Log("rlstop");
             foreach (GameObject sys in leftEngines)
             {
                 ParticleSystem ps = sys.GetComponent<ParticleSystem>();
