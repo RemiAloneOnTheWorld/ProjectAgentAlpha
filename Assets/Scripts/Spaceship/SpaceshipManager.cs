@@ -41,6 +41,7 @@ public class SpaceshipManager : Module {
 
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver,
             (EventData eventData) => AddMoney(baseMoney));
+        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, showMoney);
 
         if (gameObject.CompareTag("BaseStation_2")) {
             _z = Mathf.PI;
@@ -48,8 +49,12 @@ public class SpaceshipManager : Module {
         }
 
         _planet = GameObject.FindWithTag("Planet");
+    }
 
-        EventQueue.GetEventQueue().Subscribe(EventType.AttackPhase, showMoney);
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver,
+            (EventData eventData) => AddMoney(baseMoney));
+        EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhase, showMoney);
     }
 
     private void showMoney(EventData eventData) {

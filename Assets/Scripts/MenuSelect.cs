@@ -21,7 +21,8 @@ public class MenuSelect : MonoBehaviour
 
     public void Start()
     {
-
+        menuSelectButton.Select();
+        menuSelectButton.OnSelect(null);
         StartCoroutine(SelectStartMenu());
 
     }

@@ -21,6 +21,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private TMP_Text arrivedSpaceshipText;
     [SerializeField] private TMP_Text boxesText;
     [SerializeField] public TMP_Text warningText;
+    [SerializeField] public TMP_Text pauseText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
@@ -268,7 +269,6 @@ public class UIHandler : MonoBehaviour {
         Time.timeScale = 1f;
         ShowCursor(false);
         pauseMenu.SetActive(false);
-        Debug.Log("pause canceled");
     }
 
     public void quitGame() {
@@ -286,6 +286,7 @@ public class UIHandler : MonoBehaviour {
     private void ShowPauseMenu(InputAction.CallbackContext pContext) {
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
+        pauseText.text = this.gameObject.name + " has paused the game.";
         if (_playerInput.currentControlScheme.Equals("Gamepad")) {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
             resumeButton.GetComponent<EventTrigger>().OnSelect(null);
