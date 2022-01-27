@@ -112,19 +112,8 @@ public class Connector : MonoBehaviour {
             return;
         }
 
-        Vector3 moduleDisplacement = connection.transform.position - _connectionHovered.GetParentModule().transform.position;
 
-        //This 6.5f is the distance between the connection prefab and the center of the actual module to be placed.
-        //I use this value since the scale value of the connector is 1, which creates misaligned modules.
-        Vector3 displacementVector = connection.transform.right * 6.5f;
-        if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) < 0) {
-            displacementVector = -displacementVector;
-        }
-
-        //TODO: This must be dependent on the modules size
-        displacementVector *= _currentModule.transform.lossyScale.x / 2;
-
-        foreach (var overlap in Physics.OverlapBox(connection.transform.position + displacementVector,
+        foreach (var overlap in Physics.OverlapBox(connection.transform.position + GetModuleDisplacementVector(connection),
                      _currentModule.GetComponent<BoxCollider>().size / 2)) {
             if (overlap.gameObject == connection ||
                 overlap.gameObject == connection.transform.GetComponentInChildren<BoxCollider>().gameObject) {
@@ -150,9 +139,26 @@ public class Connector : MonoBehaviour {
         else throw new ArgumentNullException("moduleToPreview", "Creation of unassigned preview module!");
 
 
-        _currentPreviewModule = Instantiate(moduleToPreview, connection.transform.position + displacementVector,
+        _currentPreviewModule = Instantiate(moduleToPreview, connection.transform.position + GetModuleDisplacementVector(connection),
             connection.transform.rotation);
 
+    }
+
+    private Vector3 GetModuleDisplacementVector(GameObject connection)
+    {
+        Vector3 moduleDisplacement = connection.transform.position - connection.GetComponent<Connection>().GetParentModule().transform.position;
+
+        //This 6.5f is the distance between the connection prefab and the center of the actual module to be placed.
+        //I use this value since the scale value of the connector is 1, which creates misaligned modules.
+        Vector3 displacementVector = connection.transform.right * 6.5f;
+        if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) < 0) {
+            displacementVector = -displacementVector;
+        }
+
+        //TODO: This must be dependent on the modules size
+        displacementVector *= _currentModule.transform.lossyScale.x / 2;
+
+        return displacementVector;
     }
 
     private void DestroyPreviewModule() {
@@ -187,21 +193,8 @@ public class Connector : MonoBehaviour {
         }
 
 
-
-        Vector3 moduleDisplacement = raycastHit.collider.gameObject.transform.position - connection.GetParentModule().transform.position;
-
-
-        //This 6.5f is the distance between the connection prefab and the center of the actual module to be placed.
-        //I use this value since the scale value of the connector is 1, which creates misaligned modules.
-        Vector3 displacementVector = connection.transform.right * 6.5f;
-        if (Vector3.Dot(moduleDisplacement.normalized, displacementVector) < 0) {
-            displacementVector = -displacementVector;
-        }
-
-        //TODO: This must be dependent on the modules size
-        displacementVector *= _currentModule.transform.lossyScale.x / 2;
-
-        foreach (var overlap in Physics.OverlapBox(raycastHit.collider.transform.position + displacementVector,
+        foreach (var overlap in Physics.OverlapBox(raycastHit.collider.transform.position 
+                                                   + GetModuleDisplacementVector(connection.gameObject),
                      _currentModule.GetComponent<BoxCollider>().size / 2)) {
             if (overlap.gameObject == raycastHit.collider.gameObject ||
                 overlap.gameObject == raycastHit.transform.GetComponentInChildren<BoxCollider>().gameObject) {
@@ -215,11 +208,11 @@ public class Connector : MonoBehaviour {
             return;
         }
 
-        GameObject module = Instantiate(_currentModule, raycastHit.collider.transform.position + displacementVector,
+        GameObject module = Instantiate(_currentModule, raycastHit.collider.transform.position + 
+                                                        GetModuleDisplacementVector(connection.gameObject), 
             connection.GetParentModule().transform.rotation);
 
         connection.SetBoundModule(module.GetComponent<Module>(), baseModule);
-
     }
 
     private bool VerifyAdjustCredits() {
