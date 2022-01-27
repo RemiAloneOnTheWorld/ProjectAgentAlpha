@@ -41,12 +41,11 @@ public class Player_Movement : MonoBehaviour
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
     }
 
-    private void OnPrepPhaseOver(EventData eventData) {
-        _lockMovement = true;
-    }
-
-    private void OnDestructionPhaseOver(EventData eventData) {
-        _lockMovement = false;
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
+        playerInput.actions.FindAction("Movement").performed -= updateParticles;
+        playerInput.actions.FindAction("Look").performed -= updateRotationParticles;
     }
 
     // Start is called before the first frame update
@@ -62,19 +61,26 @@ public class Player_Movement : MonoBehaviour
             otherPlayer = list[0];
         }
 
-        playerInput.actions.FindAction("Movement", true).performed += updateParticles;
-        playerInput.actions.FindAction("Look", true).performed += updateRotationParticles;
+        playerInput.actions.FindAction("Movement").performed += updateParticles;
+        playerInput.actions.FindAction("Look").performed += updateRotationParticles;
 
         _uiHandler = GetComponent<UIHandler>();
         
-        _move = playerInput.actions.FindAction("Movement", true);
-        _look = playerInput.actions.FindAction("Look", true);
+        _move = playerInput.actions.FindAction("Movement");
+        _look = playerInput.actions.FindAction("Look");
         
         InputSystem.onDeviceChange += OnDeviceChanged;
 
         _move.canceled += CancelMovement;
     }
 
+    private void OnPrepPhaseOver(EventData eventData) {
+        _lockMovement = true;
+    }
+
+    private void OnDestructionPhaseOver(EventData eventData) {
+        _lockMovement = false;
+    }
 
     private void updateParticles(InputAction.CallbackContext obj)
     {
@@ -202,17 +208,15 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_uiHandler.IsMenuShown() || _lockMovement)
-        {
+        if (_uiHandler.IsMenuShown() || Time.timeScale == 0f || _lockMovement)
             return;
-        }
 
         updateMovement();
         updateDirection();
     }
 
     private void updateDirection()
-    {
+    {       
         var rotateDir2D = _look.ReadValue<Vector2>();
 
         pitch += rotationSpeed * -rotateDir2D.y;

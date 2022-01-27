@@ -214,10 +214,21 @@
                 {
                     "name": "",
                     "id": "0dcea59e-baf4-4c70-a6e9-50ea1325bcbc",
-                    "path": "<Keyboard>/backquote",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse&Keyboard",
+                    "action": "PauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e76362b5-10df-4df0-a508-b67f2a1d94bd",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "PauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false

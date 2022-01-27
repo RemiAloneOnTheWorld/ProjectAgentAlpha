@@ -43,6 +43,13 @@ public class ModuleDestructionPreview : MonoBehaviour {
         _uiHandler = GetComponent<UIHandler>();
     }
 
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhase,
+            data => _currentModule = enemySpaceshipManager);
+
+        EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
+    }
+
     private void Update() {
         CheckTransitionState();
         //if (_moveRequests.Count > 0 && !_transitionActivated && !_inTransition) {

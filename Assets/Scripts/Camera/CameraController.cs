@@ -27,6 +27,12 @@ public class CameraController : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
     }
 
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver, Ready);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
+    }
+
     // Start is called before the first frame update
     void Start() {
         Player_Movement[] players = FindObjectsOfType<Player_Movement>();

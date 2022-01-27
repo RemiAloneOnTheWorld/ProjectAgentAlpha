@@ -17,15 +17,6 @@ public class MenuSelect : MonoBehaviour
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject aboutMenu;
 
-
-
-    public void Start()
-    {
-
-        StartCoroutine(SelectStartMenu());
-
-    }
-
     public void ShowStartMenu()
     {
         startMenu.SetActive(true);

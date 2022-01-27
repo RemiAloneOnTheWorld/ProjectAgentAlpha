@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
 public class UIHandler : MonoBehaviour {
@@ -20,6 +21,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private TMP_Text arrivedSpaceshipText;
     [SerializeField] private TMP_Text boxesText;
     [SerializeField] public TMP_Text warningText;
+    [SerializeField] public TMP_Text pauseText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
@@ -30,6 +32,7 @@ public class UIHandler : MonoBehaviour {
 
     //Buy menu
     [SerializeField] private GameObject buyMenu;
+    [SerializeField] private GameObject pauseMenu; 
     private bool _menuShown;
     private GameObject _currentBuyMenuButton;
 
@@ -41,6 +44,7 @@ public class UIHandler : MonoBehaviour {
 
     //Buttons
     [SerializeField] private Button currencyButton;
+    [SerializeField] private Button resumeButton;
     [SerializeField] private Button destroyButton;
 
     [Header("Shop Preview window")]
@@ -69,6 +73,32 @@ public class UIHandler : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.OnMouseModuleSelect, SetSelectedButton);
+    }
+
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver,OnPrepPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.OnMouseModuleSelect, SetSelectedButton);
+        _playerInput.actions.FindAction("BuyMenu").performed -= ShowMenu;
+        _playerInput.actions.FindAction("Ready").performed -= OnPlayerPreparationReady;
+        _playerInput.actions.FindAction("PauseMenu").performed -= ShowPauseMenu;
+        }
+
+    private void Start() {
+        ShowCursor(_menuShown);
+        _playerInput = GetComponent<PlayerInput>();
+        _connector = GetComponent<Connector>();
+        _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
+        _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
+        _playerInput.actions.FindAction("PauseMenu").performed += ShowPauseMenu;
+
+        _initCrosshairPos = crosshair.transform.position;
+        _lastScreenWidth = Screen.width;
+        _initialPlayerUIPosition = playerUI.position;
+
+        _isController = _playerInput.currentControlScheme.Equals("Gamepad");
     }
 
     public void SetBoxesTextValue(int value) {
@@ -101,20 +131,6 @@ public class UIHandler : MonoBehaviour {
         if (playerUI.name == "Player1") {
             playerUI.position = new Vector2(playerUI.position.x, playerUI.rect.height);
         }
-    }
-
-    private void Start() {
-        ShowCursor(_menuShown);
-        _playerInput = GetComponent<PlayerInput>();
-        _connector = GetComponent<Connector>();
-        _playerInput.actions.FindAction("BuyMenu").performed += ShowMenu;
-        _playerInput.actions.FindAction("Ready").performed += OnPlayerPreparationReady;
-
-        _initCrosshairPos = crosshair.transform.position;
-        _lastScreenWidth = Screen.width;
-        _initialPlayerUIPosition = playerUI.position;
-
-        _isController = _playerInput.currentControlScheme.Equals("Gamepad");
     }
 
     private void Update() {
@@ -228,8 +244,6 @@ public class UIHandler : MonoBehaviour {
             return;
         }
 
-        Debug.Log("Show menu called on " + gameObject.name);
-        
         _menuShown = !_menuShown;
         buyMenu.SetActive(_menuShown);
 
@@ -248,6 +262,36 @@ public class UIHandler : MonoBehaviour {
             if (!_playerInput.currentControlScheme.Equals("Gamepad")) {
                 ShowCursor(_menuShown);
             }
+        }
+    }
+
+    public void closePauseMenu() {
+        Time.timeScale = 1f;
+        ShowCursor(false);
+        pauseMenu.SetActive(false);
+    }
+
+    public void quitGame() {
+        Application.Quit();
+    }
+
+    public void returnMainMenu() {
+        Time.timeScale = 1f;
+        ShowCursor(true);
+        ShowCrosshair(false);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    private void ShowPauseMenu(InputAction.CallbackContext pContext) {
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+        pauseText.text = this.gameObject.name + " has paused the game.";
+        if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+            EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+            resumeButton.GetComponent<EventTrigger>().OnSelect(null);
+        } else {
+            ShowCursor(true);
         }
     }
 

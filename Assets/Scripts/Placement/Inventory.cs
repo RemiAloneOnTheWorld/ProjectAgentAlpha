@@ -52,6 +52,11 @@ public class Inventory : MonoBehaviour
         playerInput.actions.FindAction("CollectBox", true).canceled += CancelCollect;
     }
 
+    private void OnDisable() {
+        playerInput.actions.FindAction("PlaceBox", true).started -= StartedPlace;
+        playerInput.actions.FindAction("PlaceBox", true).canceled -= CancelPlace;
+        playerInput.actions.FindAction("CollectBox", true).canceled -= CancelCollect;
+    }
 
     private void CancelCollect(InputAction.CallbackContext obj)
     {
@@ -95,7 +100,6 @@ public class Inventory : MonoBehaviour
 
 
     }
-
 
     private GameObject GetRandomBox()
     {
@@ -157,8 +161,6 @@ public class Inventory : MonoBehaviour
         }
 
     }
-
-
 
     private void MoveBox()
     {

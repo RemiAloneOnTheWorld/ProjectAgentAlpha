@@ -24,6 +24,11 @@ public class CrewSpawner : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, RemoveShips);
     }
 
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhase, SpawnShips);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseOver, RemoveShips);
+    }
+
 
     public void SpawnShips(EventData eventData) {
         SpaceshipManager station = GetComponentInParent<SpaceshipManager>();
