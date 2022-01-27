@@ -283,7 +283,8 @@ public class UIHandler : MonoBehaviour {
         moduleDestructionPriceText.text = $"Destruction cost: {moduleDestructionCost}";
 
         if (module == module.GetBaseModule() || module.GetBaseModule() == null) {
-            //Behaviour is not defined yet.
+            destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
+            //needs to be implemented
             return;
         }
 
@@ -291,6 +292,7 @@ public class UIHandler : MonoBehaviour {
             destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
         }
         else {
+
             destroyButton.GetComponentInChildren<TMP_Text>().text = "Destroy!";
             if (_playerInput.currentControlScheme.Equals("Gamepad")) {
                 EventSystem.current.SetSelectedGameObject(destroyButton.gameObject);
