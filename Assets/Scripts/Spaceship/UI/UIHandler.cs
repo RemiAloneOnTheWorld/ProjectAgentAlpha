@@ -26,6 +26,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private TMP_Text boxesText;
     [SerializeField] public TMP_Text warningText;
     [SerializeField] public TMP_Text pauseText;
+    [SerializeField] public TMP_Text gameoverText;
 
     //Message
     [SerializeField] private TMP_Text messageText;
@@ -36,7 +37,8 @@ public class UIHandler : MonoBehaviour {
 
     //Buy menu
     [SerializeField] private GameObject buyMenu;
-    [SerializeField] private GameObject pauseMenu; 
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOverMenu;
     private bool _menuShown;
     private GameObject _currentBuyMenuButton;
 
@@ -49,6 +51,7 @@ public class UIHandler : MonoBehaviour {
     //Buttons
     [SerializeField] private Button currencyButton;
     [SerializeField] private Button resumeButton;
+    [SerializeField] private Button retryButton;
     [SerializeField] private Button destroyButton;
 
     [Header("Shop Preview window")]
@@ -87,6 +90,7 @@ public class UIHandler : MonoBehaviour {
         EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
         EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
         EventQueue.GetEventQueue().Unsubscribe(EventType.OnMouseModuleSelect, SetSelectedButton);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.GameOver, OnGameOver);
         _playerInput.actions.FindAction("BuyMenu").performed -= ShowMenu;
         _playerInput.actions.FindAction("Ready").performed -= OnPlayerPreparationReady;
         _playerInput.actions.FindAction("PauseMenu").performed -= ShowPauseMenu;
@@ -285,8 +289,11 @@ public class UIHandler : MonoBehaviour {
         Time.timeScale = 1f;
         ShowCursor(true);
         ShowCrosshair(false);
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void restartScene() {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void ShowPauseMenu(InputAction.CallbackContext pContext) {
@@ -362,5 +369,8 @@ public class UIHandler : MonoBehaviour {
 
     private void OnGameOver(EventData eventData) {
         playerUIParent.SetActive(false);
+
+        gameoverText.text = this.gameObject.name + " has won";
+        gameOverMenu.SetActive(true);
     }
 }

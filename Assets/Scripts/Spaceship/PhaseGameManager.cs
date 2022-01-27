@@ -44,6 +44,8 @@ public class PhaseGameManager : MonoBehaviour {
         //Destruction Phase
         EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhase, StartDestructionPhase);
         EventQueue.GetEventQueue().Unsubscribe(EventType.PlayerDestructionReady, PlayerIsReady);
+
+        EventQueue.GetEventQueue().Unsubscribe(EventType.GameOver, OnGameOver);
     }
 
     void Start() {

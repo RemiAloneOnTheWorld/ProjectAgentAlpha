@@ -48,6 +48,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
             data => _currentModule = enemySpaceshipManager);
 
         EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
+        _move.performed -= AcceptMoveToModule;
     }
 
     private void Update() {

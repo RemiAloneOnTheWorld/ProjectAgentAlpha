@@ -46,6 +46,8 @@ public class PhaseUIManager : MonoBehaviour {
         EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseTimeUpdate, SetTime);
         EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseTimeUpdate, SetTime);
         EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhaseTimeUpdate, SetTime);
+
+        EventQueue.GetEventQueue().Unsubscribe(EventType.GameOver, OnGameOver);
     }
 
     private void SetPhaseText(EventData eventData) {
