@@ -339,11 +339,11 @@ public class UIHandler : MonoBehaviour {
         int moduleDestructionCost = module.GetDestructionCost();
         moduleDestructionPriceText.text = $"Destruction cost: {moduleDestructionCost}";
 
-        if (module == module.GetBaseModule() || module.GetBaseModule() == null) {
-            destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
-            //needs to be implemented
-            return;
-        }
+        //if (module == module.GetBaseModule() || module.GetBaseModule() == null) {
+        //    destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
+        //    //needs to be implemented
+        //    return;
+        //}
 
         if (moduleDestructionCost > spaceshipManager.ArrivedSpaceships) {
             destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";

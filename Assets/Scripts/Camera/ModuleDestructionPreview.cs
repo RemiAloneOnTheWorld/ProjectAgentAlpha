@@ -16,6 +16,10 @@ public class ModuleDestructionPreview : MonoBehaviour {
     private CinemachineVirtualCamera _currentCamera;
     [SerializeField] private PlayerCameraController cameraController;
     [SerializeField] private SpaceshipManager enemySpaceshipManager, spaceshipManager;
+
+    [Header("Rocket")]
+    [SerializeField] private GameObject rocket;
+
     private Module _currentModule;
     private Vector3 _offsetVector;
     private Vector3 _camerasStartPosition;
@@ -156,18 +160,30 @@ public class ModuleDestructionPreview : MonoBehaviour {
         _uiHandler.SetArrivedSpaceshipValue(spaceshipManager.ArrivedSpaceships);
 
         _inDestructionProcess = true;
+
+        StartCoroutine(DestroyModuleCoroutine());
+    }
+
+    private IEnumerator DestroyModuleCoroutine() {
+        GameObject launchedRocket = Instantiate(rocket, Vector3.zero, Quaternion.identity);
+        Rocket rocketLaunched = launchedRocket.GetComponent<Rocket>();
+        Coroutine rocketCoroutine = StartCoroutine(rocketLaunched.LaunchAttack(_currentModule.gameObject));
+
+        yield return new WaitWhile(() => rocketLaunched.isFlying);
+
+        StopCoroutine(rocketCoroutine);
+        Destroy(launchedRocket);
+
         Module baseModule = _currentModule.GetBaseModule();
         _currentModule.DestroyModuleWithSubs();
 
-        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2"))
-        {
+        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2")) {
             EventQueue.GetEventQueue().AddEvent(new EventData(EventType.GameOver));
-            return;
         }
-
-
-        StartCoroutine(StartCountdown(baseModule));
-        _currentModule = baseModule;
+        else {
+            StartCoroutine(StartCountdown(baseModule));
+            _currentModule = baseModule;
+        }
     }
 
     private IEnumerator StartCountdown(Module module) {
