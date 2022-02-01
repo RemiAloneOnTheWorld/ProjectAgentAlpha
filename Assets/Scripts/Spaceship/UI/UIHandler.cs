@@ -11,6 +11,8 @@ using Unity.VisualScripting;
 public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
     private Connector _connector;
+    private static bool playerOpenPauseMenu;
+    private bool pauseMenuShown;
 
     private bool _isController;
 
@@ -276,6 +278,8 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void closePauseMenu() {
+        playerOpenPauseMenu = false;
+        pauseMenuShown = false;
         Time.timeScale = 1f;
         ShowCursor(false);
         pauseMenu.SetActive(false);
@@ -296,7 +300,16 @@ public class UIHandler : MonoBehaviour {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void ShowPauseMenu(InputAction.CallbackContext pContext) {
+    private void ShowPauseMenu(InputAction.CallbackContext pContext)
+    {
+        if (pauseMenuShown){
+            closePauseMenu();
+            return;
+        }
+
+        if (playerOpenPauseMenu)
+            return;
+
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
         pauseText.text = this.gameObject.name + " has paused the game.";
@@ -306,6 +319,9 @@ public class UIHandler : MonoBehaviour {
         } else {
             ShowCursor(true);
         }
+
+        pauseMenuShown = true;
+        playerOpenPauseMenu = true;
     }
 
     private void AnimateCrosshair() {
