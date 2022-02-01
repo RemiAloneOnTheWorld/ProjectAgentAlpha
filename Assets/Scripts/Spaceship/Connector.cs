@@ -139,8 +139,7 @@ public class Connector : MonoBehaviour {
         else if (_currentModule == factoryModule) {
             moduleToPreview = previewFactoryModule;
         }
-        else if (_currentModule == boxCreationModule)
-        {
+        else if (_currentModule == boxCreationModule) {
             moduleToPreview = previewBoxCreationModule;
         }
         else throw new ArgumentNullException("moduleToPreview", "Creation of unassigned preview module!");
@@ -151,8 +150,7 @@ public class Connector : MonoBehaviour {
 
     }
 
-    private Vector3 GetModuleDisplacementVector(GameObject connection)
-    {
+    private Vector3 GetModuleDisplacementVector(GameObject connection) {
         Vector3 moduleDisplacement = connection.transform.position - connection.GetComponent<Connection>().GetParentModule().transform.position;
 
         //This 6.5f is the distance between the connection prefab and the center of the actual module to be placed.
@@ -200,7 +198,7 @@ public class Connector : MonoBehaviour {
         }
 
 
-        foreach (var overlap in Physics.OverlapBox(raycastHit.collider.transform.position 
+        foreach (var overlap in Physics.OverlapBox(raycastHit.collider.transform.position
                                                    + GetModuleDisplacementVector(connection.gameObject),
                      _currentModule.GetComponent<BoxCollider>().size / 2)) {
             if (overlap.gameObject == raycastHit.collider.gameObject ||
@@ -215,8 +213,8 @@ public class Connector : MonoBehaviour {
             return;
         }
 
-        GameObject module = Instantiate(_currentModule, raycastHit.collider.transform.position + 
-                                                        GetModuleDisplacementVector(connection.gameObject), 
+        GameObject module = Instantiate(_currentModule, raycastHit.collider.transform.position +
+                                                        GetModuleDisplacementVector(connection.gameObject),
             connection.GetParentModule().transform.rotation);
 
         connection.SetBoundModule(module.GetComponent<Module>(), baseModule);
@@ -233,19 +231,22 @@ public class Connector : MonoBehaviour {
         return false;
     }
 
+    //The DestroyPreviewModule(); forces the hover method the reevaluate the currently previewed module,
+    //thus replacing it when a new module was selected in the menu.
+
     public void SetCurrencyModulePrefab() {
         _currentModule = currencyModule;
-        Debug.Log("Currency module set");
+        DestroyPreviewModule();
     }
 
     public void SetFactoryModulePrefab() {
         _currentModule = factoryModule;
-        Debug.Log("Factory module set");
+        DestroyPreviewModule();
     }
 
     public void SetBoxCreationModule() {
         _currentModule = boxCreationModule;
-        Debug.Log("Box module set");
+        DestroyPreviewModule();
     }
 
     public GameObject GetCurrentModule() {

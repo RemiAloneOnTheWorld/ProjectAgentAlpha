@@ -10,16 +10,25 @@ public class ModuleDestructionPreview : MonoBehaviour {
     private InputAction _move;
 
     [Header("Module Destruction Preview")]
-    [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
+    [SerializeField]
+    private CinemachineStateDrivenCamera stateDrivenCamera;
+
     [SerializeField] private CinemachineVirtualCamera destructionPreviewCameraOne;
     [SerializeField] private CinemachineVirtualCamera destructionPreviewCameraTwo;
+    [SerializeField] private CinemachineVirtualCamera rocketCamera;
     private CinemachineVirtualCamera _currentCamera;
     [SerializeField] private PlayerCameraController cameraController;
     [SerializeField] private SpaceshipManager enemySpaceshipManager, spaceshipManager;
+
+    [Header("Rocket")] [SerializeField] private GameObject rocket;
+    private GameObject _launchedRocket;
+
     private Module _currentModule;
     private Vector3 _offsetVector;
     private Vector3 _camerasStartPosition;
+
     private bool _transitionActivated, _inTransition;
+
     //private Queue<Vector2> _moveRequests = new Queue<Vector2>();
     private bool _inDestructionProcess;
 
@@ -31,8 +40,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
 
         _currentModule = enemySpaceshipManager;
 
-        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase,
-            data => _currentModule = enemySpaceshipManager);
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, OnDestructionPhase);
 
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
 
@@ -44,9 +52,7 @@ public class ModuleDestructionPreview : MonoBehaviour {
     }
 
     private void OnDisable() {
-        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhase,
-            data => _currentModule = enemySpaceshipManager);
-
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhase, OnDestructionPhase);
         EventQueue.GetEventQueue().Unsubscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
         _move.performed -= AcceptMoveToModule;
     }
@@ -63,6 +69,12 @@ public class ModuleDestructionPreview : MonoBehaviour {
         destructionPreviewCameraOne.transform.position = _camerasStartPosition;
         destructionPreviewCameraTwo.transform.position = _camerasStartPosition;
         _currentCamera = destructionPreviewCameraOne;
+    }
+
+    private void OnDestructionPhase(EventData eventData) {
+        //This shows the UI of the base module after the attack phase is over.
+        _uiHandler.ShowDestructionPreviewInfo(true);
+        _uiHandler.SetDestructionPreviewInfo(_currentModule);
     }
 
     private void CheckTransitionState() {
@@ -100,8 +112,6 @@ public class ModuleDestructionPreview : MonoBehaviour {
             //_moveRequests.Enqueue(direction);
             return;
         }
-
-        Debug.LogWarning("Accepted input");
 
         float smallestAngle = float.PositiveInfinity;
         Module candidateModule = null;
@@ -156,27 +166,45 @@ public class ModuleDestructionPreview : MonoBehaviour {
         _uiHandler.SetArrivedSpaceshipValue(spaceshipManager.ArrivedSpaceships);
 
         _inDestructionProcess = true;
+
+        StartCoroutine(DestroyModuleCoroutine());
+    }
+
+    private IEnumerator DestroyModuleCoroutine() {
+        _launchedRocket = Instantiate(rocket, Vector3.zero, Quaternion.identity);
+        Rocket rocketLaunched = _launchedRocket.GetComponent<Rocket>();
+        Coroutine rocketCoroutine = StartCoroutine(rocketLaunched.LaunchAttack(_currentModule.gameObject));
+
+        //TODO: Switch to rocket camera
+        SwitchToRocketCamera();
+
+        yield return new WaitWhile(() => rocketLaunched.isFlying);
+
+        StopCoroutine(rocketCoroutine);
+        Destroy(_launchedRocket);
+        _launchedRocket = null;
+
         Module baseModule = _currentModule.GetBaseModule();
         _currentModule.DestroyModuleWithSubs();
 
-        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2"))
-        {
+        if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2")) {
             EventQueue.GetEventQueue().AddEvent(new EventData(EventType.GameOver));
-            return;
         }
-
-
-        StartCoroutine(StartCountdown(baseModule));
-        _currentModule = baseModule;
+        else {
+            StartCoroutine(StartCountdown(baseModule));
+            _currentModule = baseModule;
+        }
     }
 
     private IEnumerator StartCountdown(Module module) {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(0.1f);
         SwitchCameras(module);
         _inDestructionProcess = false;
     }
 
     private void SwitchCameras(Module module) {
+        Debug.Log("Switch cameras!");
+
         _transitionActivated = true;
         _uiHandler.ShowDestructionPreviewInfo(false);
 
@@ -193,5 +221,13 @@ public class ModuleDestructionPreview : MonoBehaviour {
             ? destructionPreviewCameraTwo
             : destructionPreviewCameraOne;
 
+    }
+
+    private void SwitchToRocketCamera() {
+        _transitionActivated = true;
+        _uiHandler.ShowDestructionPreviewInfo(false);
+        cameraController.SwitchToRocketCamera();
+        rocketCamera.LookAt = _launchedRocket.transform;
+        rocketCamera.Follow = _launchedRocket.transform;
     }
 }

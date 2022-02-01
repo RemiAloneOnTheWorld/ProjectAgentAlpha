@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
@@ -144,7 +143,8 @@ public class UIHandler : MonoBehaviour {
     private void LowerPlayerUIStats(EventData eventData) {
         //Move UI of player below vertical half.
         if (playerUI.name == "Player1") {
-            playerUI.position = new Vector2(playerUI.position.x, playerUI.rect.height);
+            //Hardcoded with magic values - remarkable programming :)
+            playerUI.position = new Vector2(playerUI.position.x, playerUI.rect.height / 2 + 15);
         }
     }
 
@@ -392,11 +392,11 @@ public class UIHandler : MonoBehaviour {
         int moduleDestructionCost = module.GetDestructionCost();
         moduleDestructionPriceText.text = $"Destruction cost: {moduleDestructionCost}";
 
-        if (module == module.GetBaseModule() || module.GetBaseModule() == null) {
-            destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
-            //needs to be implemented
-            return;
-        }
+        //if (module == module.GetBaseModule() || module.GetBaseModule() == null) {
+        //    destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
+        //    //needs to be implemented
+        //    return;
+        //}
 
         if (moduleDestructionCost > spaceshipManager.ArrivedSpaceships) {
             destroyButton.GetComponentInChildren<TMP_Text>().text = "Unavailable!";
@@ -415,6 +415,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void SetSelectedButton(EventData eventData) {
+        //This re-selects the button the controller selected, when the mouse user clicked.
         if (_isController) {
             EventSystem.current.SetSelectedGameObject(_currentBuyMenuButton);
         }
