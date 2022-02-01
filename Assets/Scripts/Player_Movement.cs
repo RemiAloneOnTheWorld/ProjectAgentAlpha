@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,7 +14,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float smoothTime;
     [SerializeField] private float moveDistance = 500;
-
+    [SerializeField] private float collisionSize;
+ 
     private InputAction _move;
     private InputAction _look;
 
@@ -262,10 +264,26 @@ public class Player_Movement : MonoBehaviour
             _uiHandler.warningText.enabled = true;
         }
 
+ 
+
         //_input = Vector3.SmoothDamp(_input, _moveInput, ref _smoothInputVelocity, smoothTime, maxSpeed);
-        if(Vector3.Distance(Vector3.zero, newPosition) < moveDistance) {
+        if(Vector3.Distance(Vector3.zero, newPosition) < moveDistance && !checkCollision(newPosition)) {
             transform.position = newPosition;
         }
+    }
+
+    private bool checkCollision(Vector3 newPosition)
+    {
+        Collider[] collisions = Physics.OverlapSphere(newPosition, collisionSize);
+        foreach (Collider item in collisions)
+        {
+         
+            if(item.tag == "BaseStation_1"|| item.tag == "BaseStation_2" || item.tag == "Planet" || item.tag == "Connection" || item.tag == "Module" || item.tag == "Sphere")
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public PlayerInput getPlayerInput()
