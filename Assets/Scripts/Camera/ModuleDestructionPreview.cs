@@ -109,6 +109,8 @@ public class ModuleDestructionPreview : MonoBehaviour {
 
 
         if (_transitionActivated || _inTransition) {
+            //Queueing input would work with a dead-zone on the controller,
+            //otherwise it adds the direction on the slightest movement.
             //_moveRequests.Enqueue(direction);
             return;
         }

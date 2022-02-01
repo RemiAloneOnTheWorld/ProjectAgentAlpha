@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using TMPro;
 using UnityEngine.InputSystem;
@@ -89,7 +90,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void OnDisable() {
-        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver,OnPrepPhaseOver);
+        EventQueue.GetEventQueue().Unsubscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
         EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
         EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToPreparation, OnDestructionPhaseOver);
         EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToDestruction, OnAttackPhaseOver);
@@ -98,7 +99,7 @@ public class UIHandler : MonoBehaviour {
         _playerInput.actions.FindAction("BuyMenu").performed -= ShowMenu;
         _playerInput.actions.FindAction("Ready").performed -= OnPlayerPreparationReady;
         _playerInput.actions.FindAction("PauseMenu").performed -= ShowPauseMenu;
-        }
+    }
 
     private void Start() {
         ShowCursor(_menuShown);
@@ -112,7 +113,14 @@ public class UIHandler : MonoBehaviour {
         _lastScreenWidth = Screen.width;
         _initialPlayerUIPosition = playerUI.position;
 
-        _isController = _playerInput.currentControlScheme.Equals("Gamepad");
+        try {
+            _isController = _playerInput.currentControlScheme.Equals("Gamepad");
+        }
+        catch (NullReferenceException e) {
+            Debug.LogWarning("UIHandler tries to access the gamepad control scheme. Please connect a controller");
+            //This is just set for compatibility reasons, game should not be played without controller.
+            _isController = true;
+        }
     }
 
     public void SetBoxesTextValue(int value) {
@@ -303,7 +311,7 @@ public class UIHandler : MonoBehaviour {
 
     public void restartScene() {
         playerOpenPauseMenu = false;
-        
+
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -317,7 +325,7 @@ public class UIHandler : MonoBehaviour {
             Time.timeScale = 1f;
             return;
         }
-        
+
         if (pauseMenuShown) {
             closePauseMenu();
             return;
@@ -333,7 +341,8 @@ public class UIHandler : MonoBehaviour {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
             resumeButton.GetComponent<EventTrigger>().OnSelect(null);
             inputController = true;
-        } else {
+        }
+        else {
             ShowCursor(true);
             inputController = false;
         }
@@ -356,7 +365,8 @@ public class UIHandler : MonoBehaviour {
         if (inputController) {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
             resumeButton.GetComponent<EventTrigger>().OnSelect(null);
-        } else {
+        }
+        else {
             ShowCursor(true);
         }
     }

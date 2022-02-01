@@ -103,7 +103,6 @@ public class Connector : MonoBehaviour {
                     //Destroy and replace
                     _connectionHovered = connection;
                     PlacePreviewModule(connection.gameObject);
-                    Debug.LogWarning("New Connection");
                 }
 
                 return;
