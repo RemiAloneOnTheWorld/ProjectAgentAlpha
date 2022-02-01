@@ -117,7 +117,8 @@ public class UIHandler : MonoBehaviour {
             _isController = _playerInput.currentControlScheme.Equals("Gamepad");
         }
         catch (NullReferenceException e) {
-            Debug.LogWarning("UIHandler tries to access the gamepad control scheme. Please connect a controller");
+            Debug.LogWarning($"{e.Message}. \n" +
+                             $"UIHandler tries to access the gamepad control scheme. Please connect a controller");
             //This is just set for compatibility reasons, game should not be played without controller.
             _isController = true;
         }
