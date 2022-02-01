@@ -13,12 +13,14 @@ public class ModuleDestructionPreview : MonoBehaviour {
     [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
     [SerializeField] private CinemachineVirtualCamera destructionPreviewCameraOne;
     [SerializeField] private CinemachineVirtualCamera destructionPreviewCameraTwo;
+    [SerializeField] private CinemachineVirtualCamera rocketCamera;
     private CinemachineVirtualCamera _currentCamera;
     [SerializeField] private PlayerCameraController cameraController;
     [SerializeField] private SpaceshipManager enemySpaceshipManager, spaceshipManager;
 
     [Header("Rocket")]
     [SerializeField] private GameObject rocket;
+    private GameObject _launchedRocket;
 
     private Module _currentModule;
     private Vector3 _offsetVector;
@@ -105,8 +107,6 @@ public class ModuleDestructionPreview : MonoBehaviour {
             return;
         }
 
-        Debug.LogWarning("Accepted input");
-
         float smallestAngle = float.PositiveInfinity;
         Module candidateModule = null;
 
@@ -165,14 +165,18 @@ public class ModuleDestructionPreview : MonoBehaviour {
     }
 
     private IEnumerator DestroyModuleCoroutine() {
-        GameObject launchedRocket = Instantiate(rocket, Vector3.zero, Quaternion.identity);
-        Rocket rocketLaunched = launchedRocket.GetComponent<Rocket>();
+        _launchedRocket = Instantiate(rocket, Vector3.zero, Quaternion.identity);
+        Rocket rocketLaunched = _launchedRocket.GetComponent<Rocket>();
         Coroutine rocketCoroutine = StartCoroutine(rocketLaunched.LaunchAttack(_currentModule.gameObject));
+
+        //TODO: Switch to rocket camera
+        SwitchToRocketCamera();
 
         yield return new WaitWhile(() => rocketLaunched.isFlying);
 
         StopCoroutine(rocketCoroutine);
-        Destroy(launchedRocket);
+        Destroy(_launchedRocket);
+        _launchedRocket = null;
 
         Module baseModule = _currentModule.GetBaseModule();
         _currentModule.DestroyModuleWithSubs();
@@ -187,12 +191,14 @@ public class ModuleDestructionPreview : MonoBehaviour {
     }
 
     private IEnumerator StartCountdown(Module module) {
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(0.1f);
         SwitchCameras(module);
         _inDestructionProcess = false;
     }
 
     private void SwitchCameras(Module module) {
+        Debug.Log("Switch cameras!");
+
         _transitionActivated = true;
         _uiHandler.ShowDestructionPreviewInfo(false);
 
@@ -209,5 +215,14 @@ public class ModuleDestructionPreview : MonoBehaviour {
             ? destructionPreviewCameraTwo
             : destructionPreviewCameraOne;
 
+    }
+
+    private void SwitchToRocketCamera()
+    {
+        _transitionActivated = true;
+        _uiHandler.ShowDestructionPreviewInfo(false);
+        cameraController.SwitchToRocketCamera();
+        rocketCamera.LookAt = _launchedRocket.transform;
+        rocketCamera.Follow = _launchedRocket.transform;
     }
 }

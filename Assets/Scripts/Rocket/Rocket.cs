@@ -6,7 +6,6 @@ public class Rocket : MonoBehaviour {
     [SerializeField] private Vector3 launchImpulse;
     public bool isFlying { get; private set; }
     private Rigidbody _rigidbody;
-    private Coroutine _coroutine;
     private GameObject _module;
 
     public IEnumerator LaunchAttack(GameObject module) {
@@ -18,7 +17,6 @@ public class Rocket : MonoBehaviour {
         while (true) {
             Vector3 currentDistance = module.transform.position - transform.position;
             float term = 1 - Mathf.Min(0.5f, (currentDistance.magnitude / (initDistance.magnitude * 4)));
-            Debug.Log("Term is: " + term);
             _rigidbody.AddForce(speedCoefficient * term * currentDistance.normalized, ForceMode.Force);
             transform.rotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
             yield return null;

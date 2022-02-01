@@ -7,10 +7,10 @@ public class PlayerCameraController : MonoBehaviour {
     private static readonly int OnDestroyPhase = Animator.StringToHash("OnDestructionPhase");
     private static readonly int OnSwitchToFirst = Animator.StringToHash("SwitchToFirstCam");
     private static readonly int OnSwitchToSecond = Animator.StringToHash("SwitchToSecCam");
+    private static readonly int OnSwitchToRocket = Animator.StringToHash("SwitchToRocketCam");
 
     private void Start() {
         _animator = GetComponent<Animator>();
-
     }
 
     public void OnPrepPhaseOver() {
@@ -36,5 +36,11 @@ public class PlayerCameraController : MonoBehaviour {
     public void SwitchToSecondDestructionCamera() {
         _animator.ResetTrigger(OnSwitchToFirst);
         _animator.SetTrigger(OnSwitchToSecond);
+    }
+
+    public void SwitchToRocketCamera(){
+        _animator.ResetTrigger(OnSwitchToFirst);
+        _animator.ResetTrigger(OnSwitchToSecond);
+        _animator.SetTrigger(OnSwitchToRocket);
     }
 }
