@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -42,6 +43,14 @@ public class Inventory : MonoBehaviour
     private Vector3 _previousPosition;
     private float _scrollValue;
     private bool inWorld = false;
+
+    private List<GameObject> _createdBoxes = new List<GameObject>();
+    [SerializeField] private GameObject baseModule;
+
+    private void Awake()
+    {
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, RemoveCreatedBoxes);
+    }
 
     void Start()
     // Start is called before the first frame update
@@ -92,13 +101,15 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            _pickedBox = raycastHit.collider.gameObject;
-
+            if (_createdBoxes.Contains(raycastHit.collider.gameObject)
+                || raycastHit.collider.gameObject.transform.parent == baseModule)
+            {
+                _pickedBox = raycastHit.collider.gameObject;
+            }
         }
+
         _pickedBox.GetComponent<Collider>().enabled = false;
         _previousPosition = _pickedBox.transform.position;
-
-
     }
 
     private GameObject GetRandomBox()
@@ -121,7 +132,7 @@ public class Inventory : MonoBehaviour
             {
                 _pickedBox.GetComponent<MeshRenderer>().material = boxMat;
                 _pickedBox.GetComponent<Collider>().enabled = true;
-
+                _createdBoxes.Add(_pickedBox);
 
                 if (BoxCount == 0)
                 {
@@ -239,5 +250,7 @@ public class Inventory : MonoBehaviour
             maxZ > point.z && minZ < point.z  && Vector3.Distance(aiSpawn.transform.position, point) > spawnRadius;
     }
 
-
+    public void RemoveCreatedBoxes(EventData eventData) {
+        _createdBoxes.Clear();
+    }
 }
