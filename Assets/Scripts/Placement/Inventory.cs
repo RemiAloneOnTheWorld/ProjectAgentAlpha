@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -86,7 +85,6 @@ public class Inventory : MonoBehaviour
 
     private void StartedPlace(InputAction.CallbackContext obj)
     {
-        selected = true;
         Vector3 pos = playerCamera.ScreenToWorldPoint(new Vector3(crosshair.position.x, crosshair.position.y, placeDistance));
         if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance)
             || !raycastHit.collider.CompareTag("Block"))
@@ -101,13 +99,16 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            if (_createdBoxes.Contains(raycastHit.collider.gameObject)
-                || raycastHit.collider.gameObject.transform.parent == baseModule)
-            {
+            var raycast = raycastHit.collider.gameObject;
+            if (_createdBoxes.Contains(raycast) || (raycast.transform.parent != null 
+                                                    && raycast.transform.parent.TryGetComponent<Module>(out var module) 
+                                                    && module.GetBaseModule() == baseModule)) {
                 _pickedBox = raycastHit.collider.gameObject;
             }
+            else return;
         }
-
+        
+        selected = true;
         _pickedBox.GetComponent<Collider>().enabled = false;
         _previousPosition = _pickedBox.transform.position;
     }
@@ -120,6 +121,9 @@ public class Inventory : MonoBehaviour
 
     private void CancelPlace(InputAction.CallbackContext pContext)
     {
+        if(!selected) {
+            return;
+        }
         selected = false;
         if (BoxCount > -1)
         {

@@ -10,7 +10,7 @@ public class BoxCreationModule : Module {
     
     private void GenerateBoxes(EventData eventData) {
         foreach (var position in placementPositions) {
-            GameObject cube = Instantiate(boxes[Random.Range(0,5)], position.position, transform.rotation, transform);
+            GameObject cube = Instantiate(boxes[Random.Range(0,boxes.Length)], position.position, transform.rotation, transform);
             Vector3 scale = cube.transform.localScale;
             scale *= .2f;
             cube.transform.localScale = scale;
