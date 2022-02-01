@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
@@ -139,7 +138,8 @@ public class UIHandler : MonoBehaviour {
     private void LowerPlayerUIStats(EventData eventData) {
         //Move UI of player below vertical half.
         if (playerUI.name == "Player1") {
-            playerUI.position = new Vector2(playerUI.position.x, playerUI.rect.height);
+            //Hardcoded with magic values - remarkable programming :)
+            playerUI.position = new Vector2(playerUI.position.x, playerUI.rect.height / 2 + 15);
         }
     }
 
