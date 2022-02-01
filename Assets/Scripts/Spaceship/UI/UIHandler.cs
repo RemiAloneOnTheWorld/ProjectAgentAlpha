@@ -362,6 +362,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void SetSelectedButton(EventData eventData) {
+        //This re-selects the button the controller selected, when the mouse user clicked.
         if (_isController) {
             EventSystem.current.SetSelectedGameObject(_currentBuyMenuButton);
         }
