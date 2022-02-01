@@ -50,7 +50,6 @@ public class MenuSelect : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             print("In method " + menuSelectButton.gameObject);
             yield return new WaitForEndOfFrame();
-            //EventSystem.current.SetSelectedGameObject(menuSelectButton.gameObject);
             menuSelectButton.Select();
             menuSelectButton.OnSelect(null);
             print("Select menu");
@@ -66,8 +65,6 @@ public class MenuSelect : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             print("In method " + optionsSelectButton.gameObject);
             yield return new WaitForEndOfFrame();
-            //EventSystem.current.SetSelectedGameObject(optionsSelectButton.gameObject);
-
             optionsSelectButton.Select();
             optionsSelectButton.OnSelect(null);
             print("Select options");
@@ -84,7 +81,6 @@ public class MenuSelect : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             print("In method " + aboutSelectButton.gameObject);
             yield return new WaitForEndOfFrame();
-            //EventSystem.current.SetSelectedGameObject(aboutSelectButton.gameObject);
             aboutSelectButton.Select();
             aboutSelectButton.OnSelect(null);
             print("Select about");
@@ -96,6 +92,7 @@ public class MenuSelect : MonoBehaviour
     {
         print(EventSystem.current.currentSelectedGameObject);
     }
+    
     public void OnControlsChanged()
     {
         if (playerInput.currentControlScheme.Equals("Gamepad"))
@@ -117,7 +114,5 @@ public class MenuSelect : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
-        
-
     }
 }
