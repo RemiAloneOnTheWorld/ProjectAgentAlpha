@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Planet : MonoBehaviour
 {
@@ -69,7 +70,8 @@ public class Planet : MonoBehaviour
           float atmosphereSize = shapeSettings.planetRadius * 2.25f;
           sphere.transform.localScale = new Vector3(atmosphereSize, atmosphereSize, atmosphereSize);
           sphere.GetComponent<Renderer>().material = colourSettings.atmosphereMaterial;
-    }
+          sphere.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.Off;
+        }
 
 
     public void RandomizePlanet() {
