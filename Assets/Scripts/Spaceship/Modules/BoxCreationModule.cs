@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BoxCreationModule : Module {
-    [SerializeField] private GameObject box;
+    [SerializeField] private GameObject[] boxes;
     [SerializeField] private Transform[] placementPositions;
 
     private void Awake() {
@@ -10,7 +10,10 @@ public class BoxCreationModule : Module {
     
     private void GenerateBoxes(EventData eventData) {
         foreach (var position in placementPositions) {
-            Instantiate(box, position.position, transform.rotation, transform);
+            GameObject cube = Instantiate(boxes[Random.Range(0,5)], position.position, transform.rotation, transform);
+            Vector3 scale = cube.transform.localScale;
+            scale *= .2f;
+            cube.transform.localScale = scale;
         }
     }
     

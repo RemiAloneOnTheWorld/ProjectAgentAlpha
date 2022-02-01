@@ -10,6 +10,10 @@ using UnityEngine.SceneManagement;
 public class UIHandler : MonoBehaviour {
     private PlayerInput _playerInput;
     private Connector _connector;
+    private static bool playerOpenPauseMenu;
+    private bool pauseMenuShown;
+    private static bool optionsMenuOpen;
+    private static bool inputController;
 
     private bool _isController;
 
@@ -38,6 +42,7 @@ public class UIHandler : MonoBehaviour {
     [SerializeField] private GameObject buyMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject optionsMenu;
     private bool _menuShown;
     private GameObject _currentBuyMenuButton;
 
@@ -276,6 +281,8 @@ public class UIHandler : MonoBehaviour {
     }
 
     public void closePauseMenu() {
+        playerOpenPauseMenu = false;
+        pauseMenuShown = false;
         Time.timeScale = 1f;
         ShowCursor(false);
         pauseMenu.SetActive(false);
@@ -287,20 +294,66 @@ public class UIHandler : MonoBehaviour {
 
     public void returnMainMenu() {
         Time.timeScale = 1f;
+        playerOpenPauseMenu = false;
+        pauseMenuShown = false;
         ShowCursor(true);
         ShowCrosshair(false);
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void restartScene() {
+        playerOpenPauseMenu = false;
+        
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void ShowPauseMenu(InputAction.CallbackContext pContext) {
+        if (optionsMenuOpen) {
+            Debug.Log("closed option menu");
+            optionsMenu.SetActive(false);
+            optionsMenuOpen = false;
+            playerOpenPauseMenu = false;
+            pauseMenuShown = false;
+            Time.timeScale = 1f;
+            return;
+        }
+        
+        if (pauseMenuShown) {
+            closePauseMenu();
+            return;
+        }
+
+        if (playerOpenPauseMenu)
+            return;
+
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
         pauseText.text = this.gameObject.name + " has paused the game.";
         if (_playerInput.currentControlScheme.Equals("Gamepad")) {
+            EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+            resumeButton.GetComponent<EventTrigger>().OnSelect(null);
+            inputController = true;
+        } else {
+            ShowCursor(true);
+            inputController = false;
+        }
+
+        pauseMenuShown = true;
+        playerOpenPauseMenu = true;
+    }
+
+    public void showOptionsMenu() {
+        optionsMenuOpen = true;
+        pauseMenuShown = false;
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
+
+    public void closeOptionsMenu() {
+        optionsMenuOpen = false;
+        optionsMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        if (inputController) {
             EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
             resumeButton.GetComponent<EventTrigger>().OnSelect(null);
         } else {
