@@ -68,12 +68,22 @@ public class Inventory : MonoBehaviour
 
     private void CancelCollect(InputAction.CallbackContext obj)
     {
+        // 1. No hit
+        // 2. No block
+        // 3. Not in list
+        // 
 
-        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit,
-             pickupDistance) || !raycastHit.collider.CompareTag("Block"))
-        {
+        if (!Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance) 
+            || !raycastHit.collider.CompareTag("Block")) {
             return;
         }
+
+        if (!_createdBoxes.Contains(raycastHit.transform.gameObject) || !raycastHit.transform.parent.TryGetComponent<Module>(out var module) ||
+            module.GetBaseModule() != baseModule.GetComponent<Module>()) {
+            return;
+        }
+
+
         if (BoxCount == -1)
         {
             BoxCount++;
@@ -100,9 +110,7 @@ public class Inventory : MonoBehaviour
         else
         {
             var raycast = raycastHit.collider.gameObject;
-            if (_createdBoxes.Contains(raycast) || (raycast.transform.parent != null 
-                                                    && raycast.transform.parent.TryGetComponent<Module>(out var module) 
-                                                    && module.GetBaseModule() == baseModule)) {
+            if (_createdBoxes.Contains(raycast)) {
                 _pickedBox = raycastHit.collider.gameObject;
             }
             else return;

@@ -17,6 +17,8 @@ public class PhaseGameManager : MonoBehaviour {
     private IEnumerator _playerReadyCountdown;
     private IEnumerator _countdownCoroutine;
 
+    private bool _inTransitionToNextPhase;
+
     private void Awake() {
         //Preparation phase
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhase, StartPreparationPhase);
@@ -55,10 +57,12 @@ public class PhaseGameManager : MonoBehaviour {
 
     private void StartPreparationPhase(EventData eventData) {
         CurrentEventType = EventType.PreparationPhase;
+        _inTransitionToNextPhase = false;
     }
 
     private void StartDestructionPhase(EventData eventData) {
         CurrentEventType = EventType.DestructionPhase;
+        _inTransitionToNextPhase = false;
     }
 
     private void OnGameOver(EventData eventData) {
@@ -69,7 +73,7 @@ public class PhaseGameManager : MonoBehaviour {
     private void PlayerIsReady(EventData eventData) {
         PlayerReadyEventData playerReadyEventData = (PlayerReadyEventData)eventData;
 
-        if (CurrentEventType == EventType.AttackPhase || CurrentEventType == EventType.GameOver) {
+        if (CurrentEventType == EventType.AttackPhase || CurrentEventType == EventType.GameOver || _inTransitionToNextPhase) {
             return;
         }
 
@@ -100,12 +104,15 @@ public class PhaseGameManager : MonoBehaviour {
         StartCoroutine(_countdownCoroutine);
         yield return new WaitWhile(() => _countdownRunning);
 
+        _inTransitionToNextPhase = true;
+
         //This event initiates the camera transition and fade
         EventQueue.GetEventQueue().AddEvent(new EventData(eventPublishType));
     }
 
     private void StartAttackPhase(EventData eventData) {
         StartCoroutine(AttackPhase());
+        _inTransitionToNextPhase = false;
     }
 
     private IEnumerator AttackPhase() {

@@ -41,8 +41,8 @@ public class ModuleDestructionPreview : MonoBehaviour {
         _currentModule = enemySpaceshipManager;
 
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhase, OnDestructionPhase);
-
         EventQueue.GetEventQueue().Subscribe(EventType.AttackPhaseOver, OnAttackPhaseOver);
+        EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, OnDestructionPhaseOver);
 
         _offsetVector = _currentModule.transform.position - destructionPreviewCameraOne.transform.position;
         _currentCamera = destructionPreviewCameraOne;
@@ -223,6 +223,11 @@ public class ModuleDestructionPreview : MonoBehaviour {
             ? destructionPreviewCameraTwo
             : destructionPreviewCameraOne;
 
+    }
+
+    private void OnDestructionPhaseOver(EventData eventData)
+    {
+        _uiHandler.ShowDestructionPreviewInfo(false);
     }
 
     private void SwitchToRocketCamera() {

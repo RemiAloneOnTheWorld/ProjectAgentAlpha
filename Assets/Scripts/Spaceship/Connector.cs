@@ -1,5 +1,4 @@
 using System;
-using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -99,6 +98,9 @@ public class Connector : MonoBehaviour {
         if (Physics.Raycast(playerCamera.ScreenPointToRay(crosshair.position), out var raycastHit, pickupDistance)) {
             Connection connection = raycastHit.collider.GetComponent<Connection>();
             if (raycastHit.collider.CompareTag("Connection")) {
+                if (connection.GetParentModule().GetBaseModule() != baseModule) {
+                    return;
+                }
                 if (connection != _connectionHovered) {
                     //Destroy and replace
                     _connectionHovered = connection;
