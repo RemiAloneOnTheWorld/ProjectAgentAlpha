@@ -32,14 +32,11 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         if (playerInput)
         {
-            _playerInput = playerInput;
-            Debug.Log("There is a player input");
+            _playerInput = playerInput;         
         }
         else
-        {
-            Debug.Log("Getting player input from optionsScript");
+        {        
             _playerInput = optionsMenu.GetPlayerControl();
-            Debug.Log(_playerInput);
         }
           _playerInput.actions.FindAction("Movement", true).performed += _InputScroll;
        
@@ -51,7 +48,7 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     private void _InputScroll(InputAction.CallbackContext obj)
     {
-        Debug.Log("Moved");
+       
         InputScroll();
     }
     void Update()
