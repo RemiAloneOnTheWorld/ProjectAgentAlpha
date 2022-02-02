@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class OptionsMenu : MonoBehaviour
     public GameObject SensitivityP2Text;
     Resolution[] resolutions;
 
+    private PlayerInput _playerInput;
 
     private void Start()
     {
@@ -89,5 +91,16 @@ public class OptionsMenu : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+
+    public void SetPlayerControl(PlayerInput playerInput)
+    {
+        _playerInput = playerInput;
+    }
+
+    public PlayerInput GetPlayerControl()
+    {
+        return _playerInput;
     }
 }
