@@ -230,7 +230,12 @@ MonoBehaviour:
   maxSpeed: 25
   rotationSpeed: 1
   smoothTime: 0.05
+  moveDistance: 500
+  collisionSize: 3
   deceleration: 0.96
+  forwardEngines: []
+  leftEngines: []
+  rightEngines: []
 --- !u!54 &4626858240665242482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -309,21 +314,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1572f8a6175d67c4d89f41275d5550a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUIParent: {fileID: 0}
   currencyText: {fileID: 0}
   spaceshipText: {fileID: 0}
+  arrivedSpaceshipText: {fileID: 0}
+  boxesText: {fileID: 0}
+  warningText: {fileID: 0}
+  pauseText: {fileID: 0}
+  gameoverText: {fileID: 0}
   messageText: {fileID: 0}
   playerUI: {fileID: 0}
   buyMenu: {fileID: 0}
-  moduleNameText: {fileID: 0}
-  moduleHealthText: {fileID: 0}
-  moduleConnectionsText: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  moduleDestructionNameText: {fileID: 0}
+  moduleDestructionModuleHealthText: {fileID: 0}
+  moduleDestructionConnectionsText: {fileID: 0}
+  moduleDestructionPriceText: {fileID: 0}
   currencyButton: {fileID: 0}
+  resumeButton: {fileID: 0}
+  retryButton: {fileID: 0}
+  destroyButton: {fileID: 0}
   previewCamera: {fileID: 0}
   previewWindow: {fileID: 0}
   previewRotationSpeed: 20
+  moduleShopNameText: {fileID: 0}
+  moduleShopPriceText: {fileID: 0}
+  moduleShopHealthText: {fileID: 0}
+  moduleShopDescriptionText: {fileID: 0}
   vcam: {fileID: 0}
   crosshair: {fileID: 0}
   crosshairDrift: 250
+  spaceshipManager: {fileID: 0}
 --- !u!114 &308976455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +364,10 @@ MonoBehaviour:
   currencyModule: {fileID: 8996090907342836104, guid: 73db2e442a34ae448a3a1bbed3ccce94, type: 3}
   factoryModule: {fileID: 1996524154288813403, guid: 0b581882f397a47458bb6aec192bee1e, type: 3}
   boxCreationModule: {fileID: 6359352634188585971, guid: 502c9cfcf7f441742917f78e27de348d, type: 3}
+  previewCurrencyModule: {fileID: 0}
+  previewFactoryModule: {fileID: 0}
+  previewBoxCreationModule: {fileID: 0}
+  removeConnectionOnClick: 0
   baseModule: {fileID: 0}
   crosshair: {fileID: 0}
 --- !u!114 &308976463
@@ -360,6 +386,7 @@ MonoBehaviour:
   destructionPreviewCameraOne: {fileID: 0}
   destructionPreviewCameraTwo: {fileID: 0}
   cameraController: {fileID: 0}
+  enemySpaceshipManager: {fileID: 0}
   spaceshipManager: {fileID: 0}
 --- !u!114 &7977529222608905447
 MonoBehaviour:
@@ -374,13 +401,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 4626858240665242480}
+  UIHandler: {fileID: 0}
+  playerCamera: {fileID: 714205125184845541}
+  crosshair: {fileID: 0}
+  enemyWorld: {fileID: 0}
+  aiSpawn: {fileID: 0}
+  spawnRadius: 0
   BoxCount: 0
   pickupDistance: 30
   placeDistance: 50
-  playerCamera: {fileID: 714205125184845541}
-  boxPrefab: {fileID: 4444184946298112911, guid: b1a643424c29d294b97d33472cceafbb, type: 3}
   radiusHalfBox: 0.8
-  crosshair: {fileID: 0}
+  boxPrefab: {fileID: 4444184946298112911, guid: b1a643424c29d294b97d33472cceafbb, type: 3}
+  boxPrefabs: []
   useLerp: 1
   lerp: 0.155
   minimumZoomDistance: 30
