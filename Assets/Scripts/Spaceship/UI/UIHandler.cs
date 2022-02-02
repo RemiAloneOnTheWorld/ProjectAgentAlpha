@@ -80,6 +80,10 @@ public class UIHandler : MonoBehaviour {
     [SerializeField]
     private SpaceshipManager spaceshipManager;
 
+    [Header("Options Menu Fix")]
+    [SerializeField] private OptionsMenu optionsMenuScript;
+   
+
     private void Awake() {
         EventQueue.GetEventQueue().Subscribe(EventType.PreparationPhaseOver, OnPrepPhaseOver);
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToAttack, LowerPlayerUIStats);
@@ -350,6 +354,9 @@ public class UIHandler : MonoBehaviour {
 
         pauseMenuShown = true;
         playerOpenPauseMenu = true;
+
+        optionsMenuScript.SetPlayerControl(_playerInput);
+       
     }
 
     public void showOptionsMenu() {
