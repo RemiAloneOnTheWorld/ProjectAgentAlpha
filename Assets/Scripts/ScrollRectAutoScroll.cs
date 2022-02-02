@@ -32,13 +32,15 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         if (playerInput)
         {
-            _playerInput = playerInput;         
+            _playerInput = playerInput;
+            _playerInput.actions.FindAction("Navigation", true).performed += _InputScroll;
         }
         else
         {        
             _playerInput = optionsMenu.GetPlayerControl();
+            _playerInput.actions.FindAction("Movement", true).performed += _InputScroll;
         }
-          _playerInput.actions.FindAction("Movement", true).performed += _InputScroll;
+       
        
         if (m_ScrollRect)
         {
