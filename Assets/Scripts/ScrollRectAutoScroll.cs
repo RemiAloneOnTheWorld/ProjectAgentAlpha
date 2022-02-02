@@ -14,11 +14,11 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     private List<Selectable> m_Selectables = new List<Selectable>();
     private ScrollRect m_ScrollRect;
     [SerializeField] private PlayerInput playerInput;
-
+    [SerializeField] private OptionsMenu optionsMenu;
     private Vector2 m_NextScrollPosition = Vector2.up;
-
+    private static PlayerInput _playerInput;
     void OnEnable()
-    {
+    {   
         if (m_ScrollRect)
         {
             m_ScrollRect.content.GetComponentsInChildren(m_Selectables);
@@ -30,8 +30,16 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     void Start()
     {
-
-        playerInput.actions.FindAction("Navigate", true).performed += _InputScroll;
+        if (playerInput)
+        {
+            _playerInput = playerInput;         
+        }
+        else
+        {        
+            _playerInput = optionsMenu.GetPlayerControl();
+        }
+          _playerInput.actions.FindAction("Movement", true).performed += _InputScroll;
+       
         if (m_ScrollRect)
         {
             m_ScrollRect.content.GetComponentsInChildren(m_Selectables);
@@ -40,6 +48,7 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     private void _InputScroll(InputAction.CallbackContext obj)
     {
+       
         InputScroll();
     }
     void Update()
@@ -92,4 +101,6 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
         mouseOver = false;
         ScrollToSelected(false);
     }
+
+  
 }
