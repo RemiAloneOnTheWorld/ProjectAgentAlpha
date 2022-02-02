@@ -11,6 +11,10 @@ public class LaneManager : MonoBehaviour {
         EventQueue.GetEventQueue().Subscribe(EventType.DestructionPhaseOver, DestroyBoxesInLane);
     }
 
+    private void OnDisable() {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.DestructionPhaseOver, DestroyBoxesInLane);
+    }
+
     private void Start() {
         _position = new Vector3(xzCollider.transform.position.x, yzCollider.transform.position.y,
             xzCollider.transform.position.z);
