@@ -57,10 +57,10 @@ public class Player_Movement : MonoBehaviour
         
         if (gameObject.tag == "Player1")
         {
-            rotationSpeed = PlayerPrefs.GetFloat("P1Sensitivity", rotationSpeed);
+            rotationSpeed = PlayerPrefs.GetFloat("P1Sensitivity");
         } else if (gameObject.tag == "Player2")
         {
-            rotationSpeed = PlayerPrefs.GetFloat("P2Sensitivity", rotationSpeed);
+            rotationSpeed = PlayerPrefs.GetFloat("P2Sensitivity");
         }
 
         var list = FindObjectsOfType<Player_Movement>();
