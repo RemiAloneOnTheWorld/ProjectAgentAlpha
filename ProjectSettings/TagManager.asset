@@ -13,6 +13,7 @@ TagManager:
   - BaseStation_2
   - Planet
   - Sphere
+  - Module
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - PostProcessing
   - Module
   - Rocket
-  - 
-  - 
+  - P1_Ship
+  - P2_Ship
   - 
   - 
   - 
