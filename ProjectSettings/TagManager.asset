@@ -13,6 +13,8 @@ TagManager:
   - BaseStation_2
   - Planet
   - Sphere
+  - Player1
+  - Player2
   - Module
   layers:
   - Default

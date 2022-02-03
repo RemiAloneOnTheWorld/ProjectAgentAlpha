@@ -54,6 +54,15 @@ public class Player_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        if (gameObject.tag == "Player1")
+        {
+            rotationSpeed = PlayerPrefs.GetFloat("P1Sensitivity");
+        } else if (gameObject.tag == "Player2")
+        {
+            rotationSpeed = PlayerPrefs.GetFloat("P2Sensitivity");
+        }
+
         var list = FindObjectsOfType<Player_Movement>();
         if (list[0].Equals(this))
         {
