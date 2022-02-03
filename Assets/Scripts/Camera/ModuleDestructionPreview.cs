@@ -189,6 +189,8 @@ public class ModuleDestructionPreview : MonoBehaviour {
         Module baseModule = _currentModule.GetBaseModule();
         _currentModule.DestroyModuleWithSubs();
 
+        baseModule.GetComponent<AudioSource>().Play();
+
         if (_currentModule.CompareTag("BaseStation_1") || _currentModule.CompareTag("BaseStation_2")) {
             EventQueue.GetEventQueue().AddEvent(new EventData(EventType.GameOver));
         }
