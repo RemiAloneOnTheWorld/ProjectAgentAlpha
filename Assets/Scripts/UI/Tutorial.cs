@@ -32,20 +32,19 @@ public class Tutorial : MonoBehaviour
 
     public void previousScreen()
     {
-        
+        screens[activeScreen].SetActive(false);
+        deactivateChildren(screens[activeScreen]);
         if (activeScreen == 0)
         {
-            return;
+            activeScreen = screens.Length-1;
         }
         else
-        {
-            screens[activeScreen].SetActive(false);
-            deactivateChildren(screens[activeScreen]);
-            activeScreen--;
-            screens[activeScreen].SetActive(true);
-            activateChildren(screens[activeScreen]);
+        {           
+            activeScreen--;          
         }
-        
+        screens[activeScreen].SetActive(true);
+        activateChildren(screens[activeScreen]);
+
     }
 
     void activateChildren(GameObject parentObject)
