@@ -12,6 +12,9 @@ public class OptionsMenu : MonoBehaviour
     public GameObject VolumeText;
     public GameObject SensitivityText;
     public GameObject SensitivityP2Text;
+    [SerializeField] Slider sSlider1;
+    [SerializeField] Slider sSlider2;
+
     Resolution[] resolutions;
 
 
@@ -39,22 +42,30 @@ public class OptionsMenu : MonoBehaviour
         resolutionList.AddOptions(resolutionsString);
         resolutionList.value = currentResolution;
         resolutionList.RefreshShownValue();
-
-        float s1 = PlayerPrefs.GetFloat("P1Sensitivity");
-        float s2 = PlayerPrefs.GetFloat("P2Sensitivity");
+        
+        float s1 = PlayerPrefs.GetFloat("P1Sensitivity", 0.5f);
+        float s2 = PlayerPrefs.GetFloat("P2Sensitivity", 0.5f);
 
         if (s1 != 0)
         {
             TextMeshProUGUI sText = SensitivityText.GetComponent<TextMeshProUGUI>();
-            sText.text = s1.ToString();
+            sText.text = (Mathf.Round(s1 * 10f) * 0.1f).ToString();
         }
 
         if (s2 != 0)
         {
             TextMeshProUGUI s2Text = SensitivityP2Text.GetComponent<TextMeshProUGUI>();
-            s2Text.text = s2.ToString();
+            s2Text.text = (Mathf.Round(s2 * 10f) * 0.1f).ToString();
         }
 
+        sSlider1.onValueChanged.AddListener(delegate { ValueChangeCheck(sSlider1); });
+        sSlider2.onValueChanged.AddListener(delegate { ValueChangeCheck(sSlider2); });
+
+    }
+
+    void ValueChangeCheck(Slider slider)
+    {
+        slider.value = Mathf.Round(slider.value * 10f) * 0.1f;
     }
 
     public void SetVolume(float volume)
@@ -76,14 +87,14 @@ public class OptionsMenu : MonoBehaviour
     {
         PlayerPrefs.SetFloat("P1Sensitivity", sensitivity);
         TextMeshProUGUI sText = SensitivityText.GetComponent<TextMeshProUGUI>();
-        sText.text = sensitivity.ToString();
+        sText.text = (Mathf.Round(sensitivity * 10f) * 0.1f).ToString();
     }
 
     public void SetP2Sensitivity(float sensitivity)
     {
         PlayerPrefs.SetFloat("P2Sensitivity", sensitivity);
         TextMeshProUGUI s2Text = SensitivityP2Text.GetComponent<TextMeshProUGUI>();
-        s2Text.text = sensitivity.ToString();
+        s2Text.text = (Mathf.Round(sensitivity * 10f) * 0.1f).ToString();
     }
 
     public void SetFullscreen(bool isFullscreen)
