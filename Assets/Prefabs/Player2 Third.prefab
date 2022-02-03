@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 308976455}
   - component: {fileID: 308976463}
   - component: {fileID: 7977529222608905447}
+  - component: {fileID: 6831995553131299820}
   m_Layer: 0
   m_Name: Player2 Third
   m_TagString: Untagged
@@ -327,6 +328,7 @@ MonoBehaviour:
   buyMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
   gameOverMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
   moduleDestructionNameText: {fileID: 0}
   moduleDestructionModuleHealthText: {fileID: 0}
   moduleDestructionConnectionsText: {fileID: 0}
@@ -346,6 +348,7 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   crosshairDrift: 250
   spaceshipManager: {fileID: 0}
+  optionsMenuScript: {fileID: 0}
 --- !u!114 &308976455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,9 +388,11 @@ MonoBehaviour:
   stateDrivenCamera: {fileID: 0}
   destructionPreviewCameraOne: {fileID: 0}
   destructionPreviewCameraTwo: {fileID: 0}
+  rocketCamera: {fileID: 0}
   cameraController: {fileID: 0}
   enemySpaceshipManager: {fileID: 0}
   spaceshipManager: {fileID: 0}
+  rocket: {fileID: 0}
 --- !u!114 &7977529222608905447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +425,20 @@ MonoBehaviour:
   redBoxMat: {fileID: 2100000, guid: 92acc6eb4c2891047bf92fc32217c705, type: 2}
   greenBoxMat: {fileID: 2100000, guid: 4ea499b9e8b0f7c48911e6e5a7ba154e, type: 2}
   boxMat: {fileID: 2100000, guid: a2ca4792ee9994547aaa0deebfda33be, type: 2}
+  baseModule: {fileID: 0}
+--- !u!65 &6831995553131299820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626858240665242495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.4134197, y: 1.3311399, z: 6.9702387}
+  m_Center: {x: -0.040150642, y: -0.05849141, z: 0.040184498}
 --- !u!1001 &7963863860804040215
 PrefabInstance:
   m_ObjectHideFlags: 0
