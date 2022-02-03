@@ -216,6 +216,15 @@ public class Player_Movement : MonoBehaviour
         if (_uiHandler.IsMenuShown() || Time.timeScale == 0f || _lockMovement)
             return;
 
+        if (gameObject.tag == "Player1")
+        {
+            rotationSpeed = PlayerPrefs.GetFloat("P1Sensitivity", rotationSpeed);
+        }
+        else if (gameObject.tag == "Player2")
+        {
+            rotationSpeed = PlayerPrefs.GetFloat("P2Sensitivity", rotationSpeed);
+        }
+
         updateMovement();
         updateDirection();
     }
