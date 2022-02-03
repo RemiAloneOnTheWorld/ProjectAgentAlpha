@@ -327,6 +327,7 @@ public class UIHandler : MonoBehaviour {
             optionsMenuOpen = false;
             playerOpenPauseMenu = false;
             pauseMenuShown = false;
+            ShowCursor(false);
             Time.timeScale = 1f;
             return;
         }

@@ -144,7 +144,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _elevationMinMax: {r: -0.26229575, g: 0.16467214, b: 0, a: 0}
+    - _elevationMinMax: {r: -0.2655137, g: 0.16867939, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5171408806867598185
 MonoBehaviour:
