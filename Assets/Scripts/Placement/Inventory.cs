@@ -45,10 +45,17 @@ public class Inventory : MonoBehaviour
 
     private List<GameObject> _createdBoxes = new List<GameObject>();
     [SerializeField] private GameObject baseModule;
+    private bool _noIncreaseOnFirst = true;
 
     private void Awake()
     {
         EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, RemoveCreatedBoxes);
+        EventQueue.GetEventQueue().Subscribe(EventType.InFadeToPreparation, AddBoxesOnPreparation);
+    }
+
+    private void OnDestroy()
+    {
+        EventQueue.GetEventQueue().Unsubscribe(EventType.InFadeToPreparation, AddBoxesOnPreparation);
     }
 
     void Start()
@@ -77,9 +84,9 @@ public class Inventory : MonoBehaviour
             || !raycastHit.collider.CompareTag("Block")) {
             return;
         }
+        
 
-        if (!_createdBoxes.Contains(raycastHit.transform.gameObject) || !raycastHit.transform.parent.TryGetComponent<Module>(out var module) ||
-            module.GetBaseModule() != baseModule.GetComponent<Module>()) {
+        if (!_createdBoxes.Contains(raycastHit.transform.gameObject) && raycastHit.transform.parent == null) {
             return;
         }
 
@@ -264,5 +271,12 @@ public class Inventory : MonoBehaviour
 
     public void RemoveCreatedBoxes(EventData eventData) {
         _createdBoxes.Clear();
+    }
+
+    private void AddBoxesOnPreparation(EventData eventData)
+    {
+        if(!_noIncreaseOnFirst)
+            BoxCount += 2;
+        _noIncreaseOnFirst = false;
     }
 }
