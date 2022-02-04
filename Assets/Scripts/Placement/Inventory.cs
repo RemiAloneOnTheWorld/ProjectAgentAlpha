@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private UIHandler UIHandler;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private RectTransform crosshair;
-    [SerializeField] private GameObject enemyWorld;
+    [SerializeField] private GameObject[] enemyCorners;
     [SerializeField] private GameObject aiSpawn;
     [SerializeField] private float spawnRadius;
 
@@ -243,10 +243,10 @@ public class Inventory : MonoBehaviour
     private bool inWorldBounds(Vector3 point)
     {
         float maxX = -Mathf.Infinity , maxY = -Mathf.Infinity, maxZ = -Mathf.Infinity, minX = Mathf.Infinity, minY = Mathf.Infinity, minZ = Mathf.Infinity;
-
-        foreach (Transform wall in enemyWorld.transform)
-        {   
-            Vector3 pos = wall.position;
+        
+        foreach (GameObject corner in enemyCorners)
+        {
+            Vector3 pos = corner.transform.position;
             maxX = Math.Max(pos.x, maxX);
             maxY = Math.Max(pos.y, maxY);
             maxZ = Math.Max(pos.z, maxZ);
