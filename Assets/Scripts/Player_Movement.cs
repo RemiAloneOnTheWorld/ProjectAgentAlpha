@@ -34,6 +34,8 @@ public class Player_Movement : MonoBehaviour
 
     private bool _lockMovement;
 
+    private InputDevice p1device;
+
     [SerializeField] private GameObject[] forwardEngines;
     [SerializeField] private GameObject[] leftEngines;
     [SerializeField] private GameObject[] rightEngines;
@@ -167,7 +169,6 @@ public class Player_Movement : MonoBehaviour
                 if (playerInput.user.hasMissingRequiredDevices)
                 {
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
-                    _uiHandler.ShowMessage("Device connected!", 2f);
                     print("Device is for P2");
                     print(device.description + " " + this.name);
                 }
@@ -185,18 +186,17 @@ public class Player_Movement : MonoBehaviour
                 {
                     playerInput.SwitchCurrentControlScheme(device) ;
                     InputUser.PerformPairingWithDevice(device, playerInput.user, InputUserPairingOptions.UnpairCurrentDevicesFromUser);
-                    _uiHandler.ShowMessage("Device connected!", 2f);
                     print("Device is for P1");
                     print(device.description + " " + this.name);
-
+                    this.p1device = device;
                 }
             
                 break;
             case InputDeviceChange.Disconnected:
-                _uiHandler.ShowMessage("Device disconnected!", 2f);
+                
                 break;
             case InputDeviceChange.Reconnected:
-                _uiHandler.ShowMessage("Device connected!", 2f);
+                
                 break;
             case InputDeviceChange.UsageChanged:
                 print("usage");

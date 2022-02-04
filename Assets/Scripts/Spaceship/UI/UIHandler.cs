@@ -16,7 +16,7 @@ public class UIHandler : MonoBehaviour {
     private static bool optionsMenuOpen;
     private static bool inputController;
 
-    private bool _isController;
+    public bool _isController;
 
     [Header("Player UI Parent")]
     [SerializeField]
@@ -268,7 +268,7 @@ public class UIHandler : MonoBehaviour {
     }
 
     private void ShowMenu(InputAction.CallbackContext pContext) {
-        if (PhaseGameManager.CurrentEventType != EventType.PreparationPhase) {
+        if (PhaseGameManager.CurrentEventType != EventType.PreparationPhase || playerOpenPauseMenu) {
             return;
         }
 
