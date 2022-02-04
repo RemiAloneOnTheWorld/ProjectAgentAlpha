@@ -24,7 +24,7 @@ public class Rocket : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject == _module) {
+        if (collision.gameObject.TryGetComponent<Module>(out var module) || collision.gameObject.CompareTag("Connection")) {
             isFlying = false;
         }
         else {
